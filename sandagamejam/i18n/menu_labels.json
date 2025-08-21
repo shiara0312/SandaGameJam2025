@@ -1,0 +1,23 @@
+{
+	"ES":
+		{
+			"jugar": "JUGAR",
+			"opciones": "OPCIONES",
+			"creditos": "CRÉDITOS",
+			"salir": "SALIR",
+		},
+	"EN":
+		{
+			"jugar": "PLAY",
+			"opciones": "OPTIONS",
+			"creditos": "CREDITS",
+			"salir": "QUIT",
+		},
+	"FR":
+		{
+			"jugar": "JOUER",
+			"opciones": "OPTIONS",
+			"creditos": "CRÉDITS",
+			"salir": "QUITTER",
+		}
+}
