@@ -44,6 +44,7 @@ func set_button_labels() -> void:
 
 func _on_jugar_pressed() -> void:
 	print("JUGAR fue presionado")
+	GlobalManager.start_game()
 
 func _on_opciones_pressed() -> void:
 	print("OPCIONES fue presionado")
