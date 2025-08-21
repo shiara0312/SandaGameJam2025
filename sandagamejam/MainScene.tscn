@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cpif4nlr27xeh"]
 
-[ext_resource type="Script" uid="uid://cfqpwpiylyfb6" path="res://scripts/main_scene.gd" id="1_3mqji"]
+[ext_resource type="Script" uid="uid://dillk2kgfjndt" path="res://scripts/main_scene.gd" id="1_3mqji"]
 
 [node name="Node2D" type="Control"]
 layout_mode = 3
@@ -12,6 +12,7 @@ grow_vertical = 2
 script = ExtResource("1_3mqji")
 
 [node name="Jugar" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 149.0
 offset_top = 345.0
 offset_right = 358.0
@@ -25,6 +26,7 @@ offset_bottom = 29.5
 text = "JUGAR"
 
 [node name="Opciones" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 149.0
 offset_top = 400.0
 offset_right = 358.0
@@ -38,6 +40,7 @@ offset_bottom = 29.5
 text = "OPCIONES"
 
 [node name="Creditos" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 149.0
 offset_top = 455.0
 offset_right = 358.0
@@ -51,6 +54,7 @@ offset_bottom = 29.5
 text = "CREDITOS"
 
 [node name="Salir" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 928.0
 offset_top = 503.0
 offset_right = 1038.0

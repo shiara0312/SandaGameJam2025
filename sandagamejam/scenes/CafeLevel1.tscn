@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c360ti54la3sr"]
+
+[ext_resource type="Script" uid="uid://bsj6xfu8y1qhc" path="res://scripts/levels/cafe_level_1.gd" id="1_0msvb"]
+
+[node name="CafeLevel" type="Node2D"]
+script = ExtResource("1_0msvb")
