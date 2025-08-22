@@ -10,7 +10,6 @@ func _ready():
 
 # TODO: Cuando se elige un idioma, llamar set_button_labels
 
-
 func set_button_labels() -> void:	
 	# Seteando labels segun el idioma
 	#print("Seteando labels para idioma:", GlobalManager.game_language)
@@ -40,19 +39,21 @@ func set_button_labels() -> void:
 	else:
 		push_error("No se pudo abrir el archivo JSON.")
 
-
-
+func _init_ui_after_scene_change():
+	var ui_layer_scene = preload("res://scenes/ui/UILayer.tscn")
+	var ui_layer_instance = ui_layer_scene.instantiate()
+	get_tree().current_scene.add_child(ui_layer_instance)
+	ui_layer_instance.show_hud()
+	
 func _on_jugar_pressed() -> void:
 	GlobalManager.start_game()
-	get_tree().change_scene_to_file("res://scenes/PastryLevel1.tscn")
+	get_tree().change_scene_to_file("res://scenes/levels/PastryLevel1.tscn")
 
 func _on_opciones_pressed() -> void:
 	print("OPCIONES fue presionado")
 
-
 func _on_creditos_pressed() -> void:
 	print("CREDITOS fue presionado")
-
 
 func _on_salir_pressed() -> void:
 	print("SALIR fue presionado")
