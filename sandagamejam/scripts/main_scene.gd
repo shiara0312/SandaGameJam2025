@@ -12,8 +12,8 @@ func _ready():
 
 
 func set_button_labels() -> void:	
+	# Seteando labels segun el idioma
 	#print("Seteando labels para idioma:", GlobalManager.game_language)
-
 	# Cargar el JSON
 	var file := FileAccess.open("res://i18n/menu_labels.json", FileAccess.READ)
 	
