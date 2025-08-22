@@ -1,7 +1,15 @@
 extends Control
 
+@onready var characters = $Personajes
+@onready var customer_scene := preload("res://scenes/Cliente.tscn")
+	
 var file_location = "res://i18n/characters_moods.json"
-var client_count = 4
+var customer_count = 4
+var current_customer: Node2D = null
+var center_frac_x := 0.5 # 0.25 cuando se abra el minijuego
+
+
+var customer
 
 # TODO: Animaciones de Newton: idle, feliz, trsite.
 # TODO: ClientesContainer generar los personajes de forma dinamica Cliente.tscn
@@ -10,14 +18,33 @@ var client_count = 4
 
 # Escena del nivel base
 func _ready():
-	var universe_combinations := get_random_combinations(file_location, client_count)
+	# detecta cambios de tamaño de ventana
+	get_viewport().connect("size_changed", Callable(self, "_on_resize"))
 
+	# Cargar combinaciones y preparar cola
+	var universe_combinations := get_random_combinations(file_location, customer_count)
+	GlobalManager.initialize_customers(universe_combinations)
+	
+	spawn_next_customer()
+	print_combos(universe_combinations) # for debug
+	print("NIVEL 1 CARGADO") # for debug
 
-
-	for comb in universe_combinations:
-		print("Personaje: ", comb["character_id"], "\nEstado: ", comb["mood_id"], "\nTexto: ", comb["texts"][GlobalManager.game_language])
-		print("......")
-	print("NIVEL 1 CARGADO")
+func spawn_next_customer():
+	var next := GlobalManager.get_next_customer()
+	if next.is_empty():
+		# TODO: posible victoria
+		print("Todos fueron atendidos")
+		return 
+	
+	current_customer = customer_scene.instantiate()
+	current_customer.setup(next, GlobalManager.game_language)
+	characters.add_child(current_customer)
+	
+	# Posición inicial (fuera de pantalla, izquierda)
+	current_customer.position = Vector2(-200, get_viewport().size.y / 2)
+	
+	# Destino inicial → centro de la pantalla en X
+	_move_customer_to_center()
 
 func instance_ui():
 	# TODO: Instanciar la escena UI y agregarla a UILayer.
@@ -70,3 +97,21 @@ func get_random_combinations(json_path: String, count: int = 4) -> Array:
 #El Minijuego instanciado se elimina de MinigameLayer.
 
 #El personaje resuelve su estado.
+
+func _move_customer_to_center():
+	if not current_customer:
+		return
+	var screen_size = get_viewport().size
+	print("screen size ", screen_size)
+	var target = Vector2(screen_size.x * center_frac_x, screen_size.y / 2)
+	current_customer.move_to(target)
+	
+func _on_resize():
+	_move_customer_to_center()
+
+# Debug :]
+func print_combos(combos):
+	for comb in combos:
+		print("Personaje: ", comb["character_id"], "\nEstado: ", comb["mood_id"], "\nTexto: ", comb["texts"][GlobalManager.game_language])
+		print("......")
+	

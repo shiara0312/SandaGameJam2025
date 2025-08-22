@@ -5,8 +5,6 @@ var game_language : String = "es" # pueden ser "en", "fr".
 var customers_to_serve: Array = []
 var satisfied_customers: Array = []
 
-
-
 func start_game():
 	is_game_started = true
 
