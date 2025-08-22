@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpif4nlr27xeh"]
+[gd_scene load_steps=9 format=3 uid="uid://cpif4nlr27xeh"]
 
 [ext_resource type="Script" uid="uid://dillk2kgfjndt" path="res://scripts/main_scene.gd" id="1_3mqji"]
 [ext_resource type="Texture2D" uid="uid://f0n1tsj6fjaf" path="res://assets/UI/btn1.png" id="2_uxrcv"]
 [ext_resource type="Texture2D" uid="uid://c5jkshtoi0o6" path="res://assets/UI/btn2.png" id="3_rf2cd"]
 [ext_resource type="Texture2D" uid="uid://gsh1n1mta4mb" path="res://assets/UI/btn3.png" id="4_a814b"]
+[ext_resource type="LabelSettings" uid="uid://b2h5bls5s7rsg" path="res://custom_resources/MainMenuButtonLabels.tres" id="5_rf2cd"]
+[ext_resource type="Texture2D" uid="uid://cyamlmrjdjrqp" path="res://assets/main/Newton_Portada.png" id="6_5crlr"]
+[ext_resource type="FontFile" uid="uid://bvsvwfxvm3l51" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="6_a814b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5crlr"]
+font = ExtResource("6_a814b")
+font_size = 28
+font_color = Color(0.713726, 0.631373, 0.521569, 1)
 
 [node name="Node2D" type="Control"]
 layout_mode = 3
@@ -24,12 +32,21 @@ rotation = 0.13439
 texture_normal = ExtResource("4_a814b")
 
 [node name="Label" type="Label" parent="Creditos"]
-layout_mode = 0
-offset_left = 130.921
-offset_top = 42.8448
-offset_right = 207.921
-offset_bottom = 65.8448
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -93.0
+offset_top = -25.5
+offset_right = 51.0
+offset_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.0523599
 text = "Créditos"
+label_settings = ExtResource("5_rf2cd")
 
 [node name="Opciones" type="TextureButton" parent="."]
 layout_mode = 0
@@ -41,13 +58,21 @@ rotation = -0.136136
 texture_normal = ExtResource("3_rf2cd")
 
 [node name="Label" type="Label" parent="Opciones"]
-layout_mode = 0
-offset_left = 143.0
-offset_top = 43.0
-offset_right = 224.21
-offset_bottom = 66.145
-rotation = 0.0872665
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.5
+offset_top = -33.5
+offset_right = 78.5
+offset_bottom = 17.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.0663225
 text = "Opciones"
+label_settings = ExtResource("5_rf2cd")
 
 [node name="Jugar" type="TextureButton" parent="."]
 layout_mode = 0
@@ -59,27 +84,46 @@ rotation = 0.13439
 texture_normal = ExtResource("2_uxrcv")
 
 [node name="Label" type="Label" parent="Jugar"]
-layout_mode = 0
-offset_left = 142.0
-offset_top = 76.0
-offset_right = 196.0
-offset_bottom = 101.0
-rotation = -0.13439
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -15.5
+offset_right = 26.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.221657
 text = "Jugar"
+label_settings = ExtResource("5_rf2cd")
+
+[node name="Newton" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 281.0
+offset_top = -16.0
+offset_right = 4631.0
+offset_bottom = 4164.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_5crlr")
 
 [node name="Salir" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 928.0
-offset_top = 503.0
-offset_right = 1038.0
-offset_bottom = 539.0
+offset_left = 942.0
+offset_top = 496.0
+offset_right = 1052.0
+offset_bottom = 532.0
 
 [node name="Label" type="Label" parent="Salir"]
 layout_mode = 0
-offset_top = 6.5
-offset_right = 50.0
-offset_bottom = 29.5
+offset_left = 16.0
+offset_top = 62.0
+offset_right = 85.0
+offset_bottom = 96.0
 text = "SALIR"
+label_settings = SubResource("LabelSettings_5crlr")
 
 [connection signal="pressed" from="Creditos" to="." method="_on_creditos_pressed"]
 [connection signal="pressed" from="Opciones" to="." method="_on_opciones_pressed"]
