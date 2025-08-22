@@ -64,86 +64,59 @@ label_settings = ExtResource("5_rf2cd")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Jugarold" type="TextureButton" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 86.0
-offset_top = 122.0
-offset_right = 440.0
-offset_bottom = 298.0
-rotation = 0.13439
-mouse_filter = 2
-texture_normal = ExtResource("2_uxrcv")
+[node name="Opciones" type="Area2D" parent="."]
+position = Vector2(210, 286)
 
-[node name="Label" type="Label" parent="Jugarold"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -68.0
-offset_top = -15.5
-offset_right = 26.0
-offset_bottom = 35.5
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Opciones"]
+polygon = PackedVector2Array(12, 2, 17, 89, 341, 71, 335, -17)
+
+[node name="TextureRect" type="TextureRect" parent="Opciones/CollisionPolygon2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+rotation = -0.139626
+texture = ExtResource("3_rf2cd")
+
+[node name="Label" type="Label" parent="Opciones/CollisionPolygon2D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 5.0
+offset_right = 334.0
+offset_bottom = 88.0
 grow_horizontal = 2
 grow_vertical = 2
-rotation = -0.221657
-text = "Jugar"
+rotation = -0.0645772
+size_flags_horizontal = 4
+text = "OPCIONES"
 label_settings = ExtResource("5_rf2cd")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Creditos" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 91.0
-offset_top = 360.0
-offset_right = 435.0
-offset_bottom = 485.0
-rotation = 0.13439
-mouse_filter = 2
-texture_normal = ExtResource("4_a814b")
+[node name="Creditos" type="Area2D" parent="."]
+position = Vector2(91, 360)
+rotation = 0.139626
+scale = Vector2(1, 1)
 
-[node name="Label" type="Label" parent="Creditos"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -93.0
-offset_top = -25.5
-offset_right = 51.0
-offset_bottom = 25.5
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -0.0523599
-text = "Créditos"
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Creditos"]
+polygon = PackedVector2Array(3.34016, 23.7664, 7.80443, 113.014, 333.538, 95.5099, 326.676, 3.57022, 6.1718, 22.3586)
+
+[node name="TextureRect" type="TextureRect" parent="Creditos/CollisionPolygon2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_a814b")
+
+[node name="Label" type="Label" parent="Creditos/CollisionPolygon2D"]
+offset_left = 5.73821
+offset_top = 26.4589
+offset_right = 324.738
+offset_bottom = 112.459
+rotation = -0.0645772
+size_flags_horizontal = 4
+text = "CREDITOS"
 label_settings = ExtResource("5_rf2cd")
-
-[node name="Opciones" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 210.0
-offset_top = 286.0
-offset_right = 555.0
-offset_bottom = 416.0
-rotation = -0.136136
-texture_normal = ExtResource("3_rf2cd")
-
-[node name="Label" type="Label" parent="Opciones"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -78.5
-offset_top = -33.5
-offset_right = 78.5
-offset_bottom = 17.5
-grow_horizontal = 2
-grow_vertical = 2
-rotation = 0.0663225
-text = "Opciones"
-label_settings = ExtResource("5_rf2cd")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Newton" type="TextureRect" parent="."]
 visible = false
@@ -174,7 +147,6 @@ text = "SALIR"
 label_settings = SubResource("LabelSettings_5crlr")
 
 [connection signal="input_event" from="Jugar" to="." method="_on_jugar_input_event"]
-[connection signal="pressed" from="Jugarold" to="." method="_on_jugar_pressed"]
-[connection signal="pressed" from="Creditos" to="." method="_on_creditos_pressed"]
-[connection signal="pressed" from="Opciones" to="." method="_on_opciones_pressed"]
+[connection signal="input_event" from="Opciones" to="." method="_on_opciones_input_event"]
+[connection signal="input_event" from="Creditos" to="." method="_on_creditos_input_event"]
 [connection signal="pressed" from="Salir" to="." method="_on_salir_pressed"]
