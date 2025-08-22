@@ -1,16 +1,29 @@
-extends Node2D
+extends Control
 
 var file_location = "res://i18n/characters_moods.json"
 var client_count = 4
 
- # Escena del nivel base
+# TODO: Animaciones de Newton: idle, feliz, trsite.
+# TODO: ClientesContainer generar los personajes de forma dinamica Cliente.tscn
+# TODO: UI Layer Elementos: tiempo, puntuación, pedidos correctos/fallidos.
+
+
+# Escena del nivel base
 func _ready():
 	var universe_combinations := get_random_combinations(file_location, client_count)
-	
+
+
+
 	for comb in universe_combinations:
 		print("Personaje: ", comb["character_id"], "\nEstado: ", comb["mood_id"], "\nTexto: ", comb["texts"][GlobalManager.game_language])
 		print("......")
 	print("NIVEL 1 CARGADO")
+
+func instance_ui():
+	# TODO: Instanciar la escena UI y agregarla a UILayer.
+	# Mostrar los 3 corazones y el temporizador (3 min → countdown).
+	pass
+	
 
 func get_random_combinations(json_path: String, count: int = 4) -> Array:
 	var file := FileAccess.open(json_path, FileAccess.READ)
@@ -38,3 +51,22 @@ func get_random_combinations(json_path: String, count: int = 4) -> Array:
 	# Tomar las primeras `count` combinaciones
 	var selected : Array = combos.slice(0, min(count, combos.size()))
 	return selected
+
+
+# Cargar sprites
+	# Cuando entra un personaje, se instancia dentro de Characters.
+	# Queda detrás de la barra y delante del fondo.
+
+#Cuando el jugador clickea en "¿qué le pasa?"
+
+#Se instancia el Minigame dentro de MinigameLayer.
+
+#El minijuego ocupa la mitad de la pantalla (puede usar un Control con anchors para centrarse).
+
+#N#ewton se mantiene adelante (no lo tapa el minijuego).
+
+#Al terminar el minijuego
+
+#El Minijuego instanciado se elimina de MinigameLayer.
+
+#El personaje resuelve su estado.
