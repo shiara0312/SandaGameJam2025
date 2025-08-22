@@ -22,6 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_3mqji")
 
 [node name="Fondo" type="TextureRect" parent="."]
@@ -34,13 +35,71 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_torvr")
 
+[node name="Jugar" type="Area2D" parent="."]
+position = Vector2(86, 122)
+rotation = 0.139626
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Jugar"]
+polygon = PackedVector2Array(3, 79, 23, 164, 340, 93, 320, 5)
+
+[node name="TextureRect" type="TextureRect" parent="Jugar/CollisionPolygon2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_uxrcv")
+
+[node name="Label" type="Label" parent="Jugar/CollisionPolygon2D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.00002
+offset_top = 81.0
+offset_right = 328.0
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.221657
+size_flags_horizontal = 4
+text = "Jugar"
+label_settings = ExtResource("5_rf2cd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Jugarold" type="TextureButton" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 86.0
+offset_top = 122.0
+offset_right = 440.0
+offset_bottom = 298.0
+rotation = 0.13439
+mouse_filter = 2
+texture_normal = ExtResource("2_uxrcv")
+
+[node name="Label" type="Label" parent="Jugarold"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -15.5
+offset_right = 26.0
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.221657
+text = "Jugar"
+label_settings = ExtResource("5_rf2cd")
+
 [node name="Creditos" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 93.0
-offset_top = 344.0
-offset_right = 437.0
-offset_bottom = 469.0
+offset_left = 91.0
+offset_top = 360.0
+offset_right = 435.0
+offset_bottom = 485.0
 rotation = 0.13439
+mouse_filter = 2
 texture_normal = ExtResource("4_a814b")
 
 [node name="Label" type="Label" parent="Creditos"]
@@ -86,32 +145,6 @@ rotation = 0.0663225
 text = "Opciones"
 label_settings = ExtResource("5_rf2cd")
 
-[node name="Jugar" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 86.0
-offset_top = 122.0
-offset_right = 440.0
-offset_bottom = 298.0
-rotation = 0.13439
-texture_normal = ExtResource("2_uxrcv")
-
-[node name="Label" type="Label" parent="Jugar"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -68.0
-offset_top = -15.5
-offset_right = 26.0
-offset_bottom = 35.5
-grow_horizontal = 2
-grow_vertical = 2
-rotation = -0.221657
-text = "Jugar"
-label_settings = ExtResource("5_rf2cd")
-
 [node name="Newton" type="TextureRect" parent="."]
 visible = false
 layout_mode = 0
@@ -140,7 +173,8 @@ offset_bottom = 53.0
 text = "SALIR"
 label_settings = SubResource("LabelSettings_5crlr")
 
+[connection signal="input_event" from="Jugar" to="." method="_on_jugar_input_event"]
+[connection signal="pressed" from="Jugarold" to="." method="_on_jugar_pressed"]
 [connection signal="pressed" from="Creditos" to="." method="_on_creditos_pressed"]
 [connection signal="pressed" from="Opciones" to="." method="_on_opciones_pressed"]
-[connection signal="pressed" from="Jugar" to="." method="_on_jugar_pressed"]
 [connection signal="pressed" from="Salir" to="." method="_on_salir_pressed"]

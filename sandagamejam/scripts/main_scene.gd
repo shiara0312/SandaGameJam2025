@@ -1,6 +1,7 @@
 extends Control
 
-@onready var btn_jugar : TextureButton = $Jugar
+@onready var btn_jugar : Area2D = $Jugar
+
 @onready var btn_opciones : TextureButton = $Opciones
 @onready var btn_creditos : TextureButton = $Creditos
 @onready var btn_salir : TextureButton = $Salir
@@ -30,7 +31,7 @@ func set_button_labels() -> void:
 		if data.has(lang):
 			var labels = data[lang]
 			# Asignar a los botones
-			btn_jugar.get_node("Label").text = labels["jugar"]
+			btn_jugar.get_node("CollisionPolygon2D/Label").text = labels["jugar"]
 			btn_opciones.get_node("Label").text = labels["opciones"]
 			btn_creditos.get_node("Label").text = labels["creditos"]
 			btn_salir.get_node("Label").text = labels["salir"]
@@ -38,16 +39,6 @@ func set_button_labels() -> void:
 			push_error("Idioma no encontrado en JSON: " + lang)
 	else:
 		push_error("No se pudo abrir el archivo JSON.")
-
-func _init_ui_after_scene_change():
-	var ui_layer_scene = preload("res://scenes/ui/UILayer.tscn")
-	var ui_layer_instance = ui_layer_scene.instantiate()
-	get_tree().current_scene.add_child(ui_layer_instance)
-	ui_layer_instance.show_hud()
-	
-func _on_jugar_pressed() -> void:
-	GlobalManager.start_game()
-	get_tree().change_scene_to_file("res://scenes/levels/PastryLevel1.tscn")
 
 func _on_opciones_pressed() -> void:
 	print("OPCIONES fue presionado")
@@ -57,3 +48,9 @@ func _on_creditos_pressed() -> void:
 
 func _on_salir_pressed() -> void:
 	print("SALIR fue presionado")
+
+
+func _on_jugar_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.pressed:
+		GlobalManager.start_game()
+		get_tree().change_scene_to_file("res://scenes/levels/PastryLevel1.tscn")
