@@ -14,6 +14,59 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3mqji")
 
+[node name="Creditos" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 344.0
+offset_right = 437.0
+offset_bottom = 469.0
+rotation = 0.13439
+texture_normal = ExtResource("4_a814b")
+
+[node name="Label" type="Label" parent="Creditos"]
+layout_mode = 0
+offset_left = 130.921
+offset_top = 42.8448
+offset_right = 207.921
+offset_bottom = 65.8448
+text = "Créditos"
+
+[node name="Opciones" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 286.0
+offset_right = 555.0
+offset_bottom = 416.0
+rotation = -0.136136
+texture_normal = ExtResource("3_rf2cd")
+
+[node name="Label" type="Label" parent="Opciones"]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 43.0
+offset_right = 224.21
+offset_bottom = 66.145
+rotation = 0.0872665
+text = "Opciones"
+
+[node name="Jugar" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 122.0
+offset_right = 440.0
+offset_bottom = 298.0
+rotation = 0.13439
+texture_normal = ExtResource("2_uxrcv")
+
+[node name="Label" type="Label" parent="Jugar"]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 76.0
+offset_right = 196.0
+offset_bottom = 101.0
+rotation = -0.13439
+text = "Jugar"
+
 [node name="Salir" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 928.0
@@ -28,78 +81,7 @@ offset_right = 50.0
 offset_bottom = 29.5
 text = "SALIR"
 
-[node name="Jugar" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 33.0
-offset_top = 175.0
-offset_right = 387.0
-offset_bottom = 351.0
-texture_normal = ExtResource("2_uxrcv")
-
-[node name="Jugar" type="TextureButton" parent="Jugar"]
-layout_mode = 0
-offset_left = 116.0
-offset_top = 183.0
-offset_right = 325.0
-offset_bottom = 219.0
-
-[node name="Label" type="Label" parent="Jugar/Jugar"]
-layout_mode = 0
-offset_left = 33.0
-offset_top = -106.0
-offset_right = 87.0
-offset_bottom = -81.0
-rotation = -0.13439
-text = "Jugar"
-
-[node name="Opciones" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 47.0
-offset_top = 296.0
-offset_right = 392.0
-offset_bottom = 426.0
-texture_normal = ExtResource("3_rf2cd")
-
-[node name="Opciones" type="TextureButton" parent="Opciones"]
-layout_mode = 0
-offset_left = -26.0
-offset_top = 100.0
-offset_right = 183.0
-offset_bottom = 136.0
-
-[node name="Label" type="Label" parent="Opciones/Opciones"]
-layout_mode = 0
-offset_left = 162.0
-offset_top = -54.0
-offset_right = 243.21
-offset_bottom = -30.855
-rotation = 0.0872665
-text = "Opciones"
-
-[node name="TextureButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 52.0
-offset_top = 405.0
-offset_right = 396.0
-offset_bottom = 530.0
-texture_normal = ExtResource("4_a814b")
-
-[node name="Creditos" type="TextureButton" parent="TextureButton"]
-layout_mode = 0
-offset_left = 149.0
-offset_top = 455.0
-offset_right = 358.0
-offset_bottom = 491.0
-
-[node name="Label" type="Label" parent="TextureButton/Creditos"]
-layout_mode = 0
-offset_left = -24.0
-offset_top = -410.0
-offset_right = 53.0
-offset_bottom = -387.0
-text = "Créditos"
-
+[connection signal="pressed" from="Creditos" to="." method="_on_creditos_pressed"]
+[connection signal="pressed" from="Opciones" to="." method="_on_opciones_pressed"]
+[connection signal="pressed" from="Jugar" to="." method="_on_jugar_pressed"]
 [connection signal="pressed" from="Salir" to="." method="_on_salir_pressed"]
-[connection signal="pressed" from="Jugar/Jugar" to="." method="_on_jugar_pressed"]
-[connection signal="pressed" from="Opciones/Opciones" to="." method="_on_opciones_pressed"]
-[connection signal="pressed" from="TextureButton/Creditos" to="." method="_on_creditos_pressed"]
