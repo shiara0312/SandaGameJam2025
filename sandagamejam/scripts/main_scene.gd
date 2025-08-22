@@ -51,6 +51,7 @@ func _on_creditos_input_event(_viewport: Node, event: InputEvent, _shape_idx: in
 func _on_opciones_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		print("OPCIONES fue presionado")
+		get_tree().change_scene_to_file("res://scenes/OpcionesModal.tscn")
 
 func _on_salir_pressed() -> void:
 	print("SALIR fue presionado")
