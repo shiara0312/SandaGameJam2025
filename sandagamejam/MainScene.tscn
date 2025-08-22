@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpif4nlr27xeh"]
+[gd_scene load_steps=5 format=3 uid="uid://cpif4nlr27xeh"]
 
-[ext_resource type="Script" uid="uid://cfqpwpiylyfb6" path="res://scripts/main_scene.gd" id="1_3mqji"]
+[ext_resource type="Script" uid="uid://dillk2kgfjndt" path="res://scripts/main_scene.gd" id="1_3mqji"]
+[ext_resource type="Texture2D" uid="uid://f0n1tsj6fjaf" path="res://assets/UI/btn1.png" id="2_uxrcv"]
+[ext_resource type="Texture2D" uid="uid://c5jkshtoi0o6" path="res://assets/UI/btn2.png" id="3_rf2cd"]
+[ext_resource type="Texture2D" uid="uid://gsh1n1mta4mb" path="res://assets/UI/btn3.png" id="4_a814b"]
 
 [node name="Node2D" type="Control"]
 layout_mode = 3
@@ -11,46 +14,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3mqji")
 
-[node name="Jugar" type="TextureButton" parent="."]
-offset_left = 149.0
-offset_top = 345.0
-offset_right = 358.0
-offset_bottom = 381.0
-
-[node name="Label" type="Label" parent="Jugar"]
-layout_mode = 0
-offset_top = 6.5
-offset_right = 50.0
-offset_bottom = 29.5
-text = "JUGAR"
-
-[node name="Opciones" type="TextureButton" parent="."]
-offset_left = 149.0
-offset_top = 400.0
-offset_right = 358.0
-offset_bottom = 436.0
-
-[node name="Label" type="Label" parent="Opciones"]
-layout_mode = 0
-offset_top = 6.5
-offset_right = 50.0
-offset_bottom = 29.5
-text = "OPCIONES"
-
-[node name="Creditos" type="TextureButton" parent="."]
-offset_left = 149.0
-offset_top = 455.0
-offset_right = 358.0
-offset_bottom = 491.0
-
-[node name="Label" type="Label" parent="Creditos"]
-layout_mode = 0
-offset_top = 6.5
-offset_right = 50.0
-offset_bottom = 29.5
-text = "CREDITOS"
-
 [node name="Salir" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = 928.0
 offset_top = 503.0
 offset_right = 1038.0
@@ -63,7 +28,78 @@ offset_right = 50.0
 offset_bottom = 29.5
 text = "SALIR"
 
-[connection signal="pressed" from="Jugar" to="." method="_on_jugar_pressed"]
-[connection signal="pressed" from="Opciones" to="." method="_on_opciones_pressed"]
-[connection signal="pressed" from="Creditos" to="." method="_on_creditos_pressed"]
+[node name="Jugar" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 175.0
+offset_right = 387.0
+offset_bottom = 351.0
+texture_normal = ExtResource("2_uxrcv")
+
+[node name="Jugar" type="TextureButton" parent="Jugar"]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 183.0
+offset_right = 325.0
+offset_bottom = 219.0
+
+[node name="Label" type="Label" parent="Jugar/Jugar"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = -106.0
+offset_right = 87.0
+offset_bottom = -81.0
+rotation = -0.13439
+text = "Jugar"
+
+[node name="Opciones" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 296.0
+offset_right = 392.0
+offset_bottom = 426.0
+texture_normal = ExtResource("3_rf2cd")
+
+[node name="Opciones" type="TextureButton" parent="Opciones"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = 100.0
+offset_right = 183.0
+offset_bottom = 136.0
+
+[node name="Label" type="Label" parent="Opciones/Opciones"]
+layout_mode = 0
+offset_left = 162.0
+offset_top = -54.0
+offset_right = 243.21
+offset_bottom = -30.855
+rotation = 0.0872665
+text = "Opciones"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 405.0
+offset_right = 396.0
+offset_bottom = 530.0
+texture_normal = ExtResource("4_a814b")
+
+[node name="Creditos" type="TextureButton" parent="TextureButton"]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 455.0
+offset_right = 358.0
+offset_bottom = 491.0
+
+[node name="Label" type="Label" parent="TextureButton/Creditos"]
+layout_mode = 0
+offset_left = -24.0
+offset_top = -410.0
+offset_right = 53.0
+offset_bottom = -387.0
+text = "Créditos"
+
 [connection signal="pressed" from="Salir" to="." method="_on_salir_pressed"]
+[connection signal="pressed" from="Jugar/Jugar" to="." method="_on_jugar_pressed"]
+[connection signal="pressed" from="Opciones/Opciones" to="." method="_on_opciones_pressed"]
+[connection signal="pressed" from="TextureButton/Creditos" to="." method="_on_creditos_pressed"]
