@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyamlmrjdjrqp"
-path="res://.godot/imported/Newton_Portada.png-b4b06c4778a86769973eb94677c090d9.ctex"
+uid="uid://dbyrn4mmgxf1i"
+path="res://.godot/imported/satisfecho.png-f5ebb41ac9027a7e9db666d20c06c546.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/main/Newton_Portada.png"
-dest_files=["res://.godot/imported/Newton_Portada.png-b4b06c4778a86769973eb94677c090d9.ctex"]
+source_file="res://assets/sprites/satisfecho.png"
+dest_files=["res://.godot/imported/satisfecho.png-f5ebb41ac9027a7e9db666d20c06c546.ctex"]
 
 [params]
 

@@ -2,19 +2,14 @@
 
 [ext_resource type="Script" uid="uid://70wy2loe8sc8" path="res://scripts/customer/customer.gd" id="1_7rffk"]
 [ext_resource type="Script" uid="uid://d1qoj3fc6bfqc" path="res://scripts/customer/customer_sprite_2d.gd" id="2_wc735"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7rffk"]
+[ext_resource type="Texture2D" uid="uid://ppau4gffe0gr" path="res://assets/sprites/ingreso.png" id="2_xhj6e"]
 
 [node name="Client" type="Node2D"]
 script = ExtResource("1_7rffk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xhj6e")
 script = ExtResource("2_wc735")
-
-[node name="TextureRect" type="TextureRect" parent="Sprite2D"]
-offset_right = 100.0
-offset_bottom = 100.0
-texture = SubResource("PlaceholderTexture2D_7rffk")
 
 [node name="Problem" type="Label" parent="."]
 offset_right = 40.0

@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 GlobalManager="*res://scripts/global_manager.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
