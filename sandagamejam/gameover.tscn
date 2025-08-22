@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cl0v2ye1fk2ex"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -2.0
+offset_right = 4.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 112.0
+offset_right = 686.0
+offset_bottom = 508.0
