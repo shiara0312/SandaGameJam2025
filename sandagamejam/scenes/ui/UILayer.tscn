@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bubpqw3sw6cvj"]
 
-[ext_resource type="Script" uid="uid://d0bteqdbb1gsl" path="res://scripts/ui_layer.gd" id="1_nbl3c"]
-[ext_resource type="Script" uid="uid://ty3s5g4vlkh6" path="res://scripts/ui/game_hud.gd" id="2_namiw"]
+[ext_resource type="Script" uid="uid://d0bteqdbb1gsl" path="res://scripts/ui/UILayer.gd" id="1_nbl3c"]
+[ext_resource type="Script" uid="uid://ty3s5g4vlkh6" path="res://scripts/ui/GameHUD.gd" id="2_namiw"]
 [ext_resource type="Texture2D" uid="uid://duniyo2px7i6w" path="res://assets/UI/heart_full.png" id="2_p1e30"]
 [ext_resource type="Texture2D" uid="uid://sh5qv0xi74q8" path="res://assets/UI/heart_empty.png" id="4_1xo4o"]
 [ext_resource type="FontFile" uid="uid://bvsvwfxvm3l51" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="5_1xo4o"]

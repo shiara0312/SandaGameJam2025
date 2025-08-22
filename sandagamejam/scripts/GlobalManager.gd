@@ -1,0 +1,75 @@
+# GlobalManager
+extends Node
+
+signal lives_changed(new_lives)
+signal time_changed(new_time)
+signal time_up
+signal game_over
+
+var lives = 3
+var time_left : float = 180.0
+var is_game_running : bool = false
+var is_paused: bool = false
+
+var game_language : String = "es" # pueden ser "en", "fr".
+var customers_to_serve: Array = []
+var satisfied_customers: Array = []
+
+func start_game():
+	print("GAME HAS STARTED")
+	is_game_running = true
+	
+	UILayerManager.init_ui_layer()
+	UILayerManager.show_hud()
+
+#### Gestionar tiempo y vidas ####
+func _process(delta: float) -> void:
+	if is_game_running and not is_paused:
+		time_left -= delta
+		emit_signal("time_changed", time_left)
+		if time_left <= 0:
+			time_left = 0
+			is_game_running = false
+			emit_signal("time_up")
+
+
+# TODO: Quitar 10 segundos GloblManager.apply_penalty(10)
+func apply_penalty(seconds: float):
+	time_left = max(time_left - seconds, 0)
+	emit_signal("time_changed", time_left)
+	
+	if time_left == 0 and is_game_running:
+		is_game_running = false
+		emit_signal("time_up")
+
+func lose_life():
+	if lives > 0:
+		lives -= 1
+		emit_signal("lives_changed", lives)
+		if lives == 0:
+			emit_signal("game_over")
+			
+#### Gestionar cola de clientes ####
+func initialize_customers(combos: Array):
+	# Clonar los clientes obtenidos para el nivel 
+	customers_to_serve = combos.duplicate()
+
+func get_next_customer() -> Dictionary:
+	if customers_to_serve.is_empty():
+		return {}
+	# retorna el primer elemento del array
+	return customers_to_serve.pop_front()
+
+func return_customer(customer: Dictionary):
+	customers_to_serve.append(customer)
+
+func mark_customer_as_satisfied(customer: Dictionary):
+	satisfied_customers.append(customer)
+
+func pause_game():
+	is_paused = true
+	is_game_running = false
+
+func resume_game():
+	is_paused = false
+	is_game_running = true
