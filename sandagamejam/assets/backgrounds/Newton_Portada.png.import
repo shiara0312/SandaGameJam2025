@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cyamlmrjdjrqp"
-path="res://.godot/imported/Newton_Portada.png-b4b06c4778a86769973eb94677c090d9.ctex"
+path="res://.godot/imported/Newton_Portada.png-f90c04e60a026a0f51df1be5ea4e7958.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/main/Newton_Portada.png"
-dest_files=["res://.godot/imported/Newton_Portada.png-b4b06c4778a86769973eb94677c090d9.ctex"]
+source_file="res://assets/backgrounds/Newton_Portada.png"
+dest_files=["res://.godot/imported/Newton_Portada.png-f90c04e60a026a0f51df1be5ea4e7958.ctex"]
 
 [params]
 

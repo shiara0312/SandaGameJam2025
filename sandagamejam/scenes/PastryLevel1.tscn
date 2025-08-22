@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c360ti54la3sr"]
+[gd_scene load_steps=5 format=3 uid="uid://c360ti54la3sr"]
 
 [ext_resource type="Script" uid="uid://bsj6xfu8y1qhc" path="res://scripts/levels/cafe_level_1.gd" id="1_74nrv"]
+[ext_resource type="Texture2D" uid="uid://gxf8kno1qwh3" path="res://assets/backgrounds/Cocina.png" id="2_dsxrl"]
+[ext_resource type="Texture2D" uid="uid://vfi4fs01bg4l" path="res://assets/backgrounds/Barra.png" id="3_mmns1"]
+[ext_resource type="Texture2D" uid="uid://b3vhhtxb4ksiu" path="res://assets/sprites/newtown/Newton_cocinando.png" id="4_mmns1"]
 
 [node name="PastryLevel1" type="Control"]
 layout_mode = 3
@@ -18,16 +21,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_dsxrl")
 
 [node name="Personajes" type="Node2D" parent="."]
 
 [node name="Barra" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = 365.0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("3_mmns1")
 
-[node name="Newton" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 324)
+[node name="Newton" type="Sprite2D" parent="."]
+position = Vector2(943, 441)
+scale = Vector2(0.175, 0.175)
+texture = ExtResource("4_mmns1")
 
 [node name="MinijuegoLayer" type="CanvasLayer" parent="."]
 visible = false
