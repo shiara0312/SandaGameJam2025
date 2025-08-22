@@ -8,9 +8,7 @@ var customer_count = 4
 var current_customer: Node2D = null
 var center_frac_x := 0.5 # 0.25 cuando se abra el minijuego
 
-
 var customer
-
 
 var original_viewport_size: Vector2
 
@@ -23,16 +21,12 @@ var original_viewport_size: Vector2
 # Escena del nivel base
 func _ready():
 	original_viewport_size = get_viewport().size
-	print("original_viewport_size-> ", original_viewport_size)
-	# detecta cambios de tamaño de ventana
-	#get_viewport().connect("size_changed", Callable(self, "_on_resize"))
-
+	
 	# Cargar combinaciones y preparar cola
 	var universe_combinations := get_random_combinations(file_location, customer_count)
 	GlobalManager.initialize_customers(universe_combinations)
 	
 	spawn_next_customer()
-	#print_combos(universe_combinations) # for debug
 	print("NIVEL 1 CARGADO") # for debug
 
 func spawn_next_customer():
@@ -51,14 +45,10 @@ func spawn_next_customer():
 	
 	# Calcular target X centrado tomando en cuenta el ancho del sprite
 	var viewport_width = get_viewport().size.x
-	var sprite_width = current_customer.sprite.texture.get_size().x * current_customer.sprite.scale.x
+	
 	# Destino = centro horizontal considerando el ancho del sprite
 	var target_x = (viewport_width / 2)
 	var target_position = Vector2(target_x, get_viewport().size.y / 2) # 400
-	print("viewport_width ", viewport_width, "sprite width ", sprite_width)
-	print("target x", target_x)
-	#1000 200  -> 500 - 100 
-	#400 + 200 + 400
 	current_customer.move_to(target_position)
 	
 	# Guardar la posición relativa para resize
@@ -115,14 +105,6 @@ func get_random_combinations(json_path: String, count: int = 4) -> Array:
 #El Minijuego instanciado se elimina de MinigameLayer.
 
 #El personaje resuelve su estado.
-
-func _move_customer_to_center():
-	if not current_customer:
-		return
-	var screen_size = get_viewport().size
-	print("screen size ", screen_size)
-	var target = Vector2(screen_size.x * center_frac_x, screen_size.y / 2)
-	current_customer.move_to(target)
 	
 # Nueva posición proporcional considerando el sprite
 func _on_viewport_resized():

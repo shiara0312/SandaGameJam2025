@@ -15,7 +15,6 @@ var state = State.ENTERING
 
 # Desde CafeLevel1:
 func move_to(target_position: Vector2) -> void:
-	print("move to.. ", target_position)
 	var dist := (target_position - position).length()
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", target_position, dist / speed)

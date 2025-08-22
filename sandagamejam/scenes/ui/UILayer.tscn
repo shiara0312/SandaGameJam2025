@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://bubpqw3sw6cvj"]
+
+[ext_resource type="Script" uid="uid://d0bteqdbb1gsl" path="res://scripts/ui/UILayer.gd" id="1_nbl3c"]
+[ext_resource type="Script" uid="uid://ty3s5g4vlkh6" path="res://scripts/ui/GameHUD.gd" id="2_namiw"]
+[ext_resource type="Texture2D" uid="uid://duniyo2px7i6w" path="res://assets/UI/heart_full.png" id="2_p1e30"]
+[ext_resource type="Texture2D" uid="uid://sh5qv0xi74q8" path="res://assets/UI/heart_empty.png" id="4_1xo4o"]
+[ext_resource type="FontFile" uid="uid://bvsvwfxvm3l51" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="5_1xo4o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6a45y"]
+line_spacing = 0.0
+font = ExtResource("5_1xo4o")
+font_size = 45
+font_color = Color(0.650724, 0.618739, 0.566123, 1)
+outline_size = 9
+outline_color = Color(0.0156863, 0.0156863, 0.211765, 1)
+
+[node name="UILayer" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_nbl3c")
+
+[node name="GameHUD" type="Control" parent="."]
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_namiw")
+full_heart = ExtResource("2_p1e30")
+empty_heart = ExtResource("4_1xo4o")
+
+[node name="HUDContainer" type="HBoxContainer" parent="GameHUD"]
+z_index = 10
+custom_minimum_size = Vector2(275, 50)
+layout_mode = 2
+offset_left = 416.5
+offset_top = 15.0
+offset_right = 703.5
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 2
+
+[node name="Heart1" type="TextureRect" parent="GameHUD/HUDContainer"]
+z_index = 2
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+texture = ExtResource("2_p1e30")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart2" type="TextureRect" parent="GameHUD/HUDContainer"]
+z_index = 2
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+texture = ExtResource("2_p1e30")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Heart3" type="TextureRect" parent="GameHUD/HUDContainer"]
+z_index = 2
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+texture = ExtResource("2_p1e30")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Spacer" type="Control" parent="GameHUD/HUDContainer"]
+z_index = 2
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="GameHUD/HUDContainer"]
+z_index = 2
+layout_mode = 2
+size_flags_vertical = 8
+text = "03:00"
+label_settings = SubResource("LabelSettings_6a45y")
+horizontal_alignment = 1
