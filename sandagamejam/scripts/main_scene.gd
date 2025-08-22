@@ -39,16 +39,16 @@ func set_button_labels() -> void:
 	else:
 		push_error("No se pudo abrir el archivo JSON.")
 
-func _on_jugar_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		GlobalManager.start_game()
 		get_tree().change_scene_to_file("res://scenes/levels/PastryLevel1.tscn")
 
-func _on_creditos_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_creditos_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		print("CREDITOS fue presionado")
 
-func _on_opciones_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_opciones_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		print("OPCIONES fue presionado")
 
