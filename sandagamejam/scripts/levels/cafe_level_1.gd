@@ -11,6 +11,10 @@ var center_frac_x := 0.5 # 0.25 cuando se abra el minijuego
 
 var customer
 
+
+var original_viewport_size: Vector2
+
+
 # TODO: Animaciones de Newton: idle, feliz, trsite.
 # TODO: ClientesContainer generar los personajes de forma dinamica Cliente.tscn
 # TODO: UI Layer Elementos: tiempo, puntuación, pedidos correctos/fallidos.
@@ -18,15 +22,17 @@ var customer
 
 # Escena del nivel base
 func _ready():
+	original_viewport_size = get_viewport().size
+	print("original_viewport_size-> ", original_viewport_size)
 	# detecta cambios de tamaño de ventana
-	get_viewport().connect("size_changed", Callable(self, "_on_resize"))
+	#get_viewport().connect("size_changed", Callable(self, "_on_resize"))
 
 	# Cargar combinaciones y preparar cola
 	var universe_combinations := get_random_combinations(file_location, customer_count)
 	GlobalManager.initialize_customers(universe_combinations)
 	
 	spawn_next_customer()
-	print_combos(universe_combinations) # for debug
+	#print_combos(universe_combinations) # for debug
 	print("NIVEL 1 CARGADO") # for debug
 
 func spawn_next_customer():
@@ -43,8 +49,20 @@ func spawn_next_customer():
 	# Posición inicial (fuera de pantalla, izquierda)
 	current_customer.position = Vector2(-200, get_viewport().size.y / 2)
 	
-	# Destino inicial → centro de la pantalla en X
-	_move_customer_to_center()
+	# Calcular target X centrado tomando en cuenta el ancho del sprite
+	var viewport_width = get_viewport().size.x
+	var sprite_width = current_customer.sprite.texture.get_size().x * current_customer.sprite.scale.x
+	# Destino = centro horizontal considerando el ancho del sprite
+	var target_x = (viewport_width / 2)
+	var target_position = Vector2(target_x, get_viewport().size.y / 2) # 400
+	print("viewport_width ", viewport_width, "sprite width ", sprite_width)
+	print("target x", target_x)
+	#1000 200  -> 500 - 100 
+	#400 + 200 + 400
+	current_customer.move_to(target_position)
+	
+	# Guardar la posición relativa para resize
+	current_customer.relative_x = target_x / viewport_width
 
 func instance_ui():
 	# TODO: Instanciar la escena UI y agregarla a UILayer.
@@ -106,8 +124,12 @@ func _move_customer_to_center():
 	var target = Vector2(screen_size.x * center_frac_x, screen_size.y / 2)
 	current_customer.move_to(target)
 	
-func _on_resize():
-	_move_customer_to_center()
+# Nueva posición proporcional considerando el sprite
+func _on_viewport_resized():
+	if current_customer:
+		var sprite_width =  current_customer.sprite.texture.get_size().x * current_customer.sprite.scale.x
+		current_customer.position.x = (get_viewport().size.x / 2) - (sprite_width / 2)
+
 
 # Debug :]
 func print_combos(combos):

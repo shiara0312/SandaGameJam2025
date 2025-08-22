@@ -1,15 +1,15 @@
 [gd_scene load_steps=2 format=3 uid="uid://c360ti54la3sr"]
 
-[ext_resource type="Script" uid="uid://bsj6xfu8y1qhc" path="res://scripts/levels/cafe_level_1.gd" id="1_0msvb"]
+[ext_resource type="Script" uid="uid://bsj6xfu8y1qhc" path="res://scripts/levels/cafe_level_1.gd" id="1_74nrv"]
 
-[node name="CafeLevel1" type="Control"]
+[node name="PastryLevel1" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_0msvb")
+script = ExtResource("1_74nrv")
 
 [node name="Fondo" type="TextureRect" parent="."]
 layout_mode = 1
