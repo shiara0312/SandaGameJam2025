@@ -12,8 +12,8 @@ func _ready():
 
 
 func set_button_labels() -> void:	
-	print("Seteando labels para idioma:", GlobalManager.game_language)
-
+	# Seteando labels segun el idioma
+	#print("Seteando labels para idioma:", GlobalManager.game_language)
 	# Cargar el JSON
 	var file := FileAccess.open("res://i18n/menu_labels.json", FileAccess.READ)
 	
@@ -43,8 +43,8 @@ func set_button_labels() -> void:
 
 
 func _on_jugar_pressed() -> void:
-	print("JUGAR fue presionado")
 	GlobalManager.start_game()
+	get_tree().change_scene_to_file("res://scenes/CafeLevel1.tscn")
 
 func _on_opciones_pressed() -> void:
 	print("OPCIONES fue presionado")
