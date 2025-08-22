@@ -44,7 +44,7 @@ func set_button_labels() -> void:
 
 func _on_jugar_pressed() -> void:
 	GlobalManager.start_game()
-	get_tree().change_scene_to_file("res://scenes/CafeLevel1.tscn")
+	get_tree().change_scene_to_file("res://scenes/PastryLevel1.tscn")
 
 func _on_opciones_pressed() -> void:
 	print("OPCIONES fue presionado")

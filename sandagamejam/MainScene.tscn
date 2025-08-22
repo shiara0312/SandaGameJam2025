@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpif4nlr27xeh"]
+[gd_scene load_steps=11 format=3 uid="uid://cpif4nlr27xeh"]
 
 [ext_resource type="Script" uid="uid://dillk2kgfjndt" path="res://scripts/main_scene.gd" id="1_3mqji"]
+[ext_resource type="Texture2D" uid="uid://da1di5lqbuvun" path="res://assets/Portada.png" id="2_torvr"]
 [ext_resource type="Texture2D" uid="uid://f0n1tsj6fjaf" path="res://assets/UI/btn1.png" id="2_uxrcv"]
 [ext_resource type="Texture2D" uid="uid://c5jkshtoi0o6" path="res://assets/UI/btn2.png" id="3_rf2cd"]
 [ext_resource type="Texture2D" uid="uid://gsh1n1mta4mb" path="res://assets/UI/btn3.png" id="4_a814b"]
@@ -22,6 +23,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3mqji")
+
+[node name="Fondo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_torvr")
 
 [node name="Creditos" type="TextureButton" parent="."]
 layout_mode = 0
@@ -102,6 +113,7 @@ text = "Jugar"
 label_settings = ExtResource("5_rf2cd")
 
 [node name="Newton" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 167.0
 offset_top = -39.0
