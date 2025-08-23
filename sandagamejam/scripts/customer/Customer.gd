@@ -1,5 +1,7 @@
 extends Node2D
 
+signal arrived_at_center(customer : Node2D)
+
 @onready var sprite : Sprite2D = $Sprite2D
 @export var speed: float = 150.0
 
@@ -15,9 +17,18 @@ var state = State.ENTERING
 
 # Desde CafeLevel1:
 func move_to(target_position: Vector2) -> void:
+	print("moving to")
 	var dist := (target_position - position).length()
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", target_position, dist / speed)
+	
+	# Cuando termine el tween (cliente en el centro) → emitir señal
+	tween.finished.connect(customer_positioned)
+
+func customer_positioned():
+	print("Cliente llegó al centro")
+	set_state(State.SEATED) # Cambiar sprite/animación a sentado
+	emit_signal("arrived_at_center", self)
 
 # Setup: Preparar, reinicializar data del cliente
 func setup(data: Dictionary, lang: String):
