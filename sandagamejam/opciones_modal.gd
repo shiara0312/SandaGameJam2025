@@ -14,8 +14,8 @@ var resoluciones = [
 
 var idiomas = {
 	"Español": "es",
-	"Inglés": "en",
-	"Francés": "fr"
+	"English": "en",
+	"Français": "fr"
 }
 
 func _ready():

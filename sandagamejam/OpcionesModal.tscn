@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbt1wif75y37k"]
+[gd_scene load_steps=7 format=3 uid="uid://dbt1wif75y37k"]
 
-[ext_resource type="Script" path="res://opciones_modal.gd" id="1_y1he4"]
+[ext_resource type="Script" uid="uid://c3ly4kmn5k6ym" path="res://opciones_modal.gd" id="1_y1he4"]
 [ext_resource type="Texture2D" uid="uid://bs2u055nrgxai" path="res://assets/ui/imagenes.png" id="2_rckh6"]
 [ext_resource type="Texture2D" uid="uid://5ombdxxdcy6j" path="res://assets/ui/ic_volume_off_fill.png" id="3_tbubh"]
 [ext_resource type="FontFile" uid="uid://di1bbtmfhsyh5" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="4_57l0b"]
+[ext_resource type="Texture2D" uid="uid://rajs2wijos4q" path="res://assets/ui/ic_volume_on_fill.png" id="4_rckh6"]
 [ext_resource type="Texture2D" uid="uid://bxclil0u88e4h" path="res://assets/ui/closebtn.png" id="5_n47gr"]
 
 [node name="OpcionesModal" type="Control"]
@@ -30,6 +31,22 @@ offset_top = 208.0
 offset_right = 296.0
 offset_bottom = 248.0
 texture = ExtResource("3_tbubh")
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 815.0
+offset_top = 208.0
+offset_right = 855.0
+offset_bottom = 248.0
+texture = ExtResource("4_rckh6")
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 815.0
+offset_top = 319.0
+offset_right = 855.0
+offset_bottom = 359.0
+texture = ExtResource("4_rckh6")
 
 [node name="Titulo" type="Label" parent="."]
 layout_mode = 0
@@ -71,7 +88,7 @@ anchor_left = -0.0451389
 anchor_right = -0.045
 offset_left = 380.0
 offset_top = 219.0
-offset_right = 871.84
+offset_right = 836.84
 offset_bottom = 241.0
 
 [node name="TextureRect4" type="TextureRect" parent="."]
@@ -90,7 +107,7 @@ anchor_left = -0.0451389
 anchor_right = -0.045
 offset_left = 380.0
 offset_top = 330.0
-offset_right = 871.84
+offset_right = 840.84
 offset_bottom = 352.0
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -130,6 +147,7 @@ offset_top = 407.0
 offset_right = 839.0
 offset_bottom = 445.0
 theme_override_fonts/font = ExtResource("4_57l0b")
+theme_override_font_sizes/font_size = 24
 metadata/_edit_use_anchors_ = true
 
 [node name="Idioma" type="OptionButton" parent="."]
@@ -139,6 +157,7 @@ offset_top = 485.0
 offset_right = 841.0
 offset_bottom = 523.0
 theme_override_fonts/font = ExtResource("4_57l0b")
+theme_override_font_sizes/font_size = 24
 metadata/_edit_use_anchors_ = true
 
 [node name="lblIdioma" type="Label" parent="."]
