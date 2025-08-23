@@ -1,0 +1,141 @@
+[gd_scene load_steps=5 format=3 uid="uid://brrp3aubtiabr"]
+
+[ext_resource type="Texture2D" uid="uid://dqmmvff0cm4qc" path="res://assets/ui/imagenes.png" id="2_2w0tc"]
+[ext_resource type="FontFile" uid="uid://bvsvwfxvm3l51" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="2_inw4l"]
+[ext_resource type="Texture2D" uid="uid://c6e1jarbejna" path="res://assets/ui/closebtn.png" id="3_2w0tc"]
+[ext_resource type="Texture2D" uid="uid://v2ps6vb6emup" path="res://assets/ui/ic_volume_off_fill.png" id="4_2w0tc"]
+
+[node name="Opciones" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_right = 1146.0
+offset_bottom = 645.0
+texture = ExtResource("2_2w0tc")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect2"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 208.0
+offset_right = 296.0
+offset_bottom = 248.0
+texture = ExtResource("4_2w0tc")
+
+[node name="TextureRect2" type="TextureRect" parent="TextureRect2"]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 323.0
+offset_right = 302.0
+offset_bottom = 363.0
+texture = ExtResource("4_2w0tc")
+
+[node name="Titulo" type="Label" parent="TextureRect2"]
+offset_left = 25.0
+offset_top = 100.0
+offset_right = 1094.0
+offset_bottom = 163.0
+theme_override_fonts/font = ExtResource("2_inw4l")
+theme_override_font_sizes/font_size = 47
+text = "Opciones"
+horizontal_alignment = 1
+
+[node name="salir" type="TextureButton" parent="TextureRect2"]
+offset_left = 871.0
+offset_top = 92.0
+offset_right = 953.0
+offset_bottom = 168.0
+texture_normal = ExtResource("3_2w0tc")
+
+[node name="lblSFX" type="Label" parent="TextureRect2"]
+offset_left = 221.0
+offset_top = 155.0
+offset_right = 821.0
+offset_bottom = 194.0
+theme_override_fonts/font = ExtResource("2_inw4l")
+theme_override_font_sizes/font_size = 32
+text = "SFX"
+
+[node name="SFXsLider" type="HSlider" parent="TextureRect2"]
+custom_minimum_size = Vector2(550, 0)
+offset_left = 314.0
+offset_top = 219.0
+offset_right = 872.0
+offset_bottom = 241.0
+
+[node name="SFXsLider2" type="HSlider" parent="TextureRect2"]
+custom_minimum_size = Vector2(550, 0)
+offset_left = 314.0
+offset_top = 333.0
+offset_right = 872.0
+offset_bottom = 355.0
+
+[node name="TextureRect3" type="TextureRect" parent="TextureRect2"]
+offset_left = 210.0
+offset_top = 264.0
+offset_right = 810.0
+offset_bottom = 264.0
+
+[node name="lblMusic" type="Label" parent="TextureRect2"]
+offset_left = 222.0
+offset_top = 266.0
+offset_right = 316.0
+offset_bottom = 305.0
+theme_override_fonts/font = ExtResource("2_inw4l")
+theme_override_font_sizes/font_size = 32
+text = "Música"
+
+[node name="lblScreen" type="Label" parent="TextureRect2"]
+offset_left = 318.0
+offset_top = 407.0
+offset_right = 609.0
+offset_bottom = 446.0
+theme_override_fonts/font = ExtResource("2_inw4l")
+theme_override_font_sizes/font_size = 32
+text = "Resolución de Pantalla"
+
+[node name="ScreenButton" type="OptionButton" parent="TextureRect2"]
+offset_left = 640.0
+offset_top = 407.0
+offset_right = 839.0
+offset_bottom = 445.0
+theme_override_fonts/font = ExtResource("2_inw4l")
+item_count = 5
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1600x900"
+popup/item_1/id = 1
+popup/item_2/text = "1366x768"
+popup/item_2/id = 2
+popup/item_3/text = "1280x720"
+popup/item_3/id = 3
+popup/item_4/text = "Pantalla completa"
+popup/item_4/id = 4
+
+[node name="ScreenButton2" type="OptionButton" parent="TextureRect2"]
+offset_left = 642.0
+offset_top = 485.0
+offset_right = 841.0
+offset_bottom = 523.0
+theme_override_fonts/font = ExtResource("2_inw4l")
+item_count = 3
+popup/item_0/text = "English"
+popup/item_0/id = 0
+popup/item_1/text = "Français"
+popup/item_1/id = 1
+popup/item_2/text = "Español"
+popup/item_2/id = 2
+
+[node name="lblIdioma" type="Label" parent="TextureRect2"]
+offset_left = 512.0
+offset_top = 484.0
+offset_right = 598.0
+offset_bottom = 523.0
+theme_override_fonts/font = ExtResource("2_inw4l")
+theme_override_font_sizes/font_size = 32
+text = "Idioma"
