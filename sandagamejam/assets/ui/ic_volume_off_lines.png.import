@@ -11,6 +11,7 @@ metadata={
 [deps]
 
 source_file="res://assets/ui/ic_volume_off_lines.png"
+dest_files=["res://.godot/imported/ic_volume_off_lines.png-1db824a4790f94b00e4d6dff4257f9f4.ctex"]
 
 [params]
 
