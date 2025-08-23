@@ -47,6 +47,8 @@ func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) 
 func _on_creditos_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		print("CREDITOS fue presionado")
+		var credits_scene = load("res://credits.tscn")
+		get_tree().change_scene_to_packed(credits_scene)
 
 func _on_opciones_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:

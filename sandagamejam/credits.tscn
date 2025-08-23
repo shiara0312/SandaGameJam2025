@@ -1,0 +1,57 @@
+[gd_scene load_steps=4 format=3 uid="uid://ecskbidj06cr"]
+
+[ext_resource type="Texture2D" uid="uid://dok5fyga6qb62" path="res://assets/UI/credits_melissa.png" id="1_c1t8d"]
+[ext_resource type="Script" uid="uid://c2yno5nwb6hlr" path="res://credits.gd" id="1_g4wvt"]
+[ext_resource type="Texture2D" uid="uid://c6e1jarbejna" path="res://assets/UI/closebtn.png" id="2_g4wvt"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g4wvt")
+
+[node name="background" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 646.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 99.0
+offset_top = 50.0
+offset_right = 172.0
+offset_bottom = 82.0
+text = "Créditos"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 119.0
+offset_right = 238.0
+offset_bottom = 327.0
+texture_normal = ExtResource("1_c1t8d")
+
+[node name="Label" type="Label" parent="TextureButton"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Melissa"
+
+[node name="close_button" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1029.0
+offset_top = 24.0
+offset_right = 1111.0
+offset_bottom = 100.0
+texture_normal = ExtResource("2_g4wvt")
+
+[node name="close" type="Label" parent="close_button"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="pressed" from="close_button" to="." method="_on_close_button_pressed"]
