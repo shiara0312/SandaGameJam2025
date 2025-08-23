@@ -53,5 +53,6 @@ func _on_opciones_input_event(_viewport: Node, event: InputEvent, _shape_idx: in
 		print("OPCIONES fue presionado")
 		get_tree().change_scene_to_file("res://OpcionesModal.tscn")
 
-func _on_salir_pressed() -> void:
+func _on_salir_pressed() :
 	print("SALIR fue presionado")
+	get_tree().quit()
