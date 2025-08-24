@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://c360ti54la3sr"]
+
+[ext_resource type="Script" uid="uid://6p3dcvi4f7xk" path="res://scripts/levels/pastry_level_1.gd" id="1_aov3q"]
+[ext_resource type="Texture2D" uid="uid://bh4nwljm6eofb" path="res://assets/backgrounds/Barra.png" id="2_g7lon"]
+[ext_resource type="Texture2D" uid="uid://c25vvveaykvc" path="res://assets/UI/recipe_book.png" id="3_aov3q"]
+
+[node name="PastryLevel1" type="Node2D"]
+script = ExtResource("1_aov3q")
+
+[node name="Fondo" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Personajes" type="Node2D" parent="."]
+
+[node name="Barra" type="TextureRect" parent="."]
+offset_top = 567.0
+offset_right = 1152.0
+offset_bottom = 850.0
+texture = ExtResource("2_g7lon")
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="RecipeBtn" type="TextureButton" parent="."]
+offset_left = 21.0
+offset_top = 22.0
+offset_right = 90.0
+offset_bottom = 95.0
+texture_normal = ExtResource("3_aov3q")
+
+[node name="Recetario" type="Panel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="RecipeBtn" to="." method="_on_texture_button_pressed"]
