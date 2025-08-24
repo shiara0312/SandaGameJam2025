@@ -3,17 +3,10 @@
 [ext_resource type="Script" uid="uid://6p3dcvi4f7xk" path="res://scripts/levels/pastry_level_1.gd" id="1_aov3q"]
 [ext_resource type="Texture2D" uid="uid://bhcae6wcpb8t6" path="res://assets/backgrounds/Barra.png" id="2_g7lon"]
 
-[node name="PastryLevel1" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="PastryLevel1" type="Node2D"]
 script = ExtResource("1_aov3q")
 
 [node name="Fondo" type="TextureRect" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -23,7 +16,6 @@ grow_vertical = 2
 [node name="Personajes" type="Node2D" parent="."]
 
 [node name="Barra" type="TextureRect" parent="."]
-layout_mode = 0
 offset_top = 567.0
 offset_right = 1152.0
 offset_bottom = 850.0

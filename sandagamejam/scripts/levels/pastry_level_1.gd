@@ -1,4 +1,4 @@
-extends Control
+extends Node2D
 
 @onready var characters = $Personajes
 @onready var customer_scene := preload("res://scenes/characters/Customer.tscn")

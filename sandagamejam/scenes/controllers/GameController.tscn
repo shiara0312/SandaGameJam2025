@@ -8,7 +8,7 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_d13v1")
 
-[node name="CurrentScene" type="Node2D" parent="."]
+[node name="CurrentSceneContainer" type="Node2D" parent="."]
 
 [node name="MiniGameOverlay" type="Node2D" parent="."]
 

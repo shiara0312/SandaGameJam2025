@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://0nbfgsjfecy8"]
+[gd_scene load_steps=4 format=3 uid="uid://0nbfgsjfecy8"]
 
 [ext_resource type="Script" uid="uid://3qg5qwd7ie6j" path="res://scripts/levels/minigame_panel.gd" id="1_jh425"]
 [ext_resource type="Texture2D" uid="uid://bcgysafwxkocx" path="res://assets/recipes/receta-texture.png" id="2_dc0xe"]
+[ext_resource type="Texture2D" uid="uid://bewfpvnniqv3d" path="res://assets/recipes/receta-btn.png" id="3_t45b2"]
 
 [node name="MinigameOverlay" type="Node2D"]
 script = ExtResource("1_jh425")
@@ -10,8 +11,40 @@ script = ExtResource("1_jh425")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 576.0
+offset_right = 700.0
 offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_dc0xe")
+
+[node name="Recipe1" type="TextureButton" parent="TextureRect"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 100.0
+offset_right = 318.0
+offset_bottom = 299.0
+texture_normal = ExtResource("3_t45b2")
+
+[node name="Recipe2" type="TextureButton" parent="TextureRect"]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 100.0
+offset_right = 670.0
+offset_bottom = 299.0
+texture_normal = ExtResource("3_t45b2")
+
+[node name="Recipe3" type="TextureButton" parent="TextureRect"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 359.0
+offset_right = 318.0
+offset_bottom = 558.0
+texture_normal = ExtResource("3_t45b2")
+
+[node name="Recipe4" type="TextureButton" parent="TextureRect"]
+layout_mode = 0
+offset_left = 382.0
+offset_top = 359.0
+offset_right = 670.0
+offset_bottom = 558.0
+texture_normal = ExtResource("3_t45b2")
