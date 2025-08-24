@@ -17,7 +17,7 @@ var state = State.ENTERING
 
 # Desde CafeLevel1:
 func move_to(target_position: Vector2) -> void:
-	print("moving to")
+	print("move_to: Customer started moving to...")
 	var dist := (target_position - position).length()
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", target_position, dist / speed)
@@ -32,15 +32,12 @@ func customer_positioned():
 
 # Setup: Preparar, reinicializar data del cliente
 func setup(data: Dictionary, lang: String):
+	print("setup.. ", data)
 	character_id = data["character_id"]
 	mood_id = data["mood_id"]
 	texts = data["texts"]
 	language = lang
-	$Problem.text = ""
 	$BtnListen.hide()
-	$BtnHelp.hide()
-
-	#$Problem.text = texts[language]
 
 func set_state(new_state: State):
 	state = new_state
