@@ -2,9 +2,14 @@
 extends CanvasLayer
 
 @onready var game_hud : Control = null
+@onready var message_texture : TextureRect = null
+
+var typing_speed := 0.05 # secs por letra
 
 func _ready() -> void:
 	game_hud = $GameHUD
+	message_texture = $GameHUD/MessageTexture
+
 	if game_hud:
 		game_hud.visible = false
 	else:
@@ -24,6 +29,31 @@ func show_hud():
 	_on_lives_changed(GlobalManager.lives)
 	_on_time_changed(GlobalManager.time_left)
 
+func show_message(msg_to_display: String = "..."):
+	if not message_texture:
+		return
+	message_texture.visible = true
+	var rich_text = message_texture.get_node("RichTextLabel")
+	var btn_help = message_texture.get_node("BtnHelp")
+	btn_help.visible = false
+	
+	rich_text.text = ""
+	rich_text.visible = true
+	
+	# Iniciar coroutine de tipeo
+	await start_typing(msg_to_display, rich_text)
+	
+	show_help_button(btn_help)
+	#btn_help.visible = true
+
+func hide_message():
+	message_texture.visible = true
+
+func show_help_button(btn: TextureButton):
+	var label = btn.get_node("Label")
+	label.text = GlobalManager.btn_help_customer_label
+	btn.visible = true
+	
 func _on_lives_changed(new_lives):
 	game_hud.update_lives(new_lives)
 
@@ -35,3 +65,17 @@ func _on_time_up():
 
 func _on_game_over():
 	print("¡GAME OVER!")
+
+func start_typing(msg: String, rich_text: RichTextLabel) -> void:
+	var full_text = msg
+	rich_text.text = ""
+	
+	for i in full_text.length():
+		rich_text.text += full_text[i]
+		await get_tree().create_timer(typing_speed).timeout
+
+func _on_btn_help_pressed() -> void:
+	AudioManager.play_click_sfx()
+	message_texture.visible = false
+	#TODO: mostrar menu 
+	print("MOSTRAR MENU")

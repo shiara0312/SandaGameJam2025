@@ -15,10 +15,15 @@ var game_language : String = "es" # pueden ser "en", "fr".
 var customers_to_serve: Array = []
 var satisfied_customers: Array = []
 
+#Interacciones
+var btn_listen_customer_label = ""
+var btn_help_customer_label = ""
+
 func start_game():
 	print("GAME HAS STARTED")
 	is_game_running = true
 	
+	load_button_labels()
 	UILayerManager.init_ui_layer()
 	UILayerManager.show_hud()
 
@@ -73,3 +78,10 @@ func pause_game():
 func resume_game():
 	is_paused = false
 	is_game_running = true
+
+func load_button_labels():
+	var interact_btns_file_path = "res://i18n/interaction_texts.json"
+	
+	var btns_data = FileHelper.read_data_from_file(interact_btns_file_path)
+	btn_listen_customer_label = btns_data[game_language]["customer_seated"]
+	btn_help_customer_label = btns_data[game_language]["start_helping"]

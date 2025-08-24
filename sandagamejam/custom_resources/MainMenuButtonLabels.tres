@@ -1,6 +1,6 @@
 [gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://b2h5bls5s7rsg"]
 
-[ext_resource type="FontFile" uid="uid://bvsvwfxvm3l51" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="1_fcgkg"]
+[ext_resource type="FontFile" uid="uid://ch5rglkjpbnk2" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="1_fcgkg"]
 
 [resource]
 font = ExtResource("1_fcgkg")

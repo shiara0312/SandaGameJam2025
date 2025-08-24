@@ -1,10 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://bubpqw3sw6cvj"]
+[gd_scene load_steps=12 format=3 uid="uid://bubpqw3sw6cvj"]
 
 [ext_resource type="Script" uid="uid://d0bteqdbb1gsl" path="res://scripts/ui/UILayer.gd" id="1_nbl3c"]
 [ext_resource type="Script" uid="uid://ty3s5g4vlkh6" path="res://scripts/ui/GameHUD.gd" id="2_namiw"]
-[ext_resource type="Texture2D" uid="uid://duniyo2px7i6w" path="res://assets/UI/heart_full.png" id="2_p1e30"]
-[ext_resource type="Texture2D" uid="uid://sh5qv0xi74q8" path="res://assets/UI/heart_empty.png" id="4_1xo4o"]
-[ext_resource type="FontFile" uid="uid://bvsvwfxvm3l51" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="5_1xo4o"]
+[ext_resource type="Texture2D" uid="uid://b30bjdt6phga" path="res://assets/UI/heart_full.png" id="2_p1e30"]
+[ext_resource type="Texture2D" uid="uid://dthq4jchq0g0x" path="res://assets/UI/heart_empty.png" id="4_1xo4o"]
+[ext_resource type="FontFile" uid="uid://ch5rglkjpbnk2" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="5_1xo4o"]
+[ext_resource type="Texture2D" uid="uid://d3lwpiqw5gj2j" path="res://assets/UI/text_message.png" id="6_6a45y"]
+[ext_resource type="Theme" uid="uid://xreggbw3h3yp" path="res://custom_resources/CustomerMessage.tres" id="7_1i1xb"]
+[ext_resource type="Texture2D" uid="uid://jamwyueec32p" path="res://assets/UI/interact-btn.png" id="8_bhogs"]
+[ext_resource type="Texture2D" uid="uid://bpv7ib6u2578q" path="res://assets/UI/interact-btn-pressed.png" id="9_tqcr1"]
+[ext_resource type="LabelSettings" uid="uid://jdv1bfj4iff7" path="res://custom_resources/InteractionButtonLabels.tres" id="10_hhtea"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6a45y"]
 line_spacing = 0.0
@@ -79,3 +84,59 @@ size_flags_vertical = 8
 text = "03:00"
 label_settings = SubResource("LabelSettings_6a45y")
 horizontal_alignment = 1
+
+[node name="MessageTexture" type="TextureRect" parent="GameHUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 4.0
+offset_right = -16.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_6a45y")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameHUD/MessageTexture"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 192.0
+offset_top = 202.0
+offset_right = -191.0
+offset_bottom = -326.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_1i1xb")
+
+[node name="BtnHelp" type="TextureButton" parent="GameHUD/MessageTexture"]
+visible = false
+offset_left = 450.5
+offset_top = 413.0
+offset_right = 701.5
+offset_bottom = 492.0
+texture_normal = ExtResource("8_bhogs")
+texture_pressed = ExtResource("9_tqcr1")
+
+[node name="Label" type="Label" parent="GameHUD/MessageTexture/BtnHelp"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -15.0
+offset_right = 78.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Endulzarlo..."
+label_settings = ExtResource("10_hhtea")
+
+[connection signal="pressed" from="GameHUD/MessageTexture/BtnHelp" to="." method="_on_btn_help_pressed"]

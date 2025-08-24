@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalManager="*res://scripts/GlobalManager.gd"
 UILayerManager="*res://scripts/ui/UILayerManager.gd"
+AudioManager="*res://scenes/AudioManager.tscn"
 
 [display]
 

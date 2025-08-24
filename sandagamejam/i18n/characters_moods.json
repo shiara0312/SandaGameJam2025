@@ -57,33 +57,33 @@
 	{
 	  "id": "somnoliento",
 	  "name": {
-		"es": "Somnoliento",
-		"en": "Sleepy",
-		"fr": "Somnolent"
+		"es": "somnoliento",
+		"en": "sleepy",
+		"fr": "somnolent"
 	  }
 	},
 	{
 	  "id": "estresado",
 	  "name": {
-		"es": "Estresado",
-		"en": "Stressed",
-		"fr": "Stressé"
+		"es": "estresado",
+		"en": "stressed",
+		"fr": "stressé"
 	  }
 	},
 	{
 	  "id": "triste",
 	  "name": {
-		"es": "Triste",
-		"en": "Sad",
-		"fr": "Triste"
+		"es": "triste",
+		"en": "sad",
+		"fr": "triste"
 	  }
 	},
 	{
 	  "id": "molesto",
 	  "name": {
-		"es": "Molesto",
-		"en": "Annoyed",
-		"fr": "Agacé"
+		"es": "molesto",
+		"en": "annoyed",
+		"fr": "agacé"
 	  }
 	}
   ],
