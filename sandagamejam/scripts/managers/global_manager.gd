@@ -87,8 +87,6 @@ func initialize_recipes(level: String):
 		if recipe["id"] in level_recipe_ids:
 			current_level_recipes.append(recipe)
 
-	print("Recipes for level ", level, ": ", current_level_recipes)
-
 ### Game Controls ###
 func pause_game():
 	is_paused = true

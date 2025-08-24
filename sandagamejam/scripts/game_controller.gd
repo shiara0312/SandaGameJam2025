@@ -103,7 +103,4 @@ func resize_newton(new_scale: float) -> void:
 	tween.tween_property(newton_sprite, "position", new_pos, 0.5)
 
 func load_recipes():
-	# TODO: cargar por nivel
-	var recipes_json_path = "res://i18n/recipes.json"	
-	var recipes_data = FileHelper.read_data_from_file(recipes_json_path)
-	GlobalManager.current_level_recipes = recipes_data
+	print("load to ui ")
