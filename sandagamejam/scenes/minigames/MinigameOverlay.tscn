@@ -103,17 +103,25 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -6.0
-offset_bottom = -136.0
+offset_bottom = -214.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("9_smtws")
-text = "HOLAS"
+text = "Receta"
+
+[node name="IngredientsContainer" type="HBoxContainer" parent="TextureRect/RecipeContainer"]
+layout_mode = 1
+offset_top = 249.0
+offset_right = 612.0
+offset_bottom = 349.0
+theme_override_constants/separation = 20
+alignment = 1
 
 [node name="BtnContinue" type="TextureButton" parent="TextureRect/RecipeContainer"]
 offset_left = 268.0
-offset_top = 350.0
+offset_top = 380.0
 offset_right = 519.0
-offset_bottom = 429.0
+offset_bottom = 459.0
 texture_normal = ExtResource("10_e7l36")
 texture_pressed = ExtResource("11_ww4g8")
 
@@ -135,9 +143,9 @@ label_settings = ExtResource("12_70k8r")
 
 [node name="BtnBack" type="TextureButton" parent="TextureRect/RecipeContainer"]
 layout_mode = 0
-offset_top = 350.0
+offset_top = 380.0
 offset_right = 251.0
-offset_bottom = 429.0
+offset_bottom = 459.0
 texture_normal = ExtResource("10_e7l36")
 texture_pressed = ExtResource("11_ww4g8")
 

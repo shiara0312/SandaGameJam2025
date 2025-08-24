@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://b62ogal448ia2"]
+
+[ext_resource type="Shader" uid="uid://4by71tp78iht" path="res://custom_resources/reveal_shader_material.gdshader" id="1_i8eym"]
+
+[sub_resource type="GDScript" id="GDScript_gg6wh"]
+
+[resource]
+shader = ExtResource("1_i8eym")
+shader_parameter/radius = 0.0
+shader_parameter/center = Vector2(0.5, 0.5)
+script = SubResource("GDScript_gg6wh")
