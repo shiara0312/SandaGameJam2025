@@ -2,7 +2,6 @@ extends Control
 
 @onready var characters = $Personajes
 @onready var customer_scene := preload("res://scenes/characters/Customer.tscn")
-#@onready var minijuego_layer: Control = $MiniJuegoLayer
 
 var characters_mood_file_path = "res://i18n/characters_moods.json"
 var interact_btns_file_path = "res://i18n/interaction_texts.json"
@@ -81,14 +80,6 @@ func _on_customer_seated(cust: Node2D):
 	
 func _on_listen_customer_pressed():
 	UILayerManager.show_message(current_customer.texts[current_customer.language])
-
-#TODO: Instanciar el Minigame dentro de MinigameLayer.
-	#El minijuego ocupa la mitad de la pantalla (puede usar un Control con anchors para centrarse).
-	#Newton se mantiene adelante (no lo tapa el minijuego).
-	#Al terminar el minijuego
-	#El Minijuego instanciado se elimina de MinigameLayer.
-	#El personaje resuelve su estado.
-	# Nueva posición proporcional considerando el sprite
 	
 func _on_viewport_resized():
 	if current_customer:
