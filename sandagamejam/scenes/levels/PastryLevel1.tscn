@@ -25,9 +25,9 @@ grow_vertical = 2
 
 [node name="Barra" type="TextureRect" parent="."]
 layout_mode = 0
-offset_top = 506.5
+offset_top = 567.0
 offset_right = 1152.0
-offset_bottom = 789.5
+offset_bottom = 850.0
 texture = ExtResource("2_g7lon")
 
 [node name="Newton" type="Sprite2D" parent="."]

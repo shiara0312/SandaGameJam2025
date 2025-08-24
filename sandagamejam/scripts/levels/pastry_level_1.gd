@@ -47,34 +47,15 @@ func spawn_next_customer():
 	# Cargar el sprite "ENTERING"
 	current_customer.set_state(current_customer.State.ENTERING)	
 	
-	# Obtener el sprite del cliente
-	var sprite: Sprite2D = current_customer.get_node("Sprite2D")
-	var sprite_size = sprite.texture.get_size() * sprite.scale
-	
-	# Vista actual
+	# Calcular posiciones usando helpers del customer
 	var viewport_size = get_viewport().size
-	print("my sprite... ", sprite, " ", sprite_size)
-
-	# Centrado en X, 20px arriba del borde inferior
-	var start_x = viewport_size.x / 2
-	var start_y = viewport_size.y - (sprite_size.y / 2 + 60)
-
-	# Posición inicial (fuera de pantalla, izquierda)
-	current_customer.position = Vector2(-200, start_y)
-
-	# Tamaño real del sprite considerando escala
-	#var sprite_width = sprite.texture.get_size().x * sprite.scale.x
-
-	# Calcular target X centrado tomando en cuenta el ancho del sprite
-	var viewport_width = get_viewport().size.x
-	
-	# Destino = centro horizontal considerando el ancho del sprite
-	var target_x = (viewport_width / 2)
-	var target_position = Vector2(target_x, start_y)
-	current_customer.move_to(target_position)
+	var start_pos = current_customer.get_initial_position(viewport_size)
+	var target_pos = current_customer.get_target_position(viewport_size)
+	current_customer.position = start_pos
+	current_customer.move_to(target_pos)
 	
 	# Guardar la posición relativa para resize
-	current_customer.relative_x = target_x / viewport_size.x
+	current_customer.relative_x = target_pos.x / viewport_size.x
 
 func get_random_combinations(json_path: String, count: int = 4) -> Array:
 	var customer_data = FileHelper.read_data_from_file(json_path)
