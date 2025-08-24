@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://jdv1bfj4iff7"]
+
+[ext_resource type="FontFile" uid="uid://ch5rglkjpbnk2" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="1_skst6"]
+
+[resource]
+font = ExtResource("1_skst6")
+font_size = 24
+font_color = Color(0.368627, 0.294118, 0.298039, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)

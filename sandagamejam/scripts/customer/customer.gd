@@ -1,11 +1,16 @@
 extends Node2D
 
 signal arrived_at_center(customer : Node2D)
-
+signal listen_customer_pressed
+	
 @onready var sprite : Sprite2D = $Sprite2D
+@onready var btn_listen : TextureButton = $BtnListen
+@onready var sfx_entering : AudioStreamPlayer = $SFXEntering
+@onready var sfx_click : AudioStreamPlayer = $SFXClick
 @export var speed: float = 150.0
 
 var relative_x: float = 0.5
+var customer_scale: float = 0.165
 var character_id: String
 var mood_id: String
 var texts: Dictionary
@@ -14,10 +19,12 @@ var language: String
 # estados del cliente
 enum State { ENTERING, SEATED, SATISFIED }
 var state = State.ENTERING
-
-# Desde CafeLevel1:
+	
+# Desde CafeLevel1 se llama a:
 func move_to(target_position: Vector2) -> void:
-	print("move_to: Customer started moving to...")
+	#print("DEBUG > move_to: Customer started moving to...")
+	sfx_entering.play()
+	
 	var dist := (target_position - position).length()
 	var tween = get_tree().create_tween()
 	tween.tween_property(self, "position", target_position, dist / speed)
@@ -26,25 +33,79 @@ func move_to(target_position: Vector2) -> void:
 	tween.finished.connect(customer_positioned)
 
 func customer_positioned():
-	print("Cliente llegó al centro")
-	set_state(State.SEATED) # Cambiar sprite/animación a sentado
+	print("DEBUG > customer_positioned: Cliente llegó al centro")
+	sfx_entering.stop()
+	set_state(State.SEATED) #TODO: Cambiar sprite/animación a sentado
+	btn_listen.visible = true
 	emit_signal("arrived_at_center", self)
 
 # Setup: Preparar, reinicializar data del cliente
 func setup(data: Dictionary, lang: String):
-	print("setup.. ", data)
+	await ready
 	character_id = data["character_id"]
 	mood_id = data["mood_id"]
 	texts = data["texts"]
 	language = lang
-	$BtnListen.hide()
+	# Buscar el botón de forma segura (sin depender de @onready aún)
+	btn_listen.visible = false
+	# Escala para el sprite
+	sprite.scale = Vector2(customer_scale, customer_scale)
+
 
 func set_state(new_state: State):
+	print(">> SETTING STATE ", new_state)
+	print("my customer ", character_id)
+
 	state = new_state
 	match state:
 		State.ENTERING:
-			sprite.texture = preload("res://assets/sprites/ingreso.png")
+			var path := "res://assets/sprites/customers/%s_entrando.png" % character_id
+			var tex : Texture2D = null
+			
+			if ResourceLoader.exists(path, "Texture2D"):
+				tex = load(path)
+			else:
+				tex = preload("res://assets/sprites/customers/adalovelace_entrando.png")
+			print("what is texture ? ", tex)
+			sprite.texture = tex
 		State.SEATED:
 			sprite.texture = preload("res://assets/sprites/molesto.png")
 		State.SATISFIED:
 			sprite.texture = preload("res://assets/sprites/satisfecho.png")
+
+	if sprite.texture:
+		position_listen_button()
+
+# Colocar el botón justo arriba del sprite
+func position_listen_button():
+	if sprite and sprite.texture:
+		var texture_size = sprite.texture.get_size() * sprite.scale
+		var btn_size = btn_listen.size
+		
+		# centrar en X, arriba en Y
+		var x = -btn_size.x / 2
+		var y = -texture_size.y/2 - btn_size.y - 10
+		
+		btn_listen.position = Vector2(x, y)
+
+
+# Cargar sprite y aplicar escala.
+func get_scaled_size() -> Vector2:
+	if sprite.texture:
+		return sprite.texture.get_size() * sprite.scale
+	return Vector2.ZERO
+	
+func get_initial_position(viewport_size: Vector2, margin_bottom: float = 60) -> Vector2:
+	var sprite_size = get_scaled_size()
+	var y = viewport_size.y - (sprite_size.y / 2 + margin_bottom)
+	return Vector2(-200, y) # fuera de pantalla a la izquierda
+#Saber cuánto mide su sprite.
+
+#Saber calcular su posición inicial (fuera de pantalla, con margen inferior).
+
+#Saber calcular su posición objetivo (centro X, con margen inferior).
+
+
+func _on_btn_listen_pressed() -> void:
+	sfx_click.play()
+	emit_signal("listen_customer_pressed")

@@ -1,14 +1,14 @@
 {
 	"es": {
-		"arrived_at_center": "Oír su historia",
+		"customer_seated": "Oír su historia",
 		"start_helping": "Endulzar su día",
 	},
 	"en": {
-		"arrived_at_center": "Hear their story",
+		"customer_seated": "Hear their story",
 		"start_helping": "Sweeten their day",
 	},
 	"fr": {
-		"arrived_at_center": "Écouter son histoire",
+		"customer_seated": "Écouter son histoire",
 		"start_helping": "Adoucir sa journée",
 	}
 }

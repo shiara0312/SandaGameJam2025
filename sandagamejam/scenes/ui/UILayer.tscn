@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bubpqw3sw6cvj"]
+[gd_scene load_steps=8 format=3 uid="uid://bubpqw3sw6cvj"]
 
 [ext_resource type="Script" uid="uid://d0bteqdbb1gsl" path="res://scripts/ui/UILayer.gd" id="1_nbl3c"]
 [ext_resource type="Script" uid="uid://ty3s5g4vlkh6" path="res://scripts/ui/GameHUD.gd" id="2_namiw"]
-[ext_resource type="Texture2D" uid="uid://duniyo2px7i6w" path="res://assets/UI/heart_full.png" id="2_p1e30"]
-[ext_resource type="Texture2D" uid="uid://sh5qv0xi74q8" path="res://assets/UI/heart_empty.png" id="4_1xo4o"]
-[ext_resource type="FontFile" uid="uid://bvsvwfxvm3l51" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="5_1xo4o"]
+[ext_resource type="Texture2D" uid="uid://b30bjdt6phga" path="res://assets/UI/heart_full.png" id="2_p1e30"]
+[ext_resource type="Texture2D" uid="uid://dthq4jchq0g0x" path="res://assets/UI/heart_empty.png" id="4_1xo4o"]
+[ext_resource type="FontFile" uid="uid://ch5rglkjpbnk2" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="5_1xo4o"]
+[ext_resource type="Texture2D" uid="uid://d3lwpiqw5gj2j" path="res://assets/UI/text_message.png" id="6_6a45y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6a45y"]
 line_spacing = 0.0
@@ -79,3 +80,18 @@ size_flags_vertical = 8
 text = "03:00"
 label_settings = SubResource("LabelSettings_6a45y")
 horizontal_alignment = 1
+
+[node name="PopupTexture" type="TextureRect" parent="GameHUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 4.0
+offset_right = -16.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_6a45y")
+expand_mode = 1
