@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cpif4nlr27xeh"]
 
 [ext_resource type="Script" uid="uid://dillk2kgfjndt" path="res://scripts/main_scene.gd" id="1_3mqji"]
-[ext_resource type="Texture2D" uid="uid://di5o88j5jlhr6" path="res://assets/backgrounds/Portada.png" id="2_torvr"]
+[ext_resource type="Texture2D" uid="uid://772576ou1gfa" path="res://assets/backgrounds/main_menu.png" id="2_krskw"]
 [ext_resource type="Texture2D" uid="uid://bc01500fwn7t0" path="res://assets/UI/btn1.png" id="2_uxrcv"]
 [ext_resource type="Texture2D" uid="uid://c3nyorqts65i7" path="res://assets/UI/btn2.png" id="3_rf2cd"]
 [ext_resource type="Texture2D" uid="uid://c0fwdq8hq43ru" path="res://assets/UI/btn3.png" id="4_a814b"]
@@ -30,7 +30,7 @@ layout_mode = 1
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
-texture = ExtResource("2_torvr")
+texture = ExtResource("2_krskw")
 
 [node name="Jugar" type="Area2D" parent="."]
 position = Vector2(86, 122)

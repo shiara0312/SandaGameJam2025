@@ -1,0 +1,72 @@
+[
+  {
+	"id": "ing_001",
+	"name": {"en": "Quinoa", "es": "Quinua", "fr": "Quinoa"},
+	"category": "grain",
+	"description": {
+	  "en": "Nutritious grain that provides energy",
+	  "es": "Grano nutritivo que aporta energía",
+	  "fr": "Grain nutritif qui apporte de l'énergie"
+	}
+  },
+  {
+	"id": "ing_002",
+	"name": {"en": "Apple", "es": "Manzana", "fr": "Pomme"},
+	"category": "fruit",
+	"description": {
+	  "en": "Fruit rich in vitamins",
+	  "es": "Fruta rica en vitaminas",
+	  "fr": "Fruit riche en vitamines"
+	}
+  },
+  {
+	"id": "ing_003",
+	"name": {"en": "Cinnamon", "es": "Canela", "fr": "Cannelle"},
+	"category": "spice",
+	"description": {
+	  "en": "Spice that aids digestion and adds flavor",
+	  "es": "Especia que ayuda a la digestión y da sabor",
+	  "fr": "Épice qui aide à la digestion et donne du goût"
+	}
+  },
+  {
+	"id": "ing_004",
+	"name": {"en": "Flour", "es": "Harina", "fr": "Farine"},
+	"category": "grain",
+	"description": {
+	  "en": "Base for baking",
+	  "es": "Base para repostería",
+	  "fr": "Base pour la pâtisserie"
+	}
+  },
+  {
+	"id": "ing_005",
+	"name": {"en": "Sugar", "es": "Azúcar", "fr": "Sucre"},
+	"category": "sweetener",
+	"description": {
+	  "en": "Natural sweetness",
+	  "es": "Dulzura natural",
+	  "fr": "Douceur naturelle"
+	}
+  },
+  {
+	"id": "ing_006",
+	"name": {"en": "Butter", "es": "Mantequilla", "fr": "Beurre"},
+	"category": "dairy",
+	"description": {
+	  "en": "Fat that adds texture and flavor",
+	  "es": "Grasa que aporta textura y sabor",
+	  "fr": "Matière grasse qui apporte texture et goût"
+	}
+  },
+  {
+	"id": "ing_007",
+	"name": {"en": "Honey", "es": "Miel", "fr": "Miel"},
+	"category": "sweetener",
+	"description": {
+	  "en": "Natural sweetener that adds smoothness",
+	  "es": "Endulzante natural que aporta suavidad",
+	  "fr": "Édulcorant naturel qui apporte de la douceur"
+	}
+  }
+]

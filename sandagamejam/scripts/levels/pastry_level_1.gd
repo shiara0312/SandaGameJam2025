@@ -23,8 +23,9 @@ func _ready():
 	# Cargar combinaciones y preparar cola
 	var universe_combinations := get_random_combinations(characters_mood_file_path, customer_count)
 	GlobalManager.initialize_customers(universe_combinations)
-	
 	spawn_next_customer()
+	
+	GlobalManager.initialize_recipes("level1")
 
 func spawn_next_customer():
 	var next := GlobalManager.get_next_customer()
