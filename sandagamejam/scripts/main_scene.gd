@@ -7,6 +7,9 @@ extends Control
 
 func _ready():
 	set_button_labels()
+	var cursor_texture = preload("res://assets/UI/hand_point.png")
+	Input.set_custom_mouse_cursor(cursor_texture, Input.CURSOR_ARROW, Vector2(16, 16))
+	
 
 # TODO: Cuando se elige un idioma, llamar set_button_labels
 
@@ -61,3 +64,9 @@ func _on_opciones_input_event(_viewport: Node, event: InputEvent, _shape_idx: in
 func _on_salir_pressed() :
 	print("SALIR fue presionado")
 	get_tree().quit()
+
+	
+func _on_button_mouse_entered():
+	var hand_cursor = preload("res://assets/UI/hand_point.png")
+	Input.set_custom_mouse_cursor(hand_cursor, Input.CURSOR_ARROW, Vector2(8, 8))
+	
