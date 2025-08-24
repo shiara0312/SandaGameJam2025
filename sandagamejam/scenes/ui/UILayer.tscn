@@ -116,6 +116,7 @@ theme = ExtResource("7_1i1xb")
 
 [node name="BtnHelp" type="TextureButton" parent="GameHUD/MessageTexture"]
 visible = false
+layout_mode = 0
 offset_left = 450.5
 offset_top = 413.0
 offset_right = 701.5

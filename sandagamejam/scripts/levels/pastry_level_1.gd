@@ -1,8 +1,8 @@
-extends Control
+extends Node2D
 
 @onready var characters = $Personajes
-@onready var customer_scene := preload("res://scenes/Customer.tscn")
-	
+@onready var customer_scene := preload("res://scenes/characters/Customer.tscn")
+
 var characters_mood_file_path = "res://i18n/characters_moods.json"
 var interact_btns_file_path = "res://i18n/interaction_texts.json"
 var customer_count = 4
@@ -11,10 +11,7 @@ var current_customer: Node2D = null
 var center_frac_x := 0.5 # 0.25 cuando se abra el minijuego
 var original_viewport_size: Vector2
 
-# TODO: Animaciones de Newton: idle, feliz, trsite.
-# TODO: ClientesContainer generar los personajes de forma dinamica Cliente.tscn
 # TODO: UI Layer Elementos: tiempo, puntuación, pedidos correctos/fallidos.
-
 
 # Escena del nivel base
 func _ready():
@@ -76,19 +73,10 @@ func get_random_combinations(json_path: String, count: int = 4) -> Array:
 func _on_customer_seated(cust: Node2D):
 	var btn_listen : TextureButton = cust.get_node("BtnListen")
 	btn_listen.show()
-
-	print("El cliente llegó y se sentó: ", cust.character_id, "\n", cust.mood_id, "\n", cust.texts, "\n", cust.language)
+	#print("DEBUG > _on_customer_seated El cliente llegó y se sentó: ", cust.character_id, "\n", cust.mood_id, "\n", cust.texts, "\n", cust.language)
 	
 func _on_listen_customer_pressed():
 	UILayerManager.show_message(current_customer.texts[current_customer.language])
-
-#TODO: Instanciar el Minigame dentro de MinigameLayer.
-	#El minijuego ocupa la mitad de la pantalla (puede usar un Control con anchors para centrarse).
-	#Newton se mantiene adelante (no lo tapa el minijuego).
-	#Al terminar el minijuego
-	#El Minijuego instanciado se elimina de MinigameLayer.
-	#El personaje resuelve su estado.
-	# Nueva posición proporcional considerando el sprite
 	
 func _on_viewport_resized():
 	if current_customer:
