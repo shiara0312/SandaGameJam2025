@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://o8miq7xrmnbt"]
+[gd_scene load_steps=3 format=3 uid="uid://o8miq7xrmnbt"]
 
 [ext_resource type="Script" uid="uid://coqfni23j7fna" path="res://game_controller.gd" id="1_d13v1"]
+[ext_resource type="Texture2D" uid="uid://cnvxr3055hpum" path="res://assets/sprites/newtown/Newton_cocinando.png" id="2_d0bm5"]
 
 [node name="GameController" type="Control"]
 layout_mode = 3
@@ -9,4 +10,14 @@ script = ExtResource("1_d13v1")
 
 [node name="CurrentScene" type="Node" parent="."]
 
-[node name="UIOverlay" type="Node" parent="."]
+[node name="MiniGameOverlay" type="Node" parent="."]
+
+[node name="NewtonLayer" type="CanvasLayer" parent="."]
+layer = 10
+visible = false
+
+[node name="Newton" type="Sprite2D" parent="NewtonLayer"]
+z_index = 100
+position = Vector2(978, 472)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("2_d0bm5")

@@ -11,10 +11,7 @@ var current_customer: Node2D = null
 var center_frac_x := 0.5 # 0.25 cuando se abra el minijuego
 var original_viewport_size: Vector2
 
-# TODO: Animaciones de Newton: idle, feliz, trsite.
-# TODO: ClientesContainer generar los personajes de forma dinamica Cliente.tscn
 # TODO: UI Layer Elementos: tiempo, puntuación, pedidos correctos/fallidos.
-
 
 # Escena del nivel base
 func _ready():

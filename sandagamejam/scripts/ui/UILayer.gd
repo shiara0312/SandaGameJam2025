@@ -79,11 +79,3 @@ func _on_btn_help_pressed() -> void:
 	message_texture.visible = false
 	if GameController:
 		GameController.show_minigame("res://scenes/minigames/MinigamePanel.tscn")
-	print("MOSTRAR MENU")
-#TODO: Instanciar el Minigame dentro de MinigameLayer.
-	#El minijuego ocupa la mitad de la pantalla (puede usar un Control con anchors para centrarse).
-	#Newton se mantiene adelante (no lo tapa el minijuego).
-	#Al terminar el minijuego
-	#El Minijuego instanciado se elimina de MinigameLayer.
-	#El personaje resuelve su estado.
-	# Nueva posición proporcional considerando el sprite

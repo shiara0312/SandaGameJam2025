@@ -44,6 +44,7 @@ func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) 
 		var level_1_path = "res://scenes/levels/PastryLevel1.tscn"
 		GlobalManager.start_game()
 		GameController.load_level(level_1_path)
+		GameController.show_newton_layer()
 		queue_free()
 		
 func _on_creditos_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
