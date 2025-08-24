@@ -1,9 +1,8 @@
 extends Control
 
 @onready var characters = $Personajes
-@onready var customer_scene := preload("res://scenes/Customer.tscn")
-@onready var minijuego_layer: Control = $MiniJuegoLayer
-
+@onready var customer_scene := preload("res://scenes/characters/Customer.tscn")
+#@onready var minijuego_layer: Control = $MiniJuegoLayer
 
 var characters_mood_file_path = "res://i18n/characters_moods.json"
 var interact_btns_file_path = "res://i18n/interaction_texts.json"

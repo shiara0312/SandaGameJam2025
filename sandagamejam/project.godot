@@ -20,7 +20,7 @@ config/icon="res://icon.svg"
 GlobalManager="*res://scripts/managers/global_manager.gd"
 UILayerManager="*res://scripts/ui/UILayerManager.gd"
 AudioManager="*res://scenes/AudioManager.tscn"
-SceneManager="*res://scripts/managers/scene_manager.gd"
+GameController="*res://scenes/controllers/GameController.tscn"
 
 [display]
 

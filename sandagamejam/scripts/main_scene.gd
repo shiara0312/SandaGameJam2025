@@ -26,7 +26,7 @@ func set_button_labels() -> void:
 			return
 		
 		# Buscar las traducciones del idioma actual
-		var lang := GlobalManager.game_language
+		var lang : String = GlobalManager.game_language
 		if data.has(lang):
 			var labels = data[lang]
 			# Asignar a los botones
@@ -41,9 +41,11 @@ func set_button_labels() -> void:
 
 func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
+		var level_1_path = "res://scenes/levels/PastryLevel1.tscn"
 		GlobalManager.start_game()
-		get_tree().change_scene_to_file("res://scenes/levels/PastryLevel1.tscn")
-
+		GameController.load_level(level_1_path)
+		queue_free()
+		
 func _on_creditos_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		print("CREDITOS fue presionado")
