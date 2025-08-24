@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c360ti54la3sr"]
 
 [ext_resource type="Script" uid="uid://6p3dcvi4f7xk" path="res://scripts/levels/pastry_level_1.gd" id="1_aov3q"]
-[ext_resource type="Texture2D" uid="uid://bhcae6wcpb8t6" path="res://assets/backgrounds/Barra.png" id="2_g7lon"]
+[ext_resource type="Texture2D" uid="uid://b3o45f2hwvneh" path="res://assets/backgrounds/mesa.png" id="2_ld2p3"]
 
 [node name="PastryLevel1" type="Node2D"]
 script = ExtResource("1_aov3q")
@@ -18,8 +18,9 @@ grow_vertical = 2
 [node name="Barra" type="TextureRect" parent="."]
 offset_top = 567.0
 offset_right = 1152.0
-offset_bottom = 850.0
-texture = ExtResource("2_g7lon")
+offset_bottom = 647.0
+texture = ExtResource("2_ld2p3")
+expand_mode = 1
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 2
