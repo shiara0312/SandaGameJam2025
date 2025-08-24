@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=3 uid="uid://cpif4nlr27xeh"]
 
 [ext_resource type="Script" uid="uid://dillk2kgfjndt" path="res://scripts/main_scene.gd" id="1_3mqji"]
-[ext_resource type="Texture2D" uid="uid://cxxsjrktc68kn" path="res://assets/backgrounds/Portada.png" id="2_torvr"]
-[ext_resource type="Texture2D" uid="uid://c56muinrpbau5" path="res://assets/UI/btn1.png" id="2_uxrcv"]
-[ext_resource type="Texture2D" uid="uid://7uf0t0f1xg65" path="res://assets/UI/btn2.png" id="3_rf2cd"]
-[ext_resource type="Texture2D" uid="uid://biqih8p6xri1b" path="res://assets/UI/btn3.png" id="4_a814b"]
+[ext_resource type="Texture2D" uid="uid://di5o88j5jlhr6" path="res://assets/backgrounds/Portada.png" id="2_torvr"]
+[ext_resource type="Texture2D" uid="uid://bc01500fwn7t0" path="res://assets/UI/btn1.png" id="2_uxrcv"]
+[ext_resource type="Texture2D" uid="uid://c3nyorqts65i7" path="res://assets/UI/btn2.png" id="3_rf2cd"]
+[ext_resource type="Texture2D" uid="uid://c0fwdq8hq43ru" path="res://assets/UI/btn3.png" id="4_a814b"]
 [ext_resource type="LabelSettings" uid="uid://b2h5bls5s7rsg" path="res://custom_resources/MainMenuButtonLabels.tres" id="5_rf2cd"]
-[ext_resource type="Texture2D" uid="uid://80eka7pv48jo" path="res://assets/backgrounds/Newton_Portada.png" id="6_5crlr"]
-[ext_resource type="FontFile" uid="uid://bx2ex5j0qq1dc" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="6_a814b"]
-[ext_resource type="Texture2D" uid="uid://caaq18s5435v6" path="res://assets/UI/closebtn.png" id="7_hbc2u"]
+[ext_resource type="Texture2D" uid="uid://4o3c3306e13x" path="res://assets/backgrounds/Newton_Portada.png" id="6_5crlr"]
+[ext_resource type="FontFile" uid="uid://ch5rglkjpbnk2" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="6_a814b"]
+[ext_resource type="Texture2D" uid="uid://bu2111ycwvth7" path="res://assets/UI/closebtn.png" id="7_hbc2u"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5crlr"]
 font = ExtResource("6_a814b")
