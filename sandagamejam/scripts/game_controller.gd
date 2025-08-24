@@ -99,7 +99,7 @@ func resize_newton(new_scale: float) -> void:
 	tween.tween_property(newton_sprite, "scale", Vector2(new_scale, new_scale), 0.5)
 	
 	# Mover con animación (20px más abajo/derecha de su posición actual)
-	var new_pos = newton_sprite.position + Vector2(42,90)
+	var new_pos = newton_sprite.position + Vector2(42,100)
 	tween.tween_property(newton_sprite, "position", new_pos, 0.5)
 
 func load_recipes():
