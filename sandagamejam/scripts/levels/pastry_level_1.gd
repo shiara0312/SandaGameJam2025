@@ -2,6 +2,9 @@ extends Node2D
 
 @onready var characters = $Personajes
 @onready var customer_scene := preload("res://scenes/characters/Customer.tscn")
+@onready var PauseBtn = $PauseBtn
+@export var pause_texture: Texture
+@export var play_texture: Texture
 
 var characters_mood_file_path = "res://i18n/characters_moods.json"
 var interact_btns_file_path = "res://i18n/interaction_texts.json"
@@ -16,7 +19,7 @@ var original_viewport_size: Vector2
 # Escena del nivel base
 func _ready():
 	original_viewport_size = get_viewport().size
-	
+	PauseBtn.connect("pressed", Callable(self, "_on_pause_pressed"))
 	# Cargar combinaciones y preparar cola
 	var universe_combinations := get_random_combinations(characters_mood_file_path, customer_count)
 	GlobalManager.initialize_customers(universe_combinations)
@@ -88,4 +91,12 @@ func print_combos(combos):
 	for comb in combos:
 		print("Personaje: ", comb["character_id"], "\nEstado: ", comb["mood_id"], "\nTexto: ", comb["texts"][GlobalManager.game_language])
 		print("......")
+
 	
+func _on_pause_pressed():
+	if get_tree().paused:
+		get_tree().paused = false
+		PauseBtn.texture_normal = pause_texture
+	else:
+		get_tree().paused = true
+		PauseBtn.texture_normal = play_texture

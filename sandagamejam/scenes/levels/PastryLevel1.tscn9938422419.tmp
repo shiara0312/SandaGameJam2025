@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://6p3dcvi4f7xk" path="res://scripts/levels/pastry_level_1.gd" id="1_aov3q"]
 [ext_resource type="Texture2D" uid="uid://bh4nwljm6eofb" path="res://assets/backgrounds/Barra.png" id="2_g7lon"]
-[ext_resource type="Texture2D" uid="uid://bq3l33msem2mr" path="res://assets/UI/pause_btn.png" id="3_aov3q"]
+[ext_resource type="Texture2D" uid="uid://c25vvveaykvc" path="res://assets/UI/recipe_book.png" id="3_aov3q"]
 
 [node name="PastryLevel1" type="Node2D"]
 script = ExtResource("1_aov3q")
@@ -26,9 +26,15 @@ texture = ExtResource("2_g7lon")
 layer = 2
 visible = false
 
-[node name="PauseBtn" type="TextureButton" parent="."]
-offset_left = 1069.0
-offset_top = 27.0
-offset_right = 1118.0
-offset_bottom = 76.0
+[node name="RecipeBtn" type="TextureButton" parent="."]
+offset_left = 21.0
+offset_top = 22.0
+offset_right = 90.0
+offset_bottom = 95.0
 texture_normal = ExtResource("3_aov3q")
+
+[node name="Recetario" type="Panel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="RecipeBtn" to="." method="_on_texture_button_pressed"]
