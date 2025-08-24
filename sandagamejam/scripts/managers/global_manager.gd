@@ -10,6 +10,7 @@ var lives = 3
 var time_left : float = 180.0
 var is_game_running : bool = false
 var is_paused: bool = false
+var is_minigame_overlay_visible : bool = false
 
 var game_language : String = "es" # pueden ser "en", "fr".
 var customers_to_serve: Array = []

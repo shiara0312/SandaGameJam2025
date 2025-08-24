@@ -45,6 +45,7 @@ func show_newton_layer():
 	newton_layer.visible = true
 
 func show_minigame(path: String):
+	GlobalManager.is_minigame_overlay_visible = true
 	var tween = create_tween()
 	var screen_width = get_viewport().size.x
 	#var screen_height = get_viewport().size.y
