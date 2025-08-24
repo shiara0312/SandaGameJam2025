@@ -41,6 +41,7 @@ func set_button_labels() -> void:
 
 func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
+		print("jugar se presiono")
 		var level_1_path = "res://scenes/levels/PastryLevel1.tscn"
 		GlobalManager.start_game()
 		GameController.load_level(level_1_path)

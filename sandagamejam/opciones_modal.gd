@@ -57,4 +57,4 @@ func _on_idioma_selected(index: int) -> void:
 
 
 func _on_salir_pressed() -> void:
-	get_tree().change_scene_to_file("res://MainScene.tscn")
+	get_tree().change_scene_to_file("res://scenes/menus/MainMenu.tscn")

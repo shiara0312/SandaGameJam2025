@@ -10,7 +10,21 @@ var current_level: Node = null
 
 func _ready():
 	newton_layer.visible = false
-	pass
+
+func load_main_menu():
+	# Limpiar cualquier escena previa
+	free_children(current_scene_container)
+	
+	# Instanciar MainMenu
+	var main_menu = load("res://scenes/menus/MainMenu.tscn").instantiate()
+	current_scene_container.add_child(main_menu)
+	
+	# Ajustar tamaño y posición si es Control
+	if main_menu is Control:
+		main_menu.position = Vector2.ZERO
+
+		newton_layer.visible = false
+		pass
 	
 func load_level(level_path: String) -> void:
 	if current_level and is_instance_valid(current_level):
@@ -25,7 +39,7 @@ func load_level(level_path: String) -> void:
 	current_level = scene.instantiate()
 	current_scene_container.add_child(current_level)
 	#get_tree().root.add_child(current_level)
-	get_tree().current_scene = current_level
+	#get_tree().current_scene = current_level
 	
 func show_newton_layer():
 	newton_layer.visible = true
@@ -33,7 +47,7 @@ func show_newton_layer():
 func show_minigame(path: String):
 	var tween = create_tween()
 	var screen_width = get_viewport().size.x
-	var screen_height = get_viewport().size.y
+	#var screen_height = get_viewport().size.y
 	
 	# Slide Minigame Overlay
 	var minigame_instance = load(path).instantiate()
