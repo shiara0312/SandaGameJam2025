@@ -39,7 +39,11 @@ func customer_positioned():
 	print("DEBUG > customer_positioned: Cliente llegó al centro")
 	sfx_entering.stop()
 	set_state(State.SEATED) #TODO: Cambiar sprite/animación a sentado
+	
+	var label = btn_listen.get_node("Label")
+	label.text = GlobalManager.btn_listen_customer_label
 	btn_listen.visible = true
+	
 	emit_signal("arrived_at_center", self)
 
 # Setup: Preparar, reinicializar data del cliente
@@ -107,7 +111,7 @@ func get_target_position(viewport_size: Vector2, margin_bottom: float = target_y
 	return Vector2(viewport_size.x / 2 - offset_x, y)
 
 func _on_btn_listen_pressed() -> void:
-	sfx_click.play()
+	AudioManager.play_click_sfx()
 	emit_signal("listen_customer_pressed")
 
 # Helper

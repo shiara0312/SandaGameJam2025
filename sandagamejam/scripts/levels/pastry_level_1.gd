@@ -41,9 +41,8 @@ func spawn_next_customer():
 	current_customer.arrived_at_center.connect(_on_customer_seated)
 	current_customer.connect("listen_customer_pressed", Callable(self, "_on_listen_customer_pressed"))
 
-	# Cargar el sprite "ENTERING"
+	# Posicionar y mover
 	current_customer.set_state(current_customer.State.ENTERING)	
-	
 	# Calcular posiciones usando helpers del customer
 	var viewport_size = get_viewport().size
 	var start_pos = current_customer.get_initial_position(viewport_size)
@@ -75,16 +74,13 @@ func get_random_combinations(json_path: String, count: int = 4) -> Array:
 
 # Funciones lanzadas por los signals
 func _on_customer_seated(cust: Node2D):
-	var btns_data = FileHelper.read_data_from_file(interact_btns_file_path)
-	if btns_data:
-		var btn_listen : TextureButton = cust.get_node("BtnListen")
-		btn_listen.get_node("Label").text = btns_data[GlobalManager.game_language]["customer_seated"]
-		btn_listen.show()
+	var btn_listen : TextureButton = cust.get_node("BtnListen")
+	btn_listen.show()
+
 	print("El cliente llegó y se sentó: ", cust.character_id, "\n", cust.mood_id, "\n", cust.texts, "\n", cust.language)
 	
 func _on_listen_customer_pressed():
 	UILayerManager.show_message(current_customer.texts[current_customer.language])
-
 
 #TODO: Instanciar el Minigame dentro de MinigameLayer.
 	#El minijuego ocupa la mitad de la pantalla (puede usar un Control con anchors para centrarse).

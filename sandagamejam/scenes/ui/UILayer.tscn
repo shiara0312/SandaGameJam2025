@@ -107,9 +107,9 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 192.0
-offset_top = 223.0
+offset_top = 202.0
 offset_right = -191.0
-offset_bottom = -339.0
+offset_bottom = -326.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("7_1i1xb")
@@ -117,9 +117,9 @@ theme = ExtResource("7_1i1xb")
 [node name="BtnHelp" type="TextureButton" parent="GameHUD/MessageTexture"]
 visible = false
 offset_left = 450.5
-offset_top = 403.0
+offset_top = 413.0
 offset_right = 701.5
-offset_bottom = 482.0
+offset_bottom = 492.0
 texture_normal = ExtResource("8_bhogs")
 texture_pressed = ExtResource("9_tqcr1")
 
@@ -138,3 +138,5 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Endulzarlo..."
 label_settings = ExtResource("10_hhtea")
+
+[connection signal="pressed" from="GameHUD/MessageTexture/BtnHelp" to="." method="_on_btn_help_pressed"]

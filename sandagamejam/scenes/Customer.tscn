@@ -36,7 +36,6 @@ offset_right = 78.0
 offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Oir su historia..."
 label_settings = ExtResource("6_eousj")
 
 [node name="SFXEntering" type="AudioStreamPlayer" parent="."]
