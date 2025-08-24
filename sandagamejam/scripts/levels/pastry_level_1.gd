@@ -2,7 +2,9 @@ extends Control
 
 @onready var characters = $Personajes
 @onready var customer_scene := preload("res://scenes/Customer.tscn")
-	
+@onready var minijuego_layer: Control = $MiniJuegoLayer
+
+
 var characters_mood_file_path = "res://i18n/characters_moods.json"
 var interact_btns_file_path = "res://i18n/interaction_texts.json"
 var customer_count = 4
@@ -76,8 +78,7 @@ func get_random_combinations(json_path: String, count: int = 4) -> Array:
 func _on_customer_seated(cust: Node2D):
 	var btn_listen : TextureButton = cust.get_node("BtnListen")
 	btn_listen.show()
-
-	print("El cliente llegó y se sentó: ", cust.character_id, "\n", cust.mood_id, "\n", cust.texts, "\n", cust.language)
+	#print("DEBUG > _on_customer_seated El cliente llegó y se sentó: ", cust.character_id, "\n", cust.mood_id, "\n", cust.texts, "\n", cust.language)
 	
 func _on_listen_customer_pressed():
 	UILayerManager.show_message(current_customer.texts[current_customer.language])

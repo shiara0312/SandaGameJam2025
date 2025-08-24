@@ -30,17 +30,18 @@ offset_right = 1152.0
 offset_bottom = 850.0
 texture = ExtResource("2_g7lon")
 
-[node name="MinijuegoLayer" type="CanvasLayer" parent="."]
+[node name="MinijuegoLayer" type="Control" parent="."]
 visible = false
+anchors_preset = 0
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 2
 visible = false
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="NewtonLayer" type="CanvasLayer" parent="."]
 layer = 10
 
-[node name="Newton" type="Sprite2D" parent="CanvasLayer"]
+[node name="Newton" type="Sprite2D" parent="NewtonLayer"]
 z_index = 100
 position = Vector2(978, 472)
 scale = Vector2(0.22, 0.22)
