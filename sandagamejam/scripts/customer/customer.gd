@@ -57,8 +57,7 @@ func setup(data: Dictionary, lang: String):
 
 func set_state(new_state: State):
 	print(">> SETTING STATE ", new_state)
-	print("my customer ", character_id, mood_id)
-
+	print("my customer ", character_id, " ", mood_id)
 	state = new_state
 	match state:
 		State.ENTERING:
@@ -119,4 +118,5 @@ func load_customer_texture(path: String, alt_path: String):
 		tex = load(path)
 	else:
 		tex = load(alt_path)
-		sprite.texture = tex
+		
+	sprite.texture = tex

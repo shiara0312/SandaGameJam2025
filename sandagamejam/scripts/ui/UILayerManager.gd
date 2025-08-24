@@ -13,3 +13,11 @@ func init_ui_layer():
 func show_hud():
 	if ui_layer_instance:
 		ui_layer_instance.call_deferred("show_hud")
+
+func show_message(msg: String):
+	if ui_layer_instance:
+		ui_layer_instance.call_deferred("show_message", msg)
+
+func hide_message():
+	if ui_layer_instance:
+		ui_layer_instance.call_deferred("hide_message")
