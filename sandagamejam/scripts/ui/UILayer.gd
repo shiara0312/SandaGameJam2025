@@ -4,9 +4,10 @@ extends CanvasLayer
 @onready var game_hud : Control = null
 @onready var message_texture : TextureRect = null
 
-var typing_speed := 0.05 # secs por letra
+var typing_speed := 0.005 #0.05 # secs por letra
 
 func _ready() -> void:
+	self.layer = 0
 	game_hud = $GameHUD
 	message_texture = $GameHUD/MessageTexture
 
@@ -78,4 +79,4 @@ func _on_btn_help_pressed() -> void:
 	AudioManager.play_click_sfx()
 	message_texture.visible = false
 	if GameController:
-		GameController.show_minigame("res://scenes/minigames/MinigamePanel.tscn")
+		GameController.show_minigame("res://scenes/minigames/MinigameOverlay.tscn")
