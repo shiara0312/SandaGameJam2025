@@ -6,6 +6,7 @@
 [node name="GameController" type="Control"]
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("1_d13v1")
 
 [node name="CurrentSceneContainer" type="Node2D" parent="."]
