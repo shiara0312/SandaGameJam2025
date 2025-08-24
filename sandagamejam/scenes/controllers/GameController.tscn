@@ -17,7 +17,7 @@ script = ExtResource("1_d13v1")
 layer = 10
 visible = false
 
-[node name="Newton" type="Sprite2D" parent="NewtonLayer"]
+[node name="NewtonSprite" type="Sprite2D" parent="NewtonLayer"]
 z_index = 100
 position = Vector2(978, 472)
 scale = Vector2(0.22, 0.22)

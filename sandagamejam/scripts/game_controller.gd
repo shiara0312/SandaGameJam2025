@@ -3,6 +3,7 @@ extends Node
 @onready var current_scene_container: Node2D = $CurrentSceneContainer
 @onready var minigame_overlay = $MiniGameOverlay
 @onready var newton_layer = $NewtonLayer
+@onready var newton_sprite: Sprite2D = $NewtonLayer/NewtonSprite
 
 var current_level: Node = null
 
@@ -38,8 +39,6 @@ func load_level(level_path: String) -> void:
 	
 	current_level = scene.instantiate()
 	current_scene_container.add_child(current_level)
-	#get_tree().root.add_child(current_level)
-	#get_tree().current_scene = current_level
 	
 func show_newton_layer():
 	newton_layer.visible = true
@@ -47,9 +46,12 @@ func show_newton_layer():
 func show_minigame(path: String):
 	GlobalManager.is_minigame_overlay_visible = true
 	var screen_width = get_viewport().size.x
+	var new_scale = 0.15
 	
 	slide_minigame_overlay(path, screen_width)
 	slide_current_level(screen_width)
+	resize_newton(new_scale)
+	load_recipes()
 
 func hide_minigames():
 	for child in minigame_overlay.get_children():
@@ -89,3 +91,19 @@ func slide_current_level(screen_width: float):
 	var start_scene_pos = current_scene_container.position
 	var target_scene_pos = start_scene_pos - Vector2(screen_width/4, 0)
 	tween.tween_property(current_scene_container, "position", target_scene_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+func resize_newton(new_scale: float) -> void:
+	var tween = create_tween()
+	
+	# Escalar con animación
+	tween.tween_property(newton_sprite, "scale", Vector2(new_scale, new_scale), 0.5)
+	
+	# Mover con animación (20px más abajo/derecha de su posición actual)
+	var new_pos = newton_sprite.position + Vector2(42,90)
+	tween.tween_property(newton_sprite, "position", new_pos, 0.5)
+
+func load_recipes():
+	# TODO: cargar por nivel
+	var recipes_json_path = "res://i18n/recipes.json"	
+	var recipes_data = FileHelper.read_data_from_file(recipes_json_path)
+	GlobalManager.current_level_recipes = recipes_data
