@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbt1wif75y37k"]
+[gd_scene load_steps=8 format=3 uid="uid://dbt1wif75y37k"]
 
 [ext_resource type="Script" uid="uid://c3ly4kmn5k6ym" path="res://opciones_modal.gd" id="1_y1he4"]
 [ext_resource type="Texture2D" uid="uid://bs2u055nrgxai" path="res://assets/ui/imagenes.png" id="2_rckh6"]
+[ext_resource type="Texture2D" uid="uid://bba0vfbcqux35" path="res://assets/backgrounds/splash.png" id="2_tbubh"]
 [ext_resource type="Texture2D" uid="uid://5ombdxxdcy6j" path="res://assets/ui/ic_volume_off_fill.png" id="3_tbubh"]
 [ext_resource type="FontFile" uid="uid://di1bbtmfhsyh5" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="4_57l0b"]
 [ext_resource type="Texture2D" uid="uid://rajs2wijos4q" path="res://assets/ui/ic_volume_on_fill.png" id="4_rckh6"]
@@ -16,7 +17,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y1he4")
 
+[node name="TextureRect7" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 648.0
+texture = ExtResource("2_tbubh")
+
 [node name="TextureRect2" type="TextureRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.866667)
+light_mask = 0
+visibility_layer = 9
 layout_mode = 0
 offset_right = 1146.0
 offset_bottom = 645.0
@@ -54,9 +64,10 @@ offset_left = 25.0
 offset_top = 100.0
 offset_right = 1094.0
 offset_bottom = 163.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_57l0b")
 theme_override_font_sizes/font_size = 47
-text = "Opciones"
+text = "OPCIONES"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
@@ -69,7 +80,7 @@ offset_bottom = 168.0
 texture_normal = ExtResource("5_n47gr")
 metadata/_edit_use_anchors_ = true
 
-[node name="lblSFX" type="Label" parent="."]
+[node name="LabelSFX" type="Label" parent="."]
 layout_mode = 0
 offset_left = 221.0
 offset_top = 155.0
@@ -118,7 +129,7 @@ offset_right = 810.0
 offset_bottom = 264.0
 metadata/_edit_use_anchors_ = true
 
-[node name="lblMusic" type="Label" parent="."]
+[node name="LabelMusica" type="Label" parent="."]
 layout_mode = 0
 offset_left = 222.0
 offset_top = 266.0
@@ -129,8 +140,13 @@ theme_override_font_sizes/font_size = 32
 text = "Música"
 metadata/_edit_use_anchors_ = true
 
-[node name="lblScreen" type="Label" parent="."]
-layout_mode = 0
+[node name="LabelResolucion" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0269097
+anchor_top = 0.115741
+anchor_right = -0.0269097
+anchor_bottom = 0.115741
 offset_left = 318.0
 offset_top = 407.0
 offset_right = 609.0
@@ -141,7 +157,10 @@ text = "Resolución de Pantalla"
 metadata/_edit_use_anchors_ = true
 
 [node name="Pantalla" type="OptionButton" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.115741
+anchor_bottom = 0.115741
 offset_left = 640.0
 offset_top = 407.0
 offset_right = 839.0
@@ -151,7 +170,12 @@ theme_override_font_sizes/font_size = 24
 metadata/_edit_use_anchors_ = true
 
 [node name="Idioma" type="OptionButton" parent="."]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0729167
+anchor_top = -0.115741
+anchor_right = -0.0729167
+anchor_bottom = -0.115741
 offset_left = 642.0
 offset_top = 485.0
 offset_right = 841.0
@@ -160,8 +184,13 @@ theme_override_fonts/font = ExtResource("4_57l0b")
 theme_override_font_sizes/font_size = 24
 metadata/_edit_use_anchors_ = true
 
-[node name="lblIdioma" type="Label" parent="."]
-layout_mode = 0
+[node name="LabelIdioma" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.101563
+anchor_top = -0.112654
+anchor_right = -0.101563
+anchor_bottom = -0.112654
 offset_left = 512.0
 offset_top = 484.0
 offset_right = 598.0
