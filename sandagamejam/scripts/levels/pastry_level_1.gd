@@ -30,6 +30,7 @@ func _ready():
 
 
 func spawn_next_customer():
+	print("DEBUG > spawn_next_customer")
 	var next := GlobalManager.get_next_customer()
 	if next.is_empty():
 		# TODO: posible victoria
@@ -40,11 +41,11 @@ func spawn_next_customer():
 	current_customer.setup(next, GlobalManager.game_language)
 	characters.add_child(current_customer)
 	
-	# Conectar señal cuando cliente llegue al centro
+	# Conectar señales
 	current_customer.arrived_at_center.connect(_on_customer_seated)
 	current_customer.connect("listen_customer_pressed", Callable(self, "_on_listen_customer_pressed"))
 
-	# Posicionar y mover
+	# Estado del cliente
 	current_customer.set_state(current_customer.State.ENTERING)	
 	
 	# Esperar el frame cuando se hace resize 
@@ -52,9 +53,11 @@ func spawn_next_customer():
 	
 	# Calcular posiciones usando helpers del customer
 	var viewport_size = get_viewport().size
-	#var start_pos = current_customer.get_initial_position(viewport_size)
+	var start_pos = current_customer.get_initial_position(viewport_size)
 	var target_pos = current_customer.get_target_position(viewport_size)
-	current_customer.position = current_customer.get_initial_position(viewport_size) #start_pos
+	print("** start position: ", start_pos)
+	print("** target position: ", target_pos)
+	current_customer.position = start_pos
 	current_customer.move_to(target_pos)
 	
 	# Guardar la posición relativa para resize

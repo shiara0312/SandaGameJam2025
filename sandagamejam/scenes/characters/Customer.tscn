@@ -1,21 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://claed8rt7wvae"]
+[gd_scene load_steps=7 format=3 uid="uid://claed8rt7wvae"]
 
 [ext_resource type="Script" uid="uid://70wy2loe8sc8" path="res://scripts/customer/customer.gd" id="1_4aogt"]
 [ext_resource type="Texture2D" uid="uid://c8qs7ttxb2fkv" path="res://assets/sprites/customers/adalovelace_entrando.png" id="2_61uij"]
-[ext_resource type="Script" uid="uid://d1qoj3fc6bfqc" path="res://scripts/customer/customer_sprite_2d.gd" id="3_kk0tw"]
 [ext_resource type="Texture2D" uid="uid://jamwyueec32p" path="res://assets/UI/interact-btn.png" id="4_e8tpg"]
 [ext_resource type="Texture2D" uid="uid://bpv7ib6u2578q" path="res://assets/UI/interact-btn-pressed.png" id="5_a0qng"]
 [ext_resource type="LabelSettings" uid="uid://jdv1bfj4iff7" path="res://custom_resources/InteractionButtonLabels.tres" id="6_2t1lt"]
 [ext_resource type="AudioStream" uid="uid://dtofmrqfj2o7h" path="res://assets/sounds/sfx_entering.wav" id="7_irena"]
-[ext_resource type="AudioStream" uid="uid://8jhoxwaydavr" path="res://assets/sounds/sfx_click.wav" id="8_egi5h"]
 
 [node name="Customer" type="Node2D"]
 script = ExtResource("1_4aogt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.175, 0.175)
+scale = Vector2(0.165, 0.165)
 texture = ExtResource("2_61uij")
-script = ExtResource("3_kk0tw")
 
 [node name="BtnListen" type="TextureButton" parent="."]
 offset_right = 40.0
@@ -41,9 +38,5 @@ label_settings = ExtResource("6_2t1lt")
 [node name="SFXEntering" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_irena")
 volume_db = -15.0
-
-[node name="SFXClick" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_egi5h")
-volume_db = -18.0
 
 [connection signal="pressed" from="BtnListen" to="." method="_on_btn_listen_pressed"]

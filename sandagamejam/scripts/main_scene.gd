@@ -54,18 +54,18 @@ func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) 
 func _on_creditos_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		AudioManager.play_click_sfx()
-		print("CREDITOS fue presionado")
-		#var credits_scene = load("res://credits.tscn")
-		#get_tree().change_scene_to_packed(credits_scene)
+		#print("CREDITOS fue presionado")
+		var credits_scene = load("res://scenes/menus/Credits.tscn")
+		get_tree().change_scene_to_packed(credits_scene)
 
 func _on_opciones_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		AudioManager.play_click_sfx()
-		print("OPCIONES fue presionado")
+		#print("OPCIONES fue presionado")
 		get_tree().change_scene_to_file("res://OpcionesModal.tscn")
 
 func _on_salir_pressed() :
-	print("SALIR fue presionado")
+	#print("SALIR fue presionado")
 	get_tree().quit()
 
 	
