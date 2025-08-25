@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://lqqdf6iy7fnl"]
+[gd_scene load_steps=4 format=3 uid="uid://lqqdf6iy7fnl"]
 
-[ext_resource type="AudioStream" uid="uid://8jhoxwaydavr" path="res://assets/sounds/sfx_click.wav" id="1_hux41"]
 [ext_resource type="Script" uid="uid://bv5tuq3hbtquc" path="res://scripts/managers/audio_manager.gd" id="1_v6v0x"]
+[ext_resource type="AudioStream" uid="uid://cqb8r6rf23v1j" path="res://assets/sfx/pop.mp3" id="2_4tesi"]
+[ext_resource type="AudioStream" uid="uid://bp72dis3qtl7y" path="res://assets/sfx/music/isaacs_pastry_game.mp3" id="3_4tesi"]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_v6v0x")
 
 [node name="SFXClick" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_hux41")
-volume_db = -18.0
+stream = ExtResource("2_4tesi")
+volume_db = -24.0
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4tesi")
+volume_db = -22.0
+parameters/looping = true
