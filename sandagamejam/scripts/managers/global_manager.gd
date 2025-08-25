@@ -10,10 +10,14 @@ var lives = 3
 var time_left : float = 180.0
 var is_game_running : bool = false
 var is_paused: bool = false
+var is_minigame_overlay_visible : bool = false
 
 var game_language : String = "es" 
 var customers_to_serve: Array = []
 var satisfied_customers: Array = []
+var current_level_recipes: Array = []
+var ingredients: Array = []
+var selected_recipe_idx : int = 0
 
 
 var btn_listen_customer_label = ""
@@ -75,6 +79,20 @@ func return_customer(customer: Dictionary):
 func mark_customer_as_satisfied(customer: Dictionary):
 	satisfied_customers.append(customer)
 
+### Gestionar recetas ###
+func initialize_recipes(level: String):
+	var level_recipes_json_path = "res://i18n/levels_recipes.json"
+	var all_recipes_json_path = "res://i18n/all_recipes.json"
+	var ingredients_json_path = "res://i18n/ingredients.json"
+	var level_recipe_ids = FileHelper.read_data_from_file(level_recipes_json_path)[level]
+	var all_recipes = FileHelper.read_data_from_file(all_recipes_json_path)
+	ingredients = FileHelper.read_data_from_file(ingredients_json_path)
+
+	for recipe in all_recipes:
+		if recipe["id"] in level_recipe_ids:
+			current_level_recipes.append(recipe)
+
+### Game Controls ###
 func pause_game():
 	is_paused = true
 	is_game_running = false
@@ -85,6 +103,7 @@ func resume_game():
 
 
 
+### Botones de interaccion con el cliente ###
 func load_button_labels():
 	if interaction_texts == {}:
 		interaction_texts = _cargar_json_file("res://i18n/interaction_texts.json")

@@ -1,0 +1,66 @@
+[
+  {
+	"id": "recipe_001",
+	"name": {"en": "Quinoa with Apple", "es": "Quinua con manzana", "fr": "Quinoa aux pommes"},
+	"mood": "somnoliento",
+	"ingredients": ["ing_001", "ing_002", "ing_003"],
+	"benefits": {
+	  "en": "Restores extra energy, makes them more patient and helps them rest better",
+	  "es": "Devuelve energía extra, los vuelve más pacientes y los ayuda a descansar mejor",
+	  "fr": "Redonne de l'énergie, rend plus patient et aide à mieux se reposer"
+	},
+	"riddle": {
+	  "en": "Awakens neurons and ends your fatigue; one bite and your mind is ready for new ideas.",
+	  "es": "Despierta neuronas y acaba con tu cansancio, un bocado y tu cabeza estará despejada para nuevas ideas.",
+	  "fr": "Réveille les neurones et chasse la fatigue ; une bouchée et votre esprit est prêt pour de nouvelles idées."
+	}
+  },
+  {
+	"id": "recipe_002",
+	"name": {"en": "Apple Tart with Cinnamon", "es": "Tarta de manzana con canela", "fr": "Tarte aux pommes et cannelle"},
+	"mood": "estresado",
+	"ingredients": ["ing_002", "ing_004", "ing_003", "ing_006"],
+	"benefits": {
+	  "en": "Calms and balances, lowers stress levels",
+	  "es": "Calma y equilibrio, baja el nivel de estrés",
+	  "fr": "Calme et équilibre, réduit le niveau de stress"
+	},
+	"riddle": {
+	  "en": "One bite and tension melts away. Perfect for those seeking calm without losing pace.",
+	  "es": "Un mordisco y la tensión se derrite. Perfecta para quienes quieren calma sin perder el ritmo.",
+	  "fr": "Une bouchée et la tension fond. Parfaite pour ceux qui cherchent le calme sans ralentir le rythme."
+	}
+  },
+  {
+	"id": "recipe_003",
+	"name": {"en": "Gravitational Apple Pie", "es": "Pie de manzana gravitacional", "fr": "Tarte aux pommes gravitationnelle"},
+	"mood": "triste",
+	"ingredients": ["ing_002", "ing_004", "ing_006", "ing_003"],
+	"benefits": {
+	  "en": "Brings happiness and lightness, lifts the customer's mood",
+	  "es": "Felicidad y ligereza, sube el ánimo al cliente",
+	  "fr": "Apporte bonheur et légèreté, remonte le moral du client"
+	},
+	"riddle": {
+	  "en": "Lifts the mood without anti-gravity. Happy inside and light outside.",
+	  "es": "Levanta el ánimo sin necesidad de antigravedad. Feliz por dentro y ligero por fuera.",
+	  "fr": "Remonte le moral sans antigravité. Heureux à l'intérieur et léger à l'extérieur."
+	}
+  },
+  {
+	"id": "recipe_004",
+	"name": {"en": "Apple Honey Strudel", "es": "Strudel de manzana con miel", "fr": "Strudel aux pommes et miel"},
+	"mood": "molesto",
+	"ingredients": ["ing_002", "ing_004", "ing_006", "ing_003", "ing_007"],
+	"benefits": {
+	  "en": "Relaxation and sweetness, prevents customers from leaving angry and calms their attitude",
+	  "es": "Relajación y dulzura, evita que los clientes se vayan enojados y calma su actitud",
+	  "fr": "Relaxation et douceur, empêche les clients de partir en colère et calme leur humeur"
+	},
+	"riddle": {
+	  "en": "Sweetens the fury and turns 'grrr' into 'mmm'. Ideal for those seeking peace while enjoying it.",
+	  "es": "Endulza la furia y convierte ‘grrr’ en ‘mmm’. Ideal para quienes quieren paz y disfrutar mientras la consiguen.",
+	  "fr": "Adoucit la fureur et transforme 'grrr' en 'mmm'. Idéal pour ceux qui cherchent la paix tout en en profitant."
+	}
+  }
+]

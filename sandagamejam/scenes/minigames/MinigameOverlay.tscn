@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://0nbfgsjfecy8"]
+[gd_scene load_steps=13 format=3 uid="uid://0nbfgsjfecy8"]
 
-[ext_resource type="Script" uid="uid://3qg5qwd7ie6j" path="res://scripts/levels/minigame_panel.gd" id="1_jh425"]
-[ext_resource type="Texture2D" uid="uid://bfevr0l1uauyg" path="res://assets/recipes/receta-texture.png" id="2_dc0xe"]
-[ext_resource type="Texture2D" uid="uid://kn5a1j4upvsn" path="res://assets/recipes/receta-btn.png" id="3_t45b2"]
-[ext_resource type="Texture2D" uid="uid://0x6n8l21jxis" path="res://assets/recipes/receta-btn-pressed.png" id="4_3ueo8"]
+[ext_resource type="Script" uid="uid://3qg5qwd7ie6j" path="res://scripts/levels/minigame_overlay.gd" id="1_jh425"]
+[ext_resource type="Texture2D" uid="uid://bcgysafwxkocx" path="res://assets/recipes/receta-texture.png" id="2_dc0xe"]
+[ext_resource type="Texture2D" uid="uid://bewfpvnniqv3d" path="res://assets/recipes/receta-btn.png" id="3_t45b2"]
+[ext_resource type="Texture2D" uid="uid://8fgc3hisuaob" path="res://assets/recipes/receta-btn-pressed.png" id="4_3ueo8"]
+[ext_resource type="Texture2D" uid="uid://7r3r7m3ps5hx" path="res://assets/recipes/Chocolate_donut.png" id="5_j6ggg"]
+[ext_resource type="Texture2D" uid="uid://den21t0eirkav" path="res://assets/recipes/Pretzel-1.png" id="6_s74ho"]
+[ext_resource type="Texture2D" uid="uid://dgu8abt7rrtcq" path="res://assets/recipes/Chocolate_muffin.png" id="7_y8xj3"]
+[ext_resource type="Texture2D" uid="uid://bf73llhf0v5v5" path="res://assets/recipes/Frosted_blueberry_donut.png" id="8_vm73b"]
+[ext_resource type="Theme" uid="uid://xreggbw3h3yp" path="res://custom_resources/CustomerMessage.tres" id="9_smtws"]
+[ext_resource type="Texture2D" uid="uid://jamwyueec32p" path="res://assets/UI/interact-btn.png" id="10_e7l36"]
+[ext_resource type="Texture2D" uid="uid://bpv7ib6u2578q" path="res://assets/UI/interact-btn-pressed.png" id="11_ww4g8"]
+[ext_resource type="LabelSettings" uid="uid://jdv1bfj4iff7" path="res://custom_resources/InteractionButtonLabels.tres" id="12_70k8r"]
 
 [node name="MinigameOverlay" type="Node2D"]
 script = ExtResource("1_jh425")
@@ -16,40 +24,150 @@ offset_right = 700.0
 offset_bottom = 648.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_dc0xe")
 
-[node name="Recipe1" type="TextureButton" parent="TextureRect"]
-layout_mode = 0
-offset_left = 30.0
-offset_top = 100.0
-offset_right = 318.0
-offset_bottom = 299.0
+[node name="MenuContainer" type="Control" parent="TextureRect"]
+anchors_preset = 0
+offset_left = 38.0
+offset_top = 85.0
+offset_right = 656.0
+offset_bottom = 525.0
+mouse_filter = 2
+
+[node name="Recipe1" type="TextureButton" parent="TextureRect/MenuContainer"]
+layout_mode = 2
+offset_right = 288.0
+offset_bottom = 199.0
 texture_normal = ExtResource("3_t45b2")
 texture_pressed = ExtResource("4_3ueo8")
 
-[node name="Recipe2" type="TextureButton" parent="TextureRect"]
-layout_mode = 0
-offset_left = 382.0
-offset_top = 100.0
-offset_right = 670.0
-offset_bottom = 299.0
+[node name="TextureRect" type="Sprite2D" parent="TextureRect/MenuContainer/Recipe1"]
+position = Vector2(144, 105)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_j6ggg")
+
+[node name="Recipe2" type="TextureButton" parent="TextureRect/MenuContainer"]
+layout_mode = 2
+offset_left = 331.0
+offset_right = 619.0
+offset_bottom = 199.0
 texture_normal = ExtResource("3_t45b2")
 texture_pressed = ExtResource("4_3ueo8")
 
-[node name="Recipe3" type="TextureButton" parent="TextureRect"]
-layout_mode = 0
-offset_left = 30.0
-offset_top = 359.0
-offset_right = 318.0
-offset_bottom = 558.0
+[node name="TextureRect" type="Sprite2D" parent="TextureRect/MenuContainer/Recipe2"]
+position = Vector2(144, 105)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_s74ho")
+
+[node name="Recipe3" type="TextureButton" parent="TextureRect/MenuContainer"]
+layout_mode = 2
+offset_top = 237.0
+offset_right = 288.0
+offset_bottom = 436.0
 texture_normal = ExtResource("3_t45b2")
 texture_pressed = ExtResource("4_3ueo8")
 
-[node name="Recipe4" type="TextureButton" parent="TextureRect"]
-layout_mode = 0
-offset_left = 382.0
-offset_top = 359.0
-offset_right = 670.0
-offset_bottom = 558.0
+[node name="TextureRect" type="Sprite2D" parent="TextureRect/MenuContainer/Recipe3"]
+position = Vector2(144, 105)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("7_y8xj3")
+
+[node name="Recipe4" type="TextureButton" parent="TextureRect/MenuContainer"]
+layout_mode = 2
+offset_left = 331.0
+offset_top = 237.0
+offset_right = 619.0
+offset_bottom = 436.0
 texture_normal = ExtResource("3_t45b2")
 texture_pressed = ExtResource("4_3ueo8")
+
+[node name="TextureRect" type="Sprite2D" parent="TextureRect/MenuContainer/Recipe4"]
+position = Vector2(144, 105)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_vm73b")
+
+[node name="RecipeContainer" type="Control" parent="TextureRect"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 38.0
+offset_top = 85.0
+offset_right = 656.0
+offset_bottom = 525.0
+mouse_filter = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TextureRect/RecipeContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -6.0
+offset_bottom = -214.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_smtws")
+text = "Receta"
+
+[node name="IngredientsContainer" type="HBoxContainer" parent="TextureRect/RecipeContainer"]
+layout_mode = 1
+offset_top = 249.0
+offset_right = 612.0
+offset_bottom = 349.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="BtnContinue" type="TextureButton" parent="TextureRect/RecipeContainer"]
+offset_left = 268.0
+offset_top = 380.0
+offset_right = 519.0
+offset_bottom = 459.0
+texture_normal = ExtResource("10_e7l36")
+texture_pressed = ExtResource("11_ww4g8")
+
+[node name="Label" type="Label" parent="TextureRect/RecipeContainer/BtnContinue"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -15.0
+offset_right = 78.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "A preparar!"
+label_settings = ExtResource("12_70k8r")
+
+[node name="BtnBack" type="TextureButton" parent="TextureRect/RecipeContainer"]
+layout_mode = 0
+offset_top = 380.0
+offset_right = 251.0
+offset_bottom = 459.0
+texture_normal = ExtResource("10_e7l36")
+texture_pressed = ExtResource("11_ww4g8")
+
+[node name="Label" type="Label" parent="TextureRect/RecipeContainer/BtnBack"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -15.0
+offset_right = 78.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "No estoy seguro"
+label_settings = ExtResource("12_70k8r")
+
+[connection signal="pressed" from="TextureRect/MenuContainer/Recipe1" to="." method="_on_recipe_1_pressed"]
+[connection signal="pressed" from="TextureRect/MenuContainer/Recipe2" to="." method="_on_recipe_2_pressed"]
+[connection signal="pressed" from="TextureRect/MenuContainer/Recipe3" to="." method="_on_recipe_3_pressed"]
+[connection signal="pressed" from="TextureRect/MenuContainer/Recipe4" to="." method="_on_recipe_4_pressed"]
+[connection signal="pressed" from="TextureRect/RecipeContainer/BtnContinue" to="." method="_on_btn_continue_pressed"]
+[connection signal="pressed" from="TextureRect/RecipeContainer/BtnBack" to="." method="_on_btn_back_pressed"]

@@ -3,6 +3,7 @@ extends Node
 @onready var current_scene_container: Node2D = $CurrentSceneContainer
 @onready var minigame_overlay = $MiniGameOverlay
 @onready var newton_layer = $NewtonLayer
+@onready var newton_sprite: Sprite2D = $NewtonLayer/NewtonSprite
 
 var current_level: Node = null
 
@@ -38,21 +39,38 @@ func load_level(level_path: String) -> void:
 	
 	current_level = scene.instantiate()
 	current_scene_container.add_child(current_level)
-	#get_tree().root.add_child(current_level)
-	#get_tree().current_scene = current_level
 	
 func show_newton_layer():
 	newton_layer.visible = true
 
 func show_minigame(path: String):
-	var tween = create_tween()
+	GlobalManager.is_minigame_overlay_visible = true
 	var screen_width = get_viewport().size.x
-	#var screen_height = get_viewport().size.y
+	var new_scale = 0.15
 	
-	# Slide Minigame Overlay
+	slide_minigame_overlay(path, screen_width)
+	slide_current_level(screen_width)
+	resize_newton(new_scale)
+	load_recipes()
+
+func hide_minigames():
+	for child in minigame_overlay.get_children():
+		child.queue_free()
+	#TODO: Al terminar el minijuego
+	#El Minijuego instanciado se elimina de MinigameLayer.
+	#El personaje resuelve su estado.
+	# Nueva posición proporcional considerando el sprit
+
+func free_children(parent: Node):
+	for child in parent.get_children():
+		child.queue_free()
+
+# Slide Minigame Overlay
+func slide_minigame_overlay(path: String, screen_width: float):
+	var tween = create_tween()
+	
 	var minigame_instance = load(path).instantiate()
 	self.add_child(minigame_instance)
-	# Escalar Node2D si quieres (opcional)
 	minigame_instance.scale = Vector2(1,1)
 	minigame_instance.z_index = 50
 	
@@ -60,42 +78,29 @@ func show_minigame(path: String):
 	
 	# Posición inicial: fuera de la pantalla (derecha)
 	minigame_instance.position = Vector2(screen_width, 0)
-	print("INIT... ", minigame_instance.position)
 	# Posición final: borde izquierdo del Node2D en la mitad de la pantalla
 	var target_x = screen_width - overlay_width
 	var target_pos = Vector2(target_x, 0)
-
-	print("target pos ", target_pos)
-
-
 	# Tween para entrada del overlay
 	tween.tween_property(minigame_instance, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
-	# Slide Level scene
-
-	
-	
-
-	# current_scene_container es Node2D, su hijo es un Control que ocupa toda la pantalla
+# Slide Level scene
+func slide_current_level(screen_width: float):
+	var tween = create_tween()
 
 	var start_scene_pos = current_scene_container.position
-	print("start at .. ", start_scene_pos)
 	var target_scene_pos = start_scene_pos - Vector2(screen_width/4, 0)
-	print("target_scene_pos .. ", target_scene_pos)
 	tween.tween_property(current_scene_container, "position", target_scene_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
+func resize_newton(new_scale: float) -> void:
+	var tween = create_tween()
+	
+	# Escalar con animación
+	tween.tween_property(newton_sprite, "scale", Vector2(new_scale, new_scale), 0.5)
+	
+	# Mover con animación (20px más abajo/derecha de su posición actual)
+	var new_pos = newton_sprite.position + Vector2(84,100)
+	tween.tween_property(newton_sprite, "position", new_pos, 0.5)
 
-		
-	#TODO: Al terminar el minijuego
-	#El Minijuego instanciado se elimina de MinigameLayer.
-	#El personaje resuelve su estado.
-	# Nueva posición proporcional considerando el sprit
-
-
-func hide_minigames():
-	for child in minigame_overlay.get_children():
-		child.queue_free()
-
-func free_children(parent: Node):
-	for child in parent.get_children():
-		child.queue_free()
+func load_recipes():
+	print("load to ui ")
