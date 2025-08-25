@@ -55,8 +55,6 @@ func spawn_next_customer():
 	var viewport_size = get_viewport().size
 	var start_pos = current_customer.get_initial_position(viewport_size)
 	var target_pos = current_customer.get_target_position(viewport_size)
-	print("** start position: ", start_pos)
-	print("** target position: ", target_pos)
 	current_customer.position = start_pos
 	current_customer.move_to(target_pos)
 	
