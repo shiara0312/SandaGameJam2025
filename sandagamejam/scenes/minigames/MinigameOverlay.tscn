@@ -168,6 +168,15 @@ grow_vertical = 2
 text = "No estoy seguro"
 label_settings = ExtResource("12_70k8r")
 
+[node name="RecollectContainer" type="Control" parent="TextureRect"]
+visible = false
+anchors_preset = 0
+offset_left = 38.0
+offset_top = 85.0
+offset_right = 656.0
+offset_bottom = 525.0
+mouse_filter = 2
+
 [connection signal="pressed" from="TextureRect/MenuContainer/Recipe1" to="." method="_on_recipe_1_pressed"]
 [connection signal="pressed" from="TextureRect/MenuContainer/Recipe2" to="." method="_on_recipe_2_pressed"]
 [connection signal="pressed" from="TextureRect/MenuContainer/Recipe3" to="." method="_on_recipe_3_pressed"]

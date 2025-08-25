@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://brrp3aubtiabr"]
 
-[ext_resource type="Texture2D" uid="uid://25iaxd67dbej" path="res://assets/ui/imagenes.png" id="2_2w0tc"]
+[ext_resource type="Texture2D" uid="uid://25iaxd67dbej" path="res://assets/UI/imagenes.png" id="2_2w0tc"]
 [ext_resource type="FontFile" uid="uid://ch5rglkjpbnk2" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="2_inw4l"]
-[ext_resource type="Texture2D" uid="uid://bu2111ycwvth7" path="res://assets/ui/closebtn.png" id="3_2w0tc"]
-[ext_resource type="Texture2D" uid="uid://c7orwwgt3mbq8" path="res://assets/ui/ic_volume_off_fill.png" id="4_2w0tc"]
+[ext_resource type="Texture2D" uid="uid://bu2111ycwvth7" path="res://assets/UI/closebtn.png" id="3_2w0tc"]
+[ext_resource type="Texture2D" uid="uid://c7orwwgt3mbq8" path="res://assets/UI/ic_volume_off_fill.png" id="4_2w0tc"]
 
 [node name="Opciones" type="Control"]
 layout_mode = 3

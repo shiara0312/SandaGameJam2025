@@ -7,7 +7,7 @@ signal listen_customer_pressed
 @onready var btn_listen : TextureButton = $BtnListen
 @onready var sfx_entering : AudioStreamPlayer = $SFXEntering
 @onready var sfx_click : AudioStreamPlayer = $SFXClick
-@export var speed: float = 500.0 #150.0
+@export var speed: float = 300.0 #DEBUG: 500.0
 
 var start_x = -200
 var offset_x = 100
