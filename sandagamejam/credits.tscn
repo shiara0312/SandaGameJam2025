@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dd5cjrr17fxps" path="res://assets/UI/back.png" id="2_c1t8d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1t8d"]
-bg_color = Color(0.94902, 0.780392, 0.466667, 1)
+bg_color = Color(0.976177, 0.780522, 0.168616, 1)
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -18,7 +18,7 @@ script = ExtResource("1_g4wvt")
 [node name="background" type="Panel" parent="."]
 layout_mode = 0
 offset_right = 1154.0
-offset_bottom = 1048.0
+offset_bottom = 643.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_c1t8d")
 
 [node name="Label" type="Label" parent="."]
@@ -45,56 +45,56 @@ offset_bottom = 23.0
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 464.0
-offset_top = 173.0
-offset_right = 580.0
-offset_bottom = 196.0
+offset_left = 329.0
+offset_top = 163.0
+offset_right = 587.0
+offset_bottom = 186.0
 scale = Vector2(2, 2)
-text = "Melissa Huerta"
+text = "Melissa Huerta - Game Developer"
 
 [node name="Label3" type="Label" parent="."]
 layout_mode = 0
-offset_left = 471.0
-offset_top = 230.0
-offset_right = 587.0
-offset_bottom = 253.0
+offset_left = 343.0
+offset_top = 228.0
+offset_right = 593.0
+offset_bottom = 251.0
 scale = Vector2(2, 2)
-text = "Shiara Arauzo"
+text = "Shiara Arauzo - Game Developer"
 
 [node name="Label4" type="Label" parent="."]
 layout_mode = 0
-offset_left = 467.0
-offset_top = 282.0
-offset_right = 583.0
-offset_bottom = 305.0
+offset_left = 339.0
+offset_top = 291.0
+offset_right = 595.0
+offset_bottom = 314.0
 scale = Vector2(2, 2)
-text = "Malu Munayco"
+text = "Malu Munayco - Game Developer"
 
 [node name="Label5" type="Label" parent="."]
 layout_mode = 0
-offset_left = 465.0
-offset_top = 409.0
+offset_left = 412.0
+offset_top = 405.0
 offset_right = 581.0
-offset_bottom = 432.0
+offset_bottom = 428.0
 scale = Vector2(2, 2)
-text = "Selene Negrón"
+text = "Selene Negrón - Artist"
 
 [node name="Label6" type="Label" parent="."]
 layout_mode = 0
-offset_left = 443.0
-offset_top = 458.0
-offset_right = 583.0
-offset_bottom = 481.0
+offset_left = 370.0
+offset_top = 348.0
+offset_right = 566.0
+offset_bottom = 371.0
 scale = Vector2(2, 2)
-text = "Ariadna Mestanza"
+text = "Ariadna Mestanza - Artist"
 
 [node name="Label7" type="Label" parent="."]
 layout_mode = 0
-offset_left = 446.0
-offset_top = 571.0
-offset_right = 579.0
-offset_bottom = 594.0
+offset_left = 325.0
+offset_top = 458.0
+offset_right = 587.0
+offset_bottom = 481.0
 scale = Vector2(2, 2)
-text = "Fabrizio Murguia"
+text = "Fabrizio Murguia - Game Designer"
 
 [connection signal="pressed" from="close_button" to="." method="_on_close_button_pressed"]
