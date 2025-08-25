@@ -19,6 +19,7 @@ func load_main_menu():
 	# Instanciar MainMenu
 	var main_menu = load("res://scenes/menus/MainMenu.tscn").instantiate()
 	current_scene_container.add_child(main_menu)
+	AudioManager.play_game_music()
 	
 	# Ajustar tamaño y posición si es Control
 	if main_menu is Control:
