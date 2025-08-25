@@ -111,22 +111,28 @@ func clear_children(node: Node) -> void:
 		child.queue_free()
 
 func _on_recipe_1_pressed() -> void:
+	AudioManager.play_click_sfx()
 	show_selected_recipe(0)
 
 func _on_recipe_2_pressed() -> void:
+	AudioManager.play_click_sfx()
 	show_selected_recipe(1)
 
 func _on_recipe_3_pressed() -> void:
+	AudioManager.play_click_sfx()
 	show_selected_recipe(2)
 
 func _on_recipe_4_pressed() -> void:
+	AudioManager.play_click_sfx()
 	show_selected_recipe(3)
 
 func _on_btn_back_pressed() -> void:
+	AudioManager.play_click_sfx()
 	hide_recipe_container()
 	show_menu_container()
 
 func _on_btn_continue_pressed() -> void:
+	AudioManager.play_click_sfx()
 	hide_recipe_container()
 	hide_menu_container()
 	start_ingredient_minigame()
