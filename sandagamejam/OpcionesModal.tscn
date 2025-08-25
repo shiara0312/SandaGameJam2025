@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://dbt1wif75y37k"]
 
 [ext_resource type="Script" uid="uid://c3ly4kmn5k6ym" path="res://opciones_modal.gd" id="1_y1he4"]
-[ext_resource type="Texture2D" uid="uid://bs2u055nrgxai" path="res://assets/ui/imagenes.png" id="2_rckh6"]
-[ext_resource type="Texture2D" uid="uid://bba0vfbcqux35" path="res://assets/backgrounds/splash.png" id="2_tbubh"]
-[ext_resource type="Texture2D" uid="uid://5ombdxxdcy6j" path="res://assets/ui/ic_volume_off_fill.png" id="3_tbubh"]
-[ext_resource type="FontFile" uid="uid://di1bbtmfhsyh5" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="4_57l0b"]
-[ext_resource type="Texture2D" uid="uid://rajs2wijos4q" path="res://assets/ui/ic_volume_on_fill.png" id="4_rckh6"]
-[ext_resource type="Texture2D" uid="uid://bxclil0u88e4h" path="res://assets/ui/closebtn.png" id="5_n47gr"]
+[ext_resource type="Texture2D" uid="uid://25iaxd67dbej" path="res://assets/ui/imagenes.png" id="2_rckh6"]
+[ext_resource type="Texture2D" uid="uid://b67j32dky2rn8" path="res://assets/backgrounds/splash.png" id="2_tbubh"]
+[ext_resource type="Texture2D" uid="uid://c7orwwgt3mbq8" path="res://assets/ui/ic_volume_off_fill.png" id="3_tbubh"]
+[ext_resource type="FontFile" uid="uid://ch5rglkjpbnk2" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="4_57l0b"]
+[ext_resource type="Texture2D" uid="uid://bgdu715qp5md0" path="res://assets/ui/ic_volume_on_fill.png" id="4_rckh6"]
+[ext_resource type="Texture2D" uid="uid://bu2111ycwvth7" path="res://assets/ui/closebtn.png" id="5_n47gr"]
 
 [node name="OpcionesModal" type="Control"]
 layout_mode = 3

@@ -44,6 +44,7 @@ func set_button_labels() -> void:
 
 func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
+		AudioManager.play_click_sfx()
 		var level_1_path = "res://scenes/levels/PastryLevel1.tscn"
 		GlobalManager.start_game()
 		GameController.load_level(level_1_path)
@@ -52,12 +53,14 @@ func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) 
 		
 func _on_creditos_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
+		AudioManager.play_click_sfx()
 		print("CREDITOS fue presionado")
-		var credits_scene = load("res://credits.tscn")
-		get_tree().change_scene_to_packed(credits_scene)
+		#var credits_scene = load("res://credits.tscn")
+		#get_tree().change_scene_to_packed(credits_scene)
 
 func _on_opciones_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
+		AudioManager.play_click_sfx()
 		print("OPCIONES fue presionado")
 		get_tree().change_scene_to_file("res://OpcionesModal.tscn")
 
