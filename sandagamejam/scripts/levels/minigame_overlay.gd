@@ -5,6 +5,7 @@ extends Node2D
 @onready var recipe_container : Control = $TextureRect/RecipeContainer
 
 func _ready():
+	load_menu_data()
 	# TODO: cargar sprites de recetas segun el nivel 
 	print("ready >> ")
 	#print("ready >> , GlobalManager.ingredients)
@@ -14,6 +15,7 @@ func hide_menu_container():
 	menu_container.visible = false
 
 func show_menu_container():
+	load_menu_data()
 	menu_container.visible = true
 
 func hide_recipe_container():
@@ -29,6 +31,30 @@ func show_selected_recipe(idx: int) -> void:
 	hide_menu_container()
 	show_recipe_container()
 
+func load_menu_data() -> void:
+	var recipe_buttons = [
+		menu_container.get_node("Recipe1"),
+		menu_container.get_node("Recipe2"),
+		menu_container.get_node("Recipe3"),
+		menu_container.get_node("Recipe4")
+	]
+	
+	for i in range(GlobalManager.current_level_recipes.size()):
+		var recipe_data = GlobalManager.current_level_recipes[i]
+		var recipe_id = recipe_data["id"]
+		var path = "res://assets/pastry/recipes/%s.png" % recipe_id
+		if not ResourceLoader.exists(path):
+			print("⚠️ No existe asset:", path)
+			continue
+		
+		var tex = load(path)
+		if i < recipe_buttons.size():
+			var button = recipe_buttons[i]
+			var sprite = button.get_node("Sprite2D") 
+			if sprite:
+				sprite.texture = tex
+		
+	
 func load_selected_recipe_data(idx: int) -> void:
 	var lang = GlobalManager.game_language
 	print("current_level_recipes ", GlobalManager.current_level_recipes)
