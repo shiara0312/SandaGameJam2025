@@ -1,8 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://ecskbidj06cr"]
 
-[ext_resource type="Texture2D" uid="uid://dok5fyga6qb62" path="res://assets/UI/credits_melissa.png" id="1_c1t8d"]
 [ext_resource type="Script" uid="uid://c2yno5nwb6hlr" path="res://credits.gd" id="1_g4wvt"]
-[ext_resource type="Texture2D" uid="uid://bu2111ycwvth7" path="res://assets/UI/closebtn.png" id="2_g4wvt"]
+[ext_resource type="Texture2D" uid="uid://dd5cjrr17fxps" path="res://assets/UI/back.png" id="2_c1t8d"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1t8d"]
+bg_color = Color(0.94902, 0.780392, 0.466667, 1)
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -16,42 +18,83 @@ script = ExtResource("1_g4wvt")
 [node name="background" type="Panel" parent="."]
 layout_mode = 0
 offset_right = 1154.0
-offset_bottom = 646.0
+offset_bottom = 1048.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c1t8d")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 99.0
-offset_top = 50.0
-offset_right = 172.0
-offset_bottom = 82.0
+offset_left = 485.0
+offset_top = 38.0
+offset_right = 551.0
+offset_bottom = 62.0
+scale = Vector2(3, 3)
 text = "Créditos"
-
-[node name="TextureButton" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 51.0
-offset_top = 119.0
-offset_right = 238.0
-offset_bottom = 327.0
-texture_normal = ExtResource("1_c1t8d")
-
-[node name="Label" type="Label" parent="TextureButton"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-text = "Melissa"
 
 [node name="close_button" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 1029.0
-offset_top = 24.0
-offset_right = 1111.0
-offset_bottom = 100.0
-texture_normal = ExtResource("2_g4wvt")
+offset_left = 51.0
+offset_top = 40.0
+offset_right = 100.0
+offset_bottom = 90.0
+texture_normal = ExtResource("2_c1t8d")
 
 [node name="close" type="Label" parent="close_button"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 464.0
+offset_top = 173.0
+offset_right = 580.0
+offset_bottom = 196.0
+scale = Vector2(2, 2)
+text = "Melissa Huerta"
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 471.0
+offset_top = 230.0
+offset_right = 587.0
+offset_bottom = 253.0
+scale = Vector2(2, 2)
+text = "Shiara Arauzo"
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 282.0
+offset_right = 583.0
+offset_bottom = 305.0
+scale = Vector2(2, 2)
+text = "Malu Munayco"
+
+[node name="Label5" type="Label" parent="."]
+layout_mode = 0
+offset_left = 465.0
+offset_top = 409.0
+offset_right = 581.0
+offset_bottom = 432.0
+scale = Vector2(2, 2)
+text = "Selene Negrón"
+
+[node name="Label6" type="Label" parent="."]
+layout_mode = 0
+offset_left = 443.0
+offset_top = 458.0
+offset_right = 583.0
+offset_bottom = 481.0
+scale = Vector2(2, 2)
+text = "Ariadna Mestanza"
+
+[node name="Label7" type="Label" parent="."]
+layout_mode = 0
+offset_left = 446.0
+offset_top = 571.0
+offset_right = 579.0
+offset_bottom = 594.0
+scale = Vector2(2, 2)
+text = "Fabrizio Murguia"
 
 [connection signal="pressed" from="close_button" to="." method="_on_close_button_pressed"]
