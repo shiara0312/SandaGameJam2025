@@ -12,16 +12,20 @@ var is_game_running : bool = false
 var is_paused: bool = false
 var is_minigame_overlay_visible : bool = false
 
-var game_language : String = "es" # pueden ser "en", "fr".
+var game_language : String = "es" 
 var customers_to_serve: Array = []
 var satisfied_customers: Array = []
 var current_level_recipes: Array = []
 var ingredients: Array = []
 var selected_recipe_idx : int = 0
 
-#Interacciones
+
 var btn_listen_customer_label = ""
 var btn_help_customer_label = ""
+
+var interaction_texts := {}     
+var menu_labels := {}        
+var characters_moods := {}    
 
 func start_game():
 	print("GAME HAS STARTED")
@@ -97,10 +101,39 @@ func resume_game():
 	is_paused = false
 	is_game_running = true
 
+
+
 ### Botones de interaccion con el cliente ###
 func load_button_labels():
-	var interact_btns_file_path = "res://i18n/interaction_texts.json"
+	if interaction_texts == {}:
+		interaction_texts = _cargar_json_file("res://i18n/interaction_texts.json")
+	if menu_labels == {}:
+		menu_labels = _cargar_json_file("res://i18n/menu_labels.json")
+	if characters_moods == {}:
+		characters_moods = _cargar_json_file("res://i18n/characters_moods.json")
 	
-	var btns_data = FileHelper.read_data_from_file(interact_btns_file_path)
-	btn_listen_customer_label = btns_data[game_language]["customer_seated"]
-	btn_help_customer_label = btns_data[game_language]["start_helping"]
+	if game_language in interaction_texts:
+		btn_listen_customer_label = interaction_texts[game_language]["customer_seated"]
+		btn_help_customer_label = interaction_texts[game_language]["start_helping"]
+	else:
+		btn_listen_customer_label = "Customer"
+		btn_help_customer_label = "Help"
+
+
+func _cargar_json_file(path: String) -> Dictionary:
+	var f = FileAccess.open(path, FileAccess.READ)
+	if not f:
+		push_error("No se pudo abrir " + path)
+		return {}
+	var text = f.get_as_text()
+	f.close()
+	var data = JSON.parse_string(text)
+	if typeof(data) == TYPE_DICTIONARY:
+		return data
+	else:
+		push_error("Error parseando JSON: " + path)
+		return {}
+
+func cambiar_idioma(nuevo_idioma: String) -> void:
+	game_language = nuevo_idioma
+	load_button_labels()

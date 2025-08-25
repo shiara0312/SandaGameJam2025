@@ -1,0 +1,150 @@
+[gd_scene load_steps=11 format=3 uid="uid://w0yddb7elguo"]
+
+[ext_resource type="Script" uid="uid://dillk2kgfjndt" path="res://scripts/main_scene.gd" id="1_3mqji"]
+[ext_resource type="Texture2D" uid="uid://c7h6j4al0tiur" path="res://assets/backgrounds/Portada.png" id="2_torvr"]
+[ext_resource type="Texture2D" uid="uid://fnyebl52f4f3" path="res://assets/UI/btn1.png" id="2_uxrcv"]
+[ext_resource type="Texture2D" uid="uid://3wcjidioqgdg" path="res://assets/UI/btn2.png" id="3_rf2cd"]
+[ext_resource type="Texture2D" uid="uid://u8j3ycp53rtu" path="res://assets/UI/btn3.png" id="4_a814b"]
+[ext_resource type="LabelSettings" uid="uid://b2h5bls5s7rsg" path="res://custom_resources/MainMenuButtonLabels.tres" id="5_rf2cd"]
+[ext_resource type="Texture2D" uid="uid://bwcnrgq51ie5w" path="res://assets/backgrounds/Newton_Portada.png" id="6_5crlr"]
+[ext_resource type="FontFile" uid="uid://di1bbtmfhsyh5" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="6_a814b"]
+[ext_resource type="Texture2D" uid="uid://bxclil0u88e4h" path="res://assets/UI/closebtn.png" id="7_hbc2u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5crlr"]
+font = ExtResource("6_a814b")
+font_size = 28
+font_color = Color(0.713726, 0.631373, 0.521569, 1)
+
+[node name="Node2D" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_3mqji")
+
+[node name="Fondo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_torvr")
+
+[node name="Jugar" type="Area2D" parent="."]
+position = Vector2(86, 122)
+rotation = 0.139626
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Jugar"]
+polygon = PackedVector2Array(3, 79, 23, 164, 340, 93, 320, 5)
+
+[node name="TextureRect" type="TextureRect" parent="Jugar/CollisionPolygon2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_uxrcv")
+
+[node name="Label" type="Label" parent="Jugar/CollisionPolygon2D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.00002
+offset_top = 81.0
+offset_right = 328.0
+offset_bottom = 164.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.221657
+size_flags_horizontal = 4
+text = "Jugar"
+label_settings = ExtResource("5_rf2cd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Opciones" type="Area2D" parent="."]
+position = Vector2(210, 286)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Opciones"]
+polygon = PackedVector2Array(12, 2, 17, 89, 341, 71, 335, -17)
+
+[node name="TextureRect" type="TextureRect" parent="Opciones/CollisionPolygon2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+rotation = -0.139626
+texture = ExtResource("3_rf2cd")
+
+[node name="Label" type="Label" parent="Opciones/CollisionPolygon2D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 5.0
+offset_right = 334.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.0645772
+size_flags_horizontal = 4
+text = "OPCIONES"
+label_settings = ExtResource("5_rf2cd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Creditos" type="Area2D" parent="."]
+position = Vector2(91, 360)
+rotation = 0.139626
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Creditos"]
+polygon = PackedVector2Array(3.34016, 23.7664, 7.80443, 113.014, 333.538, 95.5099, 326.676, 3.57022, 6.1718, 22.3586)
+
+[node name="TextureRect" type="TextureRect" parent="Creditos/CollisionPolygon2D"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_a814b")
+
+[node name="Label" type="Label" parent="Creditos/CollisionPolygon2D"]
+offset_left = 5.73821
+offset_top = 26.4589
+offset_right = 324.738
+offset_bottom = 112.459
+rotation = -0.0645772
+size_flags_horizontal = 4
+text = "CREDITOS"
+label_settings = ExtResource("5_rf2cd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Newton" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 167.0
+offset_top = -39.0
+offset_right = 5243.0
+offset_bottom = 4721.0
+scale = Vector2(0.25, 0.25)
+mouse_filter = 2
+texture = ExtResource("6_5crlr")
+
+[node name="Salir" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1030.0
+offset_top = 29.0
+offset_right = 1113.0
+offset_bottom = 105.0
+texture_normal = ExtResource("7_hbc2u")
+
+[node name="Label" type="Label" parent="Salir"]
+visible = false
+layout_mode = 0
+offset_left = -50.0
+offset_top = 30.0
+offset_bottom = 53.0
+text = "SALIR"
+label_settings = SubResource("LabelSettings_5crlr")
+
+[connection signal="input_event" from="Jugar" to="." method="_on_jugar_input_event"]
+[connection signal="input_event" from="Opciones" to="." method="_on_opciones_input_event"]
+[connection signal="input_event" from="Creditos" to="." method="_on_creditos_input_event"]
+[connection signal="pressed" from="Salir" to="." method="_on_salir_pressed"]

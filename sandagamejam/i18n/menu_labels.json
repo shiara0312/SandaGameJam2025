@@ -5,13 +5,21 @@
 			"opciones": "OPCIONES",
 			"creditos": "CRÉDITOS",
 			"salir": "SALIR",
-		},
+			"sfx": "SFX",
+			"musica":"Música",
+			"idioma":"Idioma",
+			"resolucion":"Resolución de Pantalla"
+			},
 	"en":
 		{
 			"jugar": "PLAY",
 			"opciones": "OPTIONS",
 			"creditos": "CREDITS",
 			"salir": "QUIT",
+			"sfx": "SFX",
+			"musica":"Music",
+			"idioma":"Language",
+			"resolucion":"Screen Resolution"
 		},
 	"fr":
 		{
@@ -19,5 +27,9 @@
 			"opciones": "OPTIONS",
 			"creditos": "CRÉDITS",
 			"salir": "QUITTER",
+			"sfx":"SFX",
+			"musica":"Musique",
+			"idioma":"Langue",
+			"resolucion":"Résolution d’écran"
 		}
 }
