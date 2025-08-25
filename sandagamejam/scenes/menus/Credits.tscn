@@ -1,0 +1,108 @@
+[gd_scene load_steps=5 format=3 uid="uid://ecskbidj06cr"]
+
+[ext_resource type="Script" uid="uid://c2yno5nwb6hlr" path="res://credits.gd" id="1_g4wvt"]
+[ext_resource type="Texture2D" uid="uid://ctcgekq2gtx1v" path="res://assets/UI/back.png" id="2_c1t8d"]
+[ext_resource type="Theme" uid="uid://b43q23bmf727" path="res://custom_resources/Credits.tres" id="3_5jxb4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1t8d"]
+bg_color = Color(0.976177, 0.780522, 0.168616, 1)
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g4wvt")
+
+[node name="background" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 643.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c1t8d")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 508.5
+offset_top = 88.0
+offset_right = 645.5
+offset_bottom = 136.0
+scale = Vector2(1.5, 1.5)
+theme = ExtResource("3_5jxb4")
+text = "Créditos"
+horizontal_alignment = 1
+
+[node name="close_button" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 40.0
+offset_right = 100.0
+offset_bottom = 90.0
+texture_normal = ExtResource("2_c1t8d")
+
+[node name="close" type="Label" parent="close_button"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 300.5
+offset_top = 209.0
+offset_right = 849.5
+offset_bottom = 257.0
+theme = ExtResource("3_5jxb4")
+text = "Melissa Huerta - Game Developer"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 305.5
+offset_top = 274.0
+offset_right = 844.5
+offset_bottom = 322.0
+theme = ExtResource("3_5jxb4")
+text = "Shiara Arauzo - Game Developer"
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 303.5
+offset_top = 337.0
+offset_right = 850.5
+offset_bottom = 385.0
+theme = ExtResource("3_5jxb4")
+text = "Malu Munayco - Game Developer"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="."]
+layout_mode = 0
+offset_left = 392.0
+offset_top = 451.0
+offset_right = 762.0
+offset_bottom = 499.0
+theme = ExtResource("3_5jxb4")
+text = "Selene Negrón - Artist"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="."]
+layout_mode = 0
+offset_left = 357.5
+offset_top = 394.0
+offset_right = 796.5
+offset_bottom = 442.0
+theme = ExtResource("3_5jxb4")
+text = "Ariadna Mestanza - Artist"
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="."]
+layout_mode = 0
+offset_left = 290.0
+offset_top = 504.0
+offset_right = 864.0
+offset_bottom = 552.0
+theme = ExtResource("3_5jxb4")
+text = "Fabrizio Murguia - Game Designer"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="close_button" to="." method="_on_close_button_pressed"]
