@@ -7,11 +7,11 @@ signal listen_customer_pressed
 @onready var btn_listen : TextureButton = $BtnListen
 @onready var sfx_entering : AudioStreamPlayer = $SFXEntering
 @onready var sfx_click : AudioStreamPlayer = $SFXClick
-@export var speed: float = 500.0 #150.0
+@export var speed: float = 300.0 #DEBUG: 500.0
 
 var start_x = -200
 var offset_x = 100
-var target_y = 42
+var target_y_ratio := 0.05
 var relative_x: float = 0.5
 var customer_scale: float = 0.165
 var character_id: String
@@ -99,14 +99,17 @@ func get_scaled_size() -> Vector2:
 	return Vector2.ZERO
 	
 #Calcular su posición inicial (fuera de pantalla, con margen inferior).
-func get_initial_position(viewport_size: Vector2, margin_bottom: float = target_y) -> Vector2:
+func get_initial_position(viewport_size: Vector2) -> Vector2:
 	var sprite_size = get_scaled_size()
+	var margin_bottom = viewport_size.y * target_y_ratio
 	var y = viewport_size.y - (sprite_size.y / 2 + margin_bottom)
 	return Vector2(start_x, y)
 
 #Calcular su posición final (centro X, con margen inferior).
-func get_target_position(viewport_size: Vector2, margin_bottom: float = target_y):
+func get_target_position(viewport_size: Vector2) -> Vector2:
 	var sprite_size = get_scaled_size()
+	var margin_bottom = viewport_size.y * target_y_ratio
+
 	var y = viewport_size.y - (sprite_size.y / 2 + margin_bottom)
 	return Vector2(viewport_size.x / 2 - offset_x, y)
 

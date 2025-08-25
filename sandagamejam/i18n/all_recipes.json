@@ -3,7 +3,7 @@
 	"id": "recipe_001",
 	"name": {"en": "Quinoa with Apple", "es": "Quinua con manzana", "fr": "Quinoa aux pommes"},
 	"mood": "somnoliento",
-	"ingredients": ["ing_001", "ing_002", "ing_003"],
+	"ingredients": ["ing_002", "ing_003", "ing_001"],
 	"benefits": {
 	  "en": "Restores extra energy, makes them more patient and helps them rest better",
 	  "es": "Devuelve energía extra, los vuelve más pacientes y los ayuda a descansar mejor",
@@ -19,7 +19,7 @@
 	"id": "recipe_002",
 	"name": {"en": "Apple Tart with Cinnamon", "es": "Tarta de manzana con canela", "fr": "Tarte aux pommes et cannelle"},
 	"mood": "estresado",
-	"ingredients": ["ing_002", "ing_004", "ing_003", "ing_006"],
+	"ingredients": ["ing_003", "ing_002", "ing_006", "ing_004"],
 	"benefits": {
 	  "en": "Calms and balances, lowers stress levels",
 	  "es": "Calma y equilibrio, baja el nivel de estrés",

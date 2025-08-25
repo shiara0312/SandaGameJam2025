@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var game_hud : Control = null
 @onready var message_texture : TextureRect = null
 
-var typing_speed := 0.005 #0.05 # secs por letra
+var typing_speed := 0.01
 
 func _ready() -> void:
 	self.layer = 0
