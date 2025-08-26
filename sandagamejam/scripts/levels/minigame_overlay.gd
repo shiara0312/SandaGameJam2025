@@ -136,7 +136,7 @@ func animate_ingredients(ingr_loop: Array) -> void:
 		# Guardar tween para poder cancelarlo
 		active_tweens.append(tween)
 	
-	if GlobalManager.selected_ingredients.size() > 1:
+	if GlobalManager.collected_ingredients.size() > 1:
 		print("ya cogiste mas de 1")
 
 	
@@ -237,6 +237,7 @@ func _on_btn_prepare_recipe_pressed() -> void:
 		clear_children(recollect_container)
 		
 		minigame_started = false
+		btn_prepare.visible = false
 		GameController.make_newton_cook()
 
 func _on_ingredient_clicked(event: InputEvent, wrapper: Control, ing_id: String):
@@ -251,10 +252,10 @@ func _on_ingredient_clicked(event: InputEvent, wrapper: Control, ing_id: String)
 			.set_ease(Tween.EASE_IN)
 		tween.tween_callback(Callable(wrapper, "queue_free"))
 		
-		GlobalManager.selected_ingredients.append(ing_id)
+		GlobalManager.collected_ingredients.append(ing_id)
 		
-		print("🍎 Ingredient recolectado:", ing_id)
+		#print("🍎 Ingredient recolectado:", ing_id)
 		
-		if GlobalManager.selected_ingredients.size() >= 1 and is_instance_valid(btn_prepare):
+		if GlobalManager.collected_ingredients.size() >= 1 and is_instance_valid(btn_prepare):
 			btn_prepare.visible = true
 			btn_prepare.disabled = false

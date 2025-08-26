@@ -5,6 +5,10 @@
 		"reject_recipe": "No lo creo",
 		"choose_recipe": "Esta es",
 		"newton_cook": "¡A preparar!",
+		"wrong_recipe_selected": "¡Oops! Casi, pero elegiste la receta equivocada.",
+		"wrong_ingredientes_collected": "¡Oops! No todos los ingredientes fueron correctos.",
+		"right_recipe_and_ingredientes_collected": "¡Bien hecho! Preparaste la receta correctamente.",
+		"gravitational_recipe": "¡Genial! Capturaste un ingrediente gravitacional."
 	},
 	"en": {
 		"customer_seated": "Hear their story.",
@@ -12,6 +16,10 @@
 		"reject_recipe": "I don’t think so",
 		"choose_recipe": "This is it",
 		"newton_cook": "Let’s prepare!",
+		"wrong_recipe_selected": "Oops! Almost, but you chose the wrong recipe.",
+		"wrong_ingredientes_collected": "Oops! Not all ingredients were correct.",
+		"right_recipe_and_ingredientes_collected": "Well done! You prepared the recipe correctly.",
+		"gravitational_recipe": "Awesome! You caught a gravitational ingredient."
 	},
 	"fr": {
 		"customer_seated": "Écouter son histoire.",
@@ -19,5 +27,9 @@
 		"reject_recipe": "Je ne crois pas",
 		"choose_recipe": "C’est ça",
 		"newton_cook": "À préparer!",
+		"wrong_recipe_selected": "Oups! Presque, mais tu as choisi la mauvaise recette.",
+		"wrong_ingredientes_collected": "Oups! Tous les ingrédients n’étaient pas corrects.",
+		"right_recipe_and_ingredientes_collected": "Bien joué ! Tu as préparé la recette correctement.",
+		"gravitational_recipe": "Génial! Tu as attrapé un ingrédient gravitationnel."
 	}
 }

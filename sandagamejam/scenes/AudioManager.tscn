@@ -21,7 +21,7 @@ volume_db = -24.0
 
 [node name="SFXWhisking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_v5v75")
-volume_db = -12.0
+volume_db = 1.0
 
 [node name="SFXRightRecipe" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_hmi33")

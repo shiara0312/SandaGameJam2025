@@ -15,11 +15,11 @@ var is_minigame_overlay_visible : bool = false
 var game_language : String = "es" 
 var customers_to_serve: Array = []
 var satisfied_customers: Array = []
+var current_customer: Dictionary = {}
 var current_level_recipes: Array = []
-var ingredients: Array = []
-var selected_ingredients: Array = []
+var all_ingredients: Array = []
+var collected_ingredients: Array = []
 var selected_recipe_idx : int = 0
-
 
 var btn_listen_customer_label = ""
 var btn_help_customer_label = ""
@@ -27,14 +27,29 @@ var btn_reject_recipe_label = ""
 var btn_choose_recipe_label = ""
 var btn_cook_recipe_label = ""
 
+enum ResponseType {
+	WRONG_RECIPE,
+	WRONG_INGREDIENTS,
+	RIGHT_RECIPE_AND_INGREDIENTS,
+	GRAVITATIONAL_RECIPE
+}
+
+var response_keys := {
+	ResponseType.WRONG_RECIPE: "wrong_recipe_selected",
+	ResponseType.WRONG_INGREDIENTS: "wrong_ingredientes_collected",
+	ResponseType.RIGHT_RECIPE_AND_INGREDIENTS: "right_recipe_and_ingredientes_collected",
+	ResponseType.GRAVITATIONAL_RECIPE: "gravitational_recipe"
+}
+
 var interaction_texts := {}     
 var menu_labels := {}        
-var characters_moods := {}    
+var characters_moods := {}  
 
 func start_game():
-	print("GAME HAS STARTED")
+	#print("GAME HAS STARTED")
 	is_game_running = true
 	
+	load_texts()
 	load_button_labels()
 	UILayerManager.init_ui_layer()
 	UILayerManager.show_hud()
@@ -74,7 +89,8 @@ func get_next_customer() -> Dictionary:
 	if customers_to_serve.is_empty():
 		return {}
 	# retorna el primer elemento del array
-	return customers_to_serve.pop_front()
+	current_customer = customers_to_serve.pop_front()
+	return current_customer
 
 func return_customer(customer: Dictionary):
 	customers_to_serve.append(customer)
@@ -89,7 +105,7 @@ func initialize_recipes(level: String):
 	var ingredients_json_path = "res://i18n/ingredients.json"
 	var level_recipe_ids = FileHelper.read_data_from_file(level_recipes_json_path)[level]
 	var all_recipes = FileHelper.read_data_from_file(all_recipes_json_path)
-	ingredients = FileHelper.read_data_from_file(ingredients_json_path)
+	all_ingredients = FileHelper.read_data_from_file(ingredients_json_path)
 
 	for recipe in all_recipes:
 		if recipe["id"] in level_recipe_ids:
@@ -104,17 +120,17 @@ func resume_game():
 	is_paused = false
 	is_game_running = true
 
-
-
 ### Botones de interaccion con el cliente ###
-func load_button_labels():
-	if interaction_texts == {}:
+func load_texts():
+	if interaction_texts.is_empty():
 		interaction_texts = _cargar_json_file("res://i18n/interaction_texts.json")
-	if menu_labels == {}:
+	if menu_labels.is_empty():
 		menu_labels = _cargar_json_file("res://i18n/menu_labels.json")
-	if characters_moods == {}:
+	if characters_moods.is_empty():
 		characters_moods = _cargar_json_file("res://i18n/characters_moods.json")
-	
+
+
+func load_button_labels():	
 	if game_language in interaction_texts:
 		btn_listen_customer_label = interaction_texts[game_language]["customer_seated"]
 		btn_help_customer_label = interaction_texts[game_language]["start_helping"]
@@ -125,6 +141,11 @@ func load_button_labels():
 		btn_listen_customer_label = "Customer"
 		btn_help_customer_label = "Help"
 
+func get_response_text(response: ResponseType) -> String:
+	if game_language in interaction_texts:
+		var key = response_keys[response]
+		return interaction_texts[game_language].get(key, "???")
+	return "???"
 
 func _cargar_json_file(path: String) -> Dictionary:
 	var f = FileAccess.open(path, FileAccess.READ)
