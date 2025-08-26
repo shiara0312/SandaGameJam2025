@@ -47,7 +47,6 @@ func show_newton_layer():
 	newton_layer.visible = true
 
 func show_minigame(path: String):
-	var screen_width = get_viewport().size.x
 	var new_scale = 0.15
 	
 	slide_minigame_overlay(path)

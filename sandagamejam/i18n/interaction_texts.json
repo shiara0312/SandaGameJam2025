@@ -2,13 +2,19 @@
 	"es": {
 		"customer_seated": "Oír su historia.",
 		"start_helping": "Endulzar su día.",
+		"reject_recipe": "No lo creo",
+		"choose_recipe": "Esta es"
 	},
 	"en": {
 		"customer_seated": "Hear their story.",
 		"start_helping": "Sweeten their day.",
+		"reject_recipe": "I don’t think so",
+		"choose_recipe": "This is it"
 	},
 	"fr": {
 		"customer_seated": "Écouter son histoire.",
 		"start_helping": "Adoucir sa journée.",
+		"reject_recipe": "Je ne crois pas",
+		"choose_recipe": "C’est ça"
 	}
 }

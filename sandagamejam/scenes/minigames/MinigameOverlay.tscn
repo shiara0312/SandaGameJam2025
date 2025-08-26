@@ -143,6 +143,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "A preparar!"
 label_settings = ExtResource("12_70k8r")
+horizontal_alignment = 1
 
 [node name="BtnBack" type="TextureButton" parent="TextureRect/RecipeContainer"]
 layout_mode = 0
@@ -167,6 +168,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "No estoy seguro"
 label_settings = ExtResource("12_70k8r")
+horizontal_alignment = 1
 
 [node name="RecollectContainer" type="Control" parent="TextureRect"]
 visible = false
