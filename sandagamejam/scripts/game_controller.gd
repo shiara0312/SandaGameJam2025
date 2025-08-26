@@ -52,7 +52,6 @@ func show_minigame(path: String):
 	slide_minigame_overlay(path)
 	slide_current_level()
 	resize_newton(new_scale)
-	load_recipes()
 	GlobalManager.is_minigame_overlay_visible = true
 
 func hide_minigames():
@@ -102,6 +101,3 @@ func resize_newton(new_scale: float) -> void:
 	# Mover con animación (20px más abajo/derecha de su posición actual)
 	var new_pos = newton_sprite.position + Vector2(84,100)
 	tween.tween_property(newton_sprite, "position", new_pos, 0.5)
-
-func load_recipes():
-	print("load to ui ")
