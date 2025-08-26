@@ -216,6 +216,9 @@ func _on_btn_continue_pressed() -> void:
 	show_recollect_container()
 	start_ingredient_minigame()
 	
+func _on_btn_prepare_recipe_pressed() -> void:
+	pass # Replace with function body.
+
 func _on_ingredient_clicked(event: InputEvent, wrapper: Control, ing_id: String):
 	if event is InputEventMouseButton and event.pressed:
 		AudioManager.play_collect_ingredient_sfx()
@@ -235,7 +238,3 @@ func _on_ingredient_clicked(event: InputEvent, wrapper: Control, ing_id: String)
 		if GlobalManager.selected_ingredients.size() >= 1 and is_instance_valid(btn_prepare):
 			btn_prepare.visible = true
 			btn_prepare.disabled = false
-
-
-func _on_btn_prepare_recipe_pressed() -> void:
-	pass # Replace with function body.

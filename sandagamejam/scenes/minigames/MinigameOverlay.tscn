@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://0nbfgsjfecy8"]
+[gd_scene load_steps=14 format=3 uid="uid://0nbfgsjfecy8"]
 
 [ext_resource type="Script" uid="uid://3qg5qwd7ie6j" path="res://scripts/levels/minigame_overlay.gd" id="1_jh425"]
 [ext_resource type="Texture2D" uid="uid://bewfpvnniqv3d" path="res://assets/recipes/receta-btn.png" id="3_t45b2"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://jamwyueec32p" path="res://assets/UI/interact-btn.png" id="10_e7l36"]
 [ext_resource type="Texture2D" uid="uid://bpv7ib6u2578q" path="res://assets/UI/interact-btn-pressed.png" id="11_ww4g8"]
 [ext_resource type="LabelSettings" uid="uid://jdv1bfj4iff7" path="res://custom_resources/InteractionButtonLabels.tres" id="12_70k8r"]
+[ext_resource type="Texture2D" uid="uid://nefnaqulxs8j" path="res://assets/UI/interact-btn-disabled.png" id="12_smtws"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1ae7w"]
 load_path = "res://.godot/imported/receta-texture.png-f14f93d4c3f503288c45eac62b28d78d.ctex"
@@ -188,6 +189,7 @@ offset_bottom = 564.0
 disabled = true
 texture_normal = ExtResource("10_e7l36")
 texture_pressed = ExtResource("11_ww4g8")
+texture_disabled = ExtResource("12_smtws")
 
 [node name="Label" type="Label" parent="TextureRect/BtnPrepareRecipe"]
 layout_mode = 1
@@ -212,3 +214,4 @@ horizontal_alignment = 1
 [connection signal="pressed" from="TextureRect/MenuContainer/Recipe4" to="." method="_on_recipe_4_pressed"]
 [connection signal="pressed" from="TextureRect/RecipeContainer/BtnContinue" to="." method="_on_btn_continue_pressed"]
 [connection signal="pressed" from="TextureRect/RecipeContainer/BtnBack" to="." method="_on_btn_back_pressed"]
+[connection signal="pressed" from="TextureRect/BtnPrepareRecipe" to="." method="_on_btn_prepare_recipe_pressed"]
