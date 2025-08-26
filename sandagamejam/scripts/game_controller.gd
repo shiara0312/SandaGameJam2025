@@ -8,7 +8,9 @@ extends Node
 @onready var recipe_result_text: RichTextLabel = $NewtonLayer/FeedbackMessage
 
 const SCREEN_WIDTH = 1152.0
-
+const SECONDS_TO_LOSE = 30
+const SECONDS_TO_GAIN = 15
+	
 var current_level: Node = null
 var newton_original_scale: Vector2 = Vector2(0.22, 0.22)
 var newton_original_pos: Vector2 = Vector2(978.0, 472)
@@ -155,14 +157,17 @@ func check_recipe() -> Array:
 	#print("¿Recolectó todos los ingredientes?: ", is_exact_match)
 
 	var success = correct_recipe_selected and is_exact_match
-	# Determinar respuesta
+	# Determinar respuesta y reglas
 	var response_type
 	if not correct_recipe_selected:
 		response_type = GlobalManager.ResponseType.WRONG_RECIPE
+		GlobalManager.lose_life()
 	elif not is_exact_match:
 		response_type = GlobalManager.ResponseType.WRONG_INGREDIENTS
+		GlobalManager.apply_penalty(SECONDS_TO_LOSE)
 	elif success:
 		response_type = GlobalManager.ResponseType.RIGHT_RECIPE_AND_INGREDIENTS
+		GlobalManager.apply_penalty(-SECONDS_TO_WIN)
 	else:
 		response_type = GlobalManager.ResponseType.GRAVITATIONAL_RECIPE 
 
