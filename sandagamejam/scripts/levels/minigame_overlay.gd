@@ -62,8 +62,10 @@ func load_menu_data() -> void:
 func load_btn_labels() -> void:
 	var continue_label = recipe_container.get_node("BtnContinue/Label")
 	var back_label = recipe_container.get_node("BtnBack/Label")
+	var cook_label = btn_prepare.get_node("Label")
 	continue_label.text = GlobalManager.btn_choose_recipe_label
 	back_label.text = GlobalManager.btn_reject_recipe_label
+	cook_label.text = GlobalManager.btn_cook_recipe_label
 	
 func load_selected_recipe_data(idx: int) -> void:
 	var lang = GlobalManager.game_language

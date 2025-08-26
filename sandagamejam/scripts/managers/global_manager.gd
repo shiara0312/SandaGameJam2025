@@ -25,6 +25,7 @@ var btn_listen_customer_label = ""
 var btn_help_customer_label = ""
 var btn_reject_recipe_label = ""
 var btn_choose_recipe_label = ""
+var btn_cook_recipe_label = ""
 
 var interaction_texts := {}     
 var menu_labels := {}        
@@ -120,6 +121,7 @@ func load_button_labels():
 		btn_help_customer_label = interaction_texts[game_language]["start_helping"]
 		btn_reject_recipe_label = interaction_texts[game_language]["reject_recipe"]
 		btn_choose_recipe_label = interaction_texts[game_language]["choose_recipe"]
+		btn_cook_recipe_label = interaction_texts[game_language]["newton_cook"]
 	else:
 		btn_listen_customer_label = "Customer"
 		btn_help_customer_label = "Help"
