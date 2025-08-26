@@ -49,7 +49,6 @@ func _process(delta: float) -> void:
 			is_game_running = false
 			emit_signal("time_up")
 
-
 # TODO: Quitar 10 segundos GloblManager.apply_penalty(10)
 func apply_penalty(seconds: float):
 	time_left = max(time_left - seconds, 0)
@@ -65,7 +64,7 @@ func lose_life():
 		emit_signal("lives_changed", lives)
 		if lives == 0:
 			emit_signal("game_over")
-			
+
 #### Gestionar cola de clientes ####
 func initialize_customers(combos: Array):
 	# Clonar los clientes obtenidos para el nivel 

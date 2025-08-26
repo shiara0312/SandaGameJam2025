@@ -68,9 +68,9 @@ func _on_sfx_changed(value: float) -> void:
 
 func _on_resolucion_selected(index: int) -> void:
 	if index < resoluciones.size():
-		var size = resoluciones[index]
+		var new_size = resoluciones[index]
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		DisplayServer.window_set_size(size)
+		DisplayServer.window_set_size(new_size)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 
@@ -92,4 +92,4 @@ func _actualizar_labels():
 		label_resolucion.text = labels_por_idioma.get(idioma, {}).get("resolucion", "Resolución de Pantalla")
 
 func _on_salir_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/menus/MainMenu.tscn")
+	queue_free()

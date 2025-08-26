@@ -182,6 +182,7 @@ mouse_filter = 2
 
 [node name="BtnPrepareRecipe" type="TextureButton" parent="TextureRect"]
 visible = false
+layout_mode = 0
 offset_left = 222.0
 offset_top = 485.0
 offset_right = 473.0

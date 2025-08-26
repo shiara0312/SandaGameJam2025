@@ -6,6 +6,9 @@ extends Node2D
 @onready var recollect_container : Control = $TextureRect/RecollectContainer
 @onready var btn_prepare : TextureButton = $TextureRect/BtnPrepareRecipe
 
+var minigame_started := false
+var active_tweens := []
+
 func _ready():
 	load_menu_data()
 	load_btn_labels()
@@ -98,6 +101,7 @@ func load_ingredients_assets():
 		ing_container.add_child(wrapper)
 
 func start_ingredient_minigame():
+	minigame_started = true
 	var recipe_selected = GlobalManager.current_level_recipes[GlobalManager.selected_recipe_idx]
 	var ingredients = recipe_selected["ingredients"]
 	var ingr_loop = generate_arr(ingredients, 20)
@@ -129,6 +133,8 @@ func animate_ingredients(ingr_loop: Array) -> void:
 			.set_ease(Tween.EASE_IN_OUT) \
 			.set_delay(spawn_interval * i)
 		tween.tween_callback(Callable(wrapper, "queue_free"))
+		# Guardar tween para poder cancelarlo
+		active_tweens.append(tween)
 	
 	if GlobalManager.selected_ingredients.size() > 1:
 		print("ya cogiste mas de 1")
@@ -219,7 +225,19 @@ func _on_btn_continue_pressed() -> void:
 	start_ingredient_minigame()
 	
 func _on_btn_prepare_recipe_pressed() -> void:
-	pass # Replace with function body.
+	AudioManager.play_click_sfx()
+	if minigame_started:
+		 # Cancelar todos los tweens activos
+		for t in active_tweens:
+			if is_instance_valid(t):
+				t.kill()
+		active_tweens.clear()
+		
+		# Limpiar ingredientes que aún no se recogieron
+		clear_children(recollect_container)
+		
+		minigame_started = false
+		GameController.make_newton_cook()
 
 func _on_ingredient_clicked(event: InputEvent, wrapper: Control, ing_id: String):
 	if event is InputEventMouseButton and event.pressed:
