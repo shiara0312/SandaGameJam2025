@@ -4,7 +4,6 @@ extends Node2D
 @onready var customer_scene := preload("res://scenes/characters/Customer.tscn")
 @onready var PauseBtn = $PauseBtn
 @export var pause_texture: Texture
-@export var play_texture: Texture
 
 var characters_mood_file_path = "res://i18n/characters_moods.json"
 var interact_btns_file_path = "res://i18n/interaction_texts.json"
@@ -53,8 +52,8 @@ func spawn_next_customer():
 	
 	# Calcular posiciones usando helpers del customer
 	var viewport_size = get_viewport().size
-	var start_pos = current_customer.get_initial_position(viewport_size)
-	var target_pos = current_customer.get_target_position(viewport_size)
+	var start_pos = current_customer.get_initial_position()
+	var target_pos = current_customer.get_target_position()
 	current_customer.position = start_pos
 	current_customer.move_to(target_pos)
 	
@@ -92,7 +91,7 @@ func _on_listen_customer_pressed():
 func _on_viewport_resized():
 	if current_customer:
 		var viewport_size = get_viewport().size
-		var new_target = current_customer.get_target_position(viewport_size)
+		var new_target = current_customer.get_target_position()
 
 		# Mantener coherencia en X e Y
 		current_customer.position.x = new_target.x
@@ -106,12 +105,3 @@ func print_combos(combos):
 	for comb in combos:
 		print("Personaje: ", comb["character_id"], "\nEstado: ", comb["mood_id"], "\nTexto: ", comb["texts"][GlobalManager.game_language])
 		print("......")
-
-	
-func _on_pause_pressed():
-	if get_tree().paused:
-		get_tree().paused = false
-		PauseBtn.texture_normal = pause_texture
-	else:
-		get_tree().paused = true
-		PauseBtn.texture_normal = play_texture

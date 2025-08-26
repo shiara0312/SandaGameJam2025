@@ -13,7 +13,7 @@ const BASE_START_X = -200
 const BASE_OFFSET_Y = 80
 const BASE_OFFSET_X = 100
 const SPRITE_POSITION_Y = 414
-const SPRITE_POSITION_X = 1152/2 + -80
+const SPRITE_POSITION_X = 1152.0/2.0 + -80
 
 var target_y_ratio := 0.05
 var relative_x: float = 0.5
@@ -98,10 +98,10 @@ func get_sprite_size() -> Vector2:
 		return sprite.texture.get_size() * sprite.scale
 	return Vector2.ZERO
 
-func get_initial_position(viewport_size: Vector2) -> Vector2:
+func get_initial_position() -> Vector2:
 	return Vector2(BASE_START_X, SPRITE_POSITION_Y)
 
-func get_target_position(viewport_size: Vector2) -> Vector2:
+func get_target_position() -> Vector2:
 	return Vector2(SPRITE_POSITION_X, SPRITE_POSITION_Y)
 	
 func _on_btn_listen_pressed() -> void:
