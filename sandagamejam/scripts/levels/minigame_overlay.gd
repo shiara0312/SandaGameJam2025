@@ -6,6 +6,7 @@ extends Node2D
 
 func _ready():
 	load_menu_data()
+	load_btn_labels()
 
 func hide_menu_container():
 	menu_container.visible = false
@@ -50,6 +51,11 @@ func load_menu_data() -> void:
 			if sprite:
 				sprite.texture = tex
 		
+func load_btn_labels() -> void:
+	var continue_label = recipe_container.get_node("BtnContinue/Label")
+	var back_label = recipe_container.get_node("BtnBack/Label")
+	continue_label.text = GlobalManager.btn_choose_recipe_label
+	back_label.text = GlobalManager.btn_reject_recipe_label
 	
 func load_selected_recipe_data(idx: int) -> void:
 	var lang = GlobalManager.game_language

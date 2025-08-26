@@ -5,6 +5,8 @@ extends Node
 @onready var newton_layer = $NewtonLayer
 @onready var newton_sprite: Sprite2D = $NewtonLayer/NewtonSprite
 
+const SCREEN_WIDTH = 1152.0
+
 var current_level: Node = null
 
 # TODO: Animaciones de Newton: idle, feliz, trsite.
@@ -45,14 +47,13 @@ func show_newton_layer():
 	newton_layer.visible = true
 
 func show_minigame(path: String):
-	GlobalManager.is_minigame_overlay_visible = true
-	var screen_width = get_viewport().size.x
 	var new_scale = 0.15
 	
-	slide_minigame_overlay(path, screen_width)
-	slide_current_level(screen_width)
+	slide_minigame_overlay(path)
+	slide_current_level()
 	resize_newton(new_scale)
 	load_recipes()
+	GlobalManager.is_minigame_overlay_visible = true
 
 func hide_minigames():
 	for child in minigame_overlay.get_children():
@@ -67,30 +68,29 @@ func free_children(parent: Node):
 		child.queue_free()
 
 # Slide Minigame Overlay
-func slide_minigame_overlay(path: String, screen_width: float):
+func slide_minigame_overlay(path: String):
+	const TARGET_X = SCREEN_WIDTH - 700
+	
 	var tween = create_tween()
 	
 	var minigame_instance = load(path).instantiate()
 	self.add_child(minigame_instance)
 	minigame_instance.scale = Vector2(1,1)
 	minigame_instance.z_index = 50
-	
-	var overlay_width = minigame_instance.get_node("TextureRect").texture.get_size().x
-	
+
 	# Posición inicial: fuera de la pantalla (derecha)
-	minigame_instance.position = Vector2(screen_width, 0)
+	minigame_instance.position = Vector2(SCREEN_WIDTH, 0)
 	# Posición final: borde izquierdo del Node2D en la mitad de la pantalla
-	var target_x = screen_width - overlay_width
-	var target_pos = Vector2(target_x, 0)
+	var target_pos = Vector2(TARGET_X, 0)
 	# Tween para entrada del overlay
 	tween.tween_property(minigame_instance, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	
 # Slide Level scene
-func slide_current_level(screen_width: float):
+func slide_current_level():
 	var tween = create_tween()
 
 	var start_scene_pos = current_scene_container.position
-	var target_scene_pos = start_scene_pos - Vector2(screen_width/4, 0)
+	var target_scene_pos = start_scene_pos - Vector2(SCREEN_WIDTH/4, 0)
 	tween.tween_property(current_scene_container, "position", target_scene_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 func resize_newton(new_scale: float) -> void:

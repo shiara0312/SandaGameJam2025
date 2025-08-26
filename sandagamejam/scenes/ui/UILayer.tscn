@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bubpqw3sw6cvj"]
+[gd_scene load_steps=14 format=3 uid="uid://bubpqw3sw6cvj"]
 
 [ext_resource type="Script" uid="uid://d0bteqdbb1gsl" path="res://scripts/ui/UILayer.gd" id="1_nbl3c"]
 [ext_resource type="Script" uid="uid://ty3s5g4vlkh6" path="res://scripts/ui/GameHUD.gd" id="2_namiw"]
 [ext_resource type="Texture2D" uid="uid://b30bjdt6phga" path="res://assets/UI/heart_full.png" id="2_p1e30"]
+[ext_resource type="Texture2D" uid="uid://kmijifif5ra1" path="res://assets/UI/playbtn.png" id="3_hhtea"]
 [ext_resource type="Texture2D" uid="uid://dthq4jchq0g0x" path="res://assets/UI/heart_empty.png" id="4_1xo4o"]
 [ext_resource type="FontFile" uid="uid://ch5rglkjpbnk2" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="5_1xo4o"]
 [ext_resource type="Texture2D" uid="uid://d3lwpiqw5gj2j" path="res://assets/UI/text_message.png" id="6_6a45y"]
@@ -10,18 +11,21 @@
 [ext_resource type="Texture2D" uid="uid://jamwyueec32p" path="res://assets/UI/interact-btn.png" id="8_bhogs"]
 [ext_resource type="Texture2D" uid="uid://bpv7ib6u2578q" path="res://assets/UI/interact-btn-pressed.png" id="9_tqcr1"]
 [ext_resource type="LabelSettings" uid="uid://jdv1bfj4iff7" path="res://custom_resources/InteractionButtonLabels.tres" id="10_hhtea"]
+[ext_resource type="Texture2D" uid="uid://blhi537qcthh0" path="res://assets/UI/pause_btn.png" id="11_tqcr1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_6a45y"]
 line_spacing = 0.0
 font = ExtResource("5_1xo4o")
 font_size = 45
-font_color = Color(0.650724, 0.618739, 0.566123, 1)
-outline_size = 9
-outline_color = Color(0.0156863, 0.0156863, 0.211765, 1)
+font_color = Color(0.811765, 0.811765, 0.639216, 1)
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
 
 [node name="UILayer" type="CanvasLayer"]
 layer = 10
 script = ExtResource("1_nbl3c")
+pause_texture = ExtResource("11_tqcr1")
+play_texture = ExtResource("3_hhtea")
 
 [node name="GameHUD" type="Control" parent="."]
 z_index = 10
@@ -140,4 +144,13 @@ grow_vertical = 2
 text = "Endulzarlo..."
 label_settings = ExtResource("10_hhtea")
 
+[node name="PauseBtn" type="TextureButton" parent="."]
+process_mode = 3
+offset_left = 1069.0
+offset_top = 27.0
+offset_right = 1118.0
+offset_bottom = 76.0
+texture_normal = ExtResource("11_tqcr1")
+
 [connection signal="pressed" from="GameHUD/MessageTexture/BtnHelp" to="." method="_on_btn_help_pressed"]
+[connection signal="pressed" from="PauseBtn" to="." method="_on_pause_btn_pressed"]

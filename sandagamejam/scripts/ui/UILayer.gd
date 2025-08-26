@@ -3,6 +3,9 @@ extends CanvasLayer
 
 @onready var game_hud : Control = null
 @onready var message_texture : TextureRect = null
+@onready var pause_btn = $PauseBtn
+@export var pause_texture: Texture
+@export var play_texture: Texture
 
 var typing_speed := 0.01
 
@@ -80,3 +83,12 @@ func _on_btn_help_pressed() -> void:
 	message_texture.visible = false
 	if GameController and not GlobalManager.is_minigame_overlay_visible:
 		GameController.show_minigame("res://scenes/minigames/MinigameOverlay.tscn")
+
+
+func _on_pause_btn_pressed() -> void:
+	if get_tree().paused:
+		get_tree().paused = false
+		pause_btn.texture_normal = pause_texture
+	else:
+		get_tree().paused = true
+		pause_btn.texture_normal = play_texture

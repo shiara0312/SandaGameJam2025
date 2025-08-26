@@ -4,7 +4,6 @@ extends Node2D
 @onready var customer_scene := preload("res://scenes/characters/Customer.tscn")
 @onready var PauseBtn = $PauseBtn
 @export var pause_texture: Texture
-@export var play_texture: Texture
 
 var characters_mood_file_path = "res://i18n/characters_moods.json"
 var interact_btns_file_path = "res://i18n/interaction_texts.json"
@@ -52,16 +51,10 @@ func spawn_next_customer():
 	await get_tree().process_frame
 	
 	# Calcular posiciones usando helpers del customer
-	var viewport_size = get_viewport().size
-	var start_pos = current_customer.get_initial_position(viewport_size)
-	var target_pos = current_customer.get_target_position(viewport_size)
-	print("** start position: ", start_pos)
-	print("** target position: ", target_pos)
+	var start_pos = current_customer.get_initial_position()
+	var target_pos = current_customer.get_target_position()
 	current_customer.position = start_pos
 	current_customer.move_to(target_pos)
-	
-	# Guardar la posición relativa para resize
-	#current_customer.relative_x = target_pos.x / viewport_size.x
 
 func get_random_combinations(json_path: String, count: int = 4) -> Array:
 	var customer_data = FileHelper.read_data_from_file(json_path)
@@ -93,27 +86,14 @@ func _on_listen_customer_pressed():
 	
 func _on_viewport_resized():
 	if current_customer:
-		var viewport_size = get_viewport().size
-		var new_target = current_customer.get_target_position(viewport_size)
+		var new_target = current_customer.get_target_position()
 
 		# Mantener coherencia en X e Y
 		current_customer.position.x = new_target.x
 		current_customer.position.y = new_target.y
-		
-		#var sprite_width =  current_customer.sprite.texture.get_size().x * current_customer.sprite.scale.x
-		#current_customer.position.x = (get_viewport().size.x / 2) - (sprite_width / 2)
 
 # Debug :]
 func print_combos(combos):
 	for comb in combos:
 		print("Personaje: ", comb["character_id"], "\nEstado: ", comb["mood_id"], "\nTexto: ", comb["texts"][GlobalManager.game_language])
 		print("......")
-
-	
-func _on_pause_pressed():
-	if get_tree().paused:
-		get_tree().paused = false
-		PauseBtn.texture_normal = pause_texture
-	else:
-		get_tree().paused = true
-		PauseBtn.texture_normal = play_texture

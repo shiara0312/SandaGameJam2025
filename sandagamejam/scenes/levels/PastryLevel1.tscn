@@ -33,6 +33,7 @@ layer = 2
 visible = false
 
 [node name="PauseBtn" type="TextureButton" parent="."]
+visible = false
 offset_left = 1069.0
 offset_top = 27.0
 offset_right = 1118.0
