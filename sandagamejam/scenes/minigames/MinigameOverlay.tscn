@@ -141,7 +141,7 @@ offset_right = 78.0
 offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "A preparar!"
+text = "Eelegir receta"
 label_settings = ExtResource("12_70k8r")
 horizontal_alignment = 1
 
@@ -176,8 +176,35 @@ anchors_preset = 0
 offset_left = 38.0
 offset_top = 85.0
 offset_right = 656.0
-offset_bottom = 525.0
+offset_bottom = 458.0
 mouse_filter = 2
+
+[node name="BtnPrepareRecipe" type="TextureButton" parent="TextureRect"]
+visible = false
+offset_left = 222.0
+offset_top = 485.0
+offset_right = 473.0
+offset_bottom = 564.0
+disabled = true
+texture_normal = ExtResource("10_e7l36")
+texture_pressed = ExtResource("11_ww4g8")
+
+[node name="Label" type="Label" parent="TextureRect/BtnPrepareRecipe"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -15.0
+offset_right = 78.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "A preparar!"
+label_settings = ExtResource("12_70k8r")
+horizontal_alignment = 1
 
 [connection signal="pressed" from="TextureRect/MenuContainer/Recipe1" to="." method="_on_recipe_1_pressed"]
 [connection signal="pressed" from="TextureRect/MenuContainer/Recipe2" to="." method="_on_recipe_2_pressed"]

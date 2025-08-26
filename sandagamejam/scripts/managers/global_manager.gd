@@ -17,6 +17,7 @@ var customers_to_serve: Array = []
 var satisfied_customers: Array = []
 var current_level_recipes: Array = []
 var ingredients: Array = []
+var selected_ingredients: Array = []
 var selected_recipe_idx : int = 0
 
 

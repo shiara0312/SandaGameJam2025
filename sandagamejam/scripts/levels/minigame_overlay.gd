@@ -4,6 +4,7 @@ extends Node2D
 @onready var menu_container : Control = $TextureRect/MenuContainer
 @onready var recipe_container : Control = $TextureRect/RecipeContainer
 @onready var recollect_container : Control = $TextureRect/RecollectContainer
+@onready var btn_prepare : TextureButton = $TextureRect/BtnPrepareRecipe
 
 func _ready():
 	load_menu_data()
@@ -99,9 +100,10 @@ func start_ingredient_minigame():
 	var ingredients = recipe_selected["ingredients"]
 	var ingr_loop = generate_arr(ingredients, 20)
 	animate_ingredients(ingr_loop)
+	btn_prepare.visible = true
 
 func animate_ingredients(ingr_loop: Array) -> void:
-	print("EMPEZAR A RECOLECTAR INGREDIENTES!!! ", ingr_loop)
+	#print("EMPEZAR A RECOLECTAR INGREDIENTES!!! ", ingr_loop)
 	var container := recollect_container
 	clear_children(container)
 
@@ -125,6 +127,9 @@ func animate_ingredients(ingr_loop: Array) -> void:
 			.set_ease(Tween.EASE_IN_OUT) \
 			.set_delay(spawn_interval * i)
 		tween.tween_callback(Callable(wrapper, "queue_free"))
+	
+	if GlobalManager.selected_ingredients.size() > 1:
+		print("ya cogiste mas de 1")
 
 	
 func clear_children(node: Node) -> void:
@@ -213,13 +218,24 @@ func _on_btn_continue_pressed() -> void:
 	
 func _on_ingredient_clicked(event: InputEvent, wrapper: Control, ing_id: String):
 	if event is InputEventMouseButton and event.pressed:
-		var target_x = recollect_container.position.x + recollect_container.size.x / 2
-		var target_y = recollect_container.position.y + recollect_container.size.y - 50
+		AudioManager.play_collect_ingredient_sfx()
+		
+		# mover ingrediente al centro
+		var target_pos = Vector2(550, recollect_container.position.y + recollect_container.size.y - 50)
 		var tween = create_tween()
-		tween.tween_property(wrapper, "position", Vector2(target_x, target_y), 0.5)\
+		tween.tween_property(wrapper, "position", target_pos, 0.5)\
 			.set_trans(Tween.TRANS_LINEAR)\
 			.set_ease(Tween.EASE_IN)
 		tween.tween_callback(Callable(wrapper, "queue_free"))
 		
+		GlobalManager.selected_ingredients.append(ing_id)
 		
-		print("🍎 Ingredient clicked:", ing_id)
+		print("🍎 Ingredient recolectado:", ing_id)
+		
+		if GlobalManager.selected_ingredients.size() >= 1 and is_instance_valid(btn_prepare):
+			btn_prepare.visible = true
+			btn_prepare.disabled = false
+
+
+func _on_btn_prepare_recipe_pressed() -> void:
+	pass # Replace with function body.
