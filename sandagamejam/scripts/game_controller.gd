@@ -123,7 +123,7 @@ func make_newton_cook():
 	)
 
 func show_netown_feedback():
-	var result = GlobalManager.check_recipe()
+	var result = check_recipe()
 	var success = result[0]
 	var message = result[1]
 	
