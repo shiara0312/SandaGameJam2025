@@ -3,11 +3,15 @@ extends Node
 @onready var current_scene_container: Node2D = $CurrentSceneContainer
 @onready var minigame_overlay = $MiniGameOverlay
 @onready var newton_layer = $NewtonLayer
-@onready var newton_sprite: Sprite2D = $NewtonLayer/NewtonSprite
+@onready var newton_ready_sprite: Sprite2D = $NewtonLayer/NewtonReadySprite
+@onready var newton_moods_sprite: Sprite2D = $NewtonLayer/NewtonMoodsSprite
+@onready var recipe_result_text: RichTextLabel = $NewtonLayer/FeedbackMessage
 
 const SCREEN_WIDTH = 1152.0
 
 var current_level: Node = null
+var newton_original_scale: Vector2 = Vector2(0.22, 0.22)
+var newton_original_pos: Vector2 = Vector2(978.0, 472)
 
 # TODO: Animaciones de Newton: idle, feliz, trsite.
 
@@ -48,19 +52,16 @@ func show_newton_layer():
 
 func show_minigame(path: String):
 	var new_scale = 0.15
+	var new_scale_vector = Vector2(new_scale, new_scale)
 	
 	slide_minigame_overlay(path)
 	slide_current_level()
-	resize_newton(new_scale)
+	resize_newton_ready(new_scale_vector)
 	GlobalManager.is_minigame_overlay_visible = true
 
 func hide_minigames():
 	for child in minigame_overlay.get_children():
 		child.queue_free()
-	#TODO: Al terminar el minijuego
-	#El Minijuego instanciado se elimina de MinigameLayer.
-	#El personaje resuelve su estado.
-	# Nueva posición proporcional considerando el sprit
 
 func free_children(parent: Node):
 	for child in parent.get_children():
@@ -92,12 +93,65 @@ func slide_current_level():
 	var target_scene_pos = start_scene_pos - Vector2(SCREEN_WIDTH/4, 0)
 	tween.tween_property(current_scene_container, "position", target_scene_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
-func resize_newton(new_scale: float) -> void:
+func make_newton_cook():	
+	# Regresar a "newton_ready" a la posicion y escala inicial 
+	newton_ready_sprite.visible = false
+	resize_newton_ready(newton_original_scale)
+	# Empezar a cocinar
+	print("🧑🏽‍🍳 Newton esta cocinando")
+	newton_moods_sprite.visible = true
+	# TODO: mostrar mensaje que esta2 cocinando 
+	AudioManager.play_whisking_sfx()
+	# Hacer flip horizontal repetidamente durante 2s
+	var flip_timer := Timer.new()
+	flip_timer.wait_time = 0.2 # cada 0.2 segundos cambia de lado
+	flip_timer.autostart = true
+	flip_timer.one_shot = false
+	add_child(flip_timer)
+
+	flip_timer.timeout.connect(func():
+		newton_moods_sprite.flip_h = !newton_moods_sprite.flip_h
+	)
+	
+	# Detener animación después de 2 segundos
+	var tween := get_tree().create_timer(2.0)
+	tween.timeout.connect(func():
+		flip_timer.stop()
+		flip_timer.queue_free()
+		AudioManager.stop_whisking_sfx()
+		show_netown_feedback()
+	)
+
+func show_netown_feedback():
+	var result = GlobalManager.check_recipe()
+	var success = result[0]
+	var message = result[1]
+	
+	recipe_result_text.text = message
+	# Cambiar sprite según resultado
+	if success:
+		AudioManager.play_right_recipe_sfx()
+		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_win.png")
+		print("✅ Receta preparada correctamente")
+	else:
+		AudioManager.play_wrong_recipe_sfx()
+		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_fail.png")
+		print("❌ Algo salió mal en la receta")
+
+func check_recipe() -> Array:
+	print("ingredientes acumulados: ", GlobalManager.selected_ingredients)
+	print("id receta seleccionada: ", GlobalManager.selected_recipe_idx)
+	print("recetas del nivel: ", GlobalManager.current_level_recipes)
+	var success = true
+	var message = "¡Preparaste bien la receta!"
+	return [success, message]
+
+func resize_newton_ready(new_scale_vector: Vector2) -> void:
 	var tween = create_tween()
 	
 	# Escalar con animación
-	tween.tween_property(newton_sprite, "scale", Vector2(new_scale, new_scale), 0.5)
+	tween.tween_property(newton_ready_sprite, "scale", new_scale_vector, 0.5)
 	
 	# Mover con animación (20px más abajo/derecha de su posición actual)
-	var new_pos = newton_sprite.position + Vector2(84,100)
-	tween.tween_property(newton_sprite, "position", new_pos, 0.5)
+	var new_pos = newton_ready_sprite.position + Vector2(84,100)
+	tween.tween_property(newton_ready_sprite, "position", new_pos, 0.5)

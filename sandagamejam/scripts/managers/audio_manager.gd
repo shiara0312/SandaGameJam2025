@@ -36,10 +36,15 @@ func play_whisking_sfx():
 		sfx_whisking.play()
 	else:
 		push_warning("SFXWhisking no está asignado o no existe en AudioManager")
-		
 
 func play_game_music():	
 	if game_music:
 		game_music.play()
 	else:
 		push_warning("GameMusic no está asignado o no existe en AudioManager")
+
+func stop_whisking_sfx():	
+	if sfx_whisking:
+		sfx_whisking.stop()
+	else:
+		push_warning("SFXWhisking no está asignado o no existe en AudioManager")
