@@ -8,7 +8,9 @@ extends Node
 @onready var recipe_result_text: RichTextLabel = $NewtonLayer/FeedbackMessage
 
 const SCREEN_WIDTH = 1152.0
-
+const SECONDS_TO_LOSE = 30
+const SECONDS_TO_GAIN = 15
+	
 var current_level: Node = null
 var newton_original_scale: Vector2 = Vector2(0.22, 0.22)
 var newton_original_pos: Vector2 = Vector2(978.0, 472)
@@ -128,6 +130,7 @@ func show_netown_feedback():
 	var message = result[1]
 	
 	recipe_result_text.text = message
+	recipe_result_text.visible = true
 	# Cambiar sprite según resultado
 	if success:
 		AudioManager.play_right_recipe_sfx()
@@ -139,11 +142,37 @@ func show_netown_feedback():
 		print("❌ Algo salió mal en la receta")
 
 func check_recipe() -> Array:
-	print("ingredientes acumulados: ", GlobalManager.selected_ingredients)
-	print("id receta seleccionada: ", GlobalManager.selected_recipe_idx)
-	print("recetas del nivel: ", GlobalManager.current_level_recipes)
-	var success = true
-	var message = "¡Preparaste bien la receta!"
+	var selected_recipe = GlobalManager.current_level_recipes[GlobalManager.selected_recipe_idx]
+	var selected_recipe_ingredients = selected_recipe["ingredients"]
+	var selected_recipe_mood = selected_recipe["mood"]
+	var collected_ingredients = GlobalManager.collected_ingredients
+	var customer_mood = GlobalManager.current_customer["mood_id"]
+	
+	# Selecciono receta correcta?
+	var correct_recipe_selected = true if selected_recipe_mood == customer_mood else false
+	#print("¿Seleccionó receta correcta?	? : ", correct_recipe_selected)
+	
+	# Recolectó todos los ingredientes?
+	var is_exact_match = arrays_match(collected_ingredients, selected_recipe_ingredients)
+	#print("¿Recolectó todos los ingredientes?: ", is_exact_match)
+
+	var success = correct_recipe_selected and is_exact_match
+	# Determinar respuesta y reglas
+	var response_type
+	if not correct_recipe_selected:
+		response_type = GlobalManager.ResponseType.WRONG_RECIPE
+		GlobalManager.lose_life()
+	elif not is_exact_match:
+		response_type = GlobalManager.ResponseType.WRONG_INGREDIENTS
+		GlobalManager.apply_penalty(SECONDS_TO_LOSE)
+	elif success:
+		response_type = GlobalManager.ResponseType.RIGHT_RECIPE_AND_INGREDIENTS
+		GlobalManager.apply_penalty(-SECONDS_TO_GAIN)
+	else:
+		response_type = GlobalManager.ResponseType.GRAVITATIONAL_RECIPE 
+
+	var message = GlobalManager.get_response_text(response_type)
+
 	return [success, message]
 
 func resize_newton_ready(new_scale_vector: Vector2) -> void:
@@ -155,3 +184,20 @@ func resize_newton_ready(new_scale_vector: Vector2) -> void:
 	# Mover con animación (20px más abajo/derecha de su posición actual)
 	var new_pos = newton_ready_sprite.position + Vector2(84,100)
 	tween.tween_property(newton_ready_sprite, "position", new_pos, 0.5)
+
+func arrays_match(collected: Array, recipe: Array) -> bool:
+	# Convertir recipe a un set (diccionario)
+	var recipe_set := {}
+	for item in recipe:
+		recipe_set[item] = true
+	
+	for item in collected:
+		if not recipe_set.has(item):
+			return false
+	
+	# Todos los de la receta están en collected
+	for item in recipe:
+		if not collected.has(item):
+			return false
+	
+	return true
