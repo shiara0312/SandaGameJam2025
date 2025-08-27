@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://brrp3aubtiabr"]
+[gd_scene load_steps=6 format=3 uid="uid://vtc2lyen53y6"]
 
-[ext_resource type="Texture2D" uid="uid://25iaxd67dbej" path="res://assets/UI/imagenes.png" id="2_2w0tc"]
-[ext_resource type="FontFile" uid="uid://ch5rglkjpbnk2" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="2_inw4l"]
-[ext_resource type="Texture2D" uid="uid://bu2111ycwvth7" path="res://assets/UI/closebtn.png" id="3_2w0tc"]
-[ext_resource type="Texture2D" uid="uid://c7orwwgt3mbq8" path="res://assets/UI/ic_volume_off_fill.png" id="4_2w0tc"]
+[ext_resource type="Texture2D" uid="uid://cns6yidqqgg12" path="res://assets/backgrounds/level1.png" id="1_3wh4p"]
+[ext_resource type="Texture2D" uid="uid://b5cvpb7dre038" path="res://assets/ui/text_message.png" id="2_2q3ra"]
+[ext_resource type="FontFile" uid="uid://di1bbtmfhsyh5" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="2_inw4l"]
+[ext_resource type="Texture2D" uid="uid://bxclil0u88e4h" path="res://assets/UI/closebtn.png" id="3_2w0tc"]
+[ext_resource type="Texture2D" uid="uid://5ombdxxdcy6j" path="res://assets/UI/ic_volume_off_fill.png" id="4_2w0tc"]
 
 [node name="Opciones" type="Control"]
 layout_mode = 3
@@ -13,14 +14,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="TextureRect5" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 1146.0
-offset_bottom = 645.0
-texture = ExtResource("2_2w0tc")
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_3wh4p")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.854902)
+layout_mode = 0
+offset_left = -81.0
+offset_top = -122.0
+offset_right = 1231.0
+offset_bottom = 799.0
+texture = ExtResource("2_2q3ra")
 expand_mode = 1
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect2"]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 256.0
 offset_top = 208.0
@@ -28,7 +38,7 @@ offset_right = 296.0
 offset_bottom = 248.0
 texture = ExtResource("4_2w0tc")
 
-[node name="TextureRect2" type="TextureRect" parent="TextureRect2"]
+[node name="TextureRect3" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 262.0
 offset_top = 323.0
@@ -36,36 +46,38 @@ offset_right = 302.0
 offset_bottom = 363.0
 texture = ExtResource("4_2w0tc")
 
-[node name="Titulo" type="Label" parent="TextureRect2"]
+[node name="Titulo" type="Label" parent="."]
 layout_mode = 0
-offset_left = 25.0
-offset_top = 100.0
-offset_right = 1094.0
-offset_bottom = 163.0
+offset_left = 26.0
+offset_top = 123.0
+offset_right = 1095.0
+offset_bottom = 186.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_inw4l")
 theme_override_font_sizes/font_size = 47
 text = "Opciones"
 horizontal_alignment = 1
 
-[node name="salir" type="TextureButton" parent="TextureRect2"]
+[node name="salir" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 871.0
-offset_top = 92.0
-offset_right = 953.0
-offset_bottom = 168.0
+offset_left = 868.0
+offset_top = 116.0
+offset_right = 950.0
+offset_bottom = 192.0
 texture_normal = ExtResource("3_2w0tc")
 
-[node name="lblSFX" type="Label" parent="TextureRect2"]
+[node name="lblSFX" type="Label" parent="."]
 layout_mode = 0
 offset_left = 221.0
 offset_top = 155.0
 offset_right = 821.0
 offset_bottom = 194.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_inw4l")
 theme_override_font_sizes/font_size = 32
 text = "SFX"
 
-[node name="SFXsLider" type="HSlider" parent="TextureRect2"]
+[node name="SFXsLider" type="HSlider" parent="."]
 custom_minimum_size = Vector2(550, 0)
 layout_mode = 0
 offset_left = 314.0
@@ -73,7 +85,7 @@ offset_top = 219.0
 offset_right = 872.0
 offset_bottom = 241.0
 
-[node name="SFXsLider2" type="HSlider" parent="TextureRect2"]
+[node name="SFXsLider2" type="HSlider" parent="."]
 custom_minimum_size = Vector2(550, 0)
 layout_mode = 0
 offset_left = 314.0
@@ -81,39 +93,41 @@ offset_top = 333.0
 offset_right = 872.0
 offset_bottom = 355.0
 
-[node name="TextureRect3" type="TextureRect" parent="TextureRect2"]
+[node name="TextureRect4" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 210.0
 offset_top = 264.0
 offset_right = 810.0
 offset_bottom = 264.0
 
-[node name="lblMusic" type="Label" parent="TextureRect2"]
+[node name="lblMusic" type="Label" parent="."]
 layout_mode = 0
 offset_left = 222.0
 offset_top = 266.0
 offset_right = 316.0
 offset_bottom = 305.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_inw4l")
 theme_override_font_sizes/font_size = 32
 text = "Música"
 
-[node name="lblScreen" type="Label" parent="TextureRect2"]
+[node name="lblScreen" type="Label" parent="."]
 layout_mode = 0
 offset_left = 318.0
-offset_top = 407.0
+offset_top = 397.0
 offset_right = 609.0
-offset_bottom = 446.0
+offset_bottom = 436.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_inw4l")
 theme_override_font_sizes/font_size = 32
 text = "Resolución de Pantalla"
 
-[node name="ScreenButton" type="OptionButton" parent="TextureRect2"]
+[node name="ScreenButton" type="OptionButton" parent="."]
 layout_mode = 0
 offset_left = 640.0
-offset_top = 407.0
+offset_top = 397.0
 offset_right = 839.0
-offset_bottom = 445.0
+offset_bottom = 435.0
 theme_override_fonts/font = ExtResource("2_inw4l")
 item_count = 5
 popup/item_0/text = "1920x1080"
@@ -127,12 +141,12 @@ popup/item_3/id = 3
 popup/item_4/text = "Pantalla completa"
 popup/item_4/id = 4
 
-[node name="ScreenButton2" type="OptionButton" parent="TextureRect2"]
+[node name="ScreenButton2" type="OptionButton" parent="."]
 layout_mode = 0
 offset_left = 642.0
-offset_top = 485.0
+offset_top = 458.0
 offset_right = 841.0
-offset_bottom = 523.0
+offset_bottom = 496.0
 theme_override_fonts/font = ExtResource("2_inw4l")
 item_count = 3
 popup/item_0/text = "English"
@@ -142,12 +156,13 @@ popup/item_1/id = 1
 popup/item_2/text = "Español"
 popup/item_2/id = 2
 
-[node name="lblIdioma" type="Label" parent="TextureRect2"]
+[node name="lblIdioma" type="Label" parent="."]
 layout_mode = 0
 offset_left = 512.0
-offset_top = 484.0
+offset_top = 459.0
 offset_right = 598.0
-offset_bottom = 523.0
+offset_bottom = 498.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_inw4l")
 theme_override_font_sizes/font_size = 32
 text = "Idioma"
