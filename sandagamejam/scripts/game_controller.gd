@@ -1,3 +1,4 @@
+#GameController.tscn maneja Newton, los niveles y el minigame overlay.
 extends Node
 
 @onready var current_scene_container: Node2D = $CurrentSceneContainer
@@ -12,6 +13,7 @@ const SECONDS_TO_LOSE = 30
 const SECONDS_TO_GAIN = 15
 	
 var current_level: Node = null
+var current_minigame: Node = null
 var newton_original_scale: Vector2 = Vector2(0.22, 0.22)
 var newton_original_pos: Vector2 = Vector2(978.0, 472)
 
@@ -62,9 +64,20 @@ func show_minigame(path: String):
 	GlobalManager.is_minigame_overlay_visible = true
 
 func hide_minigames():
+	print("HIDING...")
+	# Liberar lo que esté dentro del overlay
 	for child in minigame_overlay.get_children():
 		child.queue_free()
 
+	#reset_newton_ready()
+	
+	# Resetear flags globales
+	GlobalManager.is_minigame_overlay_visible = false
+	
+	# Rresetear también ingredientes recolectados, recetas, etc.
+	GlobalManager.collected_ingredients.clear()
+	GlobalManager.selected_recipe_idx = -1
+	
 func free_children(parent: Node):
 	for child in parent.get_children():
 		child.queue_free()
@@ -79,6 +92,8 @@ func slide_minigame_overlay(path: String):
 	self.add_child(minigame_instance)
 	minigame_instance.scale = Vector2(1,1)
 	minigame_instance.z_index = 50
+	self.current_minigame = minigame_instance
+	minigame_instance.connect("minigame_finished", Callable(self, "_on_minigame_finished"))
 
 	# Posición inicial: fuera de la pantalla (derecha)
 	minigame_instance.position = Vector2(SCREEN_WIDTH, 0)
@@ -86,7 +101,7 @@ func slide_minigame_overlay(path: String):
 	var target_pos = Vector2(TARGET_X, 0)
 	# Tween para entrada del overlay
 	tween.tween_property(minigame_instance, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	
+
 # Slide Level scene
 func slide_current_level():
 	var tween = create_tween()
@@ -100,9 +115,9 @@ func make_newton_cook():
 	newton_ready_sprite.visible = false
 	resize_newton_ready(newton_original_scale)
 	# Empezar a cocinar
-	print("🧑🏽‍🍳 Newton esta cocinando")
+	#print("🧑🏽‍🍳 Newton esta cocinando")
 	newton_moods_sprite.visible = true
-	# TODO: mostrar mensaje que esta2 cocinando 
+
 	AudioManager.play_whisking_sfx()
 	# Hacer flip horizontal repetidamente durante 2s
 	var flip_timer := Timer.new()
@@ -122,6 +137,19 @@ func make_newton_cook():
 		flip_timer.queue_free()
 		AudioManager.stop_whisking_sfx()
 		show_netown_feedback()
+		#TODO: OCULTAR A NEWTON COCINANDO newton_moods_sprite.visible = true
+		
+		
+		# Ocultar a Newton cocinando
+		#newton_moods_sprite.visible = false
+
+		# Esperar 0.5s y luego ocultar minijuegos
+		var hide_timer = get_tree().create_timer(0.5)
+		hide_timer.timeout.connect(func():
+			hide_minigames()
+			if current_minigame and current_minigame.has_signal("minigame_finished"):
+				current_minigame.emit_signal("minigame_finished")
+		)
 	)
 
 func show_netown_feedback():
@@ -135,11 +163,11 @@ func show_netown_feedback():
 	if success:
 		AudioManager.play_right_recipe_sfx()
 		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_win.png")
-		print("✅ Receta preparada correctamente")
+		#print("✅ Receta preparada correctamente")
 	else:
 		AudioManager.play_wrong_recipe_sfx()
 		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_fail.png")
-		print("❌ Algo salió mal en la receta")
+		#print("❌ Algo salió mal en la receta")
 
 func check_recipe() -> Array:
 	var selected_recipe = GlobalManager.current_level_recipes[GlobalManager.selected_recipe_idx]
@@ -175,6 +203,18 @@ func check_recipe() -> Array:
 
 	return [success, message]
 
+func reset_newton_ready() -> void:
+	# Restaurar Newton
+	newton_ready_sprite.visible = true
+	newton_moods_sprite.visible = false
+	#resize_newton_ready(newton_original_scale)
+	#newton_ready_sprite.position = newton_original_pos
+	
+	var tween = create_tween()
+	tween.tween_property(newton_ready_sprite, "position", newton_original_pos, 0.5)
+	tween.tween_property(newton_ready_sprite, "scale", newton_original_scale, 0.5)
+	
+	
 func resize_newton_ready(new_scale_vector: Vector2) -> void:
 	var tween = create_tween()
 	
@@ -201,3 +241,6 @@ func arrays_match(collected: Array, recipe: Array) -> bool:
 			return false
 	
 	return true
+
+func _on_minigame_finished():
+	hide_minigames()

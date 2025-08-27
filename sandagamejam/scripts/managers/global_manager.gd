@@ -64,7 +64,6 @@ func _process(delta: float) -> void:
 			is_game_running = false
 			emit_signal("time_up")
 
-# TODO: Quitar 10 segundos GloblManager.apply_penalty(10)
 func apply_penalty(seconds: float):
 	time_left = max(time_left - seconds, 0)
 	emit_signal("time_changed", time_left)
