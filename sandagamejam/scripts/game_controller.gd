@@ -167,7 +167,7 @@ func check_recipe() -> Array:
 		GlobalManager.apply_penalty(SECONDS_TO_LOSE)
 	elif success:
 		response_type = GlobalManager.ResponseType.RIGHT_RECIPE_AND_INGREDIENTS
-		GlobalManager.apply_penalty(-SECONDS_TO_WIN)
+		GlobalManager.apply_penalty(-SECONDS_TO_GAIN)
 	else:
 		response_type = GlobalManager.ResponseType.GRAVITATIONAL_RECIPE 
 
