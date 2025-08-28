@@ -211,6 +211,7 @@ func check_recipe() -> String:
 
 func reset_newton_ready() -> void:
 	# Restaurar Newton
+	newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_cocinando.png")
 	newton_ready_sprite.visible = true
 	newton_moods_sprite.visible = false
 	

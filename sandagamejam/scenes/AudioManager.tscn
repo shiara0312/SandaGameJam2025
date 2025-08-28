@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://cqb8r6rf23v1j" path="res://assets/sounds/sfx/sfx_click-pop.mp3" id="2_4tesi"]
 [ext_resource type="AudioStream" uid="uid://bp72dis3qtl7y" path="res://assets/sounds/music/isaacs_pastry_game.mp3" id="3_4tesi"]
 [ext_resource type="AudioStream" uid="uid://dg6mqxlyljwf3" path="res://assets/sounds/sfx/sfx_collect_item-equip.mp3" id="3_qb6qo"]
-[ext_resource type="AudioStream" uid="uid://sm4pm4qnlg44" path="res://assets/sounds/sfx/sfx_batir-whisking-44551.mp3" id="4_v5v75"]
+[ext_resource type="AudioStream" uid="uid://dk8s6u2tjd7oh" path="res://assets/sounds/sfx/sfx_batir-whisking-44551.wav" id="4_v5v75"]
 [ext_resource type="AudioStream" uid="uid://dq6l5mjtg0lov" path="res://assets/sounds/sfx/sfx_receta_correctashort-success-sound.mp3" id="5_hmi33"]
 [ext_resource type="AudioStream" uid="uid://c6ig76yqe7cmu" path="res://assets/sounds/sfx/sfx_receta_incorrecta-negative_beeps-6008.mp3" id="6_v5v75"]
 
@@ -21,7 +21,6 @@ volume_db = -24.0
 
 [node name="SFXWhisking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_v5v75")
-volume_db = 1.0
 
 [node name="SFXRightRecipe" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_hmi33")
