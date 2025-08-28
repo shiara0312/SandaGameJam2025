@@ -1,3 +1,4 @@
+#GameController.tscn maneja Newton, los niveles y el minigame overlay.
 extends Node
 
 @onready var current_scene_container: Node2D = $CurrentSceneContainer
@@ -5,21 +6,29 @@ extends Node
 @onready var newton_layer = $NewtonLayer
 @onready var newton_ready_sprite: Sprite2D = $NewtonLayer/NewtonReadySprite
 @onready var newton_moods_sprite: Sprite2D = $NewtonLayer/NewtonMoodsSprite
-@onready var recipe_result_text: RichTextLabel = $NewtonLayer/FeedbackMessage
+@onready var feedback_message: RichTextLabel = $NewtonLayer/FeedbackMessage
+@onready var continue_button: TextureButton = $NewtonLayer/ContinueBtn
 
 const SCREEN_WIDTH = 1152.0
 const SECONDS_TO_LOSE = 30
 const SECONDS_TO_GAIN = 15
 	
+var is_success: bool = false
 var current_level: Node = null
+var current_minigame: Node = null
 var newton_original_scale: Vector2 = Vector2(0.22, 0.22)
 var newton_original_pos: Vector2 = Vector2(978.0, 472)
 
-# TODO: Animaciones de Newton: idle, feliz, trsite.
-
 func _ready():
 	newton_layer.visible = false
+	GlobalManager.connect("time_up", Callable(self, "_on_time_up"))
+	GlobalManager.connect("game_over", Callable(self, "_on_game_over"))
+	GlobalManager.connect("win", Callable(self, "_on_win"))
 
+func show_newton_layer():
+	newton_layer.visible = true
+	
+# Cargar Main Menu: Jugar, Opciones, Creditos
 func load_main_menu():
 	# Limpiar cualquier escena previa
 	free_children(current_scene_container)
@@ -36,6 +45,7 @@ func load_main_menu():
 		newton_layer.visible = false
 		pass
 	
+# Cargar cualquier nivel
 func load_level(level_path: String) -> void:
 	if current_level and is_instance_valid(current_level):
 		current_level.queue_free()
@@ -49,22 +59,31 @@ func load_level(level_path: String) -> void:
 	current_level = scene.instantiate()
 	current_scene_container.add_child(current_level)
 	
-func show_newton_layer():
-	newton_layer.visible = true
+	# conectar el final del nivel
+	if current_level.has_signal("level_cleared"):
+		current_level.connect("level_cleared", Callable(self, "_on_level_cleared"))
 
 func show_minigame(path: String):
 	var new_scale = 0.15
 	var new_scale_vector = Vector2(new_scale, new_scale)
 	
 	slide_minigame_overlay(path)
-	slide_current_level()
+	slide_current_level("left")
 	resize_newton_ready(new_scale_vector)
 	GlobalManager.is_minigame_overlay_visible = true
 
-func hide_minigames():
-	for child in minigame_overlay.get_children():
-		child.queue_free()
-
+func finish_minigame():
+	slide_current_level("right")
+	reset_newton_ready()
+	
+	# Si existe minigame_instance guardado, animar antes de eliminarlo
+	if self.current_minigame and is_instance_valid(self.current_minigame):
+		var tween = create_tween()
+		tween.tween_property(self.current_minigame, "modulate:a", 0.0, 0.5)
+		tween.finished.connect(_on_minigame_hidden)
+	else:
+		_cleanup_minigames()
+	
 func free_children(parent: Node):
 	for child in parent.get_children():
 		child.queue_free()
@@ -76,9 +95,10 @@ func slide_minigame_overlay(path: String):
 	var tween = create_tween()
 	
 	var minigame_instance = load(path).instantiate()
-	self.add_child(minigame_instance)
+	minigame_overlay.add_child(minigame_instance)
 	minigame_instance.scale = Vector2(1,1)
 	minigame_instance.z_index = 50
+	self.current_minigame = minigame_instance
 
 	# Posición inicial: fuera de la pantalla (derecha)
 	minigame_instance.position = Vector2(SCREEN_WIDTH, 0)
@@ -86,23 +106,32 @@ func slide_minigame_overlay(path: String):
 	var target_pos = Vector2(TARGET_X, 0)
 	# Tween para entrada del overlay
 	tween.tween_property(minigame_instance, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	
+
 # Slide Level scene
-func slide_current_level():
+func slide_current_level(direction: String = "left", duration: float = 0.5):
 	var tween = create_tween()
 
 	var start_scene_pos = current_scene_container.position
-	var target_scene_pos = start_scene_pos - Vector2(SCREEN_WIDTH/4, 0)
-	tween.tween_property(current_scene_container, "position", target_scene_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	var offset = Vector2(SCREEN_WIDTH/4, 0)
+	var target_scene_pos
+	if direction == "left":
+		target_scene_pos = start_scene_pos - offset
+	elif direction == "right":
+		target_scene_pos = start_scene_pos + offset
+	else:
+		push_warning("Dirección inválida: " + direction)
+		return
+	
+	tween.tween_property(current_scene_container, "position", target_scene_pos, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
+# Empezar a cocinar
+# print("🧑🏽‍🍳 Newton esta cocinando")
 func make_newton_cook():	
-	# Regresar a "newton_ready" a la posicion y escala inicial 
+	# Ocular a "newton_ready"
 	newton_ready_sprite.visible = false
-	resize_newton_ready(newton_original_scale)
-	# Empezar a cocinar
-	print("🧑🏽‍🍳 Newton esta cocinando")
+	#resize_newton_ready(newton_original_scale)
 	newton_moods_sprite.visible = true
-	# TODO: mostrar mensaje que esta2 cocinando 
+
 	AudioManager.play_whisking_sfx()
 	# Hacer flip horizontal repetidamente durante 2s
 	var flip_timer := Timer.new()
@@ -125,23 +154,28 @@ func make_newton_cook():
 	)
 
 func show_netown_feedback():
-	var result = check_recipe()
-	var success = result[0]
-	var message = result[1]
-	
-	recipe_result_text.text = message
-	recipe_result_text.visible = true
+	var message = check_recipe()
+	var continue_btn_label = continue_button.get_node("Label")
+
+	feedback_message.text = message
+	feedback_message.visible = true
 	# Cambiar sprite según resultado
-	if success:
+	if is_success:
 		AudioManager.play_right_recipe_sfx()
 		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_win.png")
-		print("✅ Receta preparada correctamente")
+		#TODO: cambiar el sprite del customer
+		#print("✅ Receta preparada correctamente")
 	else:
 		AudioManager.play_wrong_recipe_sfx()
 		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_fail.png")
-		print("❌ Algo salió mal en la receta")
+		#TODO: cambiar el sprite del customer
+		#print("❌ Algo salió mal en la receta")
+	
+	continue_btn_label.text = "Entiendo..." 
+	#TODO: actualizar el texto segun corresponda 
+	continue_button.visible = true
 
-func check_recipe() -> Array:
+func check_recipe() -> String:
 	var selected_recipe = GlobalManager.current_level_recipes[GlobalManager.selected_recipe_idx]
 	var selected_recipe_ingredients = selected_recipe["ingredients"]
 	var selected_recipe_mood = selected_recipe["mood"]
@@ -156,7 +190,7 @@ func check_recipe() -> Array:
 	var is_exact_match = arrays_match(collected_ingredients, selected_recipe_ingredients)
 	#print("¿Recolectó todos los ingredientes?: ", is_exact_match)
 
-	var success = correct_recipe_selected and is_exact_match
+	is_success = correct_recipe_selected and is_exact_match
 	# Determinar respuesta y reglas
 	var response_type
 	if not correct_recipe_selected:
@@ -165,7 +199,7 @@ func check_recipe() -> Array:
 	elif not is_exact_match:
 		response_type = GlobalManager.ResponseType.WRONG_INGREDIENTS
 		GlobalManager.apply_penalty(SECONDS_TO_LOSE)
-	elif success:
+	elif is_success:
 		response_type = GlobalManager.ResponseType.RIGHT_RECIPE_AND_INGREDIENTS
 		GlobalManager.apply_penalty(-SECONDS_TO_GAIN)
 	else:
@@ -173,8 +207,18 @@ func check_recipe() -> Array:
 
 	var message = GlobalManager.get_response_text(response_type)
 
-	return [success, message]
+	return message
 
+func reset_newton_ready() -> void:
+	# Restaurar Newton
+	newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_cocinando.png")
+	newton_ready_sprite.visible = true
+	newton_moods_sprite.visible = false
+	
+	var tween = create_tween()
+	tween.tween_property(newton_ready_sprite, "position", newton_original_pos, 0.5)
+	tween.tween_property(newton_ready_sprite, "scale", newton_original_scale, 0.5)
+	
 func resize_newton_ready(new_scale_vector: Vector2) -> void:
 	var tween = create_tween()
 	
@@ -201,3 +245,46 @@ func arrays_match(collected: Array, recipe: Array) -> bool:
 			return false
 	
 	return true
+
+func _on_minigame_hidden():
+	if self.current_minigame and is_instance_valid(self.current_minigame):
+		self.current_minigame.queue_free()
+		self.current_minigame = null
+	
+	_cleanup_minigames()
+	
+func _on_continue_btn_pressed() -> void:
+	feedback_message.visible = false
+	continue_button.visible = false
+	
+	# Restaurar Newton
+	reset_newton_ready()
+	# Ocultar minijuegos
+	finish_minigame()
+	# Avisar al nivel que muestre reacción del cliente
+	get_tree().call_group("levels", "show_customer_reaction", is_success)
+
+func _cleanup_minigames():
+	# Liberar lo que esté dentro del overlay
+	for child in minigame_overlay.get_children():
+		child.queue_free()
+	
+	# Resetear flags globales
+	GlobalManager.is_minigame_overlay_visible = false
+	# Resetear también ingredientes recolectados, recetas, etc.
+	GlobalManager.collected_ingredients.clear()
+	GlobalManager.selected_recipe_idx = -1
+
+func _on_level_cleared():
+	print("Nivel completado desde GameController")
+	GlobalManager.emit_signal("win")
+	_on_win()
+
+func _on_win():
+	print("you won")
+	
+func _on_time_up():
+	print("¡Se acabó el tiempo!")
+
+func _on_game_over():
+	print("¡GAME OVER!")

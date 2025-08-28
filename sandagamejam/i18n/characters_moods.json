@@ -7,24 +7,12 @@
 		"en": "Ada Lovelace",
 		"fr": "Ada Lovelace"
 	  },
-	  "specialty": {
+	"specialty": {
 		"es": "Programación",
 		"en": "Programming",
 		"fr": "Programmation"
-	  }
-	},
-	{
-	  "id": "platon",
-	  "name": {
-		"es": "Platón",
-		"en": "Plato",
-		"fr": "Platon"
 	  },
-	  "specialty": {
-		"es": "Filosofía",
-		"en": "Philosophy",
-		"fr": "Philosophie"
-	  }
+		"genre": "female"
 	},
 	{
 	  "id": "renemagritte",
@@ -37,7 +25,8 @@
 		"es": "Arte",
 		"en": "Art",
 		"fr": "Art"
-	  }
+	  },
+	"genre": "male"
 	},
 	{
 	  "id": "adan",
@@ -50,7 +39,8 @@
 		"es": "Jardinería",
 		"en": "Gardening",
 		"fr": "Jardinage"
-		}
+		},
+		"genre": "male"
 	}
   ],
   "moods": [

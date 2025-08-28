@@ -1,4 +1,4 @@
-# MinigameOverlay.tscn
+# MinigameOverlay.tscn maneja la UI/flujo del minijuego.
 extends Node2D
 
 @onready var menu_container : Control = $TextureRect/MenuContainer
@@ -79,7 +79,6 @@ func load_selected_recipe_data(idx: int) -> void:
 	var riddle = recipe_selected["riddle"][lang]
 	
 	#print("recipe_selected ", recipe_selected["ingredients"])
-	
 	var text = "[center][font_size=35]" + rec_name + "[/font_size][/center]\n\n"
 	text += "[font_size=36] " + riddle + "[/font_size]"
 

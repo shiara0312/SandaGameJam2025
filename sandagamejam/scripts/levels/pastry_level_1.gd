@@ -1,5 +1,7 @@
 extends Node2D
 
+signal level_cleared
+
 @onready var characters = $Personajes
 @onready var customer_scene := preload("res://scenes/characters/Customer.tscn")
 @onready var PauseBtn = $PauseBtn
@@ -17,6 +19,7 @@ var original_viewport_size: Vector2
 
 # Escena del nivel base
 func _ready():
+	add_to_group("levels")
 	original_viewport_size = get_viewport().size
 	get_viewport().connect("size_changed", Callable(self, "_on_viewport_resized"))
 	PauseBtn.connect("pressed", Callable(self, "_on_pause_pressed"))
@@ -27,13 +30,11 @@ func _ready():
 	
 	GlobalManager.initialize_recipes("level1")
 
-
 func spawn_next_customer():
 	print("DEBUG > spawn_next_customer")
 	var next := GlobalManager.get_next_customer()
 	if next.is_empty():
-		# TODO: posible victoria
-		print("Todos fueron atendidos y son felices")
+		emit_signal("level_cleared")
 		return 
 	
 	current_customer = customer_scene.instantiate()
@@ -45,7 +46,7 @@ func spawn_next_customer():
 	current_customer.connect("listen_customer_pressed", Callable(self, "_on_listen_customer_pressed"))
 
 	# Estado del cliente
-	current_customer.set_state(current_customer.State.ENTERING)	
+	current_customer.set_state(GlobalManager.State.ENTERING)
 	
 	# Esperar el frame cuando se hace resize 
 	await get_tree().process_frame
@@ -74,6 +75,26 @@ func get_random_combinations(json_path: String, count: int = 4) -> Array:
 	# Tomar las primeras `count` combinaciones
 	var selected : Array = combos.slice(0, min(count, combos.size()))
 	return selected
+
+func show_customer_reaction(success: bool):
+	print("DEBUG > show_customer_reaction, success: ", success, current_customer)
+	
+	# Aquí puedes poner animaciones o reacciones del cliente actual
+	if current_customer:
+		if success:
+			current_customer.react_happy()
+		else:
+			current_customer.react_angry()
+	
+	# Esperar un ratito antes de traer al próximo cliente
+	await get_tree().create_timer(1.5).timeout
+	
+	# Ocultar/eliminar cliente actual
+	if current_customer and is_instance_valid(current_customer):
+		current_customer.queue_free()
+		current_customer = null
+	
+	spawn_next_customer()
 
 # Funciones lanzadas por los signals
 func _on_customer_seated(cust: Node2D):
