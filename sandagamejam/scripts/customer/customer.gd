@@ -24,7 +24,7 @@ var texts: Dictionary
 var language: String
 
 # estados del cliente
-enum State { ENTERING, SEATED, SATISFIED }
+enum State { ENTERING, SEATED, FAIL, SATISFIED }
 var state = State.ENTERING
 	
 func _ready():
@@ -72,6 +72,10 @@ func set_state(new_state: State):
 			var path := "res://assets/sprites/customers/%s_%s.png" % [character_id, mood_id]
 			var alt_path := "res://assets/sprites/customers/adalovelace_somnoliento.png"
 			load_customer_texture(path, alt_path)
+		State.FAIL:
+			var path := "res://assets/sprites/customers/%s_%s_fail.png" % [character_id, mood_id]
+			var alt_path := "res://assets/sprites/customers/adalovelace_somnoliento.png"
+			load_customer_texture(path, alt_path)
 		State.SATISFIED:
 			var path := "res://assets/sprites/customers/%s_estable.png" % character_id
 			var alt_path := "res://assets/sprites/customers/adalovelace_estable.png"
@@ -103,6 +107,13 @@ func get_initial_position() -> Vector2:
 
 func get_target_position() -> Vector2:
 	return Vector2(SPRITE_POSITION_X, SPRITE_POSITION_Y)
+	
+# Cambios de estados:
+func react_angry():
+	print("CLIENTE REACCIONA ENOJADO")
+
+func react_happy():
+	print("CLIENTE REACCIONA Feliz")
 	
 func _on_btn_listen_pressed() -> void:
 	AudioManager.play_click_sfx()

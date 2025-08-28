@@ -1,8 +1,6 @@
 # MinigameOverlay.tscn maneja la UI/flujo del minijuego.
 extends Node2D
 
-signal minigame_finished
-
 @onready var menu_container : Control = $TextureRect/MenuContainer
 @onready var recipe_container : Control = $TextureRect/RecipeContainer
 @onready var recollect_container : Control = $TextureRect/RecollectContainer

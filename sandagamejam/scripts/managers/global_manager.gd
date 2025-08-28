@@ -27,6 +27,8 @@ var btn_reject_recipe_label = ""
 var btn_choose_recipe_label = ""
 var btn_cook_recipe_label = ""
 
+enum State { ENTERING, SEATED, FAIL, SATISFIED }
+
 enum ResponseType {
 	WRONG_RECIPE,
 	WRONG_INGREDIENTS,

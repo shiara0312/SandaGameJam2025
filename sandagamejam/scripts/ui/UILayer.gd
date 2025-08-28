@@ -84,7 +84,6 @@ func _on_btn_help_pressed() -> void:
 	if GameController and not GlobalManager.is_minigame_overlay_visible:
 		GameController.show_minigame("res://scenes/minigames/MinigameOverlay.tscn")
 
-
 func _on_pause_btn_pressed() -> void:
 	if get_tree().paused:
 		get_tree().paused = false

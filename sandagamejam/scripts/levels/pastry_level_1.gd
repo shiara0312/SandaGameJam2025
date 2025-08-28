@@ -17,6 +17,7 @@ var original_viewport_size: Vector2
 
 # Escena del nivel base
 func _ready():
+	add_to_group("levels")
 	original_viewport_size = get_viewport().size
 	get_viewport().connect("size_changed", Callable(self, "_on_viewport_resized"))
 	PauseBtn.connect("pressed", Callable(self, "_on_pause_pressed"))
@@ -74,6 +75,22 @@ func get_random_combinations(json_path: String, count: int = 4) -> Array:
 	# Tomar las primeras `count` combinaciones
 	var selected : Array = combos.slice(0, min(count, combos.size()))
 	return selected
+
+func show_customer_reaction(success: bool):
+	print("DEBUG > show_customer_reaction, success: ", success, current_customer)
+	
+	# Aquí puedes poner animaciones o reacciones del cliente actual
+	if current_customer:
+		if success:
+			current_customer.react_happy()
+		else:
+			current_customer.react_angry()
+	
+	# Esperar un ratito antes de traer al próximo cliente
+	await get_tree().create_timer(1.5).timeout
+	
+	spawn_next_customer()
+
 
 # Funciones lanzadas por los signals
 func _on_customer_seated(cust: Node2D):
