@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://lqqdf6iy7fnl"]
+[gd_scene load_steps=11 format=3 uid="uid://lqqdf6iy7fnl"]
 
 [ext_resource type="Script" uid="uid://bv5tuq3hbtquc" path="res://scripts/managers/audio_manager.gd" id="1_v6v0x"]
 [ext_resource type="AudioStream" uid="uid://cqb8r6rf23v1j" path="res://assets/sounds/sfx/sfx_click-pop.mp3" id="2_4tesi"]
@@ -7,6 +7,9 @@
 [ext_resource type="AudioStream" uid="uid://dk8s6u2tjd7oh" path="res://assets/sounds/sfx/sfx_batir-whisking-44551.wav" id="4_v5v75"]
 [ext_resource type="AudioStream" uid="uid://dq6l5mjtg0lov" path="res://assets/sounds/sfx/sfx_receta_correctashort-success-sound.mp3" id="5_hmi33"]
 [ext_resource type="AudioStream" uid="uid://c6ig76yqe7cmu" path="res://assets/sounds/sfx/sfx_receta_incorrecta-negative_beeps-6008.mp3" id="6_v5v75"]
+[ext_resource type="AudioStream" uid="uid://dd26nkrbbamcy" path="res://assets/sounds/sfx/sfx_timeup.wav" id="8_hmi33"]
+[ext_resource type="AudioStream" uid="uid://cb0xc2sbbuhp6" path="res://assets/sounds/sfx/sfx_game_over-failfare-86009.mp3" id="9_muqnj"]
+[ext_resource type="AudioStream" uid="uid://b5070o6iur4sg" path="res://assets/sounds/sfx/sfx_win-6416.mp3" id="10_5jw7j"]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_v6v0x")
@@ -34,3 +37,15 @@ volume_db = -24.0
 stream = ExtResource("3_4tesi")
 volume_db = -22.0
 parameters/looping = true
+
+[node name="SFXTimeUp" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_hmi33")
+volume_db = -24.0
+
+[node name="SFXGameOver" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_muqnj")
+volume_db = -24.0
+
+[node name="SFXWin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_5jw7j")
+volume_db = -24.0

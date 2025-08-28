@@ -8,6 +8,8 @@ extends Node
 @onready var newton_moods_sprite: Sprite2D = $NewtonLayer/NewtonMoodsSprite
 @onready var feedback_message: RichTextLabel = $NewtonLayer/FeedbackMessage
 @onready var continue_button: TextureButton = $NewtonLayer/ContinueBtn
+@onready var overlay_layer = $OverlayLayer
+var final_screen: Node = null
 
 const SCREEN_WIDTH = 1152.0
 const SECONDS_TO_LOSE = 30
@@ -163,12 +165,10 @@ func show_netown_feedback():
 	if is_success:
 		AudioManager.play_right_recipe_sfx()
 		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_win.png")
-		#TODO: cambiar el sprite del customer
 		#print("✅ Receta preparada correctamente")
 	else:
 		AudioManager.play_wrong_recipe_sfx()
 		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_fail.png")
-		#TODO: cambiar el sprite del customer
 		#print("❌ Algo salió mal en la receta")
 	
 	continue_btn_label.text = "Entiendo..." 
@@ -282,9 +282,26 @@ func _on_level_cleared():
 
 func _on_win():
 	print("you won")
+	load_final_screen(GlobalManager.GameState.WIN)
 	
 func _on_time_up():
 	print("¡Se acabó el tiempo!")
+	load_final_screen(GlobalManager.GameState.TIMEUP)
 
 func _on_game_over():
 	print("¡GAME OVER!")
+	load_final_screen(GlobalManager.GameState.GAMEOVER)
+	
+func load_final_screen(state: GlobalManager.GameState):
+	newton_layer.visible = false
+	
+	# Limpia si ya había algo
+	if final_screen and is_instance_valid(final_screen):
+		final_screen.queue_free()
+	
+	# Instancia la pantalla final
+	final_screen = load("res://scenes/ui/FinalScreen.tscn").instantiate()
+	overlay_layer.add_child(final_screen)
+	
+	# Mostrar la pantalla según el estado ("win", "time_up", "game_over")
+	final_screen.show_final_screen(state)
