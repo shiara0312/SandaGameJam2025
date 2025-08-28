@@ -19,10 +19,11 @@ var current_minigame: Node = null
 var newton_original_scale: Vector2 = Vector2(0.22, 0.22)
 var newton_original_pos: Vector2 = Vector2(978.0, 472)
 
-# TODO: Animaciones de Newton: idle, feliz, trsite.
-
 func _ready():
 	newton_layer.visible = false
+	GlobalManager.connect("time_up", Callable(self, "_on_time_up"))
+	GlobalManager.connect("game_over", Callable(self, "_on_game_over"))
+	GlobalManager.connect("win", Callable(self, "_on_win"))
 
 func show_newton_layer():
 	newton_layer.visible = true
@@ -57,6 +58,10 @@ func load_level(level_path: String) -> void:
 	
 	current_level = scene.instantiate()
 	current_scene_container.add_child(current_level)
+	
+	# conectar el final del nivel
+	if current_level.has_signal("level_cleared"):
+		current_level.connect("level_cleared", Callable(self, "_on_level_cleared"))
 
 func show_minigame(path: String):
 	var new_scale = 0.15
@@ -268,3 +273,17 @@ func _cleanup_minigames():
 	# Resetear también ingredientes recolectados, recetas, etc.
 	GlobalManager.collected_ingredients.clear()
 	GlobalManager.selected_recipe_idx = -1
+
+func _on_level_cleared():
+	print("Nivel completado desde GameController")
+	GlobalManager.emit_signal("win")
+	_on_win()
+
+func _on_win():
+	print("you won")
+	
+func _on_time_up():
+	print("¡Se acabó el tiempo!")
+
+func _on_game_over():
+	print("¡GAME OVER!")

@@ -23,9 +23,7 @@ var mood_id: String
 var texts: Dictionary
 var language: String
 
-# estados del cliente
-enum State { ENTERING, SEATED, FAIL, SATISFIED }
-var state = State.ENTERING
+var state = GlobalManager.State.ENTERING
 	
 func _ready():
 	pass
@@ -53,7 +51,7 @@ func move_to(target_position: Vector2) -> void:
 
 func customer_positioned():
 	sfx_entering.stop()
-	set_state(State.SEATED)
+	set_state(GlobalManager.State.SEATED)
 	
 	var label = btn_listen.get_node("Label")
 	label.text = GlobalManager.btn_listen_customer_label
@@ -61,22 +59,23 @@ func customer_positioned():
 	
 	emit_signal("arrived_at_center", self)
 
-func set_state(new_state: State):
+func set_state(new_state: GlobalManager.State):
+	#TODO: agregar SFX
 	state = new_state
 	match state:
-		State.ENTERING:
+		GlobalManager.State.ENTERING:
 			var path := "res://assets/sprites/customers/%s_entrando.png" % character_id
 			var alt_path := "res://assets/sprites/customers/adalovelace_entrando.png"
 			load_customer_texture(path, alt_path)
-		State.SEATED:
+		GlobalManager.State.SEATED:
 			var path := "res://assets/sprites/customers/%s_%s.png" % [character_id, mood_id]
 			var alt_path := "res://assets/sprites/customers/adalovelace_somnoliento.png"
 			load_customer_texture(path, alt_path)
-		State.FAIL:
+		GlobalManager.State.FAIL:
 			var path := "res://assets/sprites/customers/%s_%s_fail.png" % [character_id, mood_id]
-			var alt_path := "res://assets/sprites/customers/adalovelace_somnoliento.png"
+			var alt_path := "res://assets/sprites/customers/%s_%s.png" % [character_id, mood_id]
 			load_customer_texture(path, alt_path)
-		State.SATISFIED:
+		GlobalManager.State.SUCCESS:
 			var path := "res://assets/sprites/customers/%s_estable.png" % character_id
 			var alt_path := "res://assets/sprites/customers/adalovelace_estable.png"
 			load_customer_texture(path, alt_path)
@@ -110,10 +109,12 @@ func get_target_position() -> Vector2:
 	
 # Cambios de estados:
 func react_angry():
-	print("CLIENTE REACCIONA ENOJADO")
+	set_state(GlobalManager.State.FAIL)
+	GlobalManager.return_customer()
 
 func react_happy():
-	print("CLIENTE REACCIONA Feliz")
+	set_state(GlobalManager.State.SUCCESS)
+	GlobalManager.mark_customer_as_satisfied()
 	
 func _on_btn_listen_pressed() -> void:
 	AudioManager.play_click_sfx()

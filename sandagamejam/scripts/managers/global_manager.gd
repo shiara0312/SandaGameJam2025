@@ -5,6 +5,7 @@ signal lives_changed(new_lives)
 signal time_changed(new_time)
 signal time_up
 signal game_over
+signal win
 
 var lives = 3
 var time_left : float = 180.0
@@ -27,7 +28,8 @@ var btn_reject_recipe_label = ""
 var btn_choose_recipe_label = ""
 var btn_cook_recipe_label = ""
 
-enum State { ENTERING, SEATED, FAIL, SATISFIED }
+# Estados del cliente
+enum State { ENTERING, SEATED, FAIL, SUCCESS }
 
 enum ResponseType {
 	WRONG_RECIPE,
@@ -93,11 +95,11 @@ func get_next_customer() -> Dictionary:
 	current_customer = customers_to_serve.pop_front()
 	return current_customer
 
-func return_customer(customer: Dictionary):
-	customers_to_serve.append(customer)
+func return_customer(): #customer: Dictionary
+	customers_to_serve.append(current_customer)
 
-func mark_customer_as_satisfied(customer: Dictionary):
-	satisfied_customers.append(customer)
+func mark_customer_as_satisfied(): #customer: Dictionary
+	satisfied_customers.append(current_customer)
 
 ### Gestionar recetas ###
 func initialize_recipes(level: String):
@@ -129,7 +131,6 @@ func load_texts():
 		menu_labels = _cargar_json_file("res://i18n/menu_labels.json")
 	if characters_moods.is_empty():
 		characters_moods = _cargar_json_file("res://i18n/characters_moods.json")
-
 
 func load_button_labels():	
 	if game_language in interaction_texts:
