@@ -10,7 +10,6 @@ signal win
 var lives = 3
 var time_left : float = 180.0
 var is_game_running : bool = false
-var is_paused: bool = false
 var is_minigame_overlay_visible : bool = false
 
 var game_language : String = "es" 
@@ -61,7 +60,7 @@ func start_game():
 
 #### Gestionar tiempo y vidas ####
 func _process(delta: float) -> void:
-	if is_game_running and not is_paused:
+	if is_game_running:
 		time_left -= delta
 		emit_signal("time_changed", time_left)
 		if time_left <= 0:
@@ -82,8 +81,14 @@ func lose_life():
 		lives -= 1
 		emit_signal("lives_changed", lives)
 		if lives == 0:
+			is_game_running = false
 			emit_signal("game_over")
 
+func check_win_condition():
+	if time_left > 0 and lives > 0 and customers_to_serve.is_empty():
+		is_game_running = false
+		emit_signal("win")
+		
 #### Gestionar cola de clientes ####
 func initialize_customers(combos: Array):
 	# Clonar los clientes obtenidos para el nivel 
@@ -117,11 +122,9 @@ func initialize_recipes(level: String):
 
 ### Game Controls ###
 func pause_game():
-	is_paused = true
 	is_game_running = false
 
 func resume_game():
-	is_paused = false
 	is_game_running = true
 
 ### Botones de interaccion con el cliente ###
