@@ -7,6 +7,7 @@ signal level_cleared
 @onready var PauseBtn = $PauseBtn
 @export var pause_texture: Texture
 
+
 var characters_mood_file_path = "res://i18n/characters_moods.json"
 var interact_btns_file_path = "res://i18n/interaction_texts.json"
 var customer_count = 3 # TODO: update
