@@ -277,8 +277,7 @@ func _cleanup_minigames():
 
 func _on_level_cleared():
 	print("Nivel completado desde GameController")
-	GlobalManager.emit_signal("win")
-	_on_win()
+	GlobalManager.check_win_condition()
 
 func _on_win():
 	print("you won")
