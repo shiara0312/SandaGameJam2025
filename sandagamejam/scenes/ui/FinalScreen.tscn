@@ -254,17 +254,17 @@ texture = ExtResource("2_7raak")
 [node name="Message" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 248.0
-offset_top = -300.0
+offset_top = 132.0
 offset_right = 912.0
-offset_bottom = -112.0
+offset_bottom = 320.0
 scale = Vector2(1.2, 1.2)
 
 [node name="Recipe1" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0.341176)
 layout_mode = 0
-offset_left = -400.0
+offset_left = 761.0
 offset_top = 466.0
-offset_right = 42.0
+offset_right = 1203.0
 offset_bottom = 802.0
 rotation = -0.188496
 scale = Vector2(0.6, 0.6)
@@ -272,9 +272,9 @@ texture = ExtResource("4_k05yd")
 
 [node name="Recipe2" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 2000.0
+offset_left = 969.0
 offset_top = 345.0
-offset_right = 3080.0
+offset_right = 2049.0
 offset_bottom = 1425.0
 rotation = 0.188496
 scale = Vector2(0.145, 0.145)
@@ -282,9 +282,9 @@ texture = ExtResource("5_3v14m")
 
 [node name="Newton" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -500.0
+offset_left = -125.0
 offset_top = 217.0
-offset_right = 3469.0
+offset_right = 3844.0
 offset_bottom = 4003.0
 rotation = -0.0942478
 scale = Vector2(0.135, 0.135)

@@ -8,7 +8,7 @@ signal game_over
 signal win
 
 var lives = 3
-var time_left : float = 5.0 #180.0
+var time_left : float = 180.0
 var is_game_running : bool = false
 var is_paused: bool = false
 var is_minigame_overlay_visible : bool = false
