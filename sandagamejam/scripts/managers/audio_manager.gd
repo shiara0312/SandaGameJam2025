@@ -5,6 +5,9 @@ extends Node
 @onready var sfx_right_recipe: AudioStreamPlayer = $SFXRightRecipe
 @onready var sfx_wrong_recipe: AudioStreamPlayer = $SFXWrongRecipe
 @onready var sfx_whisking: AudioStreamPlayer = $SFXWhisking
+@onready var sfx_time_up: AudioStreamPlayer = $SFXTimeUp
+@onready var sfx_game_over: AudioStreamPlayer = $SFXGameOver
+@onready var sfx_win: AudioStreamPlayer = $SFXWin
 @onready var game_music: AudioStreamPlayer = $GameMusic
 
 func play_click_sfx():	
@@ -37,6 +40,24 @@ func play_whisking_sfx():
 	else:
 		push_warning("SFXWhisking no está asignado o no existe en AudioManager")
 
+func play_time_up_sfx():	
+	if sfx_time_up:
+		sfx_time_up.play()
+	else:
+		push_warning("SFXTimeUp no está asignado o no existe en AudioManager")
+
+func play_game_over_sfx():	
+	if sfx_game_over:
+		sfx_game_over.play()
+	else:
+		push_warning("SFXGameOver no está asignado o no existe en AudioManager")
+
+func play_win_sfx():	
+	if sfx_win:
+		sfx_win.play()
+	else:
+		push_warning("SFXWin no está asignado o no existe en AudioManager")
+
 func play_game_music():	
 	if game_music:
 		game_music.play()
@@ -44,7 +65,13 @@ func play_game_music():
 		push_warning("GameMusic no está asignado o no existe en AudioManager")
 
 func stop_whisking_sfx():	
-	if sfx_whisking:
+	if sfx_whisking and sfx_whisking.playing:
 		sfx_whisking.stop()
 	else:
 		push_warning("SFXWhisking no está asignado o no existe en AudioManager")
+
+func stop_game_music():
+	if game_music and game_music.playing:
+		game_music.stop()
+	else:
+		push_warning("GameMusic no está asignado o no existe en AudioManager")

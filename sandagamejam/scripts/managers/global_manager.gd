@@ -30,6 +30,7 @@ var btn_cook_recipe_label = ""
 
 # Estados del cliente
 enum State { ENTERING, SEATED, FAIL, SUCCESS }
+enum GameState { WIN, TIMEUP, GAMEOVER }
 
 enum ResponseType {
 	WRONG_RECIPE,
