@@ -2,8 +2,8 @@ extends Node
 
 @onready var sfx_click: AudioStreamPlayer = $SFXClick
 @onready var sfx_collect_ingredient: AudioStreamPlayer = $SFXCollectIngredient
-@onready var sfx_right_recipe: AudioStreamPlayer = $SFXRightRecipe
-@onready var sfx_wrong_recipe: AudioStreamPlayer = $SFXWrongRecipe
+@onready var sfx_recipe_good: AudioStreamPlayer = $SFXRecipeGood
+@onready var sfx_recipe_bad: AudioStreamPlayer = $SFXRecipeBad
 @onready var sfx_whisking: AudioStreamPlayer = $SFXWhisking
 @onready var sfx_time_up: AudioStreamPlayer = $SFXTimeUp
 @onready var sfx_game_over: AudioStreamPlayer = $SFXGameOver
@@ -23,14 +23,14 @@ func play_collect_ingredient_sfx():
 		push_warning("SFXCollectIngredient no está asignado o no existe en AudioManager")
 		
 func play_right_recipe_sfx():	
-	if sfx_right_recipe:
-		sfx_right_recipe.play()
+	if sfx_recipe_good:
+		sfx_recipe_good.play()
 	else:
 		push_warning("SFXRightRecipe no está asignado o no existe en AudioManager")
 		
 func play_wrong_recipe_sfx():	
-	if sfx_wrong_recipe:
-		sfx_wrong_recipe.play()
+	if sfx_recipe_bad:
+		sfx_recipe_bad.play()
 	else:
 		push_warning("SFXCollectIngredient no está asignado o no existe en AudioManager")
 
