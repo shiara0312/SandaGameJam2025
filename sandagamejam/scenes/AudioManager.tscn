@@ -1,15 +1,15 @@
 [gd_scene load_steps=11 format=3 uid="uid://lqqdf6iy7fnl"]
 
 [ext_resource type="Script" uid="uid://bv5tuq3hbtquc" path="res://scripts/managers/audio_manager.gd" id="1_v6v0x"]
-[ext_resource type="AudioStream" uid="uid://cqb8r6rf23v1j" path="res://assets/sounds/sfx/sfx_click-pop.mp3" id="2_4tesi"]
-[ext_resource type="AudioStream" uid="uid://bp72dis3qtl7y" path="res://assets/sounds/music/isaacs_pastry_game.mp3" id="3_4tesi"]
-[ext_resource type="AudioStream" uid="uid://dg6mqxlyljwf3" path="res://assets/sounds/sfx/sfx_collect_item-equip.mp3" id="3_qb6qo"]
-[ext_resource type="AudioStream" uid="uid://dk8s6u2tjd7oh" path="res://assets/sounds/sfx/sfx_batir-whisking-44551.wav" id="4_v5v75"]
-[ext_resource type="AudioStream" uid="uid://dq6l5mjtg0lov" path="res://assets/sounds/sfx/sfx_receta_correctashort-success-sound.mp3" id="5_hmi33"]
-[ext_resource type="AudioStream" uid="uid://c6ig76yqe7cmu" path="res://assets/sounds/sfx/sfx_receta_incorrecta-negative_beeps-6008.mp3" id="6_v5v75"]
-[ext_resource type="AudioStream" uid="uid://dd26nkrbbamcy" path="res://assets/sounds/sfx/sfx_timeup.wav" id="8_hmi33"]
-[ext_resource type="AudioStream" uid="uid://cb0xc2sbbuhp6" path="res://assets/sounds/sfx/sfx_game_over-failfare-86009.mp3" id="9_muqnj"]
-[ext_resource type="AudioStream" uid="uid://b5070o6iur4sg" path="res://assets/sounds/sfx/sfx_win-6416.mp3" id="10_5jw7j"]
+[ext_resource type="AudioStream" uid="uid://cqb8r6rf23v1j" path="res://assets/sfx/global/sfx_click_pop.mp3" id="2_4tesi"]
+[ext_resource type="AudioStream" uid="uid://bp72dis3qtl7y" path="res://assets/sfx/music/isaacs_pastry_game.mp3" id="3_4tesi"]
+[ext_resource type="AudioStream" uid="uid://c26ail7w2v0q6" path="res://assets/sfx/minigame/sfx_collect_item.wav" id="3_5jw7j"]
+[ext_resource type="AudioStream" uid="uid://dk8s6u2tjd7oh" path="res://assets/sfx/minigame/sfx_whisking.wav" id="4_v5v75"]
+[ext_resource type="AudioStream" uid="uid://bddfrlou8uomc" path="res://assets/sfx/minigame/sfx_recipe_good.wav" id="5_5jw7j"]
+[ext_resource type="AudioStream" uid="uid://cfleepp1gltky" path="res://assets/sfx/minigame/sfx_recipe_bad.wav" id="6_5jw7j"]
+[ext_resource type="AudioStream" uid="uid://dd26nkrbbamcy" path="res://assets/sfx/global/sfx_time_up.wav" id="8_hmi33"]
+[ext_resource type="AudioStream" uid="uid://bqps6aqptoogf" path="res://assets/sfx/global/sfx_game_over.wav" id="9_5jw7j"]
+[ext_resource type="AudioStream" uid="uid://dpdyjtmqx60se" path="res://assets/sfx/global/sfx_win.wav" id="10_5jw7j"]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_v6v0x")
@@ -19,19 +19,19 @@ stream = ExtResource("2_4tesi")
 volume_db = -24.0
 
 [node name="SFXCollectIngredient" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_qb6qo")
+stream = ExtResource("3_5jw7j")
 volume_db = -24.0
 
 [node name="SFXWhisking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_v5v75")
 volume_db = -4.0
 
-[node name="SFXRightRecipe" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_hmi33")
+[node name="SFXRecipeGood" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_5jw7j")
 volume_db = -24.0
 
-[node name="SFXWrongRecipe" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_v5v75")
+[node name="SFXRecipeBad" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_5jw7j")
 volume_db = -24.0
 
 [node name="GameMusic" type="AudioStreamPlayer" parent="."]
@@ -44,7 +44,7 @@ stream = ExtResource("8_hmi33")
 volume_db = -24.0
 
 [node name="SFXGameOver" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_muqnj")
+stream = ExtResource("9_5jw7j")
 volume_db = -24.0
 
 [node name="SFXWin" type="AudioStreamPlayer" parent="."]
