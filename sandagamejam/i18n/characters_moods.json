@@ -45,7 +45,7 @@
   ],
   "moods": [
 	{
-	  "id": "somnoliento",
+	  "id": "sleepy",
 	  "name": {
 		"es": "somnoliento",
 		"en": "sleepy",
@@ -53,7 +53,7 @@
 	  }
 	},
 	{
-	  "id": "estresado",
+	  "id": "stressed",
 	  "name": {
 		"es": "estresado",
 		"en": "stressed",
@@ -61,7 +61,7 @@
 	  }
 	},
 	{
-	  "id": "triste",
+	  "id": "sad",
 	  "name": {
 		"es": "triste",
 		"en": "sad",
@@ -69,7 +69,7 @@
 	  }
 	},
 	{
-	  "id": "molesto",
+	  "id": "annoyed",
 	  "name": {
 		"es": "molesto",
 		"en": "annoyed",
@@ -80,7 +80,7 @@
   "combinations": [
 	{
 	  "character_id": "adalovelace",
-	  "mood_id": "somnoliento",
+	  "mood_id": "sleepy",
 	  "texts": {
 		"es": "Los números y algoritmos flotan en mi cabeza.. lástima que mis párpados también parecen flotar, a penas puedo mantenerme despierta.",
 		"en": "Numbers and algorithms float in my head... too bad my eyelids seem to float as well, I can barely stay awake.",
@@ -89,7 +89,7 @@
 	},
 		{
 	  "character_id": "renemagritte",
-	  "mood_id": "triste",
+	  "mood_id": "sad",
 	  "texts": {
 		"es": "Me es difícil pintar rostros, porque veo las emociones que expresan y me acongojan… me contagian.",
 		"en": "It’s hard for me to paint faces, because I see the emotions they express and they overwhelm me… they infect me.",
@@ -98,7 +98,7 @@
 	},
 		{
 	  "character_id": "adan",
-	  "mood_id": "molesto",
+	  "mood_id": "annoyed",
 	  "texts": {
 		"es": "Tienen un jardín completo y aún así, todos me miran por esta maldita manzana...",
 		"en": "They have a whole garden, and yet, everyone looks at me because of this damn apple...",

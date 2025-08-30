@@ -64,20 +64,20 @@ func set_state(new_state: GlobalManager.State):
 	state = new_state
 	match state:
 		GlobalManager.State.ENTERING:
-			var path := "res://assets/sprites/customers/%s_entrando.png" % character_id
-			var alt_path := "res://assets/sprites/customers/adalovelace_entrando.png"
+			var path := "res://assets/sprites/customers/%s_entering.png" % character_id
+			var alt_path := "res://assets/sprites/customers/adalovelace_entering.png"
 			load_customer_texture(path, alt_path)
 		GlobalManager.State.SEATED:
 			var path := "res://assets/sprites/customers/%s_%s.png" % [character_id, mood_id]
-			var alt_path := "res://assets/sprites/customers/adalovelace_somnoliento.png"
+			var alt_path := "res://assets/sprites/customers/adalovelace_sleepy.png"
 			load_customer_texture(path, alt_path)
 		GlobalManager.State.FAIL:
 			var path := "res://assets/sprites/customers/%s_%s_fail.png" % [character_id, mood_id]
 			var alt_path := "res://assets/sprites/customers/%s_%s.png" % [character_id, mood_id]
 			load_customer_texture(path, alt_path)
 		GlobalManager.State.SUCCESS:
-			var path := "res://assets/sprites/customers/%s_estable.png" % character_id
-			var alt_path := "res://assets/sprites/customers/adalovelace_estable.png"
+			var path := "res://assets/sprites/customers/%s_happy.png" % character_id
+			var alt_path := "res://assets/sprites/customers/adalovelace_happy.png"
 			load_customer_texture(path, alt_path)
 
 	if sprite.texture:
