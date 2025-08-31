@@ -1,3 +1,4 @@
+# AudioManager.gd
 extends Node
 
 @onready var sfx_click: AudioStreamPlayer = $SFXClick
@@ -9,6 +10,21 @@ extends Node
 @onready var sfx_game_over: AudioStreamPlayer = $SFXGameOver
 @onready var sfx_win: AudioStreamPlayer = $SFXWin
 @onready var game_music: AudioStreamPlayer = $GameMusic
+@onready var sfx_customer_complaint := AudioStreamPlayer.new()
+
+var sfx_complaint_dict := {
+	"female_sad": preload("res://assets/sfx/characters/sfx_female_sad.wav"),
+	"female_annoyed": preload("res://assets/sfx/characters/sfx_female_annoyed.wav"),
+	"female_stressed": preload("res://assets/sfx/characters/sfx_female_stressed.wav"),
+	"female_sleepy": preload("res://assets/sfx/characters/sfx_female_sleepy.wav"),
+	"male_sad": preload("res://assets/sfx/characters/sfx_male_sad.wav"),
+	"male_annoyed": preload("res://assets/sfx/characters/sfx_male_annoyed.wav"),
+	"male_stressed": preload("res://assets/sfx/characters/sfx_male_stressed.wav"),
+	"male_sleepy": preload("res://assets/sfx/characters/sfx_male_sleepy.wav"),
+}
+
+func _ready():
+	add_child(sfx_customer_complaint)
 
 func play_click_sfx():	
 	if sfx_click:
@@ -40,6 +56,15 @@ func play_whisking_sfx():
 	else:
 		push_warning("SFXWhisking no está asignado o no existe en AudioManager")
 
+func play_customer_sfx(genre: String, mood_id: String) -> void:		
+	var key = "%s_%s" % [genre, mood_id]
+	if sfx_complaint_dict.has(key):
+		sfx_customer_complaint.stream = sfx_complaint_dict[key]
+		sfx_customer_complaint.volume_db = -6.0
+		sfx_customer_complaint.play()
+	else:
+		push_warning("Audio no encontrado: " + key)
+		
 func play_time_up_sfx():	
 	if sfx_time_up:
 		sfx_time_up.play()

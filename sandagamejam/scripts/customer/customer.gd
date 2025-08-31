@@ -117,7 +117,9 @@ func react_happy():
 	GlobalManager.mark_customer_as_satisfied()
 	
 func _on_btn_listen_pressed() -> void:
+	print("DEBUG > escuchando queja...", GlobalManager.current_customer.genre, " ", GlobalManager.current_customer.mood_id)
 	AudioManager.play_click_sfx()
+	AudioManager.play_customer_sfx(GlobalManager.current_customer.genre, GlobalManager.current_customer.mood_id)
 	emit_signal("listen_customer_pressed")
 
 # Helper
