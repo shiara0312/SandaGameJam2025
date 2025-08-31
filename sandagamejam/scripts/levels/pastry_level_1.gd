@@ -78,6 +78,7 @@ func get_random_combinations(json_path: String, count: int = 4) -> Array:
 	return selected
 
 func show_customer_reaction(success: bool):
+	# La reaccion (animacion + sfx) debe durar maximo 2.5
 	print("DEBUG > show_customer_reaction, success: ", success, current_customer)
 	
 	# Aquí puedes poner animaciones o reacciones del cliente actual
@@ -95,6 +96,11 @@ func show_customer_reaction(success: bool):
 		current_customer.queue_free()
 		current_customer = null
 	
+	
+	print("antes del timer 1")
+	await get_tree().create_timer(1.0).timeout
+	print("despues del timer 2")
+	AudioManager.stop_customer_sfx()
 	spawn_next_customer()
 
 # Funciones lanzadas por los signals

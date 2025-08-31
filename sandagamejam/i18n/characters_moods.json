@@ -1,112 +1,112 @@
 {
-  "characters": [
-	{
-	  "id": "adalovelace",
-	  "name": {
-		"es": "Ada Lovelace",
-		"en": "Ada Lovelace",
-		"fr": "Ada Lovelace"
-	  },
-	"specialty": {
-		"es": "Programación",
-		"en": "Programming",
-		"fr": "Programmation"
-	  },
-		"genre": "female"
-	},
-	{
-	  "id": "renemagritte",
-	  "name": {
-		"es": "Rene Magritte",
-		"en": "Rene Magritte",
-		"fr": "Rene Magritte",
-	  },
-	  "specialty": {
-		"es": "Arte",
-		"en": "Art",
-		"fr": "Art"
-	  },
-	"genre": "male"
-	},
-	{
-	  "id": "adan",
-	  "name": {
-		"es": "Adán",
-		"en": "Adam",
-		"fr": "Adam",
-	  },
-	  "specialty": {
-		"es": "Jardinería",
-		"en": "Gardening",
-		"fr": "Jardinage"
+	"characters": [
+		{
+			"id": "adalovelace",
+			"name": {
+				"es": "Ada Lovelace",
+				"en": "Ada Lovelace",
+				"fr": "Ada Lovelace"
+			},
+			"specialty": {
+				"es": "Programación",
+				"en": "Programming",
+				"fr": "Programmation"
+			},
+			"genre": "female"
 		},
-		"genre": "male"
-	}
-  ],
-  "moods": [
-	{
-	  "id": "sleepy",
-	  "name": {
-		"es": "somnoliento",
-		"en": "sleepy",
-		"fr": "somnolent"
-	  }
-	},
-	{
-	  "id": "stressed",
-	  "name": {
-		"es": "estresado",
-		"en": "stressed",
-		"fr": "stressé"
-	  }
-	},
-	{
-	  "id": "sad",
-	  "name": {
-		"es": "triste",
-		"en": "sad",
-		"fr": "triste"
-	  }
-	},
-	{
-	  "id": "annoyed",
-	  "name": {
-		"es": "molesto",
-		"en": "annoyed",
-		"fr": "agacé"
-	  }
-	}
-  ],
-  "combinations": [
-	{
-	  "character_id": "adalovelace",
-	  "mood_id": "sleepy",
-	"genre": "female",
-	  "texts": {
-		"es": "Los números y algoritmos flotan en mi cabeza.. lástima que mis párpados también parecen flotar, a penas puedo mantenerme despierta.",
-		"en": "Numbers and algorithms float in my head... too bad my eyelids seem to float as well, I can barely stay awake.",
-		"fr": "Des chiffres et des algorithmes flottent dans ma tête… hélas, mes paupières semblent flotter aussi, et je peine à rester éveillé."
-	  }
-	},
 		{
-	  "character_id": "renemagritte",
-	  "mood_id": "sad",
-	"genre": "male",
-	  "texts": {
-		"es": "Me es difícil pintar rostros, porque veo las emociones que expresan y me acongojan… me contagian.",
-		"en": "It’s hard for me to paint faces, because I see the emotions they express and they overwhelm me… they infect me.",
-		"fr": "Il m’est difficile de peindre des visages, car je vois les émotions qu’ils expriment et elles me bouleversent… elles me contaminent."
-	  }
-	},
+			"id": "renemagritte",
+			"name": {
+				"es": "Rene Magritte",
+				"en": "Rene Magritte",
+				"fr": "Rene Magritte"
+			},
+			"specialty": {
+				"es": "Arte",
+				"en": "Art",
+				"fr": "Art"
+			},
+			"genre": "male"
+		},
 		{
-	  "character_id": "adan",
-	  "mood_id": "annoyed",
-	"genre": "male",
-	  "texts": {
-		"es": "Tienen un jardín completo y aún así, todos me miran por esta maldita manzana...",
-		"en": "They have a whole garden, and yet, everyone looks at me because of this damn apple...",
-		"fr": "Ils ont tout un jardin, et pourtant, tous les regards se tournent vers moi à cause de cette maudite pomme…"
-	  }
-	}
-  ]
+			"id": "adan",
+			"name": {
+				"es": "Adán",
+				"en": "Adam",
+				"fr": "Adam"
+			},
+			"specialty": {
+				"es": "Jardinería",
+				"en": "Gardening",
+				"fr": "Jardinage"
+			},
+			"genre": "male"
+		}
+	],
+	"moods": [
+		{
+			"id": "sleepy",
+			"name": {
+				"es": "somnoliento",
+				"en": "sleepy",
+				"fr": "somnolent"
+			}
+		},
+		{
+			"id": "stressed",
+			"name": {
+				"es": "estresado",
+				"en": "stressed",
+				"fr": "stressé"
+			}
+		},
+		{
+			"id": "sad",
+			"name": {
+				"es": "triste",
+				"en": "sad",
+				"fr": "triste"
+			}
+		},
+		{
+			"id": "annoyed",
+			"name": {
+				"es": "molesto",
+				"en": "annoyed",
+				"fr": "agacé"
+			}
+		}
+	],
+	"combinations": [
+		{
+			"character_id": "adalovelace",
+			"mood_id": "sleepy",
+			"genre": "female",
+			"texts": {
+				"es": "Los números y algoritmos flotan en mi cabeza.. lástima que mis párpados también parecen flotar, a penas puedo mantenerme despierta.",
+				"en": "Numbers and algorithms float in my head... too bad my eyelids seem to float as well, I can barely stay awake.",
+				"fr": "Des chiffres et des algorithmes flottent dans ma tête… hélas, mes paupières semblent flotter aussi, et je peine à rester éveillé."
+			}
+		},
+		{
+			"character_id": "renemagritte",
+			"mood_id": "sad",
+			"genre": "male",
+			"texts": {
+				"es": "Me es difícil pintar rostros, porque veo las emociones que expresan y me acongojan… me contagian.",
+				"en": "It’s hard for me to paint faces, because I see the emotions they express and they overwhelm me… they infect me.",
+				"fr": "Il m’est difficile de peindre des visages, car je vois les émotions qu’ils expriment et elles me bouleversent… elles me contaminent."
+			}
+		},
+		{
+			"character_id": "adan",
+			"mood_id": "annoyed",
+			"genre": "male",
+			"texts": {
+				"es": "Tienen un jardín completo y aún así, todos me miran por esta maldita manzana...",
+				"en": "They have a whole garden, and yet, everyone looks at me because of this damn apple...",
+				"fr": "Ils ont tout un jardin, et pourtant, tous les regards se tournent vers moi à cause de cette maudite pomme…"
+			}
+		}
+	]
 }
