@@ -164,11 +164,11 @@ func show_netown_feedback():
 	# Cambiar sprite según resultado
 	if is_success:
 		AudioManager.play_right_recipe_sfx()
-		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_win.png")
+		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_happy.png")
 		#print("✅ Receta preparada correctamente")
 	else:
 		AudioManager.play_wrong_recipe_sfx()
-		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_fail.png")
+		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_sad.png")
 		#print("❌ Algo salió mal en la receta")
 	
 	continue_btn_label.text = "Entiendo..." 
@@ -211,7 +211,7 @@ func check_recipe() -> String:
 
 func reset_newton_ready() -> void:
 	# Restaurar Newton
-	newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_cocinando.png")
+	newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_cooking.png")
 	newton_ready_sprite.visible = true
 	newton_moods_sprite.visible = false
 	

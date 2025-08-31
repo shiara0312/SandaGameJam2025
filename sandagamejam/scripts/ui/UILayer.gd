@@ -75,6 +75,7 @@ func start_typing(msg: String, rich_text: RichTextLabel) -> void:
 
 func _on_btn_help_pressed() -> void:
 	AudioManager.play_click_sfx()
+	AudioManager.stop_customer_sfx()
 	message_texture.visible = false
 	if GameController and not GlobalManager.is_minigame_overlay_visible:
 		GameController.show_minigame("res://scenes/minigames/MinigameOverlay.tscn")

@@ -10,8 +10,8 @@ extends Control
 @onready var bg_win   = preload("res://assets/backgrounds/win.png")
 @onready var bg_lose  = preload("res://assets/backgrounds/game_over.png")
 @onready var bg_time  = preload("res://assets/backgrounds/timeup.png")
-@onready var newton_fail = preload("res://assets/sprites/newtown/newton_fail.png")
-@onready var newton_win = preload("res://assets/sprites/newtown/newton_win.png")
+@onready var newton_fail = preload("res://assets/sprites/newtown/newton_sad.png")
+@onready var newton_win = preload("res://assets/sprites/newtown/newton_happy.png")
 
 @onready var msg_time = {
 	"es" : preload("res://assets/UI/timeup_message_es.png"),

@@ -2,7 +2,7 @@
   {
 	"id": "recipe_001",
 	"name": {"en": "Quinoa with Apple", "es": "Quinua con manzana", "fr": "Quinoa aux pommes"},
-	"mood": "somnoliento",
+	"mood": "sleepy",
 	"ingredients": ["ing_002", "ing_003", "ing_001"],
 	"benefits": {
 	  "en": "Restores extra energy, makes them more patient and helps them rest better",
@@ -18,7 +18,7 @@
   {
 	"id": "recipe_002",
 	"name": {"en": "Apple Tart with Cinnamon", "es": "Tarta de manzana con canela", "fr": "Tarte aux pommes et cannelle"},
-	"mood": "estresado",
+	"mood": "stressed",
 	"ingredients": ["ing_003", "ing_002", "ing_006", "ing_004"],
 	"benefits": {
 	  "en": "Calms and balances, lowers stress levels",
@@ -34,7 +34,7 @@
   {
 	"id": "recipe_003",
 	"name": {"en": "Gravitational Apple Pie", "es": "Pie de manzana gravitacional", "fr": "Tarte aux pommes gravitationnelle"},
-	"mood": "triste",
+	"mood": "sad",
 	"ingredients": ["ing_002", "ing_004", "ing_006", "ing_003"],
 	"benefits": {
 	  "en": "Brings happiness and lightness, lifts the customer's mood",
@@ -50,7 +50,7 @@
   {
 	"id": "recipe_004",
 	"name": {"en": "Apple Honey Strudel", "es": "Strudel de manzana con miel", "fr": "Strudel aux pommes et miel"},
-	"mood": "molesto",
+	"mood": "annoyed",
 	"ingredients": ["ing_002", "ing_004", "ing_006", "ing_003", "ing_007"],
 	"benefits": {
 	  "en": "Relaxation and sweetness, prevents customers from leaving angry and calms their attitude",
