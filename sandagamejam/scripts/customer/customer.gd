@@ -1,3 +1,4 @@
+# customer.gd
 extends Node2D
 
 signal arrived_at_center(customer : Node2D)
@@ -132,6 +133,9 @@ func load_customer_texture(path: String, alt_path: String):
 		tex = load(alt_path)
 		
 	sprite.texture = tex
+	
+func hide_listen_button():
+	btn_listen.visible = false
 	
 # Obtener factor uniforme para la escala
 func get_scale_factor():

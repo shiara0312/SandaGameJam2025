@@ -1,6 +1,8 @@
 # MinigameOverlay.tscn maneja la UI/flujo del minijuego.
 extends Node2D
 
+signal ingredients_minigame_started
+
 @onready var menu_container : Control = $TextureRect/MenuContainer
 @onready var recipe_container : Control = $TextureRect/RecipeContainer
 @onready var recollect_container : Control = $TextureRect/RecollectContainer
@@ -99,7 +101,9 @@ func load_ingredients_assets():
 		var wrapper = create_ingredient_wrapper(ing_id)
 		ing_container.add_child(wrapper)
 
+# Minijuego de PastryLevel1
 func start_ingredient_minigame():
+	emit_signal("ingredients_minigame_started")
 	minigame_started = true
 	var recipe_selected = GlobalManager.current_level_recipes[GlobalManager.selected_recipe_idx]
 	var ingredients = recipe_selected["ingredients"]
@@ -134,9 +138,6 @@ func animate_ingredients(ingr_loop: Array) -> void:
 		tween.tween_callback(Callable(wrapper, "queue_free"))
 		# Guardar tween para poder cancelarlo
 		active_tweens.append(tween)
-	
-	if GlobalManager.collected_ingredients.size() > 1:
-		print("ya cogiste mas de 1")
 
 	
 func clear_children(node: Node) -> void:

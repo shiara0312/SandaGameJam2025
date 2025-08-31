@@ -73,7 +73,7 @@ func show_minigame(path: String):
 	slide_current_level("left")
 	resize_newton_ready(new_scale_vector)
 	GlobalManager.is_minigame_overlay_visible = true
-
+		
 func finish_minigame():
 	slide_current_level("right")
 	reset_newton_ready()
@@ -102,6 +102,13 @@ func slide_minigame_overlay(path: String):
 	minigame_instance.z_index = 50
 	self.current_minigame = minigame_instance
 
+	# Conectar la señal con el nivel actual
+	if current_level and current_level.has_method("_on_ingredients_minigame_started"):
+		print("DEBUG > señal en nivel actual")
+		minigame_instance.ingredients_minigame_started.connect(
+			Callable(current_level, "_on_ingredients_minigame_started")
+		)
+	
 	# Posición inicial: fuera de la pantalla (derecha)
 	minigame_instance.position = Vector2(SCREEN_WIDTH, 0)
 	# Posición final: borde izquierdo del Node2D en la mitad de la pantalla
@@ -280,17 +287,14 @@ func _on_level_cleared():
 	GlobalManager.check_win_condition()
 
 func _on_win():
-	print("you won")
 	load_final_screen(GlobalManager.GameState.WIN)
 	
 func _on_time_up():
-	print("¡Se acabó el tiempo!")
 	load_final_screen(GlobalManager.GameState.TIMEUP)
 
 func _on_game_over():
-	print("¡GAME OVER!")
 	load_final_screen(GlobalManager.GameState.GAMEOVER)
-	
+
 func load_final_screen(state: GlobalManager.GameState):
 	newton_layer.visible = false
 	

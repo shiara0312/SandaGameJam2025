@@ -30,7 +30,6 @@ expand_mode = 1
 
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 2
-visible = false
 
 [node name="PauseBtn" type="TextureButton" parent="."]
 visible = false
