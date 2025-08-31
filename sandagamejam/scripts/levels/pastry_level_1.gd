@@ -104,7 +104,6 @@ func _on_customer_seated(cust: Node2D):
 	#print("DEBUG > _on_customer_seated El cliente llegó y se sentó: ", cust.character_id, "\n", cust.mood_id, "\n", cust.texts, "\n", cust.language)
 	
 func _on_listen_customer_pressed():
-	print("pastry level 1", current_customer)
 	UILayerManager.show_message(current_customer.texts[current_customer.language])
 	
 func _on_viewport_resized():
