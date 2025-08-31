@@ -104,7 +104,6 @@ func slide_minigame_overlay(path: String):
 
 	# Conectar la señal con el nivel actual
 	if current_level and current_level.has_method("_on_ingredients_minigame_started"):
-		print("DEBUG > señal en nivel actual")
 		minigame_instance.ingredients_minigame_started.connect(
 			Callable(current_level, "_on_ingredients_minigame_started")
 		)

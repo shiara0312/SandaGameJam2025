@@ -32,13 +32,13 @@ func _ready():
 	GlobalManager.initialize_recipes("level1")
 
 func spawn_next_customer():
-	print("DEBUG > spawn_next_customer")
 	var next := GlobalManager.get_next_customer()
 	if next.is_empty():
 		emit_signal("level_cleared")
 		return 
 	
 	current_customer = customer_scene.instantiate()
+	current_customer.visible = false # Evita que se vea el new customer en la esquina
 	current_customer.setup(next, GlobalManager.game_language)
 	characters.add_child(current_customer)
 	
@@ -54,6 +54,7 @@ func spawn_next_customer():
 	
 	# Calcular posiciones usando helpers del customer
 	var start_pos = current_customer.get_initial_position()
+	current_customer.visible = true
 	var target_pos = current_customer.get_target_position()
 	current_customer.position = start_pos
 	current_customer.move_to(target_pos)
