@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cnvxr3055hpum" path="res://assets/sprites/newtown/newton_cooking.png" id="3_5scdt"]
 [ext_resource type="Theme" uid="uid://xreggbw3h3yp" path="res://custom_resources/CustomerMessage.tres" id="3_jxop5"]
 [ext_resource type="Texture2D" uid="uid://jamwyueec32p" path="res://assets/UI/interact-btn.png" id="6_bmi0g"]
-[ext_resource type="Texture2D" uid="uid://ctblitnof5rox" path="res://assets/pastry/recipes/recipe_001_good.png" id="6_th432"]
-[ext_resource type="Texture2D" uid="uid://b0xusdftv2hdo" path="res://assets/pastry/recipes/recipe_001_bad.png" id="7_620rl"]
+[ext_resource type="Texture2D" uid="uid://ctblitnof5rox" path="res://assets/pastry/recipes/recipe_001_correct.png" id="6_th432"]
+[ext_resource type="Texture2D" uid="uid://b0xusdftv2hdo" path="res://assets/pastry/recipes/recipe_001_wrong.png" id="7_620rl"]
 [ext_resource type="Texture2D" uid="uid://bpv7ib6u2578q" path="res://assets/UI/interact-btn-pressed.png" id="7_qop8h"]
 [ext_resource type="LabelSettings" uid="uid://jdv1bfj4iff7" path="res://custom_resources/InteractionButtonLabels.tres" id="8_qop8h"]
 
@@ -68,14 +68,14 @@ position = Vector2(804, 471)
 scale = Vector2(0.22, 0.22)
 texture = ExtResource("3_5scdt")
 
-[node name="RecipeSprite" type="Sprite2D" parent="NewtonLayer"]
+[node name="CorrectRecipeSprite" type="Sprite2D" parent="NewtonLayer"]
 visible = false
 z_index = 99
 position = Vector2(802, 405)
 scale = Vector2(0.732516, 0.740712)
 texture = ExtResource("6_th432")
 
-[node name="RecipeWrongSprite" type="Sprite2D" parent="NewtonLayer"]
+[node name="WrongRecipeSprite" type="Sprite2D" parent="NewtonLayer"]
 visible = false
 z_index = 99
 position = Vector2(801, 420)

@@ -6,8 +6,8 @@ extends Node
 @onready var newton_layer = $NewtonLayer
 @onready var newton_ready_sprite: Sprite2D = $NewtonLayer/NewtonReadySprite
 @onready var newton_moods_sprite: Sprite2D = $NewtonLayer/NewtonMoodsSprite
-@onready var good_recipe_sprite: Sprite2D = $NewtonLayer/RecipeSprite
-@onready var bad_recipe_sprite: Sprite2D = $NewtonLayer/RecipeWrongSprite
+@onready var correct_recipe_sprite: Sprite2D = $NewtonLayer/CorrectRecipeSprite
+@onready var wrong_recipe_sprite: Sprite2D = $NewtonLayer/WrongRecipeSprite
 @onready var feedback_message: RichTextLabel = $NewtonLayer/FeedbackMessage
 @onready var outcome_message: RichTextLabel = $NewtonLayer/OutcomeMessage
 @onready var continue_button: TextureButton = $NewtonLayer/ContinueBtn
@@ -175,7 +175,7 @@ func show_netown_feedback():
 	
 	# Cambiar sprite según resultado
 	if is_success:
-		AudioManager.play_right_recipe_sfx()
+		AudioManager.play_correct_recipe_sfx()
 		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_happy.png")
 	else:
 		AudioManager.play_wrong_recipe_sfx()
@@ -203,20 +203,20 @@ func check_recipe() -> Dictionary:
 	var sprite_to_show : Sprite2D
 	
 	if not correct_recipe_selected:
-		bad_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_bad.png" % sprite_id)
-		sprite_to_show = bad_recipe_sprite
+		wrong_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_wrong.png" % sprite_id)
+		sprite_to_show = wrong_recipe_sprite
 		response_type = GlobalManager.ResponseType.RECIPE_WRONG
 	elif not is_exact_match:
-		bad_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_bad.png" % sprite_id)
-		sprite_to_show = bad_recipe_sprite
+		wrong_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_wrong.png" % sprite_id)
+		sprite_to_show = wrong_recipe_sprite
 		response_type = GlobalManager.ResponseType.INGREDIENTS_WRONG
 	elif is_success:
-		good_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_good.png" % sprite_id)
-		sprite_to_show = good_recipe_sprite
+		correct_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_correct.png" % sprite_id)
+		sprite_to_show = correct_recipe_sprite
 		response_type = GlobalManager.ResponseType.RECIPE_CORRECT
 	else:
-		good_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_gravitational.png" % sprite_id)
-		sprite_to_show = good_recipe_sprite
+		correct_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_gravitational.png" % sprite_id)
+		sprite_to_show = correct_recipe_sprite
 		response_type = GlobalManager.ResponseType.GRAVITATIONAL
 	
 	var result = GlobalManager.get_response_texts(response_type)
