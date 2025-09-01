@@ -33,17 +33,17 @@ enum State { ENTERING, SEATED, FAIL, SUCCESS }
 enum GameState { WIN, TIMEUP, GAMEOVER }
 
 enum ResponseType {
-	WRONG_RECIPE,
-	WRONG_INGREDIENTS,
-	RIGHT_RECIPE_AND_INGREDIENTS,
-	GRAVITATIONAL_RECIPE
+	RECIPE_WRONG,
+	INGREDIENTS_WRONG,
+	RECIPE_CORRECT,
+	GRAVITATIONAL
 }
 
 var response_keys := {
-	ResponseType.WRONG_RECIPE: "wrong_recipe_selected",
-	ResponseType.WRONG_INGREDIENTS: "wrong_ingredientes_collected",
-	ResponseType.RIGHT_RECIPE_AND_INGREDIENTS: "right_recipe_and_ingredientes_collected",
-	ResponseType.GRAVITATIONAL_RECIPE: "gravitational_recipe"
+	ResponseType.RECIPE_WRONG: "recipe_wrong_",
+	ResponseType.INGREDIENTS_WRONG: "ingredients_wrong_",
+	ResponseType.RECIPE_CORRECT: "recipe_correct_",
+	ResponseType.GRAVITATIONAL: "gravitational_"
 }
 
 var interaction_texts := {}     
@@ -153,12 +153,15 @@ func load_button_labels():
 		btn_listen_customer_label = "Customer"
 		btn_help_customer_label = "Help"
 
-func get_response_text(response: ResponseType) -> String:
-	if game_language in interaction_texts:
-		var key = response_keys[response]
-		return interaction_texts[game_language].get(key, "???")
-	return "???"
-
+func get_response_texts(response: ResponseType) -> Array[String]:
+	var lang_texts: Dictionary = interaction_texts.get(game_language, {})
+	var prefix: String = response_keys.get(response, "")
+	
+	return [
+		String(lang_texts.get(prefix + "feedback", "feedback")),
+		String(lang_texts.get(prefix + "outcome", "outcome"))
+	]
+	
 func _cargar_json_file(path: String) -> Dictionary:
 	var f = FileAccess.open(path, FileAccess.READ)
 	if not f:

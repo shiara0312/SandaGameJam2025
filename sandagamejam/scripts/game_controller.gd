@@ -6,9 +6,10 @@ extends Node
 @onready var newton_layer = $NewtonLayer
 @onready var newton_ready_sprite: Sprite2D = $NewtonLayer/NewtonReadySprite
 @onready var newton_moods_sprite: Sprite2D = $NewtonLayer/NewtonMoodsSprite
-@onready var good_recipe_sprite: Sprite2D = $NewtonLayer/GoodRecipeSprite
-@onready var bad_recipe_sprite: Sprite2D = $NewtonLayer/BadRecipeSprite
+@onready var good_recipe_sprite: Sprite2D = $NewtonLayer/RecipeSprite
+@onready var bad_recipe_sprite: Sprite2D = $NewtonLayer/RecipeWrongSprite
 @onready var feedback_message: RichTextLabel = $NewtonLayer/FeedbackMessage
+@onready var outcome_message: RichTextLabel = $NewtonLayer/OutcomeMessage
 @onready var continue_button: TextureButton = $NewtonLayer/ContinueBtn
 @onready var overlay_layer = $OverlayLayer
 var final_screen: Node = null
@@ -158,18 +159,21 @@ func make_newton_cook():
 		flip_timer.stop()
 		flip_timer.queue_free()
 		AudioManager.stop_whisking_sfx()
-		var msg = await check_recipe()
-		feedback_message.text = msg
+		var result = await check_recipe()
+		print("result.. ")
+		feedback_message.text = result[0]
+		outcome_message.text = result[1]
 		show_recipe_feedback()
 		show_netown_feedback()
 	)
 
 func show_recipe_feedback():
-	print("muestra la receta - estuvo bien?: ", is_success, GlobalManager.selected_recipe_data)
+	print("show recipe")
+	#print("muestra la receta - estuvo bien?: ", is_success, GlobalManager.selected_recipe_data)
 	
 func show_netown_feedback():
 	var continue_btn_label = continue_button.get_node("Label")
-	feedback_message.visible = true
+	outcome_message.visible = true
 	newton_moods_sprite.visible = true
 	
 	# Cambiar sprite según resultado
@@ -184,7 +188,7 @@ func show_netown_feedback():
 	continue_btn_label.text = "Entiendo..." 
 	continue_button.visible = true
 
-func check_recipe() -> String:
+func check_recipe() -> Array[String]:
 	var selected_recipe_ingredients = GlobalManager.selected_recipe_data["ingredients"]
 	var selected_recipe_mood = GlobalManager.selected_recipe_data["mood"]
 	var collected_ingredients = GlobalManager.collected_ingredients
@@ -204,28 +208,31 @@ func check_recipe() -> String:
 	if not correct_recipe_selected:
 		bad_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_bad.png" % sprite_id)
 		sprite_to_show = bad_recipe_sprite
-		response_type = GlobalManager.ResponseType.WRONG_RECIPE
+		response_type = GlobalManager.ResponseType.RECIPE_WRONG
 	elif not is_exact_match:
 		bad_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_bad.png" % sprite_id)
 		sprite_to_show = bad_recipe_sprite
-		response_type = GlobalManager.ResponseType.WRONG_INGREDIENTS
+		response_type = GlobalManager.ResponseType.INGREDIENTS_WRONG
 	elif is_success:
 		good_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_good.png" % sprite_id)
 		sprite_to_show = good_recipe_sprite
-		response_type = GlobalManager.ResponseType.RIGHT_RECIPE_AND_INGREDIENTS
+		response_type = GlobalManager.ResponseType.RECIPE_CORRECT
 	else:
 		#TODO: reemplazar por imagen gravitacional
 		good_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_good.png" % sprite_id)
 		sprite_to_show = good_recipe_sprite
-		response_type = GlobalManager.ResponseType.GRAVITATIONAL_RECIPE
-		
+		response_type = GlobalManager.ResponseType.GRAVITATIONAL
+	
+	var result = GlobalManager.get_response_texts(response_type)
 	# Mostrar sprite + delay de 1.5s antes de aplicar reglas
-	await show_recipe_result_with_delay(sprite_to_show, response_type)
-	return GlobalManager.get_response_text(response_type)
+	await show_recipe_result_with_delay(sprite_to_show, response_type, result[0])
+	return result
 
-func show_recipe_result_with_delay(sprite: Sprite2D, response_type: int) -> void:
+func show_recipe_result_with_delay(sprite: Sprite2D, response_type: int, msg: String) -> void:
 	AudioManager.play_recipe_ready_sfx()
 	newton_moods_sprite.visible = false
+	feedback_message.visible = true
+	feedback_message.text = msg
 	sprite.visible = true
 	sprite.scale = Vector2(0.2, 0.2)
 	
@@ -238,13 +245,13 @@ func show_recipe_result_with_delay(sprite: Sprite2D, response_type: int) -> void
 	await timer.timeout
 	# Aplicar consecuencias
 	match response_type:
-		GlobalManager.ResponseType.WRONG_RECIPE:
+		GlobalManager.ResponseType.RECIPE_WRONG:
 			GlobalManager.lose_life()
-		GlobalManager.ResponseType.WRONG_INGREDIENTS:
+		GlobalManager.ResponseType.INGREDIENTS_WRONG:
 			GlobalManager.apply_penalty(SECONDS_TO_LOSE)
-		GlobalManager.ResponseType.RIGHT_RECIPE_AND_INGREDIENTS:
+		GlobalManager.ResponseType.RECIPE_CORRECT:
 			GlobalManager.apply_penalty(-SECONDS_TO_GAIN)
-		GlobalManager.ResponseType.GRAVITATIONAL_RECIPE:
+		GlobalManager.ResponseType.GRAVITATIONAL:
 			GlobalManager.gain_life()
 	sprite.visible = false
 	
@@ -294,6 +301,7 @@ func _on_minigame_hidden():
 	
 func _on_continue_btn_pressed() -> void:
 	feedback_message.visible = false
+	outcome_message.visible = false
 	continue_button.visible = false
 	
 	# Restaurar Newton
