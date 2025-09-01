@@ -3,8 +3,9 @@ extends Node
 
 @onready var sfx_click: AudioStreamPlayer = $SFXClick
 @onready var sfx_collect_ingredient: AudioStreamPlayer = $SFXCollectIngredient
-@onready var sfx_recipe_good: AudioStreamPlayer = $SFXRecipeGood
-@onready var sfx_recipe_bad: AudioStreamPlayer = $SFXRecipeBad
+@onready var sfx_correct_recipe: AudioStreamPlayer = $SFXRecipeGood
+@onready var sfx_wrong_recipe: AudioStreamPlayer = $SFXRecipeBad
+@onready var sfx_recipe_ready: AudioStreamPlayer = $SFXRecipeReady
 @onready var sfx_whisking: AudioStreamPlayer = $SFXWhisking
 @onready var sfx_time_up: AudioStreamPlayer = $SFXTimeUp
 @onready var sfx_game_over: AudioStreamPlayer = $SFXGameOver
@@ -17,10 +18,12 @@ var sfx_complaint_dict := {
 	"female_annoyed": preload("res://assets/sfx/characters/sfx_female_annoyed.ogg"),
 	"female_stressed": preload("res://assets/sfx/characters/sfx_female_stressed.ogg"),
 	"female_sleepy": preload("res://assets/sfx/characters/sfx_female_sleepy.ogg"),
+	"female_happy": preload("res://assets/sfx/characters/sfx_female_happy.ogg"),
 	"male_sad": preload("res://assets/sfx/characters/sfx_male_sad.ogg"),
 	"male_annoyed": preload("res://assets/sfx/characters/sfx_male_annoyed.ogg"),
 	"male_stressed": preload("res://assets/sfx/characters/sfx_male_stressed.ogg"),
 	"male_sleepy": preload("res://assets/sfx/characters/sfx_male_sleepy.ogg"),
+	"male_happy": preload("res://assets/sfx/characters/sfx_male_happy.ogg"),
 }
 
 func _ready():
@@ -38,30 +41,35 @@ func play_collect_ingredient_sfx():
 	else:
 		push_warning("SFXCollectIngredient no está asignado o no existe en AudioManager")
 		
-func play_right_recipe_sfx():	
-	if sfx_recipe_good:
-		sfx_recipe_good.play()
+func play_correct_recipe_sfx():	
+	if sfx_correct_recipe:
+		sfx_correct_recipe.play()
 	else:
 		push_warning("SFXRightRecipe no está asignado o no existe en AudioManager")
 		
 func play_wrong_recipe_sfx():	
-	if sfx_recipe_bad:
-		sfx_recipe_bad.play()
+	if sfx_wrong_recipe:
+		sfx_wrong_recipe.play()
 	else:
 		push_warning("SFXCollectIngredient no está asignado o no existe en AudioManager")
 
+func play_recipe_ready_sfx():
+	if sfx_recipe_ready:
+		sfx_recipe_ready.play()
+	else:
+		push_warning("SFXRecipeReady no está asignado o no existe en AudioManager")
+		
 func play_whisking_sfx():	
 	if sfx_whisking:
 		sfx_whisking.play()
 	else:
 		push_warning("SFXWhisking no está asignado o no existe en AudioManager")
 
-func play_customer_sfx(genre: String, mood_id: String) -> void:
-	print("playing...")
+func play_customer_sfx(genre: String, mood_id: String, is_result: bool = false) -> void:
 	var key = "%s_%s" % [genre, mood_id]
 	if sfx_complaint_dict.has(key):
 		sfx_customer_complaint.stream = sfx_complaint_dict[key]
-		sfx_customer_complaint.stream.loop = true 
+		sfx_customer_complaint.stream.loop = not is_result
 		sfx_customer_complaint.volume_db = -10.0
 		sfx_customer_complaint.play()
 	else:
@@ -104,6 +112,5 @@ func stop_game_music():
 		push_warning("GameMusic no está asignado o no existe en AudioManager")
 
 func stop_customer_sfx() -> void:
-	print("stopping...")
 	if sfx_customer_complaint.playing:
 		sfx_customer_complaint.stop()

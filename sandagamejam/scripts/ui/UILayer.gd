@@ -41,7 +41,7 @@ func show_message(msg_to_display: String = "..."):
 	var rich_text = message_texture.get_node("RichTextLabel")
 	var btn_help = message_texture.get_node("BtnHelp")
 	btn_help.visible = false
-	
+
 	rich_text.text = ""
 	rich_text.visible = true
 	
@@ -87,6 +87,9 @@ func _on_pause_btn_pressed() -> void:
 	else:
 		get_tree().paused = true
 		pause_btn.texture_normal = play_texture
+
+func _on_ingredients_minigame_started() -> void:
+	print("hola?")
 
 func _on_hide_ui():
 	visible = false

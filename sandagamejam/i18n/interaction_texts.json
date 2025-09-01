@@ -5,10 +5,14 @@
 		"reject_recipe": "No lo creo",
 		"choose_recipe": "Esta es",
 		"newton_cook": "¡A preparar!",
-		"wrong_recipe_selected": "¡Oops! Casi, pero elegiste la receta equivocada.\n[color=#C2380E][font_size=35]Perdiste una vida.[/font_size][/color]",
-		"wrong_ingredientes_collected": "¡Oops! No todos los ingredientes fueron correctos.\n[color=#C46A0A][font_size=35]Perdiste 30 segundos.[/font_size][/color]",
-		"right_recipe_and_ingredientes_collected": "¡Bien hecho! Preparaste la receta correctamente.\n[color=#397002][font_size=35]Has ganado 15 segundos.[/font_size][/color]",
-		"gravitational_recipe": "¡Genial! Capturaste un ingrediente gravitacional.\n[color=#3E0A66][font_size=35]Ganaste una vida.[/font_size][/color]"
+		"recipe_wrong_feedback": "¡Oops! Casi, pero elegiste la receta equivocada.",
+		"recipe_wrong_outcome": "[color=#C2380E][font_size=35]Perdiste una vida.[/font_size][/color]",
+		"ingredients_wrong_feedback": "¡Oops! No todos los ingredientes fueron correctos.",
+		"ingredients_wrong_outcome": "[color=#C46A0A][font_size=35]Perdiste 30 segundos.[/font_size][/color]",
+		"recipe_correct_feedback": "¡Bien hecho! Preparaste la receta correctamente.",
+		"recipe_correct_outcome": "[color=#397002][font_size=35]Has ganado 15 segundos.[/font_size][/color]",
+		"gravitational_feedback": "¡Genial! Capturaste un ingrediente gravitacional.",
+		"gravitational_outcome": "[color=#3E0A66][font_size=35]Ganaste una vida.[/font_size][/color]"
 	},
 	"en": {
 		"customer_seated": "Hear their story.",
@@ -16,10 +20,14 @@
 		"reject_recipe": "I don’t think so",
 		"choose_recipe": "This is it",
 		"newton_cook": "Let’s prepare!",
-		"wrong_recipe_selected": "Oops! Almost, but you chose the wrong recipe.\n[color=#C2380E][font_size=35]You lost a life.[/font_size][/color]",
-		"wrong_ingredientes_collected": "Oops! Not all ingredients were correct.\n[color=#C46A0A][font_size=35]You lost 30 seconds.[/font_size][/color]",
-		"right_recipe_and_ingredientes_collected": "Well done! You prepared the recipe correctly.\n[color=#397002][font_size=35]You gained 15 seconds.[/font_size][/color]",
-		"gravitational_recipe": "Awesome! You caught a gravitational ingredient.\n[color=#3E0A66][font_size=35]You gained one life.[/font_size][/color]"
+		"recipe_wrong_feedback": "Oops! Almost, but you chose the wrong recipe.",
+		"recipe_wrong_outcome": "[color=#C2380E][font_size=35]You lost a life.[/font_size][/color]",
+		"ingredients_wrong_feedback": "Oops! Not all ingredients were correct.",
+		"ingredients_wrong_outcome": "[color=#C46A0A][font_size=35]You lost 30 seconds.[/font_size][/color]",
+		"recipe_correct_feedback": "Well done! You prepared the recipe correctly.",
+		"recipe_correct_outcome": "[color=#397002][font_size=35]You gained 15 seconds.[/font_size][/color]",
+		"gravitational_feedback": "Awesome! You caught a gravitational ingredient.",
+		"gravitational_outcome": "[color=#3E0A66][font_size=35]You gained one life.[/font_size][/color]"
 	},
 	"fr": {
 		"customer_seated": "Écouter son histoire.",
@@ -27,9 +35,13 @@
 		"reject_recipe": "Je ne crois pas",
 		"choose_recipe": "C’est ça",
 		"newton_cook": "À préparer!",
-		"wrong_recipe_selected": "Oups! Presque, mais tu as choisi la mauvaise recette.\n[color=#C2380E][font_size=35]Tu as perdu une vie.[/font_size][/color]",
-		"wrong_ingredientes_collected": "Oups! Tous les ingrédients n’étaient pas corrects.\n[color=#C46A0A][font_size=35]Tu as perdu 30 secondes.[/font_size][/color]",
-		"right_recipe_and_ingredientes_collected": "Bien joué ! Tu as préparé la recette correctement.\n[color=#397002][font_size=35]Tu as gagné 15 secondes.[/font_size][/color]",
-		"gravitational_recipe": "Génial! Tu as attrapé un ingrédient gravitationnel.\n[color=#3E0A66][font_size=35]Tu as gagné une vie.[/font_size][/color]"
+		"recipe_wrong_feedback": "Oups! Presque, mais tu as choisi la mauvaise recette.",
+		"recipe_wrong_outcome": "[color=#C2380E][font_size=35]Tu as perdu une vie.[/font_size][/color]",
+		"ingredients_wrong_feedback": "Oups! Tous les ingrédients n’étaient pas corrects.",
+		"ingredients_wrong_outcome": "[color=#C46A0A][font_size=35]Tu as perdu 30 secondes.[/font_size][/color]",
+		"recipe_correct_feedback": "Bien joué ! Tu as préparé la recette correctement.",
+		"recipe_correct_outcome": "[color=#397002][font_size=35]Tu as gagné 15 secondes.[/font_size][/color]",
+		"gravitational_feedback": "Génial! Tu as attrapé un ingrédient gravitationnel.",
+		"gravitational_outcome": "[color=#3E0A66][font_size=35]Tu as gagné une vie.[/font_size][/color]"
 	}
 }

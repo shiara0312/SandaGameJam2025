@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://lqqdf6iy7fnl"]
+[gd_scene load_steps=12 format=3 uid="uid://lqqdf6iy7fnl"]
 
 [ext_resource type="Script" uid="uid://bv5tuq3hbtquc" path="res://scripts/managers/audio_manager.gd" id="1_v6v0x"]
 [ext_resource type="AudioStream" uid="uid://dhop1owl4ecir" path="res://assets/sfx/global/sfx_click_pop.wav" id="2_5jw7j"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dk8s6u2tjd7oh" path="res://assets/sfx/minigame/sfx_whisking.wav" id="4_v5v75"]
 [ext_resource type="AudioStream" uid="uid://bddfrlou8uomc" path="res://assets/sfx/minigame/sfx_recipe_good.wav" id="5_5jw7j"]
 [ext_resource type="AudioStream" uid="uid://cfleepp1gltky" path="res://assets/sfx/minigame/sfx_recipe_bad.wav" id="6_5jw7j"]
+[ext_resource type="AudioStream" uid="uid://cmtudwflea85x" path="res://assets/sfx/minigame/sfx_recipe_ready.wav" id="7_qtie0"]
 [ext_resource type="AudioStream" uid="uid://dd26nkrbbamcy" path="res://assets/sfx/global/sfx_time_up.wav" id="8_hmi33"]
 [ext_resource type="AudioStream" uid="uid://bqps6aqptoogf" path="res://assets/sfx/global/sfx_game_over.wav" id="9_5jw7j"]
 [ext_resource type="AudioStream" uid="uid://dpdyjtmqx60se" path="res://assets/sfx/global/sfx_win.wav" id="10_5jw7j"]
@@ -32,6 +33,10 @@ volume_db = -24.0
 
 [node name="SFXRecipeBad" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_5jw7j")
+volume_db = -24.0
+
+[node name="SFXRecipeReady" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_qtie0")
 volume_db = -24.0
 
 [node name="GameMusic" type="AudioStreamPlayer" parent="."]

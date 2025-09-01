@@ -140,7 +140,7 @@ offset_right = 78.0
 offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Eelegir receta"
+text = "Elegir receta"
 label_settings = ExtResource("12_70k8r")
 horizontal_alignment = 1
 

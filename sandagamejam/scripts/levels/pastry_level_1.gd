@@ -1,3 +1,4 @@
+# Pastry Level 1
 extends Node2D
 
 signal level_cleared
@@ -7,16 +8,13 @@ signal level_cleared
 @onready var PauseBtn = $PauseBtn
 @export var pause_texture: Texture
 
-
 var characters_mood_file_path = "res://i18n/characters_moods.json"
 var interact_btns_file_path = "res://i18n/interaction_texts.json"
-var customer_count = 3 # TODO: update
+var customer_count = 3
 var current_customer: Node2D = null
 
 var center_frac_x := 0.5 # 0.25 cuando se abra el minijuego
 var original_viewport_size: Vector2
-
-# TODO: UI Layer Elementos: tiempo, puntuación, pedidos correctos/fallidos.
 
 # Escena del nivel base
 func _ready():
@@ -32,13 +30,13 @@ func _ready():
 	GlobalManager.initialize_recipes("level1")
 
 func spawn_next_customer():
-	print("DEBUG > spawn_next_customer")
 	var next := GlobalManager.get_next_customer()
 	if next.is_empty():
 		emit_signal("level_cleared")
 		return 
 	
 	current_customer = customer_scene.instantiate()
+	current_customer.visible = false # Evita que se vea el new customer en la esquina
 	current_customer.setup(next, GlobalManager.game_language)
 	characters.add_child(current_customer)
 	
@@ -54,6 +52,7 @@ func spawn_next_customer():
 	
 	# Calcular posiciones usando helpers del customer
 	var start_pos = current_customer.get_initial_position()
+	current_customer.visible = true
 	var target_pos = current_customer.get_target_position()
 	current_customer.position = start_pos
 	current_customer.move_to(target_pos)
@@ -77,10 +76,9 @@ func get_random_combinations(json_path: String, count: int = 4) -> Array:
 	var selected : Array = combos.slice(0, min(count, combos.size()))
 	return selected
 
+# La reaccion (animacion + sfx) debe durar maximo 2.5
 func show_customer_reaction(success: bool):
-	print("DEBUG > show_customer_reaction, success: ", success, current_customer)
-	
-	# Aquí puedes poner animaciones o reacciones del cliente actual
+	#print("DEBUG > show_customer_reaction, success: ", success, current_customer)
 	if current_customer:
 		if success:
 			current_customer.react_happy()
@@ -90,12 +88,12 @@ func show_customer_reaction(success: bool):
 	# Esperar un ratito antes de traer al próximo cliente
 	await get_tree().create_timer(1.5).timeout
 	
-	# Ocultar/eliminar cliente actual
+	# Animación de salida: alejar hacia el fonfo
 	if current_customer and is_instance_valid(current_customer):
-		current_customer.queue_free()
-		current_customer = null
-	
-	spawn_next_customer()
+		var tween := create_tween()
+		tween.tween_property(current_customer, "scale", current_customer.scale * 0.5, 1.0)
+		tween.parallel().tween_property(current_customer, "modulate:a", 0.0, 1.0)
+		tween.tween_callback(Callable(self, "_on_customer_exit_complete"))
 
 # Funciones lanzadas por los signals
 func _on_customer_seated(cust: Node2D):
@@ -105,7 +103,22 @@ func _on_customer_seated(cust: Node2D):
 	
 func _on_listen_customer_pressed():
 	UILayerManager.show_message(current_customer.texts[current_customer.language])
+
+func _on_ingredients_minigame_started():
+	if current_customer:
+		current_customer.hide_listen_button()
+
+func _on_customer_exit_complete():
+	if not current_customer or not is_instance_valid(current_customer):
+		return
+	current_customer.visible = false
+	current_customer.queue_free()
+	current_customer = null
+	AudioManager.stop_customer_sfx()
 	
+	# Preparar siguiente cliente
+	spawn_next_customer()
+
 func _on_viewport_resized():
 	if current_customer:
 		var new_target = current_customer.get_target_position()

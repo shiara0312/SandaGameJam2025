@@ -1,3 +1,4 @@
+# customer.gd
 extends Node2D
 
 signal arrived_at_center(customer : Node2D)
@@ -60,7 +61,6 @@ func customer_positioned():
 	emit_signal("arrived_at_center", self)
 
 func set_state(new_state: GlobalManager.State):
-	#TODO: agregar SFX
 	state = new_state
 	match state:
 		GlobalManager.State.ENTERING:
@@ -109,15 +109,16 @@ func get_target_position() -> Vector2:
 	
 # Cambios de estados:
 func react_angry():
+	AudioManager.play_customer_sfx(GlobalManager.current_customer.genre, GlobalManager.current_customer.mood_id, true)
 	set_state(GlobalManager.State.FAIL)
 	GlobalManager.return_customer()
 
 func react_happy():
+	AudioManager.play_customer_sfx(GlobalManager.current_customer.genre, "happy", true)
 	set_state(GlobalManager.State.SUCCESS)
 	GlobalManager.mark_customer_as_satisfied()
 	
 func _on_btn_listen_pressed() -> void:
-	print("DEBUG > escuchando queja...", GlobalManager.current_customer.genre, " ", GlobalManager.current_customer.mood_id)
 	AudioManager.play_click_sfx()
 	AudioManager.play_customer_sfx(GlobalManager.current_customer.genre, GlobalManager.current_customer.mood_id)
 	emit_signal("listen_customer_pressed")
@@ -132,6 +133,9 @@ func load_customer_texture(path: String, alt_path: String):
 		tex = load(alt_path)
 		
 	sprite.texture = tex
+	
+func hide_listen_button():
+	btn_listen.visible = false
 	
 # Obtener factor uniforme para la escala
 func get_scale_factor():

@@ -1,6 +1,8 @@
 # MinigameOverlay.tscn maneja la UI/flujo del minijuego.
 extends Node2D
 
+signal ingredients_minigame_started
+
 @onready var menu_container : Control = $TextureRect/MenuContainer
 @onready var recipe_container : Control = $TextureRect/RecipeContainer
 @onready var recollect_container : Control = $TextureRect/RecollectContainer
@@ -72,13 +74,10 @@ func load_btn_labels() -> void:
 	
 func load_selected_recipe_data(idx: int) -> void:
 	var lang = GlobalManager.game_language
-	#print("current_level_recipes ", GlobalManager.current_level_recipes)
 	var recipe_selected = GlobalManager.current_level_recipes[idx]
 	var rec_name = recipe_selected["name"][lang]
-	#var benefits = recipe_selected["benefits"][lang]
+	#var benefits = recipe_selected["benefits"][lang] 
 	var riddle = recipe_selected["riddle"][lang]
-	
-	#print("recipe_selected ", recipe_selected["ingredients"])
 	var text = "[center][font_size=35]" + rec_name + "[/font_size][/center]\n\n"
 	text += "[font_size=36] " + riddle + "[/font_size]"
 
@@ -99,9 +98,14 @@ func load_ingredients_assets():
 		var wrapper = create_ingredient_wrapper(ing_id)
 		ing_container.add_child(wrapper)
 
+# Minijuego de PastryLevel1
 func start_ingredient_minigame():
+	
+	emit_signal("ingredients_minigame_started")
 	minigame_started = true
 	var recipe_selected = GlobalManager.current_level_recipes[GlobalManager.selected_recipe_idx]
+	GlobalManager.selected_recipe_data = recipe_selected
+
 	var ingredients = recipe_selected["ingredients"]
 	var ingr_loop = generate_arr(ingredients, 20)
 	animate_ingredients(ingr_loop)
@@ -134,11 +138,7 @@ func animate_ingredients(ingr_loop: Array) -> void:
 		tween.tween_callback(Callable(wrapper, "queue_free"))
 		# Guardar tween para poder cancelarlo
 		active_tweens.append(tween)
-	
-	if GlobalManager.collected_ingredients.size() > 1:
-		print("ya cogiste mas de 1")
 
-	
 func clear_children(node: Node) -> void:
 	for child in node.get_children():
 		child.queue_free()
