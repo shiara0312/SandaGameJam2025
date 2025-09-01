@@ -74,13 +74,10 @@ func load_btn_labels() -> void:
 	
 func load_selected_recipe_data(idx: int) -> void:
 	var lang = GlobalManager.game_language
-	#print("current_level_recipes ", GlobalManager.current_level_recipes)
 	var recipe_selected = GlobalManager.current_level_recipes[idx]
 	var rec_name = recipe_selected["name"][lang]
-	#var benefits = recipe_selected["benefits"][lang]
+	#var benefits = recipe_selected["benefits"][lang] 
 	var riddle = recipe_selected["riddle"][lang]
-	
-	#print("recipe_selected ", recipe_selected["ingredients"])
 	var text = "[center][font_size=35]" + rec_name + "[/font_size][/center]\n\n"
 	text += "[font_size=36] " + riddle + "[/font_size]"
 
@@ -103,9 +100,12 @@ func load_ingredients_assets():
 
 # Minijuego de PastryLevel1
 func start_ingredient_minigame():
+	
 	emit_signal("ingredients_minigame_started")
 	minigame_started = true
 	var recipe_selected = GlobalManager.current_level_recipes[GlobalManager.selected_recipe_idx]
+	GlobalManager.selected_recipe_data = recipe_selected
+
 	var ingredients = recipe_selected["ingredients"]
 	var ingr_loop = generate_arr(ingredients, 20)
 	animate_ingredients(ingr_loop)
@@ -139,7 +139,6 @@ func animate_ingredients(ingr_loop: Array) -> void:
 		# Guardar tween para poder cancelarlo
 		active_tweens.append(tween)
 
-	
 func clear_children(node: Node) -> void:
 	for child in node.get_children():
 		child.queue_free()

@@ -6,6 +6,8 @@ extends Node
 @onready var newton_layer = $NewtonLayer
 @onready var newton_ready_sprite: Sprite2D = $NewtonLayer/NewtonReadySprite
 @onready var newton_moods_sprite: Sprite2D = $NewtonLayer/NewtonMoodsSprite
+@onready var good_recipe_sprite: Sprite2D = $NewtonLayer/GoodRecipeSprite
+@onready var bad_recipe_sprite: Sprite2D = $NewtonLayer/BadRecipeSprite
 @onready var feedback_message: RichTextLabel = $NewtonLayer/FeedbackMessage
 @onready var continue_button: TextureButton = $NewtonLayer/ContinueBtn
 @onready var overlay_layer = $OverlayLayer
@@ -135,13 +137,11 @@ func slide_current_level(direction: String = "left", duration: float = 0.5):
 # Empezar a cocinar
 # print("🧑🏽‍🍳 Newton esta cocinando")
 func make_newton_cook():	
-	# Ocular a "newton_ready"
 	newton_ready_sprite.visible = false
-	#resize_newton_ready(newton_original_scale)
 	newton_moods_sprite.visible = true
-
 	AudioManager.play_whisking_sfx()
-	# Hacer flip horizontal repetidamente durante 2s
+	
+	# Hacer flip horizontal repetidamente
 	var flip_timer := Timer.new()
 	flip_timer.wait_time = 0.2 # cada 0.2 segundos cambia de lado
 	flip_timer.autostart = true
@@ -158,63 +158,96 @@ func make_newton_cook():
 		flip_timer.stop()
 		flip_timer.queue_free()
 		AudioManager.stop_whisking_sfx()
+		var msg = await check_recipe()
+		feedback_message.text = msg
+		show_recipe_feedback()
 		show_netown_feedback()
 	)
 
+func show_recipe_feedback():
+	print("muestra la receta - estuvo bien?: ", is_success, GlobalManager.selected_recipe_data)
+	
 func show_netown_feedback():
-	var message = check_recipe()
 	var continue_btn_label = continue_button.get_node("Label")
-
-	feedback_message.text = message
 	feedback_message.visible = true
+	newton_moods_sprite.visible = true
+	
 	# Cambiar sprite según resultado
 	if is_success:
 		AudioManager.play_right_recipe_sfx()
 		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_happy.png")
-		#print("✅ Receta preparada correctamente")
 	else:
 		AudioManager.play_wrong_recipe_sfx()
 		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_sad.png")
-		#print("❌ Algo salió mal en la receta")
 	
-	continue_btn_label.text = "Entiendo..." 
 	#TODO: actualizar el texto segun corresponda 
+	continue_btn_label.text = "Entiendo..." 
 	continue_button.visible = true
 
 func check_recipe() -> String:
-	var selected_recipe = GlobalManager.current_level_recipes[GlobalManager.selected_recipe_idx]
-	var selected_recipe_ingredients = selected_recipe["ingredients"]
-	var selected_recipe_mood = selected_recipe["mood"]
+	var selected_recipe_ingredients = GlobalManager.selected_recipe_data["ingredients"]
+	var selected_recipe_mood = GlobalManager.selected_recipe_data["mood"]
 	var collected_ingredients = GlobalManager.collected_ingredients
 	var customer_mood = GlobalManager.current_customer["mood_id"]
 	
 	# Selecciono receta correcta?
 	var correct_recipe_selected = true if selected_recipe_mood == customer_mood else false
-	#print("¿Seleccionó receta correcta?	? : ", correct_recipe_selected)
-	
 	# Recolectó todos los ingredientes?
-	var is_exact_match = arrays_match(collected_ingredients, selected_recipe_ingredients)
-	#print("¿Recolectó todos los ingredientes?: ", is_exact_match)
-
+	var is_exact_match = arrays_match(collected_ingredients, selected_recipe_ingredients)	
 	is_success = correct_recipe_selected and is_exact_match
+
 	# Determinar respuesta y reglas
+	var sprite_id = GlobalManager.selected_recipe_data["id"]
 	var response_type
+	var sprite_to_show : Sprite2D
+	
 	if not correct_recipe_selected:
+		bad_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_bad.png" % sprite_id)
+		sprite_to_show = bad_recipe_sprite
 		response_type = GlobalManager.ResponseType.WRONG_RECIPE
-		GlobalManager.lose_life()
 	elif not is_exact_match:
+		bad_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_bad.png" % sprite_id)
+		sprite_to_show = bad_recipe_sprite
 		response_type = GlobalManager.ResponseType.WRONG_INGREDIENTS
-		GlobalManager.apply_penalty(SECONDS_TO_LOSE)
 	elif is_success:
+		good_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_good.png" % sprite_id)
+		sprite_to_show = good_recipe_sprite
 		response_type = GlobalManager.ResponseType.RIGHT_RECIPE_AND_INGREDIENTS
-		GlobalManager.apply_penalty(-SECONDS_TO_GAIN)
 	else:
-		response_type = GlobalManager.ResponseType.GRAVITATIONAL_RECIPE 
+		#TODO: reemplazar por imagen gravitacional
+		good_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_good.png" % sprite_id)
+		sprite_to_show = good_recipe_sprite
+		response_type = GlobalManager.ResponseType.GRAVITATIONAL_RECIPE
+		
+	# Mostrar sprite + delay de 1.5s antes de aplicar reglas
+	await show_recipe_result_with_delay(sprite_to_show, response_type)
+	return GlobalManager.get_response_text(response_type)
 
-	var message = GlobalManager.get_response_text(response_type)
+func show_recipe_result_with_delay(sprite: Sprite2D, response_type: int) -> void:
+	AudioManager.play_recipe_ready_sfx()
+	newton_moods_sprite.visible = false
+	sprite.visible = true
+	sprite.scale = Vector2(0.2, 0.2)
+	
+	# Animación "pop"
+	var tween := create_tween()
+	tween.tween_property(sprite, "scale", Vector2(1, 1), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-	return message
-
+	# Esperar 1.5 segundos
+	var timer := get_tree().create_timer(1.5)
+	await timer.timeout
+	# Aplicar consecuencias
+	match response_type:
+		GlobalManager.ResponseType.WRONG_RECIPE:
+			GlobalManager.lose_life()
+		GlobalManager.ResponseType.WRONG_INGREDIENTS:
+			GlobalManager.apply_penalty(SECONDS_TO_LOSE)
+		GlobalManager.ResponseType.RIGHT_RECIPE_AND_INGREDIENTS:
+			GlobalManager.apply_penalty(-SECONDS_TO_GAIN)
+		GlobalManager.ResponseType.GRAVITATIONAL_RECIPE:
+			GlobalManager.gain_life()
+	sprite.visible = false
+	
 func reset_newton_ready() -> void:
 	# Restaurar Newton
 	newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_cooking.png")

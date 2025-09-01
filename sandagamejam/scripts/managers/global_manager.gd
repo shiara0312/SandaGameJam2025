@@ -20,6 +20,7 @@ var current_level_recipes: Array = []
 var all_ingredients: Array = []
 var collected_ingredients: Array = []
 var selected_recipe_idx : int = 0
+var selected_recipe_data: Dictionary = {}
 
 var btn_listen_customer_label = ""
 var btn_help_customer_label = ""
@@ -83,6 +84,11 @@ func lose_life():
 		if lives == 0:
 			is_game_running = false
 			emit_signal("game_over")
+
+func gain_life():
+	if lives <= 3:
+		lives += 1
+		emit_signal("lives_changed", lives)
 
 func check_win_condition():
 	if time_left > 0 and lives > 0 and customers_to_serve.is_empty():
