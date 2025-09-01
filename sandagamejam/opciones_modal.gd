@@ -23,42 +23,44 @@ var idiomas = {
 	"Français": "fr"
 }
 
-var labels_por_idioma = {
-	"es": {
-		"musica": "Música",
-		"sfx": "SFX",
-		"idioma": "Idioma",
-		"resolucion": "Resolución de Pantalla"
-	},
-	"en": {
-		"musica": "Music",
-		"sfx": "SFX",
-		"idioma": "Language",
-		"resolucion": "Screen Resolution"
-	},
-	"fr": {
-		"musica": "Musique",
-		"sfx": "SFX",
-		"idioma": "Langue",
-		"resolucion": "Résolution d’écran"
-	}
-}
+# Aquí guardaremos lo que cargamos del JSON
+var labels_por_idioma = {}
 
 func _ready():
+	# cargar el JSON de labels
+	_cargar_json_labels()
+
 	for res in resoluciones:
 		screen_button.add_item(str(res.x) + "x" + str(res.y))
 	screen_button.add_item("Pantalla Completa")
+
 	for nombre in idiomas.keys():
 		idioma_button.add_item(nombre)
+
 	slider_musica.value_changed.connect(_on_musica_changed)
 	slider_sfx.value_changed.connect(_on_sfx_changed)
 	screen_button.item_selected.connect(_on_resolucion_selected)
 	idioma_button.item_selected.connect(_on_idioma_selected)
+
+	# Seleccionar el idioma actual en el ComboBox
 	for i in range(idioma_button.get_item_count()):
 		if idiomas[idioma_button.get_item_text(i)] == GlobalManager.game_language:
 			idioma_button.select(i)
 			break
+
+	# refrescar labels
 	_actualizar_labels()
+
+func _cargar_json_labels():
+	var file = FileAccess.open("res://menu_labels.json", FileAccess.READ)
+	if file:
+		var data = JSON.parse_string(file.get_as_text())
+		if typeof(data) == TYPE_DICTIONARY:
+			labels_por_idioma = data
+		else:
+			push_error("Error: JSON inválido")
+	else:
+		push_error("No se encontró menu_labels.json")
 
 func _on_musica_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(value / 100.0))

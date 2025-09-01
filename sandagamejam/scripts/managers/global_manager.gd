@@ -6,6 +6,7 @@ signal time_changed(new_time)
 signal time_up
 signal game_over
 signal win
+signal language_changed(nuevo_idioma)   # 🔥 Señal para refrescar textos cuando cambia el idioma
 
 var lives = 3
 var time_left : float = 180.0
@@ -167,6 +168,8 @@ func _cargar_json_file(path: String) -> Dictionary:
 		push_error("Error parseando JSON: " + path)
 		return {}
 
+### Cambio de idioma ###
 func cambiar_idioma(nuevo_idioma: String) -> void:
 	game_language = nuevo_idioma
-	load_button_labels()
+	load_button_labels()   # recargar textos de botones
+	emit_signal("language_changed", nuevo_idioma)  # 🔥 avisar al resto de nodos que el idioma cambió

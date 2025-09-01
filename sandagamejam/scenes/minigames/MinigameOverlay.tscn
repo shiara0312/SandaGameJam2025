@@ -9,10 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://dgu8abt7rrtcq" path="res://assets/recipes/Chocolate_muffin.png" id="7_y8xj3"]
 [ext_resource type="Texture2D" uid="uid://bf73llhf0v5v5" path="res://assets/recipes/Frosted_blueberry_donut.png" id="8_vm73b"]
 [ext_resource type="Theme" uid="uid://xreggbw3h3yp" path="res://custom_resources/CustomerMessage.tres" id="9_smtws"]
-[ext_resource type="Texture2D" uid="uid://b28kcd0oku717" path="res://assets/UI/interact-btn.png" id="10_e7l36"]
-[ext_resource type="Texture2D" uid="uid://pe12a3dpmteo" path="res://assets/UI/interact-btn-pressed.png" id="11_ww4g8"]
+[ext_resource type="Texture2D" uid="uid://b28kcd0oku717" path="res://assets/ui/interact-btn.png" id="10_e7l36"]
+[ext_resource type="Texture2D" uid="uid://pe12a3dpmteo" path="res://assets/ui/interact-btn-pressed.png" id="11_ww4g8"]
 [ext_resource type="LabelSettings" uid="uid://jdv1bfj4iff7" path="res://custom_resources/InteractionButtonLabels.tres" id="12_70k8r"]
-[ext_resource type="Texture2D" uid="uid://b6rsdliq8rho8" path="res://assets/UI/interact-btn-disabled.png" id="12_smtws"]
+[ext_resource type="Texture2D" uid="uid://b6rsdliq8rho8" path="res://assets/ui/interact-btn-disabled.png" id="12_smtws"]
 
 [node name="MinigameOverlay" type="Node2D"]
 script = ExtResource("1_jh425")

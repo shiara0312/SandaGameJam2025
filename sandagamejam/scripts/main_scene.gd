@@ -6,41 +6,47 @@ extends Control
 @onready var btn_salir : TextureButton = $Salir
 
 func _ready():
-	set_button_labels()
+	# Configuramos el cursor personalizado
 	var cursor_texture = preload("res://assets/UI/hand_point.png")
 	Input.set_custom_mouse_cursor(cursor_texture, Input.CURSOR_ARROW, Vector2(16, 16))
-	
 
-# TODO: Cuando se elige un idioma, llamar set_button_labels
+	# Seteamos los labels iniciales según el idioma actual
+	set_button_labels()
 
+	# Nos conectamos a la señal del GlobalManager para refrescar en tiempo real
+	if not GlobalManager.language_changed.is_connected(set_button_labels):
+		GlobalManager.language_changed.connect(set_button_labels)
+
+
+# Actualiza los labels en base al idioma actual
 func set_button_labels() -> void:	
-	# Seteando labels segun el idioma
-	#print("Seteando labels para idioma:", GlobalManager.game_language)
-	# Cargar el JSON
 	var file := FileAccess.open("res://i18n/menu_labels.json", FileAccess.READ)
+	if not file:
+		push_error("No se pudo abrir el archivo JSON de labels.")
+		return
 	
-	if file:
-		var json_text := file.get_as_text()
-		file.close()
-		
-		var data = JSON.parse_string(json_text)
-		if data == null:
-			push_error("Error al parsear el JSON de menu labels.")
-			return
-		
-		# Buscar las traducciones del idioma actual
-		var lang : String = GlobalManager.game_language
-		if data.has(lang):
-			var labels = data[lang]
-			# Asignar a los botones
-			btn_jugar.get_node("CollisionPolygon2D/Label").text = labels["jugar"]
-			btn_opciones.get_node("CollisionPolygon2D/Label").text = labels["opciones"]
-			btn_creditos.get_node("CollisionPolygon2D/Label").text = labels["creditos"]
-			btn_salir.get_node("Label").text = labels["salir"]
-		else:
-			push_error("Idioma no encontrado en JSON: " + lang)
+	var json_text := file.get_as_text()
+	file.close()
+
+	var data = JSON.parse_string(json_text)
+	if data == null:
+		push_error("Error al parsear el JSON de menu labels.")
+		return
+	
+	var lang : String = GlobalManager.game_language
+	if data.has(lang):
+		var labels = data[lang]
+		btn_jugar.get_node("CollisionPolygon2D/Label").text = labels["jugar"]
+		btn_opciones.get_node("CollisionPolygon2D/Label").text = labels["opciones"]
+		btn_creditos.get_node("CollisionPolygon2D/Label").text = labels["creditos"]
+		btn_salir.get_node("Label").text = labels["salir"]
 	else:
-		push_error("No se pudo abrir el archivo JSON.")
+		push_error("Idioma no encontrado en JSON: " + lang)
+
+
+# -----------------------
+# BOTONES
+# -----------------------
 
 func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
@@ -54,7 +60,6 @@ func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) 
 func _on_creditos_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		AudioManager.play_click_sfx()
-		#print("CREDITOS fue presionado")
 		var credits_scene = load("res://scenes/menus/Credits.tscn")
 		get_tree().change_scene_to_packed(credits_scene)
 
@@ -64,11 +69,8 @@ func _on_opciones_input_event(_viewport: Node, event: InputEvent, _shape_idx: in
 		get_tree().change_scene_to_file("res://OpcionesModal.tscn")
 
 func _on_salir_pressed() :
-	#print("SALIR fue presionado")
 	get_tree().quit()
 
-	
 func _on_button_mouse_entered():
 	var hand_cursor = preload("res://assets/UI/hand_point.png")
 	Input.set_custom_mouse_cursor(hand_cursor, Input.CURSOR_ARROW, Vector2(8, 8))
-	
