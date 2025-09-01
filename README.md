@@ -1,32 +1,69 @@
+# 🥧 Sir Isaac's Pastry & Apples  
+
+🎮 Prototype release for our game jam project, **Sir Isaac's Pastry & Apples**.  
+Developed by **The Glitch Girls** during the **Sanda Game Jam 2025**, using **Godot 4**.  
+
+---
+
+## ✨ Features  
+
+- 🗣️ **NPC interaction system** with historical characters  
+- 😀 **Mood states system** that affect dialogues and reactions  
+- 🍳 **Cooking minigame** (ingredient-based recipes)  
+- 🎯 **Capture mechanic** to progress gameplay  
+- 🌍 **Multilingual support (i18n):** English, Spanish, French  
+
+---
+
+## 📦 Play & Download  
+
+- **Repo:** [GitHub](https://github.com/shiara0312/SandaGameJam2025)  
+- **Playable build:** [Itch.io](https://shiara0312.itch.io/sir-isaacs-pastry-and-apples)
+
+---
+
+## 🛠️ Tech Stack  
+
+- **Engine:** Godot 4.4.1
+- **Language:** GDScript  
+- **Version Control:** Git + GitHub  
+
+---
+
+## 🚀 How to Run Locally  
+
+1. Clone the repo:  
+   ```bash
+   git clone https://github.com/shiara0312/SandaGameJam2025.git
+   ```
+2. Open the folder sandagamejam/ in Godot 4.2.2+
+3. Run the main scene (Main.tscn)
+
+---
+
+## ✨ Project Structure
 
 Estructura del proyecto:
 ```
-res://
-│
-├─ assets/           # Imágenes, sprites, audio, iconos
-│   ├─ characters/
-│   ├─ backgrounds/
-│   ├─ ui/
-│   └─ sounds/
-│
-├─ i18n/             # JSONs de textos, traducciones
-│   ├─ menu_labels.json
-│   └─ characters_moods.json
-│
-├─ scenes/           # Escenas principales y modulares
-│   ├─ CafeLevel1.tscn        # Escena del nivel base
-│   ├─ CafeLevel2.tscn        # Futuro nivel 2
-│   ├─ MinigamePanel.tscn     # Escena superpuesta para minijuegos
-│   └─ UI/
-│       ├─ LifeTimer.tscn
-│       └─ ButtonsPanel.tscn
-│
-├─ scripts/          # Scripts GDScript
-│   ├─ characters/
-│   ├─ ui/
-│   └─ levels/
-│       ├─ CafeLevel1.gd
-│       └─ MinigamePanel.gd
-│
-└─ project.godot
+sandagamejam/
+├── assets/              # Art, sprites, sounds
+├── custom_resources/    # Scripted Resources
+├── i18n/                # Translation files
+├── scenes/              # Levels, minigames, UI
+├── scripts/             # GDScript gameplay logic
+├── utils/               # Helper functions and utilities
+└── README.md
 ```
+---
+## 👩‍💻 Team – The Glitch Girls
+
+- Selene Negrón - Concept Artist & 2D Artist
+- Ariadna Mestanza - 2D Artist
+- Melissa Huerta – Game Developer, Technical Designer
+- Shiara Arauzo - Game Developer
+- Maria Munayco - Game Developer
+- Fabrizio Murguia - Game Designer
+
+---
+## 📜 License
+This project was created for a game jam. Assets and code may not be reused without permission.
