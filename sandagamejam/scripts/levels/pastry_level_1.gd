@@ -10,13 +10,11 @@ signal level_cleared
 
 var characters_mood_file_path = "res://i18n/characters_moods.json"
 var interact_btns_file_path = "res://i18n/interaction_texts.json"
-var customer_count = 3 # TODO: update
+var customer_count = 3
 var current_customer: Node2D = null
 
 var center_frac_x := 0.5 # 0.25 cuando se abra el minijuego
 var original_viewport_size: Vector2
-
-# TODO: UI Layer Elementos: tiempo, puntuación, pedidos correctos/fallidos.
 
 # Escena del nivel base
 func _ready():

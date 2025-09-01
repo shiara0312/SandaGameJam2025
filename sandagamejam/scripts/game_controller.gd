@@ -215,8 +215,7 @@ func check_recipe() -> Dictionary:
 		sprite_to_show = good_recipe_sprite
 		response_type = GlobalManager.ResponseType.RECIPE_CORRECT
 	else:
-		#TODO: reemplazar por imagen gravitacional
-		good_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_good.png" % sprite_id)
+		good_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_gravitational.png" % sprite_id)
 		sprite_to_show = good_recipe_sprite
 		response_type = GlobalManager.ResponseType.GRAVITATIONAL
 	
