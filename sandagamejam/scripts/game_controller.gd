@@ -160,7 +160,7 @@ func make_newton_cook():
 		flip_timer.queue_free()
 		AudioManager.stop_whisking_sfx()
 		# Obtener los resultados
-		var result = await check_recipe()
+		var result = check_recipe()
 		# Mostrar mensajes inmediatos
 		feedback_message.text = result["feedback"]
 		outcome_message.text = result["outcome"]
