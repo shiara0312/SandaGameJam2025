@@ -159,18 +159,15 @@ func make_newton_cook():
 		flip_timer.stop()
 		flip_timer.queue_free()
 		AudioManager.stop_whisking_sfx()
+		# Obtener los resultados
 		var result = await check_recipe()
-		print("result.. ")
-		feedback_message.text = result[0]
-		outcome_message.text = result[1]
-		show_recipe_feedback()
+		# Mostrar mensajes inmediatos
+		feedback_message.text = result["feedback"]
+		outcome_message.text = result["outcome"]
+		await show_recipe_result_with_delay(result)
 		show_netown_feedback()
 	)
 
-func show_recipe_feedback():
-	print("show recipe")
-	#print("muestra la receta - estuvo bien?: ", is_success, GlobalManager.selected_recipe_data)
-	
 func show_netown_feedback():
 	var continue_btn_label = continue_button.get_node("Label")
 	outcome_message.visible = true
@@ -188,7 +185,7 @@ func show_netown_feedback():
 	continue_btn_label.text = "Entiendo..." 
 	continue_button.visible = true
 
-func check_recipe() -> Array[String]:
+func check_recipe() -> Dictionary:
 	var selected_recipe_ingredients = GlobalManager.selected_recipe_data["ingredients"]
 	var selected_recipe_mood = GlobalManager.selected_recipe_data["mood"]
 	var collected_ingredients = GlobalManager.collected_ingredients
@@ -224,11 +221,19 @@ func check_recipe() -> Array[String]:
 		response_type = GlobalManager.ResponseType.GRAVITATIONAL
 	
 	var result = GlobalManager.get_response_texts(response_type)
-	# Mostrar sprite + delay de 1.5s antes de aplicar reglas
-	await show_recipe_result_with_delay(sprite_to_show, response_type, result[0])
-	return result
+	
+	return {
+		"type": response_type,
+		"sprite": sprite_to_show,
+		"feedback": result[0],
+		"outcome": result[1]
+	}
 
-func show_recipe_result_with_delay(sprite: Sprite2D, response_type: int, msg: String) -> void:
+func show_recipe_result_with_delay(result: Dictionary) -> void:
+	var sprite: Sprite2D = result["sprite"]
+	var msg: String = result["feedback"]
+	var response_type: int = result["type"]
+	
 	AudioManager.play_recipe_ready_sfx()
 	newton_moods_sprite.visible = false
 	feedback_message.visible = true
@@ -254,7 +259,7 @@ func show_recipe_result_with_delay(sprite: Sprite2D, response_type: int, msg: St
 		GlobalManager.ResponseType.GRAVITATIONAL:
 			GlobalManager.gain_life()
 	sprite.visible = false
-	
+
 func reset_newton_ready() -> void:
 	# Restaurar Newton
 	newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_cooking.png")
@@ -323,7 +328,7 @@ func _cleanup_minigames():
 	GlobalManager.selected_recipe_idx = -1
 
 func _on_level_cleared():
-	print("Nivel completado desde GameController")
+	#print("Nivel completado desde GameController")
 	GlobalManager.check_win_condition()
 
 func _on_win():
