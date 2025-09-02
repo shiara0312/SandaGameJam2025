@@ -38,8 +38,9 @@ mouse_filter = 2
 
 [node name="Recipe1" type="TextureButton" parent="TextureRect/MenuContainer"]
 layout_mode = 2
+offset_top = 11.0
 offset_right = 281.0
-offset_bottom = 194.0
+offset_bottom = 205.0
 texture_normal = ExtResource("3_t45b2")
 texture_pressed = ExtResource("4_3ueo8")
 
@@ -51,8 +52,9 @@ texture = ExtResource("5_e7l36")
 [node name="Recipe2" type="TextureButton" parent="TextureRect/MenuContainer"]
 layout_mode = 2
 offset_left = 331.0
+offset_top = 11.0
 offset_right = 612.0
-offset_bottom = 194.0
+offset_bottom = 205.0
 texture_normal = ExtResource("3_t45b2")
 texture_pressed = ExtResource("4_3ueo8")
 
@@ -63,9 +65,9 @@ texture = ExtResource("6_ww4g8")
 
 [node name="Recipe3" type="TextureButton" parent="TextureRect/MenuContainer"]
 layout_mode = 2
-offset_top = 237.0
+offset_top = 248.0
 offset_right = 282.0
-offset_bottom = 431.0
+offset_bottom = 442.0
 texture_normal = ExtResource("3_t45b2")
 texture_pressed = ExtResource("4_3ueo8")
 
@@ -77,9 +79,9 @@ texture = ExtResource("7_70k8r")
 [node name="Recipe4" type="TextureButton" parent="TextureRect/MenuContainer"]
 layout_mode = 2
 offset_left = 331.0
-offset_top = 237.0
+offset_top = 248.0
 offset_right = 612.0
-offset_bottom = 431.0
+offset_bottom = 442.0
 texture_normal = ExtResource("3_t45b2")
 texture_pressed = ExtResource("4_3ueo8")
 
