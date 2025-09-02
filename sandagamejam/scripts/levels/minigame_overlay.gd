@@ -100,7 +100,6 @@ func load_ingredients_assets():
 
 # Minijuego de PastryLevel1
 func start_ingredient_minigame():
-	
 	emit_signal("ingredients_minigame_started")
 	minigame_started = true
 	var recipe_selected = GlobalManager.current_level_recipes[GlobalManager.selected_recipe_idx]
