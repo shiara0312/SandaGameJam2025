@@ -23,4 +23,5 @@ func _ready():
 	queue_free()
 
 func _show_main_menu():
+	AudioManager.play_game_music()
 	game_controller.load_main_menu()

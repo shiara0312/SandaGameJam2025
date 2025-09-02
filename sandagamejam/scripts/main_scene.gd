@@ -45,7 +45,7 @@ func set_button_labels() -> void:
 	else:
 		push_error("No se pudo abrir el archivo JSON.")
 
-func _on_language_changed(new_lang: String) -> void:
+func _on_language_changed() -> void:
 	# Cuando GlobalManager emite la señal, refrescar etiquetas
 	set_button_labels()
 
@@ -68,7 +68,10 @@ func _on_creditos_input_event(_viewport: Node, event: InputEvent, _shape_idx: in
 func _on_opciones_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		AudioManager.play_click_sfx()
-		get_tree().change_scene_to_file("res://OpcionesModal.tscn")
+
+		var modal = load("res://OpcionesModal.tscn").instantiate()
+		GameController.current_scene_container.add_child(modal)
+
 
 func _on_salir_pressed() :
 	#print("SALIR fue presionado")
