@@ -114,9 +114,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.0451389
 anchor_right = -0.045
-offset_left = 380.0
+offset_left = 372.0
 offset_top = 232.0
-offset_right = 836.84
+offset_right = 828.84
 offset_bottom = 254.0
 
 [node name="TextureRect4" type="TextureRect" parent="."]
@@ -133,9 +133,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.0451389
 anchor_right = -0.045
-offset_left = 380.0
+offset_left = 375.0
 offset_top = 337.0
-offset_right = 840.84
+offset_right = 835.84
 offset_bottom = 359.0
 
 [node name="LabelMusica" type="Label" parent="."]
