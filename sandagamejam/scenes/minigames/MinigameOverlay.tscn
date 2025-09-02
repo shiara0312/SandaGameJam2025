@@ -31,9 +31,9 @@ texture = ExtResource("2_e7l36")
 [node name="MenuContainer" type="Control" parent="TextureRect"]
 anchors_preset = 0
 offset_left = 38.0
-offset_top = 85.0
+offset_top = 92.0
 offset_right = 656.0
-offset_bottom = 525.0
+offset_bottom = 532.0
 mouse_filter = 2
 
 [node name="Recipe1" type="TextureButton" parent="TextureRect/MenuContainer"]
@@ -51,7 +51,7 @@ texture = ExtResource("5_e7l36")
 [node name="Recipe2" type="TextureButton" parent="TextureRect/MenuContainer"]
 layout_mode = 2
 offset_left = 331.0
-offset_right = 619.0
+offset_right = 612.0
 offset_bottom = 194.0
 texture_normal = ExtResource("3_t45b2")
 texture_pressed = ExtResource("4_3ueo8")
@@ -64,8 +64,8 @@ texture = ExtResource("6_ww4g8")
 [node name="Recipe3" type="TextureButton" parent="TextureRect/MenuContainer"]
 layout_mode = 2
 offset_top = 237.0
-offset_right = 288.0
-offset_bottom = 436.0
+offset_right = 282.0
+offset_bottom = 431.0
 texture_normal = ExtResource("3_t45b2")
 texture_pressed = ExtResource("4_3ueo8")
 
@@ -78,8 +78,8 @@ texture = ExtResource("7_70k8r")
 layout_mode = 2
 offset_left = 331.0
 offset_top = 237.0
-offset_right = 619.0
-offset_bottom = 436.0
+offset_right = 612.0
+offset_bottom = 431.0
 texture_normal = ExtResource("3_t45b2")
 texture_pressed = ExtResource("4_3ueo8")
 
