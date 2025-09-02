@@ -92,4 +92,4 @@ func _actualizar_labels():
 		label_resolucion.text = labels_por_idioma.get(idioma, {}).get("resolucion", "Resolución de Pantalla")
 
 func _on_salir_pressed() -> void:
-	queue_free()
+		get_tree().change_scene_to_file("res://scenes/menus/MainMenu.tscn")

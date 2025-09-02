@@ -10,6 +10,9 @@ func _ready():
 	var cursor_texture = preload("res://assets/UI/hand_point.png")
 	Input.set_custom_mouse_cursor(cursor_texture, Input.CURSOR_ARROW, Vector2(16, 16))
 	
+	# Conectar al cambio de idioma
+	if GlobalManager.has_signal("language_changed"):
+		GlobalManager.language_changed.connect(_on_language_changed)
 
 # TODO: Cuando se elige un idioma, llamar set_button_labels
 
@@ -42,6 +45,10 @@ func set_button_labels() -> void:
 	else:
 		push_error("No se pudo abrir el archivo JSON.")
 
+func _on_language_changed(new_lang: String) -> void:
+	# Cuando GlobalManager emite la señal, refrescar etiquetas
+	set_button_labels()
+
 func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		AudioManager.play_click_sfx()
@@ -67,8 +74,6 @@ func _on_salir_pressed() :
 	#print("SALIR fue presionado")
 	get_tree().quit()
 
-	
 func _on_button_mouse_entered():
 	var hand_cursor = preload("res://assets/UI/hand_point.png")
 	Input.set_custom_mouse_cursor(hand_cursor, Input.CURSOR_ARROW, Vector2(8, 8))
-	

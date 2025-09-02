@@ -1,4 +1,4 @@
-# GlobalManager
+# GlobalManager.gd
 extends Node
 
 signal lives_changed(new_lives)
@@ -6,6 +6,7 @@ signal time_changed(new_time)
 signal time_up
 signal game_over
 signal win
+signal idioma_cambiado(nuevo_idioma) # Señal para actualizar UI en tiempo real
 
 var lives = 3
 var time_left : float = 180.0
@@ -51,9 +52,7 @@ var menu_labels := {}
 var characters_moods := {}  
 
 func start_game():
-	#print("GAME HAS STARTED")
 	is_game_running = true
-	
 	load_texts()
 	load_button_labels()
 	UILayerManager.init_ui_layer()
@@ -97,20 +96,18 @@ func check_win_condition():
 		
 #### Gestionar cola de clientes ####
 func initialize_customers(combos: Array):
-	# Clonar los clientes obtenidos para el nivel 
 	customers_to_serve = combos.duplicate()
 
 func get_next_customer() -> Dictionary:
 	if customers_to_serve.is_empty():
 		return {}
-	# retorna el primer elemento del array
 	current_customer = customers_to_serve.pop_front()
 	return current_customer
 
-func return_customer(): #customer: Dictionary
+func return_customer():
 	customers_to_serve.append(current_customer)
 
-func mark_customer_as_satisfied(): #customer: Dictionary
+func mark_customer_as_satisfied():
 	satisfied_customers.append(current_customer)
 
 ### Gestionar recetas ###
@@ -176,6 +173,12 @@ func _cargar_json_file(path: String) -> Dictionary:
 		push_error("Error parseando JSON: " + path)
 		return {}
 
+### Cambio de idioma en tiempo real ###
+func set_language(nuevo_idioma: String) -> void:
+	cambiar_idioma(nuevo_idioma)
+
 func cambiar_idioma(nuevo_idioma: String) -> void:
 	game_language = nuevo_idioma
-	load_button_labels()
+	load_texts()            # Recarga TODOS los textos
+	load_button_labels()    # Recarga labels de botones
+	emit_signal("idioma_cambiado", game_language) # Notificar a todas las escenas activas
