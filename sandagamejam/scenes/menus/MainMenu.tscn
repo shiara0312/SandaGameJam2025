@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c0fwdq8hq43ru" path="res://assets/UI/btn3.png" id="4_a814b"]
 [ext_resource type="LabelSettings" uid="uid://b2h5bls5s7rsg" path="res://custom_resources/MainMenuButtonLabels.tres" id="5_rf2cd"]
 [ext_resource type="FontFile" uid="uid://ch5rglkjpbnk2" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="6_a814b"]
-[ext_resource type="Texture2D" uid="uid://bu2111ycwvth7" path="res://assets/UI/closebtn.png" id="7_hbc2u"]
+[ext_resource type="Texture2D" uid="uid://b810rbfrnlq87" path="res://assets/UI/close-btn.png" id="7_41ciy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_5crlr"]
 font = ExtResource("6_a814b")
@@ -119,7 +119,7 @@ offset_left = 1030.0
 offset_top = 29.0
 offset_right = 1113.0
 offset_bottom = 105.0
-texture_normal = ExtResource("7_hbc2u")
+texture_normal = ExtResource("7_41ciy")
 
 [node name="Label" type="Label" parent="Salir"]
 visible = false
