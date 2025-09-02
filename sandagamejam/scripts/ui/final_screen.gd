@@ -33,14 +33,15 @@ extends Control
 	"fr" : preload("res://assets/UI/game_over_message_fr.png")
 }
 
-#Score: 100
-#Enter name: MELLS_ (MAX 6 characteres)
 var score: int = 100
 var max_name_length: int = 6
 var current_name: Array = []
 
 func _ready():
-	score = 200 #TODO: calcular el score
+	if GlobalManager.satisfied_customers.size() == 0:
+		score = 0
+	else:
+		score = (round(GlobalManager.time_left) * 10) + (GlobalManager.lives * 100)
 	score_label.text = "SCORE: " + str(score) #TODO: "SCORE: cargar de json"
 	show_name_label()
 	
@@ -86,7 +87,6 @@ func show_final_screen(state: GlobalManager.GameState):
 	anim.play("final_sequence")
 	
 func show_name_label():
-	print("mostrando nombre.. ", current_name)
 	var display = ""
 	for i in range(max_name_length):
 		if i < current_name.size():
