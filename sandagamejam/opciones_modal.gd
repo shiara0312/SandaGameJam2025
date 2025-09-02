@@ -45,26 +45,51 @@ var labels_por_idioma = {
 }
 
 func _ready():
+	# Rellenar resoluciones
 	for res in resoluciones:
 		screen_button.add_item(str(res.x) + "x" + str(res.y))
 	screen_button.add_item("Pantalla Completa")
+
+	# Rellenar idiomas
 	for nombre in idiomas.keys():
 		idioma_button.add_item(nombre)
+
+	# Conectar señales
 	slider_musica.value_changed.connect(_on_musica_changed)
 	slider_sfx.value_changed.connect(_on_sfx_changed)
 	screen_button.item_selected.connect(_on_resolucion_selected)
 	idioma_button.item_selected.connect(_on_idioma_selected)
+
+	# Seleccionar idioma actual
 	for i in range(idioma_button.get_item_count()):
 		if idiomas[idioma_button.get_item_text(i)] == GlobalManager.game_language:
 			idioma_button.select(i)
 			break
+
+	# 🔊 Inicializar sliders con valores actuales de audio
+	var vol_musica_db = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))
+	var vol_sfx_db = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))
+
+	# Si el bus está en -80 dB (muteado por default), arrancamos en 100%
+	if vol_musica_db <= -79.0:
+		slider_musica.value = 100.0
+	else:
+		slider_musica.value = db_to_linear(vol_musica_db) * 100.0
+
+	if vol_sfx_db <= -79.0:
+		slider_sfx.value = 100.0
+	else:
+		slider_sfx.value = db_to_linear(vol_sfx_db) * 100.0
+
 	_actualizar_labels()
 
 func _on_musica_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(value / 100.0))
+	var vol = clamp(value / 100.0, 0.0, 1.0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(vol))
 
 func _on_sfx_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(value / 100.0))
+	var vol = clamp(value / 100.0, 0.0, 1.0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(vol))
 
 func _on_resolucion_selected(index: int) -> void:
 	if index < resoluciones.size():
@@ -92,4 +117,4 @@ func _actualizar_labels():
 		label_resolucion.text = labels_por_idioma.get(idioma, {}).get("resolucion", "Resolución de Pantalla")
 
 func _on_salir_pressed() -> void:
-		get_tree().change_scene_to_file("res://scenes/menus/MainMenu.tscn")
+	get_tree().change_scene_to_file("res://scenes/menus/MainMenu.tscn")
