@@ -5,6 +5,6 @@
 [resource]
 font = ExtResource("1_skst6")
 font_size = 24
-font_color = Color(0.368627, 0.294118, 0.298039, 1)
+font_color = Color(0.909804, 0.87451, 0.768627, 1)
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
