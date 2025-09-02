@@ -15,6 +15,20 @@
 			"genre": "female"
 		},
 		{
+			"id": "grimhilde",
+			"name": {
+				"es": "Reina Grimhilde",
+				"en": "Queen Grimhilde",
+				"fr": "Reine-sorcière"
+			},
+			"specialty": {
+				"es": "Hechicería",
+				"en": "Sorcery",
+				"fr": "Sorcellerie"
+			},
+			"genre": "female"
+		},
+		{
 			"id": "renemagritte",
 			"name": {
 				"es": "Rene Magritte",
@@ -86,6 +100,16 @@
 				"es": "Los números y algoritmos flotan en mi cabeza.. lástima que mis párpados también parecen flotar, a penas puedo mantenerme despierta.",
 				"en": "Numbers and algorithms float in my head... too bad my eyelids seem to float as well, I can barely stay awake.",
 				"fr": "Des chiffres et des algorithmes flottent dans ma tête… hélas, mes paupières semblent flotter aussi, et je peine à rester éveillé."
+			}
+		},
+		{
+			"character_id": "grimhilde",
+			"mood_id": "stressed",
+			"genre": "female",
+			"texts": {
+				"es": "¡Díganme! Si ya no soy la más hermosa… ¿quién soy, quién?! ¿Acaso seré tan frágil como una mordida en mi propia manzana?",
+				"en": "Tell me! If I am no longer the fairest… then who am I, who?! Am I as fragile as a single bite of my own apple?",
+				"fr": "Dites-moi ! Si je ne suis plus la plus belle… qui suis-je, qui ?! Suis-je aussi fragile qu’une seule bouchée de ma propre pomme?"
 			}
 		},
 		{
