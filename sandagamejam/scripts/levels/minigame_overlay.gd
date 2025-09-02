@@ -172,11 +172,19 @@ func create_ingredient_wrapper(ingredient_id: String, is_clickable: bool = false
 	return wrapper
 
 # Helpers
+# Generar un array con ingredientes variados que contengan por lo menos una vez cada ingrediente real
+# y 0 o más ingredientes falsos
 func generate_arr(base: Array, base_len: int) -> Array:
-	# Generar un array con ingredientes variados que contengan por lo menos una vez cada ingrediente
 	var result = []
 	result = base.duplicate()
 	
+	# Agregar ingredientes falsos (0 o más)
+	var fake_count = randi() % (GlobalManager.fake_ingredients.size() + 1)
+	for i in range(fake_count):
+		var fake_ing = GlobalManager.fake_ingredients[randi() % GlobalManager.fake_ingredients.size()]
+		#print("fake_ing ", fake_ing)
+		result.append(fake_ing.id)
+		
 	while result.size() < base_len:
 		var rand = base[randi() % base.size()]
 		result.append(rand)
