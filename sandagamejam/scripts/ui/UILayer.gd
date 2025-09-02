@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var pause_btn = $PauseBtn
 @export var pause_texture: Texture
 @export var play_texture: Texture
+@onready var timer_label: Label = $GameHUD/HUDContainer/TimerLabel
 
 var typing_speed := 0.01
 
@@ -19,7 +20,12 @@ func _ready() -> void:
 	else:
 		# Esperar al frame siguiente si aún no existe
 		call_deferred("_ready")
-	
+		
+	if timer_label:
+		timer_label.add_theme_color_override("font_color", Color("#a79e91"))
+		timer_label.add_theme_color_override("font_outline_color", Color("#19211f"))
+		timer_label.add_theme_constant_override("outline_size", 10)
+		
 	GlobalManager.connect("lives_changed", Callable(self, "_on_lives_changed"))
 	GlobalManager.connect("time_changed", Callable(self, "_on_time_changed"))
 	GlobalManager.connect("time_up", Callable(self, "_on_hide_ui"))
@@ -73,10 +79,22 @@ func start_typing(msg: String, rich_text: RichTextLabel) -> void:
 		rich_text.text += full_text[i]
 		await get_tree().create_timer(typing_speed).timeout
 
+# Invertir colores del timer_label
+func invest_label_colors():
+	if timer_label:
+		var font_color = timer_label.get_theme_color("font_color", "Label")
+		var outline_color = timer_label.get_theme_color("outline_color", "Label")
+		
+		timer_label.add_theme_color_override("font_color", outline_color)
+		timer_label.add_theme_color_override("font_outline_color", font_color)
+		timer_label.add_theme_constant_override("outline_size", 6)
+		
 func _on_btn_help_pressed() -> void:
 	AudioManager.play_click_sfx()
 	AudioManager.stop_customer_sfx()
 	message_texture.visible = false
+	invest_label_colors()
+	
 	if GameController and not GlobalManager.is_minigame_overlay_visible:
 		GameController.show_minigame("res://scenes/minigames/MinigameOverlay.tscn")
 

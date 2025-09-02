@@ -12,14 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bpv7ib6u2578q" path="res://assets/UI/interact-btn-pressed.png" id="9_tqcr1"]
 [ext_resource type="LabelSettings" uid="uid://jdv1bfj4iff7" path="res://custom_resources/InteractionButtonLabels.tres" id="10_hhtea"]
 [ext_resource type="Texture2D" uid="uid://blhi537qcthh0" path="res://assets/UI/pause_btn.png" id="11_tqcr1"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_6a45y"]
-line_spacing = 0.0
-font = ExtResource("5_1xo4o")
-font_size = 45
-font_color = Color(0.811765, 0.811765, 0.639216, 1)
-outline_size = 5
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="Texture2D" uid="uid://2n1ol4pwkj0p" path="res://assets/backgrounds/level1.png" id="13_evnnp"]
 
 [node name="UILayer" type="CanvasLayer"]
 layer = 10
@@ -85,8 +78,9 @@ layout_mode = 2
 z_index = 2
 layout_mode = 2
 size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("5_1xo4o")
+theme_override_font_sizes/font_size = 49
 text = "03:00"
-label_settings = SubResource("LabelSettings_6a45y")
 horizontal_alignment = 1
 
 [node name="MessageTexture" type="TextureRect" parent="GameHUD"]
@@ -151,6 +145,12 @@ offset_top = 27.0
 offset_right = 1118.0
 offset_bottom = 76.0
 texture_normal = ExtResource("11_tqcr1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("13_evnnp")
 
 [connection signal="pressed" from="GameHUD/MessageTexture/BtnHelp" to="." method="_on_btn_help_pressed"]
 [connection signal="pressed" from="PauseBtn" to="." method="_on_pause_btn_pressed"]

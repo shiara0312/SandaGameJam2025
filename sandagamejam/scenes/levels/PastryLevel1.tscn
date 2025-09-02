@@ -9,7 +9,6 @@
 script = ExtResource("1_aov3q")
 
 [node name="Fondo" type="TextureRect" parent="."]
-modulate = Color(0.69036, 0.762833, 0.708195, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
