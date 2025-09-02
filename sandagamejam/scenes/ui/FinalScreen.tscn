@@ -118,6 +118,30 @@ tracks/8/keys = {
 "update": 0,
 "values": [Vector2(0.135, 0.135)]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("ScoreContainer:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(384, 900)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("ScoreContainer:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_5kium"]
 resource_name = "final_sequence"
@@ -230,6 +254,30 @@ tracks/8/keys = {
 "update": 0,
 "values": [Vector2(0.135, 0.135), Vector2(0.162, 0.162), Vector2(0.135, 0.135)]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("ScoreContainer:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(2.10963, 2.29707),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(384, 900), Vector2(384, 401)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("ScoreContainer:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(2.11306, 2.26694),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.105882), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bome8"]
 _data = {
@@ -308,9 +356,9 @@ libraries = {
 [node name="ScoreContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 384.0
-offset_top = 401.0
+offset_top = 900.0
 offset_right = 978.0
-offset_bottom = 509.0
+offset_bottom = 1008.0
 alignment = 1
 
 [node name="Score" type="Label" parent="ScoreContainer"]
