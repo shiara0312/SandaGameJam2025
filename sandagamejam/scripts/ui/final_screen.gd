@@ -40,13 +40,16 @@ var score: int = 100
 var max_name_length: int = 6
 var current_name: Array = []
 var ranking: Array = []
+var ranking_labels = GlobalManager.menu_labels[GlobalManager.game_language]
 
 func _ready():
 	if GlobalManager.satisfied_customers.size() == 0:
 		score = 0
 	else:
 		score = (round(GlobalManager.time_left) * 10) + (GlobalManager.lives * 100)
-	score_label.text = "SCORE: " + str(score) #TODO: "SCORE: cargar de json"
+	
+	print("GlobalManager.menu_labels", ranking_labels)
+	score_label.text = ranking_labels["ranking"]["score"] + " " + str(score) 
 	show_name_label()
 	
 func _input(event: InputEvent) -> void:
@@ -97,7 +100,7 @@ func show_name_label():
 			display += current_name[i] + ""
 		else:
 			display += "_"
-	name_label.text = "ENTER NAME: " + display #TODO: reemplazar por valores en json 
+	name_label.text =  ranking_labels["ranking"]["name"] + " " + display 
 
 func store_in_ranking(username: String, score_value: int):
 	ranking.append({"name": username, "score": score_value})

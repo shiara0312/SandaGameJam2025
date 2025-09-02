@@ -8,8 +8,12 @@
 			"sfx": "SFX",
 			"musica":"Música",
 			"idioma":"Idioma",
-			"resolucion":"Resolución de Pantalla"
-			},
+			"resolucion":"Resolución de Pantalla",
+			"ranking": {
+				"name": "NOMBRE:",
+				"score": "PUNTAJE:",
+				}
+		},
 	"en":
 		{
 			"jugar": "PLAY",
@@ -19,7 +23,11 @@
 			"sfx": "SFX",
 			"musica":"Music",
 			"idioma":"Language",
-			"resolucion":"Screen Resolution"
+			"resolucion":"Screen Resolution",
+			"ranking": {
+				"name": "NAME:",
+				"score": "SCORE:",
+				}
 		},
 	"fr":
 		{
@@ -30,6 +38,10 @@
 			"sfx":"SFX",
 			"musica":"Musique",
 			"idioma":"Langue",
-			"resolucion":"Résolution d’écran"
+			"resolucion":"Résolution d’écran",
+			"ranking": {
+				"name": "NOM:",
+				"score": "SCORE:",
+				}
 		}
 }
