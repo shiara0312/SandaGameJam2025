@@ -5,8 +5,10 @@ extends Control
 @onready var message = $Message
 @onready var score_panel = $ScorePanel
 @onready var newton = $Newton
+@onready var score_container = $ScoreContainer
 @onready var score_label = $ScoreContainer/Score
 @onready var name_label = $ScoreContainer/Name
+@onready var ranking_container = $RankingContainer 
 
 # Preloads de texturas
 @onready var bg_win   = preload("res://assets/backgrounds/win.png")
@@ -14,6 +16,7 @@ extends Control
 @onready var bg_time  = preload("res://assets/backgrounds/timeup.png")
 @onready var newton_fail = preload("res://assets/sprites/newtown/newton_sad.png")
 @onready var newton_win = preload("res://assets/sprites/newtown/newton_happy.png")
+@onready var ranking_label_settings: LabelSettings = preload("res://custom_resources/Ranking.tres")
 
 @onready var msg_time = {
 	"es" : preload("res://assets/UI/timeup_message_es.png"),
@@ -36,6 +39,7 @@ extends Control
 var score: int = 100
 var max_name_length: int = 6
 var current_name: Array = []
+var ranking: Array = []
 
 func _ready():
 	if GlobalManager.satisfied_customers.size() == 0:
@@ -59,7 +63,7 @@ func _input(event: InputEvent) -> void:
 				show_name_label()
 			# Borrar letra
 		elif event.keycode == KEY_ENTER and current_name.size() > 0:
-				store_score()
+				store_in_ranking("".join(current_name), score)
 				show_ranking()
 	
 # state puede ser: "win", "lose", "timeup"
@@ -95,11 +99,29 @@ func show_name_label():
 			display += "_"
 	name_label.text = "ENTER NAME: " + display #TODO: reemplazar por valores en json 
 
-func store_score():
-	print("storing.. ")
+func store_in_ranking(username: String, score_value: int):
+	ranking.append({"name": username, "score": score_value})
+	# Ordenar de mayor a menor score
+	ranking.sort_custom(func(a, b): return b.score - a.score)
+	if ranking.size() > 10:
+		ranking = ranking.slice(0, 10)
 
 func show_ranking():
-	print("show ranking list")
+	message.visible = false
+	score_container.visible = false
+	
+	for child in ranking_container.get_children():
+		child.queue_free()
+	
+	# Crear un label por cada item en ranking
+	for i in range(ranking.size()):
+		var entry = ranking[i]
+		var label = Label.new()
+		label.text = str(i+1)+". " + entry.name +" - " + str(entry.score)
+		label.label_settings = ranking_label_settings
+		ranking_container.add_child(label)
+		
+	ranking_container.visible = true
 	
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "final_sequence":
