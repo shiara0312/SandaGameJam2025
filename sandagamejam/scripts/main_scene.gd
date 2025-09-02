@@ -45,7 +45,7 @@ func set_button_labels() -> void:
 	else:
 		push_error("No se pudo abrir el archivo JSON.")
 
-func _on_language_changed(new_lang: String) -> void:
+func _on_language_changed() -> void:
 	# Cuando GlobalManager emite la señal, refrescar etiquetas
 	set_button_labels()
 
