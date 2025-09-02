@@ -5,6 +5,8 @@ extends Control
 @onready var message = $Message
 @onready var score_panel = $ScorePanel
 @onready var newton = $Newton
+@onready var score_label = $ScoreContainer/Score
+@onready var name_label = $ScoreContainer/Name
 
 # Preloads de texturas
 @onready var bg_win   = preload("res://assets/backgrounds/win.png")
@@ -31,6 +33,34 @@ extends Control
 	"fr" : preload("res://assets/UI/game_over_message_fr.png")
 }
 
+#Score: 100
+#Enter name: MELLS_ (MAX 6 characteres)
+var score: int = 100
+var max_name_length: int = 6
+var current_name: Array = []
+
+func _ready():
+	score = 200 #TODO: calcular el score
+	score_label.text = "SCORE: " + str(score) #TODO: "SCORE: cargar de json"
+	show_name_label()
+	
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		#a-z y A-Z
+		if (event.unicode >= 65 and event.unicode <=90) or (event.unicode >= 97 and event.unicode <= 122):
+			var char_typed = char(event.unicode).to_upper()
+			if current_name.size() < max_name_length:
+				current_name.append(char_typed)
+				show_name_label()
+			# Luego del enter
+		elif event.keycode == KEY_BACKSPACE and current_name.size() > 0:
+				current_name.pop_back()
+				show_name_label()
+			# Borrar letra
+		elif event.keycode == KEY_ENTER and current_name.size() > 0:
+				store_score()
+				show_ranking()
+	
 # state puede ser: "win", "lose", "timeup"
 func show_final_screen(state: GlobalManager.GameState):
 	AudioManager.stop_game_music()
@@ -54,6 +84,22 @@ func show_final_screen(state: GlobalManager.GameState):
 			AudioManager.play_game_over_sfx()
 	
 	anim.play("final_sequence")
+	
+func show_name_label():
+	print("mostrando nombre.. ", current_name)
+	var display = ""
+	for i in range(max_name_length):
+		if i < current_name.size():
+			display += current_name[i] + ""
+		else:
+			display += "_"
+	name_label.text = "ENTER NAME: " + display #TODO: reemplazar por valores en json 
+
+func store_score():
+	print("storing.. ")
+
+func show_ranking():
+	print("show ranking list")
 	
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "final_sequence":

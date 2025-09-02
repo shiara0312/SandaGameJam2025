@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://i5q50xw1j3v2"]
+
+[ext_resource type="FontFile" uid="uid://crpc3lwujufom" path="res://assets/fonts/Libre_Baskerville/LibreBaskerville-Bold.ttf" id="1_0ld3j"]
+
+[resource]
+font = ExtResource("1_0ld3j")
+font_size = 35
+font_color = Color(0.368627, 0.294118, 0.298039, 1)
+outline_size = 4
+outline_color = Color(0.201547, 0.154855, 0.157348, 1)
+shadow_size = 0
