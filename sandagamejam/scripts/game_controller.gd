@@ -180,8 +180,7 @@ func show_netown_feedback():
 		AudioManager.play_wrong_recipe_sfx()
 		newton_moods_sprite.texture = preload("res://assets/sprites/newtown/newton_sad.png")
 	
-	#TODO: actualizar el texto segun corresponda 
-	continue_btn_label.text = "Entiendo..." 
+	continue_btn_label.text = GlobalManager.btn_continuar_label
 	continue_button.visible = true
 
 func check_recipe() -> Dictionary:

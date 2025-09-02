@@ -14,8 +14,6 @@ func _ready():
 	if GlobalManager.has_signal("language_changed"):
 		GlobalManager.language_changed.connect(_on_language_changed)
 
-# TODO: Cuando se elige un idioma, llamar set_button_labels
-
 func set_button_labels() -> void:	
 	# Seteando labels segun el idioma
 	#print("Seteando labels para idioma:", GlobalManager.game_language)

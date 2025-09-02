@@ -2,10 +2,8 @@
 
 [ext_resource type="Script" uid="uid://c2yno5nwb6hlr" path="res://credits.gd" id="1_g4wvt"]
 [ext_resource type="Texture2D" uid="uid://ctcgekq2gtx1v" path="res://assets/UI/back.png" id="2_c1t8d"]
+[ext_resource type="Texture2D" uid="uid://bp4takne0jvo1" path="res://assets/backgrounds/credits_bg.png" id="2_d2vv3"]
 [ext_resource type="Theme" uid="uid://b43q23bmf727" path="res://custom_resources/Credits.tres" id="3_5jxb4"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1t8d"]
-bg_color = Color(0.976177, 0.780522, 0.168616, 1)
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -16,11 +14,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g4wvt")
 
-[node name="background" type="Panel" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
-offset_right = 1154.0
-offset_bottom = 643.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_c1t8d")
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_d2vv3")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

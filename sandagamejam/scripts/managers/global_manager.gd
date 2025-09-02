@@ -28,6 +28,7 @@ var btn_help_customer_label = ""
 var btn_reject_recipe_label = ""
 var btn_choose_recipe_label = ""
 var btn_cook_recipe_label = ""
+var btn_continuar_label = ""
 
 # Estados del cliente
 enum State { ENTERING, SEATED, FAIL, SUCCESS }
@@ -146,6 +147,7 @@ func load_button_labels():
 		btn_reject_recipe_label = interaction_texts[game_language]["reject_recipe"]
 		btn_choose_recipe_label = interaction_texts[game_language]["choose_recipe"]
 		btn_cook_recipe_label = interaction_texts[game_language]["newton_cook"]
+		btn_continuar_label = interaction_texts[game_language]["continue"]
 	else:
 		btn_listen_customer_label = "Customer"
 		btn_help_customer_label = "Help"
@@ -179,6 +181,6 @@ func set_language(nuevo_idioma: String) -> void:
 
 func cambiar_idioma(nuevo_idioma: String) -> void:
 	game_language = nuevo_idioma
-	load_texts()            # Recarga TODOS los textos
+	load_texts()            # Recarga todos los textos
 	load_button_labels()    # Recarga labels de botones
 	emit_signal("idioma_cambiado", game_language) # Notificar a todas las escenas activas

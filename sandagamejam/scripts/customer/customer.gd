@@ -7,7 +7,7 @@ signal listen_customer_pressed
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var btn_listen : TextureButton = $BtnListen
 @onready var sfx_entering : AudioStreamPlayer = $SFXEntering
-@export var speed: float = 300.0 #DEBUG: 500.0
+@export var speed: float = 300.0
 
 const BASE_VIEWPORT = Vector2(1152, 648)
 const BASE_START_X = -200
