@@ -189,8 +189,9 @@ func generate_arr(base: Array, base_len: int) -> Array:
 	# Agregar ingredientes falsos (0 o más)
 	add_random_ingredients(result, GlobalManager.fake_ingredients)
 
-	# Agregar 0 o 1 ingrediente gravitational (opcional)
-	add_random_ingredients(result, GlobalManager.gravitational_ingredients)
+	# Agregar 0 o 1 ingrediente gravitational solo si no se ha llegado al tope de vidas
+	if GlobalManager.lives < GlobalManager.max_lives:
+		add_random_ingredients(result, GlobalManager.gravitational_ingredients)
 	
 	# Completar hasta base_len con ingredientes aleatorios de los reales
 	while result.size() < base_len:
