@@ -10,9 +10,14 @@
 			"idioma":"Idioma",
 			"resolucion":"Resolución de Pantalla",
 			"ranking": {
-				"name": "NOMBRE:",
-				"score": "PUNTAJE:",
-				}
+				"name": "Tu nombre:",
+				"score": "Puntaje:",
+				},
+			"final_screen": {
+				"win": "¡Bien!",
+				"time_up": "¡Tiempo!",
+				"game_over": "¡Ay no! :(",
+			}
 		},
 	"en":
 		{
@@ -25,9 +30,14 @@
 			"idioma":"Language",
 			"resolucion":"Screen Resolution",
 			"ranking": {
-				"name": "NAME:",
-				"score": "SCORE:",
-				}
+				"name": "Your name:",
+				"score": "Score:",
+				},
+			"final_screen": {
+				"win": "Win!",
+				"time_up": "Time's up!",
+				"game_over": "Oh no! :(",
+			}
 		},
 	"fr":
 		{
@@ -40,8 +50,13 @@
 			"idioma":"Langue",
 			"resolucion":"Résolution d’écran",
 			"ranking": {
-				"name": "NOM:",
-				"score": "SCORE:",
-				}
+				"name": "Ton nom:",
+				"score": "Score:",
+				},
+			"final_screen": {
+				"win": "Bravo!",
+				"time_up": "Trop!",
+				"game_over": "Oh non :("
+			}
 		}
 }
