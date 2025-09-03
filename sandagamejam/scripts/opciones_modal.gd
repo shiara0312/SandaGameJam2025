@@ -1,3 +1,4 @@
+# opciones_modal.gd
 extends Control
 
 @onready var slider_musica := $MusicaSlider
@@ -66,30 +67,23 @@ func _ready():
 			idioma_button.select(i)
 			break
 
-	# 🔊 Inicializar sliders con valores actuales de audio
-	var vol_musica_db = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))
-	var vol_sfx_db = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("SFX"))
+	# 🔊 Inicializar sliders con valores guardados en GlobalManager
+	slider_musica.value = GlobalManager.music_volume * 100
+	slider_sfx.value = GlobalManager.sfx_volume * 100
 
-	# Si el bus está en -80 dB (muteado por default), arrancamos en 100%
-	if vol_musica_db <= -79.0:
-		slider_musica.value = 100.0
-	else:
-		slider_musica.value = db_to_linear(vol_musica_db) * 100.0
-
-	if vol_sfx_db <= -79.0:
-		slider_sfx.value = 100.0
-	else:
-		slider_sfx.value = db_to_linear(vol_sfx_db) * 100.0
+	# Aplicar volúmenes a los buses (por si cambiaste escena)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(GlobalManager.music_volume))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(GlobalManager.sfx_volume))
 
 	_actualizar_labels()
 
 func _on_musica_changed(value: float) -> void:
 	var vol = clamp(value / 100.0, 0.0, 1.0)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(vol))
+	GlobalManager.set_music_volume(vol)  # Actualiza bus y guarda persistencia
 
 func _on_sfx_changed(value: float) -> void:
 	var vol = clamp(value / 100.0, 0.0, 1.0)
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(vol))
+	GlobalManager.set_sfx_volume(vol)    # Actualiza bus y guarda persistencia
 
 func _on_resolucion_selected(index: int) -> void:
 	if index < resoluciones.size():
