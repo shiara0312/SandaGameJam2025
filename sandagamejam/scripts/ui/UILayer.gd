@@ -1,5 +1,5 @@
 #UILayer
-#HUD + manager de mensajes y botones,
+#HUD + manager de mensajes y botones
 extends CanvasLayer
 
 @onready var game_hud : Control = null
@@ -8,8 +8,16 @@ extends CanvasLayer
 @export var pause_texture: Texture
 @export var play_texture: Texture
 @onready var timer_label: Label = $GameHUD/HUDContainer/TimerLabel
+#Enciclopedia -> TODO: cambiar a una escena independiente
+@onready var encyclopedia_ui = $EncyclopediaUI
+@onready var tools_btn = $ToolsBtn
+@onready var tab_container = $EncyclopediaUI/Panel/TabContainer
+@onready var ingredients_box = $EncyclopediaUI/Panel/TabContainer/IngredientsTab/VBoxContainer
+@onready var characters_box = $EncyclopediaUI/Panel/TabContainer/CharactersTab/MarginContainer/VBoxContainer
+var font = load("res://assets/fonts/Macondo/Macondo-Regular.ttf")
 
 var typing_speed := 0.01
+var characters_data = null
 
 func _ready() -> void:
 	self.layer = 0
@@ -36,6 +44,13 @@ func _ready() -> void:
 	if GameController.has_signal("ingredients_minigame_finished"):
 		GameController.connect("ingredients_minigame_finished", Callable(self, "_on_ingredients_minigame_exit"))
 	
+	
+	# Datos para la enciclopedia
+	characters_data = FileHelper.read_data_from_file("res://i18n/characters_moods.json")
+	characters_data = characters_data["characters"]
+	_build_tabs()
+
+
 func show_hud():
 	if not game_hud:
 		return
@@ -92,6 +107,7 @@ func invest_label_colors():
 		timer_label.add_theme_color_override("font_outline_color", font_color)
 		timer_label.add_theme_constant_override("outline_size", 6)
 
+# Ayudar al cliente
 func _on_btn_help_pressed() -> void:
 	AudioManager.play_click_sfx()
 	AudioManager.stop_customer_sfx()
@@ -108,9 +124,111 @@ func _on_pause_btn_pressed() -> void:
 	else:
 		get_tree().paused = true
 		pause_btn.texture_normal = play_texture
-
+	
 func _on_hide_ui():
 	visible = false
 
 func _on_ingredients_minigame_exit() -> void:
 	invest_label_colors()
+	
+# Funciones para la enciclopedia:
+func _on_tools_btn_pressed() -> void:
+	encyclopedia_ui.visible = true
+	get_tree().paused = true
+
+func _on_close_btn_pressed() -> void:
+	encyclopedia_ui.visible = false
+	get_tree().paused = false
+
+func _build_tabs():
+	var lang = GlobalManager.game_language
+	# Limpia todos los hijos antes de reconstruir
+	for child in characters_box.get_children():
+		child.queue_free()
+	
+	for chart in characters_data:
+		var hbox = HBoxContainer.new()
+		
+		# Sprite
+		var sprite_path = "res://assets/sprites/customers/%s_happy.png" % chart["id"]
+		var tex = load(sprite_path)
+		if tex:
+			var tex_rect = TextureRect.new()
+			tex_rect.texture = tex
+			tex_rect.custom_minimum_size = Vector2(250, 250)
+			tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			tex_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+			hbox.add_child(tex_rect)
+		
+		# Textos
+		var vbox = VBoxContainer.new()
+		vbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+
+		# Nombre
+		var name_label = Label.new()
+		name_label.text = chart["name"].get(lang, chart["name"]["en"])
+		name_label.add_theme_font_size_override("font_size", 18)
+		
+		# Especialidad
+		var esp_label = Label.new()
+		esp_label.text = str(chart["specialty"][GlobalManager.game_language])
+		
+		# Descripcion
+		var desc_label = Label.new()
+		desc_label.text = str(chart["description"][GlobalManager.game_language])
+		desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		desc_label.custom_minimum_size = Vector2(500, 0)
+		
+		vbox.add_child(name_label)
+		vbox.add_child(esp_label)
+		vbox.add_child(desc_label)
+		hbox.add_child(vbox)
+
+		# Agregar fila al VBox principal
+		characters_box.add_child(hbox)
+		apply_font_to_labels(characters_box, font, 24)
+
+func populate_ingredients_list(vbox: VBoxContainer) -> void:
+	vbox.queue_free_children()
+
+	# Concatenar todos los ingredientes en una sola lista
+	var all_ingredients = []
+	all_ingredients += GlobalManager.all_ingredients
+	all_ingredients += GlobalManager.fake_ingredients
+	all_ingredients += GlobalManager.gravitational_ingredients
+
+	for ing in all_ingredients:
+		var hbox = HBoxContainer.new()
+		hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		hbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+
+		# Imagen
+		var sprite_path = "res://assets/pastry/ingredients/%s.png" % ing["id"]
+		var tex = load(sprite_path)
+		if tex:
+			var tex_rect = TextureRect.new()
+			tex_rect.texture = tex
+			tex_rect.custom_minimum_size = Vector2(64, 64)
+			tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
+			hbox.add_child(tex_rect)
+
+		# Texto
+		var label = Label.new()
+		label.text = ing["name"].get("es", ing["id"])
+		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		hbox.add_child(label)
+
+		vbox.add_child(hbox)
+
+
+func apply_font_to_labels(node: Node, font: FontFile, size: int = 16) -> void:
+	for child in node.get_children():
+		if child is Label:
+			child.add_theme_font_override("font", font)
+			child.add_theme_font_size_override("font_size", size)
+		elif child.get_child_count() > 0:
+			# Aplicar también a hijos dentro de sub-contenedores
+			apply_font_to_labels(child, font, size)
