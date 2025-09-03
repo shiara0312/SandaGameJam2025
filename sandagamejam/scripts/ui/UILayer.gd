@@ -46,10 +46,36 @@ func _ready() -> void:
 	
 	
 	# Datos para la enciclopedia
-	characters_data = FileHelper.read_data_from_file("res://i18n/characters_moods.json")
-	characters_data = characters_data["characters"]
-	populate_characters_list()
-	populate_ingredients_list(ingredients_box)
+	#characters_data = FileHelper.read_data_from_file("res://i18n/characters_moods.json")
+	#characters_data = characters_data["characters"]
+	#populate_characters_list()
+	#populate_ingredients_list(ingredients_box)
+	# Characters
+	characters_data = FileHelper.read_data_from_file("res://i18n/characters_moods.json")["characters"]
+	populate_list(
+		characters_box,
+		characters_data,
+		"res://assets/sprites/customers/%s_happy.png",
+		Vector2(250, 250),
+		Vector2(250, 250), # sprite_min_size
+		Vector2(500, 0)    # text_min_size
+	)
+
+	# Ingredients
+	var all_ingredients = []
+	all_ingredients += GlobalManager.all_ingredients
+	all_ingredients += GlobalManager.fake_ingredients
+	all_ingredients += GlobalManager.gravitational_ingredients
+
+	populate_list(
+		ingredients_box,
+		all_ingredients,
+		"res://assets/pastry/ingredients/%s.png",
+		Vector2(250, 120),
+		Vector2(250, 120), # sprite_min_size
+		Vector2(400, 0)    # text_min_size
+	)
+
 
 func show_hud():
 	if not game_hud:
@@ -260,6 +286,84 @@ func populate_ingredients_list(vbox: VBoxContainer) -> void:
 		
 		apply_font_to_labels(vbox, font, 24)
 
+func populate_list(
+	box: VBoxContainer,
+	data: Array,
+	sprite_path_format: String,
+	sprite_size: Vector2,
+	sprite_min_size: Vector2 = Vector2(100, 100),
+	text_min_size: Vector2 = Vector2(400, 0)
+) -> void:
+	# Limpia primero
+	for child in box.get_children():
+		child.queue_free()
+
+	var lang = GlobalManager.game_language
+
+	for entry in data:
+		var hbox = HBoxContainer.new()
+		hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		hbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		hbox.custom_minimum_size = Vector2(0, sprite_size.y) #Vector2(0, 120)
+
+		# Imagen
+		var img_container = Control.new()
+		img_container.custom_minimum_size = sprite_size
+		img_container.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		img_container.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+
+		var sprite_path = sprite_path_format % entry["id"]
+		#print("sprite_path ", sprite_path)
+		if not FileAccess.file_exists(sprite_path):
+			push_warning("Sprite not found: %s" % sprite_path)
+		else: 
+			var tex = load(sprite_path)
+			#print("tex ", tex)
+			if tex == null:
+				push_warning("Loaded resource is null: %s" % sprite_path)
+			else:
+				var tex_rect = TextureRect.new()
+				tex_rect.texture = tex
+				tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+				tex_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+				tex_rect.custom_minimum_size = sprite_min_size
+				tex_rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+				tex_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+				img_container.add_child(tex_rect)
+
+		hbox.add_child(img_container)
+
+		# Textos
+		var text_vbox = VBoxContainer.new()
+		text_vbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+
+		# Nombre
+		var name_label = Label.new()
+		name_label.text = entry["name"].get(lang, entry["id"])
+		name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		name_label.custom_minimum_size = text_min_size
+		text_vbox.add_child(name_label)
+		
+		# Descripción
+		if "specialty" in entry:
+			var desc_label = Label.new()
+			desc_label.text = entry["specialty"].get(lang, entry["id"])
+			desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			desc_label.custom_minimum_size = text_min_size
+			text_vbox.add_child(desc_label)
+			
+		# Descripción
+		if "description" in entry:
+			var desc_label = Label.new()
+			desc_label.text = entry["description"].get(lang, entry["id"])
+			desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			desc_label.custom_minimum_size = text_min_size
+			text_vbox.add_child(desc_label)
+
+		hbox.add_child(text_vbox)
+		box.add_child(hbox)
+
+	apply_font_to_labels(box, font, 24)
 
 func apply_font_to_labels(node: Node, label_font: FontFile, size: int = 16) -> void:
 	for child in node.get_children():
