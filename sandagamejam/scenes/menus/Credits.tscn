@@ -44,9 +44,12 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+layout_mode = 2
 
 [connection signal="pressed" from="close_button" to="." method="_on_close_button_pressed"]
