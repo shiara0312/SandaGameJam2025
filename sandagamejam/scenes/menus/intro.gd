@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var btn_start: TextureButton = $Comenzar_Game
-@onready var btn_back: Button = $BtnBack   # si tienes un botón volver
+@onready var btn_back: Button = $BtnBack if has_node("BtnBack") else null # si tienes un botón volver
 
 func _ready():
 	# Conectar señales de los botones
@@ -14,9 +14,6 @@ func _on_btn_start_pressed():
 	AudioManager.play_click_sfx()
 
 	var level_1_path = "res://scenes/levels/PastryLevel1.tscn"
-
-	# Cambia la escena al primer nivel
-	get_tree().change_scene_to_file(level_1_path)
 
 	# Inicia el juego en tus managers
 	GlobalManager.start_game()

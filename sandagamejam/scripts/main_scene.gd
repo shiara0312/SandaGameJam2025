@@ -48,8 +48,9 @@ func _on_language_changed() -> void:
 func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		AudioManager.play_click_sfx()
-		#SOLO cambio de escena al Intro
-		get_tree().change_scene_to_file("res://scenes/menus/intro.tscn")
+		GameController.free_children(GameController.current_scene_container)
+		var intro_path = "res://scenes/menus/intro.tscn"
+		GameController.load_level(intro_path)
 
 func _on_creditos_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
