@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=3 uid="uid://0nbfgsjfecy8"]
 
 [ext_resource type="Script" uid="uid://3qg5qwd7ie6j" path="res://scripts/levels/minigame_overlay.gd" id="1_jh425"]
-[ext_resource type="Texture2D" uid="uid://bd7sqrxqdcj80" path="res://assets/recipes/receta_texture.png" id="2_e7l36"]
-[ext_resource type="Texture2D" uid="uid://bewfpvnniqv3d" path="res://assets/recipes/receta-btn.png" id="3_t45b2"]
-[ext_resource type="Texture2D" uid="uid://8fgc3hisuaob" path="res://assets/recipes/receta-btn-pressed.png" id="4_3ueo8"]
+[ext_resource type="Texture2D" uid="uid://bd7sqrxqdcj80" path="res://assets/UI/receta_texture.png" id="2_e7l36"]
+[ext_resource type="Texture2D" uid="uid://bewfpvnniqv3d" path="res://assets/UI/receta-btn.png" id="3_t45b2"]
+[ext_resource type="Texture2D" uid="uid://8fgc3hisuaob" path="res://assets/UI/receta-btn-pressed.png" id="4_3ueo8"]
 [ext_resource type="Texture2D" uid="uid://h8fdael1b70m" path="res://assets/pastry/recipes/recipe_001.png" id="5_e7l36"]
 [ext_resource type="Texture2D" uid="uid://dfr4wl37n1av4" path="res://assets/pastry/recipes/recipe_002.png" id="6_ww4g8"]
 [ext_resource type="Texture2D" uid="uid://j5x08ntmqrit" path="res://assets/pastry/recipes/recipe_003.png" id="7_70k8r"]
