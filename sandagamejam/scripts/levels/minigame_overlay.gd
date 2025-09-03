@@ -117,10 +117,10 @@ func animate_ingredients(ingr_loop: Array) -> void:
 
 	var start_x := recollect_container.position.x + recollect_container.size.x + 100
 	var end_x := recollect_container.position.x
-	var spacing := 200
+	var spacing := 170
 	var duration := 4.0
 	var y := 100
-	var spawn_interval := 1.0  # tiempo entre aparición de cada ingrediente
+	var spawn_interval := 0.90  # tiempo entre aparición de cada ingrediente
 
 	for i in range(ingr_loop.size()):
 		var ing_id = ingr_loop[i]
@@ -151,7 +151,7 @@ func create_ingredient_wrapper(ingredient_id: String, is_clickable: bool = false
 		
 	# Wrapper (para escalarlo)
 	var wrapper = Control.new()
-	wrapper.custom_minimum_size = tex.get_size() * 0.25
+	wrapper.custom_minimum_size = tex.get_size() * 0.35 if is_clickable else tex.get_size() * 0.25
 	wrapper.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	wrapper.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 
