@@ -198,7 +198,7 @@ func generate_arr(base: Array, base_len: int) -> Array:
 		result.append(rand)
 	
 	shuffle_array(result)
-	print("result.. ", result)
+
 	return result
 
 func shuffle_array(arr: Array) -> void:
@@ -210,7 +210,7 @@ func shuffle_array(arr: Array) -> void:
 		arr[j] = temp
 
 func add_random_ingredients(result: Array, source_array: Array, max_count: int) -> void:
-	var count = randi() % (max_count + 1)
+	var count = 2 #TODO: incrementar segun cada nivel, randi() % (max_count + 1)
 	for i in range(count):
 		var ing = source_array[randi() % source_array.size()]
 		result.append(ing.id)
