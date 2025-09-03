@@ -5,6 +5,9 @@ extends Control
 @onready var btn_opciones : Area2D = $Opciones
 @onready var btn_salir : TextureButton = $Salir
 
+
+var intro_game = preload ("res://scenes/menus/intro.tscn")
+
 func _ready():
 	set_button_labels()
 	var cursor_texture = preload("res://assets/UI/hand_point.png")
@@ -49,6 +52,7 @@ func _on_language_changed() -> void:
 
 func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
+		
 		AudioManager.play_click_sfx()
 		var level_1_path = "res://scenes/levels/PastryLevel1.tscn"
 		GlobalManager.start_game()

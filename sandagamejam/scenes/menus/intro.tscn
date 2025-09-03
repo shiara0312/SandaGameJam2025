@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ebvprw6pexo2"]
+
+[ext_resource type="Script" uid="uid://cd2svseh483m6" path="res://scenes/menus/intro.gd" id="1_1a7bk"]
+[ext_resource type="Texture2D" uid="uid://4gn8d3o5xhsq" path="res://assets/backgrounds/credits_bg.png" id="2_sh6lv"]
+
+[node name="Intro" type="Node2D"]
+script = ExtResource("1_1a7bk")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_sh6lv")
