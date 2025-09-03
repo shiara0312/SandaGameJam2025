@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bubpqw3sw6cvj"]
+[gd_scene load_steps=16 format=3 uid="uid://bubpqw3sw6cvj"]
 
 [ext_resource type="Script" uid="uid://d0bteqdbb1gsl" path="res://scripts/ui/UILayer.gd" id="1_nbl3c"]
 [ext_resource type="Script" uid="uid://ty3s5g4vlkh6" path="res://scripts/ui/GameHUD.gd" id="2_namiw"]
@@ -13,12 +13,21 @@
 [ext_resource type="LabelSettings" uid="uid://jdv1bfj4iff7" path="res://custom_resources/InteractionButtonLabels.tres" id="10_hhtea"]
 [ext_resource type="Texture2D" uid="uid://blhi537qcthh0" path="res://assets/UI/pause_btn.png" id="11_tqcr1"]
 [ext_resource type="Texture2D" uid="uid://2n1ol4pwkj0p" path="res://assets/backgrounds/level1.png" id="13_evnnp"]
+[ext_resource type="Texture2D" uid="uid://cvalstby0pdu1" path="res://assets/UI/tools-btn.png" id="14_hni0w"]
+[ext_resource type="Texture2D" uid="uid://b810rbfrnlq87" path="res://assets/UI/close-btn.png" id="15_5wsmn"]
 
 [node name="UILayer" type="CanvasLayer"]
 layer = 10
 script = ExtResource("1_nbl3c")
 pause_texture = ExtResource("11_tqcr1")
 play_texture = ExtResource("3_hhtea")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+texture = ExtResource("13_evnnp")
 
 [node name="GameHUD" type="Control" parent="."]
 z_index = 10
@@ -152,11 +161,81 @@ offset_right = 1118.0
 offset_bottom = 76.0
 texture_normal = ExtResource("11_tqcr1")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="ToolsBtn" type="TextureButton" parent="."]
+process_mode = 3
+offset_left = 36.0
+offset_top = 27.0
+offset_right = 112.0
+offset_bottom = 98.0
+scale = Vector2(0.65, 0.65)
+texture_normal = ExtResource("14_hni0w")
+
+[node name="EncyclopediaUI" type="Control" parent="."]
 visible = false
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("13_evnnp")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="EncyclopediaUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TabContainer" type="TabContainer" parent="EncyclopediaUI/Panel"]
+process_mode = 2
+layout_mode = 0
+offset_top = 100.0
+offset_right = 1154.0
+offset_bottom = 648.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("5_1xo4o")
+current_tab = 0
+
+[node name="IngredientsTab" type="ScrollContainer" parent="EncyclopediaUI/Panel/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="EncyclopediaUI/Panel/TabContainer/IngredientsTab"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EncyclopediaUI/Panel/TabContainer/IngredientsTab/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="CharactersTab" type="ScrollContainer" parent="EncyclopediaUI/Panel/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="EncyclopediaUI/Panel/TabContainer/CharactersTab"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EncyclopediaUI/Panel/TabContainer/CharactersTab/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="CloseBtn" type="TextureButton" parent="EncyclopediaUI"]
+process_mode = 2
+layout_mode = 0
+offset_left = 1048.0
+offset_top = 24.0
+offset_right = 1124.0
+offset_bottom = 95.0
+texture_normal = ExtResource("15_5wsmn")
 
 [connection signal="pressed" from="GameHUD/MessageTexture/BtnHelp" to="." method="_on_btn_help_pressed"]
 [connection signal="pressed" from="PauseBtn" to="." method="_on_pause_btn_pressed"]
+[connection signal="pressed" from="ToolsBtn" to="." method="_on_tools_btn_pressed"]
+[connection signal="pressed" from="EncyclopediaUI/CloseBtn" to="." method="_on_close_btn_pressed"]
