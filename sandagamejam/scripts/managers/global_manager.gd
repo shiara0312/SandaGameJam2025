@@ -1,7 +1,7 @@
 # GlobalManager.gd
 extends Node
 
-signal lives_changed(new_lives)
+signal lives_changed(new_lives, maxi)
 signal time_changed(new_time)
 signal time_up
 signal game_over
