@@ -1,12 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://ebvprw6pexo2"]
+[gd_scene load_steps=4 format=3 uid="uid://ebvprw6pexo2"]
 
 [ext_resource type="Script" uid="uid://cd2svseh483m6" path="res://scenes/menus/intro.gd" id="1_1a7bk"]
-[ext_resource type="Texture2D" uid="uid://4gn8d3o5xhsq" path="res://assets/backgrounds/credits_bg.png" id="2_sh6lv"]
+[ext_resource type="Texture2D" uid="uid://djl26wfwn7u1a" path="res://assets/UI/intro_game.png" id="2_1a7bk"]
+[ext_resource type="Texture2D" uid="uid://bucjn7pqe12yt" path="res://assets/UI/interact-btn.png" id="3_sh6lv"]
 
 [node name="Intro" type="Node2D"]
 script = ExtResource("1_1a7bk")
 
-[node name="Background" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("2_sh6lv")
+[node name="IntroGame" type="Sprite2D" parent="."]
+position = Vector2(584.5, 321.5)
+scale = Vector2(0.374196, 0.370895)
+texture = ExtResource("2_1a7bk")
+
+[node name="Comenzar_Game" type="TextureButton" parent="."]
+offset_left = 220.0
+offset_top = 473.0
+offset_right = 467.0
+offset_bottom = 549.0
+texture_normal = ExtResource("3_sh6lv")
+
+[node name="Label" type="Label" parent="Comenzar_Game"]
+layout_mode = 0
+offset_left = 106.0
+offset_top = 26.0
+offset_right = 147.0
+offset_bottom = 49.0
+text = "Jugar"
