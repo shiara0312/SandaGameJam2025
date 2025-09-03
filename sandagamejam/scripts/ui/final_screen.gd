@@ -11,9 +11,8 @@ extends Control
 @onready var ranking_container = $RankingContainer 
 
 # Preloads de texturas
-@onready var bg_win   = preload("res://assets/backgrounds/win.png")
-@onready var bg_lose  = preload("res://assets/backgrounds/game_over.png")
-@onready var bg_time  = preload("res://assets/backgrounds/timeup.png")
+@onready var bg_win   = preload("res://assets/backgrounds/good_score_bg.png")
+@onready var bg_lose  = preload("res://assets/backgrounds/bad_score_bg.png")
 @onready var newton_fail = preload("res://assets/sprites/newtown/newton_sad.png")
 @onready var newton_win = preload("res://assets/sprites/newtown/newton_happy.png")
 @onready var ranking_label_settings: LabelSettings = preload("res://custom_resources/Ranking.tres")
@@ -76,7 +75,7 @@ func show_final_screen(state: GlobalManager.GameState):
 	var lang = GlobalManager.game_language
 	match state:
 		GlobalManager.GameState.TIMEUP:
-			bg.texture = bg_time
+			bg.texture = bg_lose
 			newton.texture = newton_fail
 			message.texture = msg_time.get(lang, msg_time["es"])
 			AudioManager.play_time_up_sfx()
