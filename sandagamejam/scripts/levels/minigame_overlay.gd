@@ -187,10 +187,10 @@ func generate_arr(base: Array, base_len: int) -> Array:
 	var result = base.duplicate()
 
 	# Agregar ingredientes falsos (0 o más)
-	add_random_ingredients(result, GlobalManager.fake_ingredients, GlobalManager.fake_ingredients.size())
+	add_random_ingredients(result, GlobalManager.fake_ingredients)
 
 	# Agregar 0 o 1 ingrediente gravitational (opcional)
-	add_random_ingredients(result, GlobalManager.gravitational_ingredients, GlobalManager.gravitational_ingredients.size())
+	add_random_ingredients(result, GlobalManager.gravitational_ingredients)
 	
 	# Completar hasta base_len con ingredientes aleatorios de los reales
 	while result.size() < base_len:
@@ -209,7 +209,7 @@ func shuffle_array(arr: Array) -> void:
 		arr[i] = arr[j]
 		arr[j] = temp
 
-func add_random_ingredients(result: Array, source_array: Array, max_count: int) -> void:
+func add_random_ingredients(result: Array, source_array: Array) -> void:
 	var count = 2 #TODO: incrementar segun cada nivel, randi() % (max_count + 1)
 	for i in range(count):
 		var ing = source_array[randi() % source_array.size()]

@@ -30,6 +30,13 @@ var current_minigame: Node = null
 var newton_original_scale: Vector2 = Vector2(0.22, 0.22)
 var newton_original_pos: Vector2 = Vector2(978.0, 472)
 
+# Diccionario de equivalencias normales → gravitacionales
+var gravitational_equivalents = {
+	"ing_002": ["ing_202"],  # Apple → Falling Apple
+	"ing_005": ["ing_205"],  # Sugar → Gravity Sugar
+	"ing_007": ["ing_207"]   # Honey → Sticky Fall Honey
+}
+
 func _ready():
 	newton_layer.visible = false
 	GlobalManager.connect("time_up", Callable(self, "_on_time_up"))
@@ -210,12 +217,14 @@ func check_recipe() -> Dictionary:
 	var selected_recipe_mood = GlobalManager.selected_recipe_data["mood"]
 	var collected_ingredients = GlobalManager.collected_ingredients
 	var customer_mood = GlobalManager.current_customer["mood_id"]
-	
+	print("selected_recipe_ingredients: ", selected_recipe_ingredients)
+	print("collected_ingredients: ", collected_ingredients)
 	# Selecciono receta correcta?
 	var correct_recipe_selected = true if selected_recipe_mood == customer_mood else false
 	# Recolectó todos los ingredientes?
-	var is_exact_match = arrays_match(collected_ingredients, selected_recipe_ingredients)	
+	var is_exact_match = arrays_match_with_gravity(collected_ingredients, selected_recipe_ingredients)
 	is_success = correct_recipe_selected and is_exact_match
+	var gravitational = is_gravitational(collected_ingredients, selected_recipe_ingredients)
 
 	# Determinar respuesta y reglas
 	var sprite_id = GlobalManager.selected_recipe_data["id"]
@@ -223,23 +232,28 @@ func check_recipe() -> Dictionary:
 	var sprite_to_show : Sprite2D
 	
 	if not GlobalManager.recipe_started:
+		print("not started")
 		response_type = GlobalManager.ResponseType.RECIPE_NOT_PREPARED
 	elif not correct_recipe_selected:
+		print("not correct recipe selected")
 		wrong_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_wrong.png" % sprite_id)
 		sprite_to_show = wrong_recipe_sprite
 		response_type = GlobalManager.ResponseType.RECIPE_WRONG
 	elif not is_exact_match:
+		print("not exact match")
 		wrong_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_wrong.png" % sprite_id)
 		sprite_to_show = wrong_recipe_sprite
 		response_type = GlobalManager.ResponseType.INGREDIENTS_WRONG
 	elif is_success:
-		correct_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_correct.png" % sprite_id)
-		sprite_to_show = correct_recipe_sprite
-		response_type = GlobalManager.ResponseType.RECIPE_CORRECT
-	else:
-		gravitational_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_gravitational.png" % sprite_id)
-		sprite_to_show = gravitational_recipe_sprite
-		response_type = GlobalManager.ResponseType.GRAVITATIONAL
+		print("SUCCESS!! ", gravitational)
+		if gravitational:
+			gravitational_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_gravitational.png" % sprite_id)
+			sprite_to_show = gravitational_recipe_sprite
+			response_type = GlobalManager.ResponseType.GRAVITATIONAL
+		else:
+			correct_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_correct.png" % sprite_id)
+			sprite_to_show = correct_recipe_sprite
+			response_type = GlobalManager.ResponseType.RECIPE_CORRECT
 	
 	var result = GlobalManager.get_response_texts(response_type)
 	
@@ -275,22 +289,30 @@ func resize_newton_ready(new_scale_vector: Vector2) -> void:
 	var new_pos = newton_ready_sprite.position + Vector2(84,100)
 	tween.tween_property(newton_ready_sprite, "position", new_pos, 0.5)
 
-func arrays_match(collected: Array, recipe: Array) -> bool:
-	# Convertir recipe a un set (diccionario)
-	var recipe_set := {}
-	for item in recipe:
-		recipe_set[item] = true
-	
-	for item in collected:
-		if not recipe_set.has(item):
+func arrays_match_with_gravity(collected: Array, recipe: Array) -> bool:	
+	for recipe_id in recipe: #["ing_001", "ing_002", "ing_005", "ing_003"]
+		# IDs válidos = ingrediente normal + versiones gravitacionales
+		var valid_ids = [recipe_id] #gravitational_equivalents[recipe_id] if gravitational_equivalents.has(recipe_id) else [recipe_id]
+		if gravitational_equivalents.has(recipe_id):
+			valid_ids += gravitational_equivalents[recipe_id]
+		# Verificar si al menos uno está en collected
+		var matched = false
+		for id in valid_ids:
+			if collected.has(id):
+				matched = true
+				break
+		if not matched:
 			return false
-	
-	# Todos los de la receta están en collected
-	for item in recipe:
-		if not collected.has(item):
-			return false
-	
 	return true
+
+# Detectar si la receta contiene algún ingrediente gravitacional
+func is_gravitational(collected: Array, recipe: Array) -> bool:
+	for recipe_id in recipe:
+		if gravitational_equivalents.has(recipe_id):
+			for grav_id in gravitational_equivalents[recipe_id]:
+				if collected.has(grav_id):
+					return true
+	return false
 
 # Función común para mostrar resultados y aplicar consecuencias
 func apply_recipe_result(result: Dictionary, show_sprite: bool = false, delayed: bool = false) -> void:
