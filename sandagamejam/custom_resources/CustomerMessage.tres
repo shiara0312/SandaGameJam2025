@@ -1,8 +1,9 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://xreggbw3h3yp"]
 
-[ext_resource type="FontFile" uid="uid://ch5rglkjpbnk2" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="1_i1ejm"]
+[ext_resource type="FontFile" uid="uid://bx2ex5j0qq1dc" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="1_i1ejm"]
 
 [resource]
+Label/font_sizes/font_size = 50
 RichTextLabel/colors/default_color = Color(0.368627, 0.294118, 0.298039, 1)
 RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
 RichTextLabel/font_sizes/normal_font_size = 42

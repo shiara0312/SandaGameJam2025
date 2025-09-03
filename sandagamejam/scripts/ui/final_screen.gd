@@ -3,44 +3,31 @@ extends Control
 @onready var anim = $AnimationPlayer
 @onready var bg = $Background
 @onready var message = $Message
+@onready var message_label = $Message/Label
 @onready var score_panel = $ScorePanel
 @onready var newton = $Newton
 @onready var score_container = $ScoreContainer
 @onready var score_label = $ScoreContainer/Score
 @onready var name_label = $ScoreContainer/Name
-@onready var ranking_container = $RankingContainer 
+@onready var ranking_container = $RankingContainer
+@onready var recipe_texture = $Recipe
 
 # Preloads de texturas
-@onready var bg_win   = preload("res://assets/backgrounds/win.png")
-@onready var bg_lose  = preload("res://assets/backgrounds/game_over.png")
-@onready var bg_time  = preload("res://assets/backgrounds/timeup.png")
+@onready var bg_win   = preload("res://assets/backgrounds/good_score_bg.png")
+@onready var bg_fail  = preload("res://assets/backgrounds/bad_score_bg.png")
 @onready var newton_fail = preload("res://assets/sprites/newtown/newton_sad.png")
 @onready var newton_win = preload("res://assets/sprites/newtown/newton_happy.png")
+@onready var recipe_fail = preload("res://assets/pastry/recipes/recipe_003_wrong.png")
+@onready var recipe_win = preload("res://assets/pastry/recipes/recipe_003.png")
 @onready var ranking_label_settings: LabelSettings = preload("res://custom_resources/Ranking.tres")
-
-@onready var msg_time = {
-	"es" : preload("res://assets/UI/timeup_message_es.png"),
-	"en" : preload("res://assets/UI/timeup_message_en.png"),
-	"fr" : preload("res://assets/UI/timeup_message_fr.png")
-}
-
-@onready var msg_win = {
-	"es" : preload("res://assets/UI/win_message_es.png"),
-	"en" : preload("res://assets/UI/win_message_en.png"),
-	"fr" : preload("res://assets/UI/win_message_fr.png")
-}
-
-@onready var msg_lose = {
-	"es" : preload("res://assets/UI/game_over_message_es.png"),
-	"en" : preload("res://assets/UI/game_over_message_en.png"),
-	"fr" : preload("res://assets/UI/game_over_message_fr.png")
-}
 
 var score: int = 100
 var max_name_length: int = 6
 var current_name: Array = []
 var ranking: Array = []
 var ranking_labels = GlobalManager.menu_labels[GlobalManager.game_language]
+var final_screen_labels = GlobalManager.menu_labels[GlobalManager.game_language]
+var settings_instance = preload("res://custom_resources/Ranking.tres").duplicate()
 
 func _ready():
 	if GlobalManager.satisfied_customers.size() == 0:
@@ -48,8 +35,10 @@ func _ready():
 	else:
 		score = (round(GlobalManager.time_left) * 10) + (GlobalManager.lives * 100)
 	
-	print("GlobalManager.menu_labels", ranking_labels)
-	score_label.text = ranking_labels["ranking"]["score"] + " " + str(score) 
+	settings_instance.font_size = 50
+	message_label.label_settings = settings_instance
+
+	score_label.text = ranking_labels["ranking"]["score"] + " " + str(score)
 	show_name_label()
 	
 func _input(event: InputEvent) -> void:
@@ -73,22 +62,24 @@ func _input(event: InputEvent) -> void:
 func show_final_screen(state: GlobalManager.GameState):
 	AudioManager.stop_game_music()
 	score_panel.visible = false
-	var lang = GlobalManager.game_language
+	recipe_texture.texture = recipe_fail
+
 	match state:
 		GlobalManager.GameState.TIMEUP:
-			bg.texture = bg_time
+			bg.texture = bg_fail
 			newton.texture = newton_fail
-			message.texture = msg_time.get(lang, msg_time["es"])
+			message_label.text = ranking_labels["final_screen"]["time_up"]
 			AudioManager.play_time_up_sfx()
 		GlobalManager.GameState.WIN:
 			bg.texture = bg_win
+			recipe_texture.texture = recipe_win
 			newton.texture = newton_win
-			message.texture = msg_win.get(lang, msg_win["es"])
+			message_label.text = ranking_labels["final_screen"]["win"]
 			AudioManager.play_win_sfx()
 		GlobalManager.GameState.GAMEOVER:
-			bg.texture = bg_lose
+			bg.texture = bg_fail
 			newton.texture = newton_fail
-			message.texture = msg_lose.get(lang, msg_lose["es"])
+			message_label.text = ranking_labels["final_screen"]["game_over"]
 			AudioManager.play_game_over_sfx()
 	
 	anim.play("final_sequence")
@@ -99,8 +90,8 @@ func show_name_label():
 		if i < current_name.size():
 			display += current_name[i] + ""
 		else:
-			display += "_"
-	name_label.text =  ranking_labels["ranking"]["name"] + " " + display 
+			display += "_ "
+	name_label.text =  ranking_labels["ranking"]["name"] + "\n" + display 
 
 func store_in_ranking(username: String, score_value: int):
 	ranking.append({"name": username, "score": score_value})
