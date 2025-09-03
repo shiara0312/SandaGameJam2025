@@ -12,7 +12,12 @@
 				"en": "Programming",
 				"fr": "Programmation"
 			},
-			"genre": "female"
+			"genre": "female",
+			"description": {
+				"es": "La pionera de la programación. Aunque nunca tuvo que ver con el logo de la Mac, muchos dirían que si ella hubiese mordido una manzana, seguro habría escrito su algoritmo en binario.",
+				"en": "The pioneer of programming. Though she had nothing to do with the Mac logo, some would say if she had bitten an apple, she would’ve turned it into binary code.",
+				"fr": "La pionnière de la programmation. Bien qu'elle n'ait rien à voir avec le logo Mac, certains diraient que si elle avait croqué une pomme, elle l'aurait transformée en code binaire."
+			}
 		},
 		{
 			"id": "grimhilde",
@@ -26,7 +31,12 @@
 				"en": "Sorcery",
 				"fr": "Sorcellerie"
 			},
-			"genre": "female"
+			"genre": "female",
+			"description": {
+				"es": "Maestra en el arte oscuro, sabe que una manzana bien elegida puede ser más letal que cualquier conjuro.",
+				"en": "A master of the dark arts, she knows that a carefully chosen apple can be deadlier than any spell.",
+				"fr": "Maîtresse des arts obscurs, elle sait qu'une pomme soigneusement choisie peut être plus mortelle que n'importe quel sort."
+			}
 		},
 		{
 			"id": "renemagritte",
@@ -40,7 +50,12 @@
 				"en": "Art",
 				"fr": "Art"
 			},
-			"genre": "male"
+			"genre": "male",
+			"description": {
+				"es": "El artista que convirtió la manzana en un enigma visual, recordándonos que lo obvio puede ser un misterio.",
+				"en": "The artist who turned the apple into a visual enigma, reminding us that the obvious can still be a mystery.",
+				"fr": "L'artiste qui a transformé la pomme en énigme visuelle, nous rappelant que l'évident peut être mystérieux."
+  			}
 		},
 		{
 			"id": "adan",
@@ -54,7 +69,12 @@
 				"en": "Gardening",
 				"fr": "Jardinage"
 			},
-			"genre": "male"
+			"genre": "male",
+			 "description": {
+				"es": "El primer jardinero de la historia. A él no le sobra una costilla, pero la manzana nunca se le escapa.",
+				"en": "The very first gardener in history. He may be missing a rib, but the apple never slips from his hand.",
+				"fr": "Le tout premier jardinier de l’histoire. Il n’a peut-être pas une côte, mais la pomme ne lui échappe jamais."
+			}
 		}
 	],
 	"moods": [
