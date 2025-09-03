@@ -44,12 +44,6 @@ func _ready() -> void:
 	if GameController.has_signal("ingredients_minigame_finished"):
 		GameController.connect("ingredients_minigame_finished", Callable(self, "_on_ingredients_minigame_exit"))
 	
-	
-	# Datos para la enciclopedia
-	#characters_data = FileHelper.read_data_from_file("res://i18n/characters_moods.json")
-	#characters_data = characters_data["characters"]
-	#populate_characters_list()
-	#populate_ingredients_list(ingredients_box)
 	# Characters
 	characters_data = FileHelper.read_data_from_file("res://i18n/characters_moods.json")["characters"]
 	populate_list(
@@ -165,126 +159,6 @@ func _on_tools_btn_pressed() -> void:
 func _on_close_btn_pressed() -> void:
 	encyclopedia_ui.visible = false
 	get_tree().paused = false
-
-func populate_characters_list():
-	print("poblando customers.. ")
-	var lang = GlobalManager.game_language
-	# Limpia todos los hijos antes de reconstruir
-	for child in characters_box.get_children():
-		child.queue_free()
-	
-	for chart in characters_data:
-		var hbox = HBoxContainer.new()
-		
-		# Sprite
-		var sprite_path = "res://assets/sprites/customers/%s_happy.png" % chart["id"]
-		var tex = load(sprite_path)
-		if tex:
-			var tex_rect = TextureRect.new()
-			tex_rect.texture = tex
-			tex_rect.custom_minimum_size = Vector2(250, 250)
-			tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-			tex_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-			hbox.add_child(tex_rect)
-		
-		# Textos
-		var vbox = VBoxContainer.new()
-		vbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-
-		# Nombre
-		var name_label = Label.new()
-		name_label.text = chart["name"].get(lang, chart["name"]["en"])
-		name_label.add_theme_font_size_override("font_size", 18)
-		
-		# Especialidad
-		var esp_label = Label.new()
-		esp_label.text = str(chart["specialty"][lang])
-		
-		# Descripcion
-		var desc_label = Label.new()
-		desc_label.text = str(chart["description"][lang])
-		desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		desc_label.custom_minimum_size = Vector2(500, 0)
-		
-		vbox.add_child(name_label)
-		vbox.add_child(esp_label)
-		vbox.add_child(desc_label)
-		hbox.add_child(vbox)
-
-		# Agregar fila al VBox principal
-		characters_box.add_child(hbox)
-		apply_font_to_labels(characters_box, font, 24)
-
-func populate_ingredients_list(vbox: VBoxContainer) -> void:
-	print("poblando ingredientes.. ")
-	var lang = GlobalManager.game_language
-	# Limpia todos los hijos antes de reconstruir
-	for child in ingredients_box.get_children():
-		child.queue_free()
-
-	# Concatenar todos los ingredientes en una sola lista
-	var all_ingredients = []
-	all_ingredients += GlobalManager.all_ingredients #regular
-	all_ingredients += GlobalManager.fake_ingredients
-	all_ingredients += GlobalManager.gravitational_ingredients
-
-	for ing in all_ingredients:
-		var hbox = HBoxContainer.new()
-		hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		hbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-
-		# Imagen
-		# Imagen
-		var img_container = Control.new()
-		img_container.custom_minimum_size = Vector2(250, 120)
-
-		var sprite_path = "res://assets/pastry/ingredients/%s.png" % ing["id"]
-		var tex = load(sprite_path)
-		if tex:
-			var tex_rect = TextureRect.new()
-			tex_rect.texture = tex
-			tex_rect.custom_minimum_size = Vector2(120,100)
-			tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-			tex_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-			tex_rect.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-			tex_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-			tex_rect.custom_minimum_size = Vector2(100, 100) # escala base de la imagen
-			img_container.add_child(tex_rect)
-
-		else:
-			var spacer = Control.new()
-			spacer.custom_minimum_size = Vector2(120, 120)
-			hbox.add_child(spacer)
-	
-		hbox.add_child(img_container)
-		
-		# Textos
-		var text_vbox = VBoxContainer.new()
-		text_vbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		# Nombre
-		var name_label = Label.new()
-		name_label.text = ing["name"].get(lang, ing["id"])
-		name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		name_label.custom_minimum_size = Vector2(400, 0)
-		name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		name_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-		text_vbox.add_child(name_label)
-		
-		# Descripcion
-		var desc_label = Label.new()
-		desc_label.text = ing["description"].get(lang, ing["id"])
-		desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		desc_label.custom_minimum_size = Vector2(400, 0)
-		desc_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		desc_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-		
-		text_vbox.add_child(desc_label)
-		hbox.add_child(text_vbox)
-		vbox.add_child(hbox)
-		
-		apply_font_to_labels(vbox, font, 24)
 
 func populate_list(
 	box: VBoxContainer,
