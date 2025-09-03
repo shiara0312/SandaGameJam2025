@@ -203,7 +203,12 @@ current_tab = 0
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="EncyclopediaUI/Panel/TabContainer/IngredientsTab"]
+[node name="MarginContainer" type="MarginContainer" parent="EncyclopediaUI/Panel/TabContainer/IngredientsTab"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EncyclopediaUI/Panel/TabContainer/IngredientsTab/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 30
 
