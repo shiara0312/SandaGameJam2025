@@ -12,7 +12,7 @@ var lives = 3
 var time_left : float = 180.0
 var is_game_running : bool = false
 var is_minigame_overlay_visible : bool = false
-var ingredientes_array_size = 20 #Debe disminuir si el nivel aumenta
+var ingredientes_array_size = 0 #Debe disminuir si el nivel aumenta
 
 var game_language : String = "es" 
 var customers_to_serve: Array = []
@@ -24,6 +24,7 @@ var fake_ingredients: Array = []
 var collected_ingredients: Array = []
 var selected_recipe_idx : int = 0
 var selected_recipe_data: Dictionary = {}
+var recipe_started : bool = false
 
 var btn_listen_customer_label = ""
 var btn_help_customer_label = ""
@@ -38,6 +39,7 @@ enum GameState { WIN, TIMEUP, GAMEOVER }
 
 enum ResponseType {
 	RECIPE_WRONG,
+	RECIPE_NOT_PREPARED,
 	INGREDIENTS_WRONG,
 	RECIPE_CORRECT,
 	GRAVITATIONAL
@@ -45,6 +47,7 @@ enum ResponseType {
 
 var response_keys := {
 	ResponseType.RECIPE_WRONG: "recipe_wrong_",
+	ResponseType.RECIPE_NOT_PREPARED: "recipe_timeout_",
 	ResponseType.INGREDIENTS_WRONG: "ingredients_wrong_",
 	ResponseType.RECIPE_CORRECT: "recipe_correct_",
 	ResponseType.GRAVITATIONAL: "gravitational_"

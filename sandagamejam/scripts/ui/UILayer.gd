@@ -113,9 +113,3 @@ func _on_ingredients_minigame_started() -> void:
 
 func _on_hide_ui():
 	visible = false
-
-
-			# Llamar directamente al flujo de feedback del GameController
-			#if GameController:
-			#	GameController.show_netown_feedback()
-			#	GameController.spawn_next_customer()

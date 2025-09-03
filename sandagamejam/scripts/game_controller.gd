@@ -16,6 +16,7 @@ var final_screen: Node = null
 
 const SCREEN_WIDTH = 1152.0
 const SECONDS_TO_LOSE = 30
+const SECONDS_TO_LOSE_NOT_PREPARED = 42
 const SECONDS_TO_GAIN = 15
 	
 var is_success: bool = false
@@ -77,6 +78,7 @@ func show_minigame(path: String):
 	GlobalManager.is_minigame_overlay_visible = true
 		
 func finish_minigame():
+	print("finished")
 	slide_current_level("right")
 	reset_newton_ready()
 	
@@ -206,7 +208,9 @@ func check_recipe() -> Dictionary:
 	var response_type
 	var sprite_to_show : Sprite2D
 	
-	if not correct_recipe_selected:
+	if not GlobalManager.recipe_started:
+		response_type = GlobalManager.ResponseType.RECIPE_NOT_PREPARED
+	elif not correct_recipe_selected:
 		wrong_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_wrong.png" % sprite_id)
 		sprite_to_show = wrong_recipe_sprite
 		response_type = GlobalManager.ResponseType.RECIPE_WRONG
@@ -276,6 +280,7 @@ func arrays_match(collected: Array, recipe: Array) -> bool:
 
 # Función común para mostrar resultados y aplicar consecuencias
 func apply_recipe_result(result: Dictionary, show_sprite: bool = false, delayed: bool = false) -> void:
+	#print("result..", result)
 	var msg: String = result["feedback"]
 	var response_type: int = result["type"]
 	var sprite: Sprite2D = result.get("sprite", null)
@@ -304,6 +309,8 @@ func apply_recipe_result(result: Dictionary, show_sprite: bool = false, delayed:
 	match response_type:
 		GlobalManager.ResponseType.RECIPE_WRONG:
 			GlobalManager.lose_life()
+		GlobalManager.ResponseType.RECIPE_NOT_PREPARED:
+			GlobalManager.apply_penalty(SECONDS_TO_LOSE_NOT_PREPARED)
 		GlobalManager.ResponseType.INGREDIENTS_WRONG:
 			GlobalManager.apply_penalty(SECONDS_TO_LOSE)
 		GlobalManager.ResponseType.RECIPE_CORRECT:

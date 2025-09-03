@@ -241,6 +241,8 @@ func _on_btn_continue_pressed() -> void:
 	
 func _on_btn_prepare_recipe_pressed() -> void:
 	AudioManager.play_click_sfx()
+	GlobalManager.recipe_started = true
+	
 	if minigame_started:
 		 # Cancelar todos los tweens activos
 		for t in active_tweens:

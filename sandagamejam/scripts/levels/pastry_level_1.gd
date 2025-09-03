@@ -30,6 +30,7 @@ func _ready():
 	GlobalManager.initialize_recipes("level1")
 
 func spawn_next_customer():
+	GlobalManager.recipe_started = false
 	var next := GlobalManager.get_next_customer()
 	if next.is_empty():
 		emit_signal("level_cleared")

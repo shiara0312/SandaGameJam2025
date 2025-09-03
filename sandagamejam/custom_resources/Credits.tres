@@ -5,7 +5,7 @@
 [resource]
 Label/colors/font_color = Color(0.228241, 0.145724, 0.111383, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
-Label/font_sizes/font_size = 27
+Label/font_sizes/font_size = 28
 Label/fonts/font = ExtResource("1_betr6")
 RichTextLabel/colors/default_color = Color(0.227451, 0.145098, 0.109804, 1)
 RichTextLabel/font_sizes/normal_font_size = 24
