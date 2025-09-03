@@ -63,7 +63,7 @@ func _on_opciones_input_event(_viewport: Node, event: InputEvent, _shape_idx: in
 		var modal = load("res://OpcionesModal.tscn").instantiate()
 		GameController.current_scene_container.add_child(modal)
 
-func _on_salir_pressed():
+func _on_salir_pressed() :
 	get_tree().quit()
 
 func _on_button_mouse_entered():

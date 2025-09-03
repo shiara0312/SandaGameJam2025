@@ -2,6 +2,7 @@
 extends Node2D
 
 signal ingredients_minigame_started
+signal ingredients_minigame_timeout
 
 @onready var menu_container : Control = $TextureRect/MenuContainer
 @onready var recipe_container : Control = $TextureRect/RecipeContainer
@@ -104,9 +105,10 @@ func start_ingredient_minigame():
 	minigame_started = true
 	var recipe_selected = GlobalManager.current_level_recipes[GlobalManager.selected_recipe_idx]
 	GlobalManager.selected_recipe_data = recipe_selected
-
+	
+	var array_size = GlobalManager.ingredientes_array_size
 	var ingredients = recipe_selected["ingredients"]
-	var ingr_loop = generate_arr(ingredients, 20)
+	var ingr_loop = generate_arr(ingredients, array_size)
 	animate_ingredients(ingr_loop)
 	btn_prepare.visible = true
 
@@ -117,10 +119,10 @@ func animate_ingredients(ingr_loop: Array) -> void:
 
 	var start_x := recollect_container.position.x + recollect_container.size.x + 100
 	var end_x := recollect_container.position.x
-	var spacing := 200
+	var spacing := 170
 	var duration := 4.0
 	var y := 100
-	var spawn_interval := 1.0  # tiempo entre aparición de cada ingrediente
+	var spawn_interval := 1.1  # tiempo entre aparición de cada ingrediente
 
 	for i in range(ingr_loop.size()):
 		var ing_id = ingr_loop[i]
@@ -137,6 +139,13 @@ func animate_ingredients(ingr_loop: Array) -> void:
 		tween.tween_callback(Callable(wrapper, "queue_free"))
 		# Guardar tween para poder cancelarlo
 		active_tweens.append(tween)
+	
+		# Cuando el último tween termina, verificar si se presionó "Prepare"
+		if i == ingr_loop.size() - 1:
+			tween.finished.connect(func():
+				emit_signal("ingredients_minigame_timeout")
+			)
+
 
 func clear_children(node: Node) -> void:
 	for child in node.get_children():
@@ -151,7 +160,7 @@ func create_ingredient_wrapper(ingredient_id: String, is_clickable: bool = false
 		
 	# Wrapper (para escalarlo)
 	var wrapper = Control.new()
-	wrapper.custom_minimum_size = tex.get_size() * 0.25
+	wrapper.custom_minimum_size = tex.get_size() * 0.35 if is_clickable else tex.get_size() * 0.25
 	wrapper.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	wrapper.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 
@@ -232,6 +241,8 @@ func _on_btn_continue_pressed() -> void:
 	
 func _on_btn_prepare_recipe_pressed() -> void:
 	AudioManager.play_click_sfx()
+	GlobalManager.recipe_started = true
+	
 	if minigame_started:
 		 # Cancelar todos los tweens activos
 		for t in active_tweens:
@@ -261,7 +272,6 @@ func _on_ingredient_clicked(event: InputEvent, wrapper: Control, ing_id: String)
 		GlobalManager.collected_ingredients.append(ing_id)
 		
 		#print("🍎 Ingredient recolectado:", ing_id)
-		
 		if GlobalManager.collected_ingredients.size() >= 1 and is_instance_valid(btn_prepare):
 			btn_prepare.visible = true
 			btn_prepare.disabled = false

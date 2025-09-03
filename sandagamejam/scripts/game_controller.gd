@@ -1,6 +1,10 @@
 #GameController.tscn maneja Newton, los niveles y el minigame overlay.
 extends Node
 
+signal ingredients_minigame_started
+signal ingredients_minigame_timeout
+signal ingredients_minigame_finished
+
 @onready var current_scene_container: Node2D = $CurrentSceneContainer
 @onready var minigame_overlay = $MiniGameOverlay
 @onready var newton_layer = $NewtonLayer
@@ -16,6 +20,7 @@ var final_screen: Node = null
 
 const SCREEN_WIDTH = 1152.0
 const SECONDS_TO_LOSE = 30
+const SECONDS_TO_LOSE_NOT_PREPARED = 42
 const SECONDS_TO_GAIN = 15
 	
 var is_success: bool = false
@@ -77,6 +82,7 @@ func show_minigame(path: String):
 	GlobalManager.is_minigame_overlay_visible = true
 		
 func finish_minigame():
+	emit_signal("ingredients_minigame_finished")
 	slide_current_level("right")
 	reset_newton_ready()
 	
@@ -88,6 +94,11 @@ func finish_minigame():
 	else:
 		_cleanup_minigames()
 	
+	# Invertir colores del timer cuando cierre el minijuego
+	var ui_layer = get_tree().get_first_node_in_group("UILayer")
+	if ui_layer:
+		ui_layer.revert_label_colors_from_minigame()
+		
 func free_children(parent: Node):
 	for child in parent.get_children():
 		child.queue_free()
@@ -102,8 +113,16 @@ func slide_minigame_overlay(path: String):
 	minigame_overlay.add_child(minigame_instance)
 	minigame_instance.scale = Vector2(1,1)
 	minigame_instance.z_index = 50
-	self.current_minigame = minigame_instance
+	
 
+	if minigame_instance.has_signal("ingredients_minigame_started"):
+		minigame_instance.connect("ingredients_minigame_started", Callable(self, "_on_overlay_minigame_started"))
+		
+	if minigame_instance.has_signal("ingredients_minigame_timeout"):
+		minigame_instance.connect("ingredients_minigame_timeout", Callable(self, "_on_overlay_minigame_timeout"))
+
+	self.current_minigame = minigame_instance
+	
 	# Conectar la señal con el nivel actual
 	if current_level and current_level.has_method("_on_ingredients_minigame_started"):
 		minigame_instance.ingredients_minigame_started.connect(
@@ -116,6 +135,7 @@ func slide_minigame_overlay(path: String):
 	var target_pos = Vector2(TARGET_X, 0)
 	# Tween para entrada del overlay
 	tween.tween_property(minigame_instance, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
 
 # Slide Level scene
 func slide_current_level(direction: String = "left", duration: float = 0.5):
@@ -170,6 +190,7 @@ func make_newton_cook():
 func show_netown_feedback():
 	var continue_btn_label = continue_button.get_node("Label")
 	outcome_message.visible = true
+	newton_ready_sprite.visible = false
 	newton_moods_sprite.visible = true
 	
 	# Cambiar sprite según resultado
@@ -200,7 +221,9 @@ func check_recipe() -> Dictionary:
 	var response_type
 	var sprite_to_show : Sprite2D
 	
-	if not correct_recipe_selected:
+	if not GlobalManager.recipe_started:
+		response_type = GlobalManager.ResponseType.RECIPE_NOT_PREPARED
+	elif not correct_recipe_selected:
 		wrong_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_wrong.png" % sprite_id)
 		sprite_to_show = wrong_recipe_sprite
 		response_type = GlobalManager.ResponseType.RECIPE_WRONG
@@ -226,36 +249,10 @@ func check_recipe() -> Dictionary:
 		"outcome": result[1]
 	}
 
-func show_recipe_result_with_delay(result: Dictionary) -> void:
-	var sprite: Sprite2D = result["sprite"]
-	var msg: String = result["feedback"]
-	var response_type: int = result["type"]
-	
+func show_recipe_result_with_delay(result: Dictionary) -> void:	
 	AudioManager.play_recipe_ready_sfx()
-	newton_moods_sprite.visible = false
-	feedback_message.visible = true
-	feedback_message.text = msg
-	sprite.visible = true
-	sprite.scale = Vector2(0.2, 0.2)
-	
-	# Animación "pop"
-	var tween := create_tween()
-	tween.tween_property(sprite, "scale", Vector2(1, 1), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-
-	# Esperar 1.5 segundos
-	var timer := get_tree().create_timer(1.5)
-	await timer.timeout
-	# Aplicar consecuencias
-	match response_type:
-		GlobalManager.ResponseType.RECIPE_WRONG:
-			GlobalManager.lose_life()
-		GlobalManager.ResponseType.INGREDIENTS_WRONG:
-			GlobalManager.apply_penalty(SECONDS_TO_LOSE)
-		GlobalManager.ResponseType.RECIPE_CORRECT:
-			GlobalManager.apply_penalty(-SECONDS_TO_GAIN)
-		GlobalManager.ResponseType.GRAVITATIONAL:
-			GlobalManager.gain_life()
-	sprite.visible = false
+	await apply_recipe_result(result, true, true)
+	show_netown_feedback()
 
 func reset_newton_ready() -> void:
 	# Restaurar Newton
@@ -293,6 +290,62 @@ func arrays_match(collected: Array, recipe: Array) -> bool:
 			return false
 	
 	return true
+
+# Función común para mostrar resultados y aplicar consecuencias
+func apply_recipe_result(result: Dictionary, show_sprite: bool = false, delayed: bool = false) -> void:
+	#print("result..", result)
+	var msg: String = result["feedback"]
+	var response_type: int = result["type"]
+	var sprite: Sprite2D = result.get("sprite", null)
+
+	# Mostrar feedback
+	newton_moods_sprite.visible = false
+	feedback_message.visible = true
+	feedback_message.text = msg
+	outcome_message.text = result["outcome"]
+
+	if show_sprite and sprite:
+		sprite.visible = true
+		sprite.scale = Vector2(0.2, 0.2)
+
+		# Animación "pop"
+		var tween := create_tween()
+		tween.tween_property(sprite, "scale", Vector2(1, 1), 0.3) \
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	# Si es con delay → esperar antes de aplicar consecuencias
+	if delayed:
+		var timer := get_tree().create_timer(1.5)
+		await timer.timeout
+
+	# Aplicar consecuencias
+	match response_type:
+		GlobalManager.ResponseType.RECIPE_WRONG:
+			GlobalManager.lose_life()
+		GlobalManager.ResponseType.RECIPE_NOT_PREPARED:
+			GlobalManager.apply_penalty(SECONDS_TO_LOSE_NOT_PREPARED)
+		GlobalManager.ResponseType.INGREDIENTS_WRONG:
+			GlobalManager.apply_penalty(SECONDS_TO_LOSE)
+		GlobalManager.ResponseType.RECIPE_CORRECT:
+			GlobalManager.apply_penalty(-SECONDS_TO_GAIN)
+		GlobalManager.ResponseType.GRAVITATIONAL:
+			GlobalManager.gain_life()
+		_:
+			print(">> response_type no coincide con ninguna opción:", response_type)
+
+	# Ocultar sprite al final si lo hubo
+	if show_sprite and sprite:
+		sprite.visible = false
+
+# Senales
+func _on_ingredients_minigame_timeout():
+	# Obtener los resultados
+	var result = check_recipe()
+	
+	# Forzar feedback negativo si no presionaron preparar
+	is_success = false
+	await apply_recipe_result(result, false, false)
+	show_netown_feedback()
 
 func _on_minigame_hidden():
 	if self.current_minigame and is_instance_valid(self.current_minigame):
@@ -336,6 +389,13 @@ func _on_time_up():
 
 func _on_game_over():
 	load_final_screen(GlobalManager.GameState.GAMEOVER)
+
+func _on_overlay_minigame_started():
+	emit_signal("ingredients_minigame_started")
+
+func _on_overlay_minigame_timeout():
+	emit_signal("ingredients_minigame_timeout")
+	_on_ingredients_minigame_timeout() # sigue llamando tu lógica actual
 
 func load_final_screen(state: GlobalManager.GameState):
 	newton_layer.visible = false

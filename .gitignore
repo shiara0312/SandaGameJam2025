@@ -2,4 +2,4 @@
 # Godot imports
 *.import
 .import/
-
+.DS_Store

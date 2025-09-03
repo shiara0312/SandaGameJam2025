@@ -1,4 +1,5 @@
 #UILayer
+#HUD + manager de mensajes y botones,
 extends CanvasLayer
 
 @onready var game_hud : Control = null
@@ -20,7 +21,7 @@ func _ready() -> void:
 	else:
 		# Esperar al frame siguiente si aún no existe
 		call_deferred("_ready")
-		
+	
 	if timer_label:
 		timer_label.add_theme_color_override("font_color", Color("#a79e91"))
 		timer_label.add_theme_color_override("font_outline_color", Color("#19211f"))
@@ -31,6 +32,9 @@ func _ready() -> void:
 	GlobalManager.connect("time_up", Callable(self, "_on_hide_ui"))
 	GlobalManager.connect("game_over", Callable(self, "_on_hide_ui"))
 	GlobalManager.connect("win", Callable(self, "_on_hide_ui"))
+	
+	if GameController.has_signal("ingredients_minigame_finished"):
+		GameController.connect("ingredients_minigame_finished", Callable(self, "_on_ingredients_minigame_exit"))
 	
 func show_hud():
 	if not game_hud:
@@ -55,7 +59,6 @@ func show_message(msg_to_display: String = "..."):
 	await start_typing(msg_to_display, rich_text)
 	
 	show_help_button(btn_help)
-	#btn_help.visible = true
 
 func hide_message():
 	message_texture.visible = true
@@ -83,12 +86,12 @@ func start_typing(msg: String, rich_text: RichTextLabel) -> void:
 func invest_label_colors():
 	if timer_label:
 		var font_color = timer_label.get_theme_color("font_color", "Label")
-		var outline_color = timer_label.get_theme_color("outline_color", "Label")
-		
+		var outline_color = timer_label.get_theme_color("font_outline_color", "Label")
+
 		timer_label.add_theme_color_override("font_color", outline_color)
 		timer_label.add_theme_color_override("font_outline_color", font_color)
 		timer_label.add_theme_constant_override("outline_size", 6)
-		
+
 func _on_btn_help_pressed() -> void:
 	AudioManager.play_click_sfx()
 	AudioManager.stop_customer_sfx()
@@ -106,8 +109,8 @@ func _on_pause_btn_pressed() -> void:
 		get_tree().paused = true
 		pause_btn.texture_normal = play_texture
 
-func _on_ingredients_minigame_started() -> void:
-	print("hola?")
-
 func _on_hide_ui():
 	visible = false
+
+func _on_ingredients_minigame_exit() -> void:
+	invest_label_colors()
