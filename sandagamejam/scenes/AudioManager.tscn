@@ -1,16 +1,16 @@
 [gd_scene load_steps=12 format=3 uid="uid://lqqdf6iy7fnl"]
 
 [ext_resource type="Script" uid="uid://bv5tuq3hbtquc" path="res://scripts/managers/audio_manager.gd" id="1_v6v0x"]
-[ext_resource type="AudioStream" uid="uid://n7a7ox1trj37" path="res://assets/sfx/global/sfx_click_pop.wav" id="2_5jw7j"]
-[ext_resource type="AudioStream" uid="uid://be7v0e0rgqxa6" path="res://assets/sfx/music/isaacs_pastry_game.mp3" id="3_4tesi"]
-[ext_resource type="AudioStream" uid="uid://dratqpsjopnav" path="res://assets/sfx/minigame/sfx_collect_item.wav" id="3_5jw7j"]
-[ext_resource type="AudioStream" uid="uid://kf2hghv2lhvf" path="res://assets/sfx/minigame/sfx_whisking.wav" id="4_v5v75"]
-[ext_resource type="AudioStream" uid="uid://pcprxj0wkkxi" path="res://assets/sfx/minigame/sfx_recipe_good.wav" id="5_5jw7j"]
-[ext_resource type="AudioStream" uid="uid://cnqpasfjpk1ux" path="res://assets/sfx/minigame/sfx_recipe_bad.wav" id="6_5jw7j"]
-[ext_resource type="AudioStream" uid="uid://d2eh6qs61vwvj" path="res://assets/sfx/minigame/sfx_recipe_ready.wav" id="7_qtie0"]
-[ext_resource type="AudioStream" uid="uid://ctnuv3qavnq45" path="res://assets/sfx/global/sfx_time_up.wav" id="8_hmi33"]
-[ext_resource type="AudioStream" uid="uid://bkfpwjlbxqx0y" path="res://assets/sfx/global/sfx_game_over.wav" id="9_5jw7j"]
-[ext_resource type="AudioStream" uid="uid://s4a8rh4a3uv7" path="res://assets/sfx/global/sfx_win.wav" id="10_5jw7j"]
+[ext_resource type="AudioStream" uid="uid://c7ffijcq3rsrx" path="res://assets/sfx/global/sfx_click_pop.wav" id="2_5jw7j"]
+[ext_resource type="AudioStream" uid="uid://8hfpjuwfc4yy" path="res://assets/sfx/music/isaacs_pastry_game.mp3" id="3_4tesi"]
+[ext_resource type="AudioStream" uid="uid://biff1tco7laxe" path="res://assets/sfx/minigame/sfx_collect_item.wav" id="3_5jw7j"]
+[ext_resource type="AudioStream" uid="uid://b4662e6khqq7c" path="res://assets/sfx/minigame/sfx_whisking.wav" id="4_v5v75"]
+[ext_resource type="AudioStream" uid="uid://dg1f4jk15ejgt" path="res://assets/sfx/minigame/sfx_recipe_good.wav" id="5_5jw7j"]
+[ext_resource type="AudioStream" uid="uid://d37c1154rmirr" path="res://assets/sfx/minigame/sfx_recipe_bad.wav" id="6_5jw7j"]
+[ext_resource type="AudioStream" uid="uid://d3x2yikdvao8p" path="res://assets/sfx/minigame/sfx_recipe_ready.wav" id="7_qtie0"]
+[ext_resource type="AudioStream" uid="uid://dt60wyhohvgfl" path="res://assets/sfx/global/sfx_time_up.wav" id="8_hmi33"]
+[ext_resource type="AudioStream" uid="uid://en55n7g3qvwv" path="res://assets/sfx/global/sfx_game_over.wav" id="9_5jw7j"]
+[ext_resource type="AudioStream" uid="uid://cbjfvhy0lrlnp" path="res://assets/sfx/global/sfx_win.wav" id="10_5jw7j"]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_v6v0x")
@@ -18,40 +18,50 @@ script = ExtResource("1_v6v0x")
 [node name="SFXClick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_5jw7j")
 volume_db = -24.0
+bus = &"SFX"
 
 [node name="SFXCollectIngredient" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_5jw7j")
 volume_db = -24.0
+bus = &"SFX"
 
 [node name="SFXWhisking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_v5v75")
 volume_db = -4.0
+bus = &"SFX"
 
 [node name="SFXRecipeGood" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_5jw7j")
 volume_db = -24.0
+bus = &"SFX"
 
 [node name="SFXRecipeBad" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_5jw7j")
 volume_db = -24.0
+bus = &"SFX"
 
 [node name="SFXRecipeReady" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_qtie0")
 volume_db = -24.0
+bus = &"SFX"
 
 [node name="GameMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_4tesi")
 volume_db = -22.0
+bus = &"Music"
 parameters/looping = true
 
 [node name="SFXTimeUp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_hmi33")
 volume_db = -24.0
+bus = &"SFX"
 
 [node name="SFXGameOver" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_5jw7j")
 volume_db = -24.0
+bus = &"SFX"
 
 [node name="SFXWin" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_5jw7j")
 volume_db = -24.0
+bus = &"SFX"

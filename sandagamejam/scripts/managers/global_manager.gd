@@ -12,7 +12,7 @@ var lives = 3
 var time_left : float = 180.0
 var is_game_running : bool = false
 var is_minigame_overlay_visible : bool = false
-var ingredientes_array_size = 20 #TODO: Debe disminuir si el nivel aumenta
+var ingredientes_array_size = 20 #Debe disminuir si el nivel aumenta
 
 var game_language : String = "es" 
 var customers_to_serve: Array = []
@@ -25,6 +25,11 @@ var collected_ingredients: Array = []
 var selected_recipe_idx : int = 0
 var selected_recipe_data: Dictionary = {}
 var recipe_started : bool = false
+
+# Nuevas variables de audio globales
+var music_volume : float = 1.0 # 0.0 a 1.0
+var sfx_volume : float = 1.0   # 0.0 a 1.0
+var audio_config_path := "user://audio_settings.cfg"
 
 var btn_listen_customer_label = ""
 var btn_help_customer_label = ""
@@ -191,3 +196,23 @@ func cambiar_idioma(nuevo_idioma: String) -> void:
 	load_texts()            # Recarga todos los textos
 	load_button_labels()    # Recarga labels de botones
 	emit_signal("idioma_cambiado", game_language) # Notificar a todas las escenas activas
+
+### ============================
+### NUEVO: Persistencia de Audio
+### ============================
+
+func guardar_audio_settings() -> void:
+	var cfg = ConfigFile.new()
+	cfg.load(audio_config_path)
+	cfg.set_value("audio", "music_volume", music_volume)
+	cfg.set_value("audio", "sfx_volume", sfx_volume)
+	cfg.save(audio_config_path)
+
+func cargar_audio_settings() -> void:
+	var cfg = ConfigFile.new()
+	if cfg.load(audio_config_path) == OK:
+		music_volume = cfg.get_value("audio", "music_volume", 1.0)
+		sfx_volume = cfg.get_value("audio", "sfx_volume", 1.0)
+	else:
+		music_volume = 1.0
+		sfx_volume = 1.0

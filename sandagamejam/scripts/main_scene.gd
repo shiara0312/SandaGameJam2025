@@ -61,7 +61,7 @@ func _on_creditos_input_event(_viewport: Node, event: InputEvent, _shape_idx: in
 func _on_opciones_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		AudioManager.play_click_sfx()
-		var modal = load("res://OpcionesModal.tscn").instantiate()
+		var modal = load("res://scenes/OpcionesModal.tscn").instantiate()
 		GameController.current_scene_container.add_child(modal)
 
 func _on_salir_pressed() :

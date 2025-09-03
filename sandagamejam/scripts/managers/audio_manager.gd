@@ -26,8 +26,15 @@ var sfx_complaint_dict := {
 	"male_happy": preload("res://assets/sfx/characters/sfx_male_happy.ogg"),
 }
 
+var config_path := "user://audio_settings.cfg"
+
 func _ready():
 	add_child(sfx_customer_complaint)
+	_cargar_audio_settings() # <-- Cargar valores guardados
+
+### ============================
+### Funciones existentes (sin cambios)
+### ============================
 
 func play_click_sfx():	
 	if sfx_click:
@@ -114,3 +121,39 @@ func stop_game_music():
 func stop_customer_sfx() -> void:
 	if sfx_customer_complaint.playing:
 		sfx_customer_complaint.stop()
+
+### ============================
+### NUEVO: Audio con sliders y persistencia
+### ============================
+
+func set_music_volume(vol: float) -> void:
+	var clamped = clamp(vol, 0.0, 1.0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(clamped))
+	GlobalManager.music_volume = clamped
+	_guardar_audio_settings("music_volume", clamped)
+
+func set_sfx_volume(vol: float) -> void:
+	var clamped = clamp(vol, 0.0, 1.0)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(clamped))
+	GlobalManager.sfx_volume = clamped
+	_guardar_audio_settings("sfx_volume", clamped)
+
+func _guardar_audio_settings(key: String, value: float) -> void:
+	var cfg = ConfigFile.new()
+	cfg.load(config_path)
+	cfg.set_value("audio", key, value)
+	cfg.save(config_path)
+
+func _cargar_audio_settings() -> void:
+	var cfg = ConfigFile.new()
+	if cfg.load(config_path) == OK:
+		# Música
+		var music_vol = cfg.get_value("audio", "music_volume", 1.0)
+		set_music_volume(music_vol)
+		# SFX
+		var sfx_vol = cfg.get_value("audio", "sfx_volume", 1.0)
+		set_sfx_volume(sfx_vol)
+	else:
+		# Defaults si no existe archivo
+		set_music_volume(GlobalManager.music_volume)
+		set_sfx_volume(GlobalManager.sfx_volume)
