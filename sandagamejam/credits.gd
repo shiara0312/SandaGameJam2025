@@ -38,9 +38,8 @@ func _ready():
 	_add_credit("Melissa Huerta", "Game Developer & Tech Designer")
 	_add_credit("Shiara Arauzo", "Game Developer")
 	_add_credit("Malu Munayco", "Game Developer")
-	_add_credit("Selene Negrón", "Concept Artist & 2D Artist")
-	_add_credit("Ariadna Mestanza", "Concept Artist & 2D Artist")
-	_add_credit("Fabrizio Murguia", "Game Designer")
+	$close_button.pressed.connect(_on_close_button_pressed)
+
 
 
 func _add_credit(member: String, role: String):
@@ -56,5 +55,4 @@ func _add_credit(member: String, role: String):
 	grid.add_child(role_label)
 
 func _on_close_button_pressed() -> void:
-	var menu_scene = load("res://scenes/menus/MainMenu.tscn")
-	get_tree().change_scene_to_packed(menu_scene)
+	get_tree().change_scene_to_file("res://scenes/menus/MainMenu.tscn")
