@@ -106,7 +106,7 @@ func start_ingredient_minigame():
 	var recipe_selected = GlobalManager.current_level_recipes[GlobalManager.selected_recipe_idx]
 	GlobalManager.selected_recipe_data = recipe_selected
 	
-	var array_size = 20
+	var array_size = 1 #20
 	var ingredients = recipe_selected["ingredients"]
 	var ingr_loop = generate_arr(ingredients, array_size)
 	animate_ingredients(ingr_loop)
@@ -270,7 +270,6 @@ func _on_ingredient_clicked(event: InputEvent, wrapper: Control, ing_id: String)
 		GlobalManager.collected_ingredients.append(ing_id)
 		
 		#print("🍎 Ingredient recolectado:", ing_id)
-		
 		if GlobalManager.collected_ingredients.size() >= 1 and is_instance_valid(btn_prepare):
 			btn_prepare.visible = true
 			btn_prepare.disabled = false

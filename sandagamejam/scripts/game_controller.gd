@@ -232,36 +232,10 @@ func check_recipe() -> Dictionary:
 		"outcome": result[1]
 	}
 
-func show_recipe_result_with_delay(result: Dictionary) -> void:
-	var sprite: Sprite2D = result["sprite"]
-	var msg: String = result["feedback"]
-	var response_type: int = result["type"]
-	
+func show_recipe_result_with_delay(result: Dictionary) -> void:	
 	AudioManager.play_recipe_ready_sfx()
-	newton_moods_sprite.visible = false
-	feedback_message.visible = true
-	feedback_message.text = msg
-	sprite.visible = true
-	sprite.scale = Vector2(0.2, 0.2)
-	
-	# Animación "pop"
-	var tween := create_tween()
-	tween.tween_property(sprite, "scale", Vector2(1, 1), 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-
-	# Esperar 1.5 segundos
-	var timer := get_tree().create_timer(1.5)
-	await timer.timeout
-	# Aplicar consecuencias
-	match response_type:
-		GlobalManager.ResponseType.RECIPE_WRONG:
-			GlobalManager.lose_life()
-		GlobalManager.ResponseType.INGREDIENTS_WRONG:
-			GlobalManager.apply_penalty(SECONDS_TO_LOSE)
-		GlobalManager.ResponseType.RECIPE_CORRECT:
-			GlobalManager.apply_penalty(-SECONDS_TO_GAIN)
-		GlobalManager.ResponseType.GRAVITATIONAL:
-			GlobalManager.gain_life()
-	sprite.visible = false
+	await apply_recipe_result(result, true, true)
+	show_netown_feedback()
 
 func reset_newton_ready() -> void:
 	# Restaurar Newton
@@ -299,6 +273,59 @@ func arrays_match(collected: Array, recipe: Array) -> bool:
 			return false
 	
 	return true
+
+# Función común para mostrar resultados y aplicar consecuencias
+func apply_recipe_result(result: Dictionary, show_sprite: bool = false, delayed: bool = false) -> void:
+	var msg: String = result["feedback"]
+	var response_type: int = result["type"]
+	var sprite: Sprite2D = result.get("sprite", null)
+
+	# Mostrar feedback
+	newton_moods_sprite.visible = false
+	feedback_message.visible = true
+	feedback_message.text = msg
+	outcome_message.text = result["outcome"]
+
+	if show_sprite and sprite:
+		sprite.visible = true
+		sprite.scale = Vector2(0.2, 0.2)
+
+		# Animación "pop"
+		var tween := create_tween()
+		tween.tween_property(sprite, "scale", Vector2(1, 1), 0.3) \
+			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	# Si es con delay → esperar antes de aplicar consecuencias
+	if delayed:
+		var timer := get_tree().create_timer(1.5)
+		await timer.timeout
+
+	# Aplicar consecuencias
+	match response_type:
+		GlobalManager.ResponseType.RECIPE_WRONG:
+			GlobalManager.lose_life()
+		GlobalManager.ResponseType.INGREDIENTS_WRONG:
+			GlobalManager.apply_penalty(SECONDS_TO_LOSE)
+		GlobalManager.ResponseType.RECIPE_CORRECT:
+			GlobalManager.apply_penalty(-SECONDS_TO_GAIN)
+		GlobalManager.ResponseType.GRAVITATIONAL:
+			GlobalManager.gain_life()
+		_:
+			print(">> response_type no coincide con ninguna opción:", response_type)
+
+	# Ocultar sprite al final si lo hubo
+	if show_sprite and sprite:
+		sprite.visible = false
+
+# Senales
+func _on_ingredients_minigame_timeout():
+	# Obtener los resultados
+	var result = check_recipe()
+	
+	# Forzar feedback negativo si no presionaron preparar
+	is_success = false
+	await apply_recipe_result(result, false, false)
+	show_netown_feedback()
 
 func _on_minigame_hidden():
 	if self.current_minigame and is_instance_valid(self.current_minigame):
@@ -356,34 +383,3 @@ func load_final_screen(state: GlobalManager.GameState):
 	
 	# Mostrar la pantalla según el estado ("win", "time_up", "game_over")
 	final_screen.show_final_screen(state)
-
-func _on_ingredients_minigame_timeout():
-	# Obtener los resultados
-	var result = check_recipe()
-	print("result.. ", result)
-	# Mostrar mensajes inmediatos
-	feedback_message.text = result["feedback"]
-	outcome_message.text = result["outcome"]
-	var msg: String = result["feedback"]
-	var response_type: int = result["type"]
-	
-	newton_moods_sprite.visible = false
-	feedback_message.visible = true
-	feedback_message.text = msg
-	#sprite.visible = true
-	#sprite.scale = Vector2(0.2, 0.2)
-	
-	# Aplicar consecuencias
-	match response_type:
-		GlobalManager.ResponseType.RECIPE_WRONG:
-			GlobalManager.lose_life()
-		GlobalManager.ResponseType.INGREDIENTS_WRONG:
-			GlobalManager.apply_penalty(SECONDS_TO_LOSE)
-		GlobalManager.ResponseType.RECIPE_CORRECT:
-			GlobalManager.apply_penalty(-SECONDS_TO_GAIN)
-		GlobalManager.ResponseType.GRAVITATIONAL:
-			GlobalManager.gain_life()
-		
-	# Forzar feedback negativo si no presionaron preparar
-	is_success = false
-	show_netown_feedback()
