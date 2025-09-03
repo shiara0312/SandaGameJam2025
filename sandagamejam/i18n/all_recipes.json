@@ -1,9 +1,9 @@
 [
   {
 	"id": "recipe_001",
-	"name": {"en": "Quinoa with Apple", "es": "Quinua con manzana", "fr": "Quinoa aux pommes"},
+	"name": {"en": "Falling Quinoa", "es": "Quinua que cae", "fr": "Quinoa tombante"},
 	"mood": "sleepy",
-	"ingredients": ["ing_002", "ing_003", "ing_001"],
+	"ingredients": ["ing_001", "ing_002", "ing_005", "ing_003"],
 	"benefits": {
 	  "en": "Restores extra energy, makes them more patient and helps them rest better",
 	  "es": "Devuelve energía extra, los vuelve más pacientes y los ayuda a descansar mejor",
@@ -17,7 +17,7 @@
   },
   {
 	"id": "recipe_002",
-	"name": {"en": "Apple Tart with Cinnamon", "es": "Tarta de manzana con canela", "fr": "Tarte aux pommes et cannelle"},
+	"name": {"en": "Tangent Tart", "es": "Tarta Tangente", "fr": "Tarte Tangente"},
 	"mood": "stressed",
 	"ingredients": ["ing_003", "ing_002", "ing_006", "ing_004"],
 	"benefits": {
@@ -33,9 +33,9 @@
   },
   {
 	"id": "recipe_003",
-	"name": {"en": "Gravitational Apple Pie", "es": "Pie de manzana gravitacional", "fr": "Tarte aux pommes gravitationnelle"},
+	"name": {"en": "Cosmic Apple Tart", "es": "Tarta de Manzana Cósmica", "fr": "Tarte aux Pommes Cosmique"},
 	"mood": "sad",
-	"ingredients": ["ing_002", "ing_004", "ing_006", "ing_003"],
+	"ingredients": ["ing_005", "ing_002", "ing_004", "ing_006", "ing_003"],
 	"benefits": {
 	  "en": "Brings happiness and lightness, lifts the customer's mood",
 	  "es": "Felicidad y ligereza, sube el ánimo al cliente",
@@ -49,7 +49,7 @@
   },
   {
 	"id": "recipe_004",
-	"name": {"en": "Apple Honey Strudel", "es": "Strudel de manzana con miel", "fr": "Strudel aux pommes et miel"},
+	"name": {"en": "Prismatic Apple Strudel", "es": "Strudel de Manzana Prismático", "fr": "Strudel aux Pommes Prismatique"},
 	"mood": "annoyed",
 	"ingredients": ["ing_002", "ing_004", "ing_006", "ing_003", "ing_007"],
 	"benefits": {

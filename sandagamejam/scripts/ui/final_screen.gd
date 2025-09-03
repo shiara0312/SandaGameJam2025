@@ -21,6 +21,7 @@ extends Control
 @onready var recipe_win = preload("res://assets/pastry/recipes/recipe_003.png")
 @onready var ranking_label_settings: LabelSettings = preload("res://custom_resources/Ranking.tres")
 
+var name_entered: bool = false
 var score: int = 100
 var max_name_length: int = 6
 var current_name: Array = []
@@ -54,9 +55,10 @@ func _input(event: InputEvent) -> void:
 				current_name.pop_back()
 				show_name_label()
 			# Borrar letra
-		elif event.keycode == KEY_ENTER and current_name.size() > 0:
+		elif event.keycode == KEY_ENTER and current_name.size() > 0 and not name_entered:
 				store_in_ranking("".join(current_name), score)
 				show_ranking()
+				name_entered = true
 	
 # state puede ser: "win", "lose", "timeup"
 func show_final_screen(state: GlobalManager.GameState):

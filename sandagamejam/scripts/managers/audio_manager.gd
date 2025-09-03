@@ -11,6 +11,7 @@ extends Node
 @onready var sfx_game_over: AudioStreamPlayer = $SFXGameOver
 @onready var sfx_win: AudioStreamPlayer = $SFXWin
 @onready var game_music: AudioStreamPlayer = $GameMusic
+@onready var final_music: AudioStreamPlayer = $FinalMusic
 @onready var sfx_customer_complaint := AudioStreamPlayer.new()
 
 var sfx_complaint_dict := {
@@ -105,6 +106,14 @@ func play_game_music():
 		game_music.play()
 	else:
 		push_warning("GameMusic no está asignado o no existe en AudioManager")
+
+func play_end_music():	
+	if final_music:
+		game_music.stop()
+		final_music.play()
+	else:
+		push_warning("FinalMusic no está asignado o no existe en AudioManager")
+
 
 func stop_whisking_sfx():	
 	if sfx_whisking and sfx_whisking.playing:

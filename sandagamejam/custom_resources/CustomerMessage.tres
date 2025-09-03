@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://xreggbw3h3yp"]
 
-[ext_resource type="FontFile" uid="uid://c5f73qmgd11ts" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="1_i1ejm"]
+[ext_resource type="FontFile" uid="uid://ch5rglkjpbnk2" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="1_i1ejm"]
 
 [resource]
 Label/font_sizes/font_size = 50
