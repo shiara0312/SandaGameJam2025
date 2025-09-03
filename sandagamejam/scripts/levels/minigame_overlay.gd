@@ -106,7 +106,7 @@ func start_ingredient_minigame():
 	var recipe_selected = GlobalManager.current_level_recipes[GlobalManager.selected_recipe_idx]
 	GlobalManager.selected_recipe_data = recipe_selected
 	
-	var array_size = 1 #20
+	var array_size = GlobalManager.ingredientes_array_size
 	var ingredients = recipe_selected["ingredients"]
 	var ingr_loop = generate_arr(ingredients, array_size)
 	animate_ingredients(ingr_loop)
