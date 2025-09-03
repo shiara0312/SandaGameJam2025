@@ -45,7 +45,11 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 2
 
+[node name="Hearts" type="HBoxContainer" parent="GameHUD/HUDContainer"]
+layout_mode = 2
+
 [node name="Heart1" type="TextureRect" parent="GameHUD/HUDContainer"]
+visible = false
 z_index = 2
 custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
@@ -54,6 +58,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Heart2" type="TextureRect" parent="GameHUD/HUDContainer"]
+visible = false
 z_index = 2
 custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
@@ -62,6 +67,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Heart3" type="TextureRect" parent="GameHUD/HUDContainer"]
+visible = false
 z_index = 2
 custom_minimum_size = Vector2(42, 42)
 layout_mode = 2

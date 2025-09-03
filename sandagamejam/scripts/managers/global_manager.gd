@@ -8,7 +8,8 @@ signal game_over
 signal win
 signal idioma_cambiado(nuevo_idioma) # Señal para actualizar UI en tiempo real
 
-var lives = 1#3
+var lives = 3
+var max_lives = 4
 var time_left : float = 180.0
 var is_game_running : bool = false
 var is_minigame_overlay_visible : bool = false
@@ -91,15 +92,15 @@ func apply_penalty(seconds: float):
 func lose_life():
 	if lives > 0:
 		lives -= 1
-		emit_signal("lives_changed", lives)
+		emit_signal("lives_changed", lives, max_lives)
 		if lives == 0:
 			is_game_running = false
 			emit_signal("game_over")
 
 func gain_life():
-	if lives <= 3:
+	if lives <= max_lives:
 		lives += 1
-		emit_signal("lives_changed", lives)
+		emit_signal("lives_changed", lives, max_lives)
 
 func check_win_condition():
 	if time_left > 0 and lives > 0 and customers_to_serve.is_empty():
