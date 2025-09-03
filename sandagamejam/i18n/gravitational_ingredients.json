@@ -1,32 +1,32 @@
 [
   {
 	"id": "ing_202",
-	"name": {"en": "Apple", "es": "Manzana", "fr": "Pomme"},
+	"name": {"en": "Falling Apple", "es": "Manzana Caída", "fr": "Pomme Tombante"},
 	"category": "fruit",
 	"description": {
-	  "en": "Fruit rich in vitamins.",
-	  "es": "Fruta rica en vitaminas.",
-	  "fr": "Fruit riche en vitamines."
-	}
-  },
+		"en": "A juicy apple that accelerates downward under gravity.",
+		"es": "Una jugosa manzana que cae más rápido debido a la gravedad.",
+		"fr": "Une pomme juteuse qui accélère vers le bas sous l'effet de la gravité."
+		}
+	},
   {
 	"id": "ing_205",
-	"name": {"en": "Sugar", "es": "Azúcar", "fr": "Sucre"},
+	"name": {"en": "Gravity Sugar", "es": "Azúcar Gravitacional", "fr": "Sucre Gravitationnel"},
 	"category": "sweetener",
 	"description": {
-	  "en": "Natural sweetness.",
-	  "es": "Dulzura natural.",
-	  "fr": "Douceur naturelle."
+		"en": "Tiny crystals that drop quickly when released.",
+		"es": "Pequeños cristales que caen rápidamente al soltarlos.",
+		"fr": "Petits cristaux qui tombent rapidement lorsqu'ils sont lâchés."
 	}
-  },
-  {
+},
+{
 	"id": "ing_207",
-	"name": {"en": "Honey", "es": "Miel", "fr": "Miel"},
+	"name": {"en": "Sticky Fall Honey", "es": "Miel Pegajosa Caída", "fr": "Miel Collante Tombante"},
 	"category": "sweetener",
 	"description": {
-	  "en": "Natural sweetener that adds smoothness.",
-	  "es": "Endulzante natural que aporta suavidad.",
-	  "fr": "Édulcorant naturel qui apporte de la douceur."
+	 "en": "Dense and sticky honey that succumbs strongly to gravity.",
+	 "es": "Miel densa y pegajosa que se deja llevar fuertemente por la gravedad.",
+	 "fr": "Miel dense et collante qui cède fortement à la gravité."
 	}
   }
 ]
