@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://brrp3aubtiabr"]
 
-[ext_resource type="Texture2D" uid="uid://cns6yidqqgg12" path="res://assets/backgrounds/level1.png" id="1_3wh4p"]
-[ext_resource type="Texture2D" uid="uid://b5cvpb7dre038" path="res://assets/UI/text_message.png" id="2_2q3ra"]
-[ext_resource type="FontFile" uid="uid://di1bbtmfhsyh5" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="2_inw4l"]
-[ext_resource type="Texture2D" uid="uid://bxclil0u88e4h" path="res://assets/UI/closebtn.png" id="3_2w0tc"]
-[ext_resource type="Texture2D" uid="uid://5ombdxxdcy6j" path="res://assets/UI/ic_volume_off_fill.png" id="4_2w0tc"]
+[ext_resource type="Texture2D" uid="uid://xqi1bhg5dq31" path="res://assets/backgrounds/level1.png" id="1_3wh4p"]
+[ext_resource type="Texture2D" uid="uid://lhy87j8s1x45" path="res://assets/UI/text_message.png" id="2_2q3ra"]
+[ext_resource type="FontFile" uid="uid://bx2ex5j0qq1dc" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="2_inw4l"]
+[ext_resource type="Texture2D" uid="uid://caaq18s5435v6" path="res://assets/UI/closebtn.png" id="3_2w0tc"]
+[ext_resource type="Texture2D" uid="uid://bfk8wkppon833" path="res://assets/UI/ic_volume_off_fill.png" id="4_2w0tc"]
 
 [node name="Opciones" type="Control"]
 layout_mode = 3
