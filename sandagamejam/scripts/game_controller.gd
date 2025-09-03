@@ -1,6 +1,10 @@
 #GameController.tscn maneja Newton, los niveles y el minigame overlay.
 extends Node
 
+signal ingredients_minigame_started
+signal ingredients_minigame_timeout
+signal ingredients_minigame_finished
+
 @onready var current_scene_container: Node2D = $CurrentSceneContainer
 @onready var minigame_overlay = $MiniGameOverlay
 @onready var newton_layer = $NewtonLayer
@@ -78,7 +82,7 @@ func show_minigame(path: String):
 	GlobalManager.is_minigame_overlay_visible = true
 		
 func finish_minigame():
-	print("finished")
+	emit_signal("ingredients_minigame_finished")
 	slide_current_level("right")
 	reset_newton_ready()
 	
@@ -90,6 +94,11 @@ func finish_minigame():
 	else:
 		_cleanup_minigames()
 	
+	# Invertir colores del timer cuando cierre el minijuego
+	var ui_layer = get_tree().get_first_node_in_group("UILayer")
+	if ui_layer:
+		ui_layer.revert_label_colors_from_minigame()
+		
 func free_children(parent: Node):
 	for child in parent.get_children():
 		child.queue_free()
@@ -104,18 +113,21 @@ func slide_minigame_overlay(path: String):
 	minigame_overlay.add_child(minigame_instance)
 	minigame_instance.scale = Vector2(1,1)
 	minigame_instance.z_index = 50
-	self.current_minigame = minigame_instance
+	
 
+	if minigame_instance.has_signal("ingredients_minigame_started"):
+		minigame_instance.connect("ingredients_minigame_started", Callable(self, "_on_overlay_minigame_started"))
+		
+	if minigame_instance.has_signal("ingredients_minigame_timeout"):
+		minigame_instance.connect("ingredients_minigame_timeout", Callable(self, "_on_overlay_minigame_timeout"))
+
+	self.current_minigame = minigame_instance
+	
 	# Conectar la señal con el nivel actual
 	if current_level and current_level.has_method("_on_ingredients_minigame_started"):
 		minigame_instance.ingredients_minigame_started.connect(
 			Callable(current_level, "_on_ingredients_minigame_started")
 		)
-	
-	# Conectar la señal con el nivel actual
-	minigame_instance.ingredients_minigame_timeout.connect(
-		Callable(self, "_on_ingredients_minigame_timeout")
-	)
 	
 	# Posición inicial: fuera de la pantalla (derecha)
 	minigame_instance.position = Vector2(SCREEN_WIDTH, 0)
@@ -178,6 +190,7 @@ func make_newton_cook():
 func show_netown_feedback():
 	var continue_btn_label = continue_button.get_node("Label")
 	outcome_message.visible = true
+	newton_ready_sprite.visible = false
 	newton_moods_sprite.visible = true
 	
 	# Cambiar sprite según resultado
@@ -376,6 +389,13 @@ func _on_time_up():
 
 func _on_game_over():
 	load_final_screen(GlobalManager.GameState.GAMEOVER)
+
+func _on_overlay_minigame_started():
+	emit_signal("ingredients_minigame_started")
+
+func _on_overlay_minigame_timeout():
+	emit_signal("ingredients_minigame_timeout")
+	_on_ingredients_minigame_timeout() # sigue llamando tu lógica actual
 
 func load_final_screen(state: GlobalManager.GameState):
 	newton_layer.visible = false
