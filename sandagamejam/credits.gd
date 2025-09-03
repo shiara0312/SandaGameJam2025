@@ -1,32 +1,49 @@
 extends Control
 
 @onready var credits_theme: Theme = preload("res://custom_resources/Credits.tres")
-
+@onready var scroll: ScrollContainer = ScrollContainer.new()
+@onready var grid: GridContainer = GridContainer.new()
 
 func _ready():
 	self.theme = credits_theme
+	
+	scroll.anchor_left = 0.5
+	scroll.anchor_right = 0.5
+	scroll.anchor_top = 0.5
+	scroll.anchor_bottom = 0.5
 
-	var grid = GridContainer.new()
+	scroll.offset_left = -300
+	scroll.offset_top = -150
+	scroll.offset_right = 300
+	scroll.offset_bottom = 150
+
+	scroll.custom_minimum_size = Vector2(600, 400)
+
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	add_child(scroll)
+
 	grid.columns = 2
-	grid.anchor_left = 0.5
-	grid.anchor_right = 0.5
-	grid.anchor_top = 0.5
-	grid.anchor_bottom = 0.5
-	grid.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	grid.grow_vertical = Control.GROW_DIRECTION_BOTH
-	grid.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	grid.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	add_child(grid)
+	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	grid.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll.add_child(grid)
 
-	# Créditos
-	_add_credit(grid, "Melissa Huerta", "Game Developer & Tech Designer")
-	_add_credit(grid, "Shiara Arauzo", "Game Developer")
-	_add_credit(grid, "Malu Munayco", "Game Developer")
-	_add_credit(grid, "Selene Negrón", "Concept Artist & 2D Artist")
-	_add_credit(grid, "Ariadna Mestanza", "Concept Artist & 2D Artist")
-	_add_credit(grid, "Fabrizio Murguia", "Game Designer")
 
-func _add_credit(grid: GridContainer, member: String, role: String):
+	_add_credit("Melissa Huerta", "Game Developer & Tech Designer")
+	_add_credit("Shiara Arauzo", "Game Developer")
+	_add_credit("Malu Munayco", "Game Developer")
+	_add_credit("Selene Negrón", "Concept Artist & 2D Artist")
+	_add_credit("Ariadna Mestanza", "Concept Artist & 2D Artist")
+	_add_credit("Fabrizio Murguia", "Game Designer")
+	_add_credit("Melissa Huerta", "Game Developer & Tech Designer")
+	_add_credit("Shiara Arauzo", "Game Developer")
+	_add_credit("Malu Munayco", "Game Developer")
+	_add_credit("Selene Negrón", "Concept Artist & 2D Artist")
+	_add_credit("Ariadna Mestanza", "Concept Artist & 2D Artist")
+	_add_credit("Fabrizio Murguia", "Game Designer")
+
+
+func _add_credit(member: String, role: String):
 	var name_label = Label.new()
 	name_label.text = member
 	name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
@@ -37,7 +54,6 @@ func _add_credit(grid: GridContainer, member: String, role: String):
 	
 	grid.add_child(name_label)
 	grid.add_child(role_label)
-
 
 func _on_close_button_pressed() -> void:
 	var menu_scene = load("res://scenes/menus/MainMenu.tscn")
