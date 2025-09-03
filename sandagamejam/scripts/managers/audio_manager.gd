@@ -107,9 +107,8 @@ func play_game_music():
 	else:
 		push_warning("GameMusic no está asignado o no existe en AudioManager")
 
-func play_end_music():	
+func play_end_music():
 	if final_music:
-		game_music.stop()
 		final_music.play()
 	else:
 		push_warning("FinalMusic no está asignado o no existe en AudioManager")

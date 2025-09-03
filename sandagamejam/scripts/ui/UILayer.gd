@@ -41,7 +41,7 @@ func show_hud():
 		return
 
 	game_hud.visible = true
-	_on_lives_changed(GlobalManager.lives)
+	_on_lives_changed(GlobalManager.lives, GlobalManager.max_lives)
 	_on_time_changed(GlobalManager.time_left)
 
 func show_message(msg_to_display: String = "..."):
@@ -68,8 +68,8 @@ func show_help_button(btn: TextureButton):
 	label.text = GlobalManager.btn_help_customer_label
 	btn.visible = true
 	
-func _on_lives_changed(new_lives):
-	game_hud.update_lives(new_lives)
+func _on_lives_changed(new_lives, max_lives):
+	game_hud.update_hud(new_lives, max_lives)
 
 func _on_time_changed(new_time):
 	game_hud.update_timer(new_time)
