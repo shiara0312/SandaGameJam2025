@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://0nbfgsjfecy8"]
+[gd_scene load_steps=16 format=3 uid="uid://0nbfgsjfecy8"]
 
 [ext_resource type="Script" uid="uid://3qg5qwd7ie6j" path="res://scripts/levels/minigame_overlay.gd" id="1_jh425"]
 [ext_resource type="Texture2D" uid="uid://bd7sqrxqdcj80" path="res://assets/UI/receta_texture.png" id="2_e7l36"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://bpv7ib6u2578q" path="res://assets/UI/interact-btn-pressed.png" id="11_ww4g8"]
 [ext_resource type="LabelSettings" uid="uid://jdv1bfj4iff7" path="res://custom_resources/InteractionButtonLabels.tres" id="12_70k8r"]
 [ext_resource type="Texture2D" uid="uid://nefnaqulxs8j" path="res://assets/UI/interact-btn-disabled.png" id="12_smtws"]
+[ext_resource type="Texture2D" uid="uid://ds7ivot3n32fn" path="res://assets/pastry/bowl_back.png" id="13_70k8r"]
+[ext_resource type="Texture2D" uid="uid://2415spvhlg76" path="res://assets/pastry/bowl_front.png" id="14_q84un"]
 
 [node name="MinigameOverlay" type="Node2D"]
 script = ExtResource("1_jh425")
@@ -173,12 +175,34 @@ horizontal_alignment = 1
 
 [node name="RecollectContainer" type="Control" parent="TextureRect"]
 visible = false
-anchors_preset = 0
-offset_left = 38.0
-offset_top = 85.0
-offset_right = 656.0
-offset_bottom = 458.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 217.0
+offset_top = 428.0
+offset_right = -240.975
+offset_bottom = 22.025
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+
+[node name="BowlContainer" type="Node2D" parent="TextureRect/RecollectContainer"]
+visible = false
+position = Vector2(-93, -64)
+scale = Vector2(1.8, 1.8)
+
+[node name="Back" type="TextureRect" parent="TextureRect/RecollectContainer/BowlContainer"]
+offset_right = 1383.0
+offset_bottom = 1383.0
+scale = Vector2(0.175, 0.175)
+texture = ExtResource("13_70k8r")
+
+[node name="Front" type="TextureRect" parent="TextureRect/RecollectContainer/BowlContainer"]
+offset_right = 1383.0
+offset_bottom = 1383.0
+scale = Vector2(0.175, 0.175)
+texture = ExtResource("14_q84un")
 
 [node name="BtnPrepareRecipe" type="TextureButton" parent="TextureRect"]
 visible = false
