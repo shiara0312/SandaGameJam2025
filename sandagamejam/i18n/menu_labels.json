@@ -12,7 +12,12 @@
 			"ranking": {
 				"name": "Tu nombre:",
 				"score": "Puntaje:",
-				}
+				},
+			"final_screen": {
+				"win": "¡Bien!",
+				"time_up": "¡Tiempo!",
+				"game_over": "¡Ay no! :(",
+			}
 		},
 	"en":
 		{
@@ -27,7 +32,12 @@
 			"ranking": {
 				"name": "Your name:",
 				"score": "Score:",
-				}
+				},
+			"final_screen": {
+				"win": "Win!",
+				"time_up": "Time's up!",
+				"game_over": "Oh no! :(",
+			}
 		},
 	"fr":
 		{
@@ -42,6 +52,11 @@
 			"ranking": {
 				"name": "Ton nom:",
 				"score": "Score:",
-				}
+				},
+			"final_screen": {
+				"win": "Bravo!",
+				"time_up": "Trop!",
+				"game_over": "Oh non :("
+			}
 		}
 }

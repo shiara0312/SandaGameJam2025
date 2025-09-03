@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bw2cu7s6406ip"]
+[gd_scene load_steps=10 format=3 uid="uid://bw2cu7s6406ip"]
 
 [ext_resource type="Script" uid="uid://dday64lgpu1ot" path="res://scripts/ui/final_screen.gd" id="1_gh2yv"]
 [ext_resource type="Texture2D" uid="uid://y3oji4h74je" path="res://assets/backgrounds/bad_score_bg.png" id="2_7raak"]
 [ext_resource type="Texture2D" uid="uid://bc01500fwn7t0" path="res://assets/UI/btn1.png" id="3_7raak"]
-[ext_resource type="Texture2D" uid="uid://bxhf5isiudnlo" path="res://assets/pastry/recipes/recipe_003_wrong.png" id="4_u5ho7"]
-[ext_resource type="Texture2D" uid="uid://y6hfs4fb0n56" path="res://assets/pastry/recipes/recipe_002_wrong.png" id="5_u5ho7"]
+[ext_resource type="Texture2D" uid="uid://j5x08ntmqrit" path="res://assets/pastry/recipes/recipe_003.png" id="4_gh2yv"]
 [ext_resource type="Texture2D" uid="uid://l81w5kaye73g" path="res://assets/sprites/newtown/newton_sad.png" id="6_nsh0p"]
 [ext_resource type="LabelSettings" uid="uid://i5q50xw1j3v2" path="res://custom_resources/Ranking.tres" id="7_u5ho7"]
 
@@ -37,7 +36,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Recipe1:position")
+tracks/2/path = NodePath("Recipe:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -49,7 +48,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Recipe1:modulate")
+tracks/3/path = NodePath("Recipe:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -118,10 +117,34 @@ tracks/8/keys = {
 "update": 0,
 "values": [0.0698132]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Background:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.121512, 0.0134418, 0.0559318, 0.14902)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Message:size")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(369, 188)]
+}
 
 [sub_resource type="Animation" id="Animation_5kium"]
 resource_name = "final_sequence"
-length = 3.0
+length = 4.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -129,10 +152,10 @@ tracks/0/path = NodePath("Message:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.500021),
-"transitions": PackedFloat32Array(0.999999, 1),
+"times": PackedFloat32Array(0, 0.166667, 0.498737, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(248, -322), Vector2(372, -10)]
+"values": [Vector2(-232, -228), Vector2(215, 112), Vector2(215.056, 111.956), Vector2(372, -10)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -141,31 +164,31 @@ tracks/1/path = NodePath("Message:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.297758, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.166667, 0.498737, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(1.75, 1.75), Vector2(1.2, 1.2)]
+"values": [Vector2(5, 5), Vector2(1.99542, 1.99542), Vector2(1.995, 1.995), Vector2(1.2, 1.2)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Recipe1:position")
+tracks/2/path = NodePath("Recipe:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.8, 1),
+"times": PackedFloat32Array(2.3, 2.5109),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-400, 466), Vector2(761, 466)]
+"values": [Vector2(-400, 466), Vector2(694, 400)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Recipe1:modulate")
+tracks/3/path = NodePath("Recipe:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.8, 1),
+"times": PackedFloat32Array(2.3, 2.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0.341176), Color(1, 1, 1, 1)]
@@ -177,7 +200,7 @@ tracks/4/path = NodePath("Newton:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(1.6, 1.9, 2.19965),
+"times": PackedFloat32Array(3.1, 3.4, 3.6996),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(-500, 217), Vector2(-125, 217), Vector2(-208, 161)]
@@ -189,10 +212,10 @@ tracks/5/path = NodePath("Newton:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(1.9, 2, 2.19965),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(3.4, 3.6996),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.135, 0.135), Vector2(0.162, 0.162), Vector2(0.175, 0.175)]
+"values": [Vector2(0.135, 0.135), Vector2(0.175, 0.175)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -201,7 +224,7 @@ tracks/6/path = NodePath("ScoreContainer:position")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(2.10963, 2.3382),
+"times": PackedFloat32Array(3.6096, 3.8382),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(384, 900), Vector2(460, 294)]
@@ -213,7 +236,7 @@ tracks/7/path = NodePath("ScoreContainer:modulate")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(2.11306, 2.26694),
+"times": PackedFloat32Array(3.6131, 4.2669),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0.105882), Color(1, 1, 1, 1)]
@@ -225,10 +248,34 @@ tracks/8/path = NodePath("Message:rotation")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0.297687),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 0,
-"values": [0.0698132]
+"values": []
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Background:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.466667, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.121512, 0.0134418, 0.0559318, 0.14902), Color(1, 1, 1, 1)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Message:size")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.0329574),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(369, 188), Vector2(369, 188)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bome8"]
@@ -245,6 +292,7 @@ offset_bottom = 648.0
 script = ExtResource("1_gh2yv")
 
 [node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.121512, 0.0134418, 0.0559318, 0.14902)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -255,49 +303,42 @@ texture = ExtResource("2_7raak")
 
 [node name="Message" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 248.0
-offset_top = -300.0
-offset_right = 617.0
-offset_bottom = -112.0
+offset_left = 372.0
+offset_top = -10.0
+offset_right = 741.0
+offset_bottom = 178.0
 rotation = 0.0698132
 scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_7raak")
 
 [node name="Label" type="Label" parent="Message"]
 layout_mode = 0
-offset_left = -206.667
-offset_top = -110.0
-offset_right = -166.667
-offset_bottom = -70.0
+offset_left = 5.0
+offset_top = 84.0
+offset_right = 341.0
+offset_bottom = 176.0
+rotation = -0.226893
+text = "Bravo!"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Recipe1" type="TextureRect" parent="."]
+[node name="Recipe" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0.341176)
 layout_mode = 0
-offset_left = -400.0
-offset_top = 466.0
-offset_right = 42.0
-offset_bottom = 847.0
+offset_left = 694.0
+offset_top = 400.0
+offset_right = 1136.0
+offset_bottom = 781.0
 rotation = -0.188496
 scale = Vector2(0.6, 0.6)
-texture = ExtResource("4_u5ho7")
-
-[node name="Recipe2" type="TextureRect" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 919.0
-offset_top = 211.0
-offset_right = 2348.0
-offset_bottom = 1668.0
-rotation = 0.188496
-scale = Vector2(0.145, 0.145)
-texture = ExtResource("5_u5ho7")
+texture = ExtResource("4_gh2yv")
 
 [node name="Newton" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -500.0
-offset_top = 217.0
-offset_right = 3469.0
-offset_bottom = 4003.0
+offset_left = -208.0
+offset_top = 161.0
+offset_right = 3761.0
+offset_bottom = 3947.0
 rotation = -0.0942478
 scale = Vector2(0.135, 0.135)
 texture = ExtResource("6_nsh0p")
@@ -316,10 +357,10 @@ libraries = {
 
 [node name="ScoreContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 384.0
-offset_top = 900.0
-offset_right = 709.0
-offset_bottom = 1051.0
+offset_left = 460.0
+offset_top = 294.0
+offset_right = 785.0
+offset_bottom = 445.0
 theme_override_constants/separation = 16
 alignment = 1
 
