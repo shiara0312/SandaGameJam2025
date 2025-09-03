@@ -9,27 +9,20 @@ extends Control
 @onready var timer_label = $HUDContainer/TimerLabel
 	
 func _ready() -> void:
-	# conectar señales del GlobalManager
 	GlobalManager.lives_changed.connect(update_hud)
-	#GlobalManager.game_over.connect(_on_game_over)
-	# inicializar HUD
 	update_hud(GlobalManager.lives, GlobalManager.max_lives)
 
 # Reconstruir el UI de corazones
-func update_hud(current: int, max: int):
+func update_hud(current: int, max_lives: int):
 	for child in hearts_container.get_children():
 		child.queue_free()
 	
-	for i in range(max):
+	for i in range(max_lives):
 		var heart_sprite = TextureRect.new()
 		heart_sprite.texture = full_heart if i < current else empty_heart
 		heart_sprite.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		hearts_container.add_child(heart_sprite)
 
-#func update_lives(value: int):
-#	for i in range(hearts.size()):
-#		hearts[i].texture = full_heart if i < value else empty_heart
-			
 func update_timer(seconds: int):
 	var mins = div_int(seconds, 60)
 	var secs = int(seconds % 60)

@@ -31,6 +31,7 @@ var final_screen_labels = GlobalManager.menu_labels[GlobalManager.game_language]
 var settings_instance = preload("res://custom_resources/Ranking.tres").duplicate()
 
 func _ready():
+	AudioManager.play_end_music()
 	if GlobalManager.satisfied_customers.size() == 0:
 		score = 0
 	else:
