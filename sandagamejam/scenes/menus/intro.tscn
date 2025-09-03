@@ -1,14 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://ebvprw6pexo2"]
+[gd_scene load_steps=6 format=3 uid="uid://ebvprw6pexo2"]
 
 [ext_resource type="Script" uid="uid://cd2svseh483m6" path="res://scenes/menus/intro.gd" id="1_1a7bk"]
 [ext_resource type="Texture2D" uid="uid://cn0srn72cshrg" path="res://assets/UI/intro_game.png" id="2_1a7bk"]
 [ext_resource type="Texture2D" uid="uid://jamwyueec32p" path="res://assets/UI/interact-btn.png" id="3_sh6lv"]
+[ext_resource type="LabelSettings" uid="uid://jdv1bfj4iff7" path="res://custom_resources/InteractionButtonLabels.tres" id="4_d7r31"]
+[ext_resource type="LabelSettings" uid="uid://b2h5bls5s7rsg" path="res://custom_resources/MainMenuButtonLabels.tres" id="5_56pe6"]
 
 [node name="Intro" type="Node2D"]
 script = ExtResource("1_1a7bk")
 
 [node name="IntroGame" type="Sprite2D" parent="."]
-position = Vector2(584.5, 321.5)
+position = Vector2(576, 323)
 scale = Vector2(0.374196, 0.370895)
 texture = ExtResource("2_1a7bk")
 
@@ -20,15 +22,21 @@ offset_bottom = 549.0
 texture_normal = ExtResource("3_sh6lv")
 
 [node name="button_label" type="Label" parent="Comenzar_Game"]
-layout_mode = 0
-offset_left = 106.0
-offset_top = 26.0
-offset_right = 147.0
-offset_bottom = 49.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Jugar"
+label_settings = ExtResource("4_d7r31")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="text_intro" type="Label" parent="."]
 offset_left = 179.0
-offset_top = 181.0
-offset_right = 240.0
-offset_bottom = 212.0
+offset_top = 147.0
+offset_right = 728.0
+offset_bottom = 421.0
+label_settings = ExtResource("5_56pe6")
+autowrap_mode = 3
