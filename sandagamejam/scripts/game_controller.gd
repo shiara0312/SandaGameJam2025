@@ -12,6 +12,7 @@ signal ingredients_minigame_finished
 @onready var newton_moods_sprite: Sprite2D = $NewtonLayer/NewtonMoodsSprite
 @onready var correct_recipe_sprite: Sprite2D = $NewtonLayer/CorrectRecipeSprite
 @onready var wrong_recipe_sprite: Sprite2D = $NewtonLayer/WrongRecipeSprite
+@onready var gravitational_recipe_sprite: Sprite2D = $NewtonLayer/GravitationalRecipeSprite
 @onready var feedback_message: RichTextLabel = $NewtonLayer/FeedbackMessage
 @onready var outcome_message: RichTextLabel = $NewtonLayer/OutcomeMessage
 @onready var continue_button: TextureButton = $NewtonLayer/ContinueBtn
@@ -236,8 +237,8 @@ func check_recipe() -> Dictionary:
 		sprite_to_show = correct_recipe_sprite
 		response_type = GlobalManager.ResponseType.RECIPE_CORRECT
 	else:
-		correct_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_gravitational.png" % sprite_id)
-		sprite_to_show = correct_recipe_sprite
+		gravitational_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_gravitational.png" % sprite_id)
+		sprite_to_show = gravitational_recipe_sprite
 		response_type = GlobalManager.ResponseType.GRAVITATIONAL
 	
 	var result = GlobalManager.get_response_texts(response_type)

@@ -1,0 +1,32 @@
+[
+  {
+	"id": "ing_202",
+	"name": {"en": "Apple", "es": "Manzana", "fr": "Pomme"},
+	"category": "fruit",
+	"description": {
+	  "en": "Fruit rich in vitamins.",
+	  "es": "Fruta rica en vitaminas.",
+	  "fr": "Fruit riche en vitamines."
+	}
+  },
+  {
+	"id": "ing_205",
+	"name": {"en": "Sugar", "es": "Azúcar", "fr": "Sucre"},
+	"category": "sweetener",
+	"description": {
+	  "en": "Natural sweetness.",
+	  "es": "Dulzura natural.",
+	  "fr": "Douceur naturelle."
+	}
+  },
+  {
+	"id": "ing_207",
+	"name": {"en": "Honey", "es": "Miel", "fr": "Miel"},
+	"category": "sweetener",
+	"description": {
+	  "en": "Natural sweetener that adds smoothness.",
+	  "es": "Endulzante natural que aporta suavidad.",
+	  "fr": "Édulcorant naturel qui apporte de la douceur."
+	}
+  }
+]

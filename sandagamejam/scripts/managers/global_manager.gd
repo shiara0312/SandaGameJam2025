@@ -21,6 +21,7 @@ var current_customer: Dictionary = {}
 var current_level_recipes: Array = []
 var all_ingredients: Array = []
 var fake_ingredients: Array = []
+var gravitational_ingredients: Array = []
 var collected_ingredients: Array = []
 var selected_recipe_idx : int = 0
 var selected_recipe_data: Dictionary = {}
@@ -127,10 +128,12 @@ func initialize_recipes(level: String):
 	var all_recipes_json_path = "res://i18n/all_recipes.json"
 	var ingredients_json_path = "res://i18n/ingredients.json"
 	var fake_ingr_json_path = "res://i18n/fake_ingredients.json"
+	var gravitational_ingr_json_path = "res://i18n/gravitational_ingredients.json"
 	var level_recipe_ids = FileHelper.read_data_from_file(level_recipes_json_path)[level]
 	var all_recipes = FileHelper.read_data_from_file(all_recipes_json_path)
 	all_ingredients = FileHelper.read_data_from_file(ingredients_json_path)
 	fake_ingredients = FileHelper.read_data_from_file(fake_ingr_json_path)
+	gravitational_ingredients = FileHelper.read_data_from_file(gravitational_ingr_json_path)
 
 	for recipe in all_recipes:
 		if recipe["id"] in level_recipe_ids:
