@@ -63,7 +63,7 @@ func show_final_screen(state: GlobalManager.GameState):
 	AudioManager.stop_game_music()
 	score_panel.visible = false
 	recipe_texture.texture = recipe_fail
-	var lang = GlobalManager.game_language
+
 	match state:
 		GlobalManager.GameState.TIMEUP:
 			bg.texture = bg_fail

@@ -8,7 +8,7 @@ signal game_over
 signal win
 signal idioma_cambiado(nuevo_idioma) # Señal para actualizar UI en tiempo real
 
-var lives = 1 #3
+var lives = 3
 var time_left : float = 180.0
 var is_game_running : bool = false
 var is_minigame_overlay_visible : bool = false
