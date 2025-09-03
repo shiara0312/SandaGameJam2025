@@ -1,4 +1,5 @@
 #UILayer
+#HUD + manager de mensajes y botones,
 extends CanvasLayer
 
 @onready var game_hud : Control = null
@@ -98,6 +99,7 @@ func _on_btn_help_pressed() -> void:
 	if GameController and not GlobalManager.is_minigame_overlay_visible:
 		GameController.show_minigame("res://scenes/minigames/MinigameOverlay.tscn")
 
+			
 func _on_pause_btn_pressed() -> void:
 	if get_tree().paused:
 		get_tree().paused = false
@@ -111,3 +113,9 @@ func _on_ingredients_minigame_started() -> void:
 
 func _on_hide_ui():
 	visible = false
+
+
+			# Llamar directamente al flujo de feedback del GameController
+			#if GameController:
+			#	GameController.show_netown_feedback()
+			#	GameController.spawn_next_customer()

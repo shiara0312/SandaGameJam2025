@@ -110,12 +110,18 @@ func slide_minigame_overlay(path: String):
 			Callable(current_level, "_on_ingredients_minigame_started")
 		)
 	
+	# Conectar la señal con el nivel actual
+	minigame_instance.ingredients_minigame_timeout.connect(
+		Callable(self, "_on_ingredients_minigame_timeout")
+	)
+	
 	# Posición inicial: fuera de la pantalla (derecha)
 	minigame_instance.position = Vector2(SCREEN_WIDTH, 0)
 	# Posición final: borde izquierdo del Node2D en la mitad de la pantalla
 	var target_pos = Vector2(TARGET_X, 0)
 	# Tween para entrada del overlay
 	tween.tween_property(minigame_instance, "position", target_pos, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
 
 # Slide Level scene
 func slide_current_level(direction: String = "left", duration: float = 0.5):
@@ -350,3 +356,34 @@ func load_final_screen(state: GlobalManager.GameState):
 	
 	# Mostrar la pantalla según el estado ("win", "time_up", "game_over")
 	final_screen.show_final_screen(state)
+
+func _on_ingredients_minigame_timeout():
+	# Obtener los resultados
+	var result = check_recipe()
+	print("result.. ", result)
+	# Mostrar mensajes inmediatos
+	feedback_message.text = result["feedback"]
+	outcome_message.text = result["outcome"]
+	var msg: String = result["feedback"]
+	var response_type: int = result["type"]
+	
+	newton_moods_sprite.visible = false
+	feedback_message.visible = true
+	feedback_message.text = msg
+	#sprite.visible = true
+	#sprite.scale = Vector2(0.2, 0.2)
+	
+	# Aplicar consecuencias
+	match response_type:
+		GlobalManager.ResponseType.RECIPE_WRONG:
+			GlobalManager.lose_life()
+		GlobalManager.ResponseType.INGREDIENTS_WRONG:
+			GlobalManager.apply_penalty(SECONDS_TO_LOSE)
+		GlobalManager.ResponseType.RECIPE_CORRECT:
+			GlobalManager.apply_penalty(-SECONDS_TO_GAIN)
+		GlobalManager.ResponseType.GRAVITATIONAL:
+			GlobalManager.gain_life()
+		
+	# Forzar feedback negativo si no presionaron preparar
+	is_success = false
+	show_netown_feedback()
