@@ -217,8 +217,7 @@ func check_recipe() -> Dictionary:
 	var selected_recipe_mood = GlobalManager.selected_recipe_data["mood"]
 	var collected_ingredients = GlobalManager.collected_ingredients
 	var customer_mood = GlobalManager.current_customer["mood_id"]
-	print("selected_recipe_ingredients: ", selected_recipe_ingredients)
-	print("collected_ingredients: ", collected_ingredients)
+
 	# Selecciono receta correcta?
 	var correct_recipe_selected = true if selected_recipe_mood == customer_mood else false
 	# Recolectó todos los ingredientes?
@@ -232,20 +231,16 @@ func check_recipe() -> Dictionary:
 	var sprite_to_show : Sprite2D
 	
 	if not GlobalManager.recipe_started:
-		print("not started")
 		response_type = GlobalManager.ResponseType.RECIPE_NOT_PREPARED
 	elif not correct_recipe_selected:
-		print("not correct recipe selected")
 		wrong_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_wrong.png" % sprite_id)
 		sprite_to_show = wrong_recipe_sprite
 		response_type = GlobalManager.ResponseType.RECIPE_WRONG
 	elif not is_exact_match:
-		print("not exact match")
 		wrong_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_wrong.png" % sprite_id)
 		sprite_to_show = wrong_recipe_sprite
 		response_type = GlobalManager.ResponseType.INGREDIENTS_WRONG
 	elif is_success:
-		print("SUCCESS!! ", gravitational)
 		if gravitational:
 			gravitational_recipe_sprite.texture = load("res://assets/pastry/recipes/%s_gravitational.png" % sprite_id)
 			sprite_to_show = gravitational_recipe_sprite
