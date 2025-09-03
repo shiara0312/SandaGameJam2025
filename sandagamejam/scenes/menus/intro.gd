@@ -13,6 +13,7 @@ var texts = [
 var current_index = 0
 func _ready():
 	text_intro.text = texts[current_index]
+	button_label.text = "Continuar" 
 	btn_start.pressed.connect(_on_btn_start_pressed)
 	if has_node("BtnBack"):
 		btn_back.pressed.connect(_on_btn_back_pressed)
