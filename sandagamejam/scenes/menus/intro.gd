@@ -12,13 +12,11 @@ var texts = [
 ]
 var current_index = 0
 func _ready():
-	# Conectar señales de los botones
 	text_intro.text = texts[current_index]
 	btn_start.pressed.connect(_on_btn_start_pressed)
 	if has_node("BtnBack"):
 		btn_back.pressed.connect(_on_btn_back_pressed)
 
-# Cuando presionas "Comenzar"
 func _on_btn_start_pressed():
 	
 	AudioManager.play_click_sfx()
@@ -31,7 +29,7 @@ func _on_btn_start_pressed():
 		if current_index == texts.size() - 1:
 			button_label.text = "Jugar"
 	else:
-		# Tercer click → iniciar juego
+		# Tercer click iniciar juego
 		var level_1_path = "res://scenes/levels/PastryLevel1.tscn"
 		GlobalManager.start_game()
 		GameController.load_level(level_1_path)
