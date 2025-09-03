@@ -10,8 +10,8 @@
 			"idioma":"Idioma",
 			"resolucion":"Resolución de Pantalla",
 			"ranking": {
-				"name": "NOMBRE:",
-				"score": "PUNTAJE:",
+				"name": "Tu nombre:",
+				"score": "Puntaje:",
 				}
 		},
 	"en":
@@ -25,8 +25,8 @@
 			"idioma":"Language",
 			"resolucion":"Screen Resolution",
 			"ranking": {
-				"name": "NAME:",
-				"score": "SCORE:",
+				"name": "Your name:",
+				"score": "Score:",
 				}
 		},
 	"fr":
@@ -40,8 +40,8 @@
 			"idioma":"Langue",
 			"resolucion":"Résolution d’écran",
 			"ranking": {
-				"name": "NOM:",
-				"score": "SCORE:",
+				"name": "Ton nom:",
+				"score": "Score:",
 				}
 		}
 }
