@@ -69,14 +69,4 @@
 	  "fr": "Édulcorant naturel qui apporte de la douceur."
 	}
   },
-{
-	"id": "ing_008",
-	"name": { "en": "Sugar", "es": "Azúcar", "fr": "Sucre" },
-	"category": "sweetener",
-	"description": {
-	  "en": "Sweet crystalline substance commonly used in cooking and baking.",
-	"es": "Sustancia cristalina dulce, comúnmente usada en cocina y repostería.",
-	"fr": "Substance cristalline sucrée, couramment utilisée en cuisine et pâtisserie."
-	}
-}
 ]

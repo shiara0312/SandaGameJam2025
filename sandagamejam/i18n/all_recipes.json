@@ -3,7 +3,7 @@
 	"id": "recipe_001",
 	"name": {"en": "Falling Quinoa", "es": "Quinua que cae", "fr": "Quinoa tombante"},
 	"mood": "sleepy",
-	"ingredients": ["ing_001", "ing_002", "ing_008", "ing_003"],
+	"ingredients": ["ing_001", "ing_002", "ing_005", "ing_003"],
 	"benefits": {
 	  "en": "Restores extra energy, makes them more patient and helps them rest better",
 	  "es": "Devuelve energía extra, los vuelve más pacientes y los ayuda a descansar mejor",
@@ -35,7 +35,7 @@
 	"id": "recipe_003",
 	"name": {"en": "Cosmic Apple Tart", "es": "Tarta de Manzana Cósmica", "fr": "Tarte aux Pommes Cosmique"},
 	"mood": "sad",
-	"ingredients": ["ing_008", "ing_002", "ing_004", "ing_006", "ing_003"],
+	"ingredients": ["ing_005", "ing_002", "ing_004", "ing_006", "ing_003"],
 	"benefits": {
 	  "en": "Brings happiness and lightness, lifts the customer's mood",
 	  "es": "Felicidad y ligereza, sube el ánimo al cliente",
