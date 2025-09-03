@@ -12,7 +12,7 @@ extends CanvasLayer
 @onready var encyclopedia_ui = $EncyclopediaUI
 @onready var tools_btn = $ToolsBtn
 @onready var tab_container = $EncyclopediaUI/Panel/TabContainer
-@onready var ingredients_box = $EncyclopediaUI/Panel/TabContainer/IngredientsTab/VBoxContainer
+@onready var ingredients_box = $EncyclopediaUI/Panel/TabContainer/IngredientsTab/MarginContainer/VBoxContainer
 @onready var characters_box = $EncyclopediaUI/Panel/TabContainer/CharactersTab/MarginContainer/VBoxContainer
 var font = load("res://assets/fonts/Macondo/Macondo-Regular.ttf")
 
@@ -48,8 +48,8 @@ func _ready() -> void:
 	# Datos para la enciclopedia
 	characters_data = FileHelper.read_data_from_file("res://i18n/characters_moods.json")
 	characters_data = characters_data["characters"]
-	_build_tabs()
-
+	populate_characters_list()
+	populate_ingredients_list(ingredients_box)
 
 func show_hud():
 	if not game_hud:
@@ -140,7 +140,8 @@ func _on_close_btn_pressed() -> void:
 	encyclopedia_ui.visible = false
 	get_tree().paused = false
 
-func _build_tabs():
+func populate_characters_list():
+	print("poblando customers.. ")
 	var lang = GlobalManager.game_language
 	# Limpia todos los hijos antes de reconstruir
 	for child in characters_box.get_children():
@@ -171,11 +172,11 @@ func _build_tabs():
 		
 		# Especialidad
 		var esp_label = Label.new()
-		esp_label.text = str(chart["specialty"][GlobalManager.game_language])
+		esp_label.text = str(chart["specialty"][lang])
 		
 		# Descripcion
 		var desc_label = Label.new()
-		desc_label.text = str(chart["description"][GlobalManager.game_language])
+		desc_label.text = str(chart["description"][lang])
 		desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		desc_label.custom_minimum_size = Vector2(500, 0)
 		
@@ -189,11 +190,15 @@ func _build_tabs():
 		apply_font_to_labels(characters_box, font, 24)
 
 func populate_ingredients_list(vbox: VBoxContainer) -> void:
-	vbox.queue_free_children()
+	print("poblando ingredientes.. ")
+	var lang = GlobalManager.game_language
+	# Limpia todos los hijos antes de reconstruir
+	for child in ingredients_box.get_children():
+		child.queue_free()
 
 	# Concatenar todos los ingredientes en una sola lista
 	var all_ingredients = []
-	all_ingredients += GlobalManager.all_ingredients
+	all_ingredients += GlobalManager.all_ingredients #regular
 	all_ingredients += GlobalManager.fake_ingredients
 	all_ingredients += GlobalManager.gravitational_ingredients
 
@@ -203,32 +208,64 @@ func populate_ingredients_list(vbox: VBoxContainer) -> void:
 		hbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 
 		# Imagen
+		# Imagen
+		var img_container = Control.new()
+		img_container.custom_minimum_size = Vector2(250, 120)
+
 		var sprite_path = "res://assets/pastry/ingredients/%s.png" % ing["id"]
 		var tex = load(sprite_path)
 		if tex:
 			var tex_rect = TextureRect.new()
 			tex_rect.texture = tex
-			tex_rect.custom_minimum_size = Vector2(64, 64)
-			tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-			hbox.add_child(tex_rect)
+			tex_rect.custom_minimum_size = Vector2(120,100)
+			tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			tex_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+			tex_rect.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+			tex_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+			tex_rect.custom_minimum_size = Vector2(100, 100) # escala base de la imagen
+			img_container.add_child(tex_rect)
 
-		# Texto
-		var label = Label.new()
-		label.text = ing["name"].get("es", ing["id"])
-		label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		hbox.add_child(label)
-
+		else:
+			var spacer = Control.new()
+			spacer.custom_minimum_size = Vector2(120, 120)
+			hbox.add_child(spacer)
+	
+		hbox.add_child(img_container)
+		
+		# Textos
+		var text_vbox = VBoxContainer.new()
+		text_vbox.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		# Nombre
+		var name_label = Label.new()
+		name_label.text = ing["name"].get(lang, ing["id"])
+		name_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		name_label.custom_minimum_size = Vector2(400, 0)
+		name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		name_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		text_vbox.add_child(name_label)
+		
+		# Descripcion
+		var desc_label = Label.new()
+		desc_label.text = ing["description"].get(lang, ing["id"])
+		desc_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		desc_label.custom_minimum_size = Vector2(400, 0)
+		desc_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		desc_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+		
+		text_vbox.add_child(desc_label)
+		hbox.add_child(text_vbox)
 		vbox.add_child(hbox)
+		
+		apply_font_to_labels(vbox, font, 24)
 
 
-func apply_font_to_labels(node: Node, font: FontFile, size: int = 16) -> void:
+func apply_font_to_labels(node: Node, label_font: FontFile, size: int = 16) -> void:
 	for child in node.get_children():
 		if child is Label:
-			child.add_theme_font_override("font", font)
+			child.add_theme_font_override("font", label_font)
 			child.add_theme_font_size_override("font_size", size)
 		elif child.get_child_count() > 0:
 			# Aplicar también a hijos dentro de sub-contenedores
-			apply_font_to_labels(child, font, size)
+			apply_font_to_labels(child, label_font, size)
