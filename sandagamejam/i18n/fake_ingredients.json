@@ -38,5 +38,25 @@
 	  "es": "Definitivamente no es comida, solo una llanta de auto.",
 	  "fr": "Certainement pas de la nourriture, juste un pneu de voiture."
 	}
+  },
+  {
+	"id": "ing_105",
+	"name": { "en": "Tilted Tire", "es": "Llanta inclinada", "fr": "Pneu incliné" },
+	"category": "fake",
+	"description": {
+	  "en": "Just another tire, but leaning. Definitely not edible!",
+	  "es": "Otra llanta más, pero inclinada. ¡Definitivamente no es comestible!",
+	  "fr": "Juste un autre pneu, mais incliné. Certainement pas comestible !"
+	}
+  },
+  {
+	"id": "ing_106",
+	"name": { "en": "Prism", "es": "Prisma", "fr": "Prisme" },
+	"category": "fake",
+	"description": {
+		"en": "Newton discovered it! Not edible, this prism splits light like Pink Floyd's classic album cover. Still not edible, and it won't give you any points!",
+		"es": "¡Newton lo descubrió! No es comestible, este prisma separa la luz como la portada del clásico disco de Pink Floyd. Sigue sin ser comestible, y no te dará puntos a favor.",
+		"fr": "Newton l'a découvert ! Pas comestible, ce prisme décompose la lumière comme la pochette de l'album classique de Pink Floyd. Toujours pas comestible, et il ne vous donnera aucun point !"
+	}
   }
 ]
