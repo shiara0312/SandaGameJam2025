@@ -1,168 +1,218 @@
-[gd_scene load_steps=6 format=3 uid="uid://brrp3aubtiabr"]
+[gd_scene load_steps=7 format=3 uid="uid://dbt1wif75y37k"]
 
-[ext_resource type="Texture2D" uid="uid://xqi1bhg5dq31" path="res://assets/backgrounds/level1.png" id="1_3wh4p"]
-[ext_resource type="Texture2D" uid="uid://lhy87j8s1x45" path="res://assets/UI/text_message.png" id="2_2q3ra"]
-[ext_resource type="FontFile" uid="uid://bx2ex5j0qq1dc" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="2_inw4l"]
-[ext_resource type="Texture2D" uid="uid://caaq18s5435v6" path="res://assets/UI/closebtn.png" id="3_2w0tc"]
-[ext_resource type="Texture2D" uid="uid://bfk8wkppon833" path="res://assets/UI/ic_volume_off_fill.png" id="4_2w0tc"]
+[ext_resource type="Script" uid="uid://c3ly4kmn5k6ym" path="res://opciones_modal.gd" id="1_y1he4"]
+[ext_resource type="Texture2D" uid="uid://bhe2g0oc3ge3k" path="res://assets/UI/text_message.png" id="3_57l0b"]
+[ext_resource type="Texture2D" uid="uid://d0dio5qm3w7ga" path="res://assets/UI/ic_volume_off_fill.png" id="3_tbubh"]
+[ext_resource type="FontFile" uid="uid://c5f73qmgd11ts" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="4_57l0b"]
+[ext_resource type="Texture2D" uid="uid://sknxmaq3yjgh" path="res://assets/UI/ic_volume_on_fill.png" id="4_rckh6"]
+[ext_resource type="Texture2D" uid="uid://c7lrfj17fxnv2" path="res://assets/UI/close-btn.png" id="6_rckh6"]
 
-[node name="Opciones" type="Control"]
+[node name="OpcionesModal" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_y1he4")
 
-[node name="TextureRect5" type="TextureRect" parent="."]
+[node name="TextureRect7" type="TextureRect" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
-texture = ExtResource("1_3wh4p")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.854902)
+[node name="TextureRect8" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -81.0
-offset_top = -122.0
-offset_right = 1231.0
-offset_bottom = 799.0
-texture = ExtResource("2_2q3ra")
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="TextureRect9" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.894118)
+layout_mode = 0
+offset_left = -64.0
+offset_top = -113.0
+offset_right = 1228.0
+offset_bottom = 819.0
+texture = ExtResource("3_57l0b")
 expand_mode = 1
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 256.0
-offset_top = 208.0
-offset_right = 296.0
-offset_bottom = 248.0
-texture = ExtResource("4_2w0tc")
 
 [node name="TextureRect3" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 262.0
-offset_top = 323.0
-offset_right = 302.0
-offset_bottom = 363.0
-texture = ExtResource("4_2w0tc")
+offset_left = 256.0
+offset_top = 223.0
+offset_right = 296.0
+offset_bottom = 263.0
+texture = ExtResource("3_tbubh")
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 815.0
+offset_top = 223.0
+offset_right = 855.0
+offset_bottom = 263.0
+texture = ExtResource("4_rckh6")
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 815.0
+offset_top = 328.0
+offset_right = 855.0
+offset_bottom = 368.0
+texture = ExtResource("4_rckh6")
 
 [node name="Titulo" type="Label" parent="."]
-layout_mode = 0
-offset_left = 26.0
-offset_top = 123.0
-offset_right = 1095.0
-offset_bottom = 186.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0130208
+anchor_top = 0.0324074
+anchor_right = 0.0130208
+anchor_bottom = 0.0324074
+offset_left = 25.0
+offset_top = 100.0
+offset_right = 1094.0
+offset_bottom = 163.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_inw4l")
+theme_override_fonts/font = ExtResource("4_57l0b")
 theme_override_font_sizes/font_size = 47
-text = "Opciones"
+text = "OPCIONES"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="salir" type="TextureButton" parent="."]
-layout_mode = 0
-offset_left = 868.0
-offset_top = 116.0
-offset_right = 950.0
-offset_bottom = 192.0
-texture_normal = ExtResource("3_2w0tc")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00520833
+anchor_top = 0.0416667
+anchor_right = 0.00520833
+anchor_bottom = 0.0416667
+offset_left = 871.0
+offset_top = 92.0
+offset_right = 953.0
+offset_bottom = 168.0
+texture_normal = ExtResource("6_rckh6")
+metadata/_edit_use_anchors_ = true
 
-[node name="lblSFX" type="Label" parent="."]
-layout_mode = 0
+[node name="LabelSFX" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.0354938
+anchor_bottom = 0.0354938
 offset_left = 221.0
 offset_top = 155.0
 offset_right = 821.0
 offset_bottom = 194.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_inw4l")
+theme_override_fonts/font = ExtResource("4_57l0b")
 theme_override_font_sizes/font_size = 32
 text = "SFX"
+metadata/_edit_use_anchors_ = true
 
 [node name="SFXsLider" type="HSlider" parent="."]
-custom_minimum_size = Vector2(550, 0)
-layout_mode = 0
-offset_left = 314.0
-offset_top = 219.0
-offset_right = 872.0
-offset_bottom = 241.0
-
-[node name="SFXsLider2" type="HSlider" parent="."]
-custom_minimum_size = Vector2(550, 0)
-layout_mode = 0
-offset_left = 314.0
-offset_top = 333.0
-offset_right = 872.0
-offset_bottom = 355.0
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0451389
+anchor_right = -0.045
+offset_left = 379.0
+offset_top = 232.0
+offset_right = 835.84
+offset_bottom = 254.0
 
 [node name="TextureRect4" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 210.0
-offset_top = 264.0
-offset_right = 810.0
-offset_bottom = 264.0
+offset_left = 256.0
+offset_top = 327.0
+offset_right = 296.0
+offset_bottom = 367.0
+texture = ExtResource("3_tbubh")
 
-[node name="lblMusic" type="Label" parent="."]
-layout_mode = 0
+[node name="MusicaSlider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0451389
+anchor_right = -0.045
+offset_left = 380.0
+offset_top = 337.0
+offset_right = 840.84
+offset_bottom = 359.0
+
+[node name="LabelMusica" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.0216049
+anchor_bottom = 0.0216049
 offset_left = 222.0
 offset_top = 266.0
 offset_right = 316.0
 offset_bottom = 305.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_inw4l")
+theme_override_fonts/font = ExtResource("4_57l0b")
 theme_override_font_sizes/font_size = 32
 text = "Música"
+metadata/_edit_use_anchors_ = true
 
-[node name="lblScreen" type="Label" parent="."]
-layout_mode = 0
+[node name="LabelResolucion" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0277778
+anchor_top = 0.100309
+anchor_right = -0.0277778
+anchor_bottom = 0.100309
 offset_left = 318.0
-offset_top = 397.0
+offset_top = 407.0
 offset_right = 609.0
-offset_bottom = 436.0
+offset_bottom = 446.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_inw4l")
+theme_override_fonts/font = ExtResource("4_57l0b")
 theme_override_font_sizes/font_size = 32
 text = "Resolución de Pantalla"
+metadata/_edit_use_anchors_ = true
 
-[node name="ScreenButton" type="OptionButton" parent="."]
-layout_mode = 0
+[node name="Pantalla" type="OptionButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.100309
+anchor_bottom = 0.100309
 offset_left = 640.0
-offset_top = 397.0
+offset_top = 407.0
 offset_right = 839.0
-offset_bottom = 435.0
-theme_override_fonts/font = ExtResource("2_inw4l")
-item_count = 5
-popup/item_0/text = "1920x1080"
-popup/item_0/id = 0
-popup/item_1/text = "1600x900"
-popup/item_1/id = 1
-popup/item_2/text = "1366x768"
-popup/item_2/id = 2
-popup/item_3/text = "1280x720"
-popup/item_3/id = 3
-popup/item_4/text = "Pantalla completa"
-popup/item_4/id = 4
+offset_bottom = 445.0
+theme_override_fonts/font = ExtResource("4_57l0b")
+theme_override_font_sizes/font_size = 24
+metadata/_edit_use_anchors_ = true
 
-[node name="ScreenButton2" type="OptionButton" parent="."]
-layout_mode = 0
+[node name="Idioma" type="OptionButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0729167
+anchor_top = -0.121914
+anchor_right = -0.0729167
+anchor_bottom = -0.121914
 offset_left = 642.0
-offset_top = 458.0
+offset_top = 485.0
 offset_right = 841.0
-offset_bottom = 496.0
-theme_override_fonts/font = ExtResource("2_inw4l")
-item_count = 3
-popup/item_0/text = "English"
-popup/item_0/id = 0
-popup/item_1/text = "Français"
-popup/item_1/id = 1
-popup/item_2/text = "Español"
-popup/item_2/id = 2
+offset_bottom = 523.0
+theme_override_fonts/font = ExtResource("4_57l0b")
+theme_override_font_sizes/font_size = 24
+metadata/_edit_use_anchors_ = true
 
-[node name="lblIdioma" type="Label" parent="."]
-layout_mode = 0
+[node name="LabelIdioma" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.101563
+anchor_top = -0.123456
+anchor_right = -0.101563
+anchor_bottom = -0.123456
 offset_left = 512.0
-offset_top = 459.0
+offset_top = 484.0
 offset_right = 598.0
-offset_bottom = 498.0
+offset_bottom = 523.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("2_inw4l")
+theme_override_fonts/font = ExtResource("4_57l0b")
 theme_override_font_sizes/font_size = 32
 text = "Idioma"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="salir" to="." method="_on_salir_pressed"]
