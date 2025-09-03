@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://lqqdf6iy7fnl"]
+[gd_scene load_steps=13 format=3 uid="uid://lqqdf6iy7fnl"]
 
 [ext_resource type="Script" uid="uid://bv5tuq3hbtquc" path="res://scripts/managers/audio_manager.gd" id="1_v6v0x"]
 [ext_resource type="AudioStream" uid="uid://dhop1owl4ecir" path="res://assets/sfx/global/sfx_click_pop.wav" id="2_5jw7j"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://cfleepp1gltky" path="res://assets/sfx/minigame/sfx_recipe_bad.wav" id="6_5jw7j"]
 [ext_resource type="AudioStream" uid="uid://cmtudwflea85x" path="res://assets/sfx/minigame/sfx_recipe_ready.wav" id="7_qtie0"]
 [ext_resource type="AudioStream" uid="uid://dd26nkrbbamcy" path="res://assets/sfx/global/sfx_time_up.wav" id="8_hmi33"]
+[ext_resource type="AudioStream" uid="uid://cnw128el4qcw8" path="res://assets/sfx/music/isaacs_pastry_end.mp3" id="9_3uvv3"]
 [ext_resource type="AudioStream" uid="uid://bqps6aqptoogf" path="res://assets/sfx/global/sfx_game_over.wav" id="9_5jw7j"]
 [ext_resource type="AudioStream" uid="uid://dpdyjtmqx60se" path="res://assets/sfx/global/sfx_win.wav" id="10_5jw7j"]
 
@@ -41,6 +42,11 @@ volume_db = -24.0
 
 [node name="GameMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_4tesi")
+volume_db = -22.0
+parameters/looping = true
+
+[node name="FinalMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_3uvv3")
 volume_db = -22.0
 parameters/looping = true
 
