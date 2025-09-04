@@ -15,6 +15,11 @@ run/main_scene="uid://bcx0u2eaelyr6"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/Music=false
+buses/SFX=false
+
 [autoload]
 
 GlobalManager="*res://scripts/managers/global_manager.gd"
