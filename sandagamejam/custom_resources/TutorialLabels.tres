@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://d2d5fqqackxp5"]
+
+[ext_resource type="FontFile" uid="uid://ch5rglkjpbnk2" path="res://assets/fonts/Macondo/Macondo-Regular.ttf" id="1_bu2pc"]
+
+[resource]
+font = ExtResource("1_bu2pc")
+font_size = 60
+font_color = Color(0.34902, 0.137255, 0.0862745, 1)
