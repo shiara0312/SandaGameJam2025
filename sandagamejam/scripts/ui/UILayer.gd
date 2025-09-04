@@ -131,6 +131,7 @@ func invest_label_colors():
 func _on_btn_help_pressed() -> void:
 	AudioManager.play_click_sfx()
 	AudioManager.stop_customer_sfx()
+	AudioManager.play_newton_humming_sfx()
 	message_texture.visible = false
 	invest_label_colors()
 	
