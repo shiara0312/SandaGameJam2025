@@ -23,6 +23,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_klb7a")
 
 [node name="text_intro" type="Label" parent="TextureRect"]
+layout_mode = 0
 offset_left = 104.0
 offset_top = 98.0
 offset_right = 1076.0
