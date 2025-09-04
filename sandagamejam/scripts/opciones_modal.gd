@@ -10,6 +10,7 @@ extends Control
 @onready var label_sfx := $LabelSFX
 @onready var label_idioma := $LabelIdioma
 @onready var label_resolucion := $LabelResolucion
+@onready var label_titulo := $Titulo
 
 var resoluciones = [
 	Vector2i(1920, 1080),
@@ -26,18 +27,21 @@ var idiomas = {
 
 var labels_por_idioma = {
 	"es": {
+		"opciones":"Opciones",
 		"musica": "Música",
 		"sfx": "SFX",
 		"idioma": "Idioma",
 		"resolucion": "Resolución de Pantalla"
 	},
 	"en": {
+		"opciones":"Settings",
 		"musica": "Music",
 		"sfx": "SFX",
 		"idioma": "Language",
 		"resolucion": "Screen Resolution"
 	},
 	"fr": {
+		"opciones":"Paramètres",
 		"musica": "Musique",
 		"sfx": "SFX",
 		"idioma": "Langue",
@@ -109,6 +113,8 @@ func _on_idioma_selected(index: int) -> void:
 
 func _actualizar_labels():
 	var idioma = GlobalManager.game_language
+	if label_titulo:
+		label_titulo.text = labels_por_idioma.get(idioma, {}).get("opciones", "Opciones")
 	if label_musica:
 		label_musica.text = labels_por_idioma.get(idioma, {}).get("musica", "Música")
 	if label_sfx:
