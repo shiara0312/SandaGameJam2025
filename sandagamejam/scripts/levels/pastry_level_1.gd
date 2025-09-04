@@ -25,6 +25,7 @@ func _ready():
 	# Cargar combinaciones y preparar cola
 	var universe_combinations := get_random_combinations(characters_mood_file_path, customer_count)
 	GlobalManager.initialize_customers(universe_combinations)
+	AudioManager.play_crowd_talking_sfx()
 	spawn_next_customer()
 	
 	GlobalManager.initialize_recipes("level1")
