@@ -5,9 +5,9 @@ extends Node2D
 @onready var btn_back: Button = $BtnBack if has_node("BtnBack") else null 
 
 var texts = [
-	"Sir Isaac Newton, cansado de que le caigan manzanas en la cabeza, abrió una pastelería...",
-	"Ahora debe combinar ingredientes secretos para complacer a sus clientes exigentes...",
-	"¡Tu aventura como maestro pastelero comienza ahora!"
+	"¡Bienvenido a mi cafeteria! Te preguntarás qué hace Isaac Newton con un mandil y preparando pasteles.",
+	"Pues, descubrí mi pasión por la pastelería cuando me cayó una manzana en la cabeza mientras descansaba bajo un manzanero.",
+	"Durante los siguientes minutos, llegaran mis mejores clientes para degustar de mis deliciosas preparaciones a base de mi fruta favorita, la manzana. ¡Es hora de abrir!, aquí viene nuestro primer comensal "
 ]
 var typing_speed := 0.05
 var typing_timer: Timer
