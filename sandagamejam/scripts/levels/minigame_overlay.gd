@@ -101,6 +101,7 @@ func load_ingredients_assets():
 
 # Minijuego de PastryLevel1
 func start_ingredient_minigame():
+	print("START MINIGAME... ")
 	emit_signal("ingredients_minigame_started")
 	minigame_started = true
 	var recipe_selected = GlobalManager.current_level_recipes[GlobalManager.selected_recipe_idx]
@@ -113,9 +114,9 @@ func start_ingredient_minigame():
 	btn_prepare.visible = true
 
 func animate_ingredients(ingr_loop: Array) -> void:
-	#print("EMPEZAR A RECOLECTAR INGREDIENTES!!! ", ingr_loop)
+	print("EMPEZAR A RECOLECTAR INGREDIENTES!!! ", ingr_loop)
 	var container := recollect_container
-	clear_children(container)
+	clear_children_except_bowl(container)
 
 	var start_x := recollect_container.position.x + recollect_container.size.x + 100
 	var end_x := recollect_container.position.x
@@ -151,6 +152,11 @@ func clear_children(node: Node) -> void:
 	for child in node.get_children():
 		child.queue_free()
 		
+func clear_children_except_bowl(container: Node) -> void:
+	for child in container.get_children():
+		if child.name != "Bowl":
+			child.queue_free()
+
 func create_ingredient_wrapper(ingredient_id: String, is_clickable: bool = false):
 	var path = "res://assets/pastry/ingredients/%s.png" % ingredient_id
 	if not ResourceLoader.exists(path):
@@ -268,17 +274,46 @@ func _on_ingredient_clicked(event: InputEvent, wrapper: Control, ing_id: String)
 	if event is InputEventMouseButton and event.pressed:
 		AudioManager.play_collect_ingredient_sfx()
 		
-		# mover ingrediente al centro
-		var target_pos = Vector2(550, recollect_container.position.y + recollect_container.size.y - 50)
+		# Posición aleatoria dentro del polígono
+		var target_pos = Vector2(1000, recollect_container.position.y + recollect_container.size.y - 50)
+		
+		# Tween para mover el ingrediente
 		var tween = create_tween()
-		tween.tween_property(wrapper, "position", target_pos, 0.5)\
+		
+		tween.tween_property(wrapper, "global_position", target_pos, 0.5)\
 			.set_trans(Tween.TRANS_LINEAR)\
 			.set_ease(Tween.EASE_IN)
+			
 		tween.tween_callback(Callable(wrapper, "queue_free"))
-		
+
 		GlobalManager.collected_ingredients.append(ing_id)
 		
 		#print("🍎 Ingredient recolectado:", ing_id)
-		if GlobalManager.collected_ingredients.size() >= 1 and is_instance_valid(btn_prepare):
+		if GlobalManager.collected_ingredients.size() >= 2 and is_instance_valid(btn_prepare):
 			btn_prepare.visible = true
 			btn_prepare.disabled = false
+
+# Función simple: generar un punto aleatorio dentro del bounding box y chequear si está dentro del polígono
+func random_point_in_polygon(poly: PackedVector2Array) -> Vector2:
+	var min_x = poly[0].x
+	var max_x = poly[0].x
+	var min_y = poly[0].y
+	var max_y = poly[0].y
+
+	for v in poly:
+		min_x = min(min_x, v.x)
+		max_x = max(max_x, v.x)
+		min_y = min(min_y, v.y)
+		max_y = max(max_y, v.y)
+
+	var point = Vector2()
+	var attempts = 0
+	while attempts < 1000:  # evitar loop infinito
+		point.x = randf_range(min_x, max_x)
+		point.y = randf_range(min_y, max_y)
+		if Geometry2D.is_point_in_polygon(point, poly):
+			return point
+		attempts += 1
+		
+	# fallback por si no encuentra un punto después de muchos intentos
+	return poly[0]  # retorna el primer vértice del polígono
