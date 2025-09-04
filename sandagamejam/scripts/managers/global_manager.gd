@@ -220,3 +220,15 @@ func cargar_audio_settings() -> void:
 	else:
 		music_volume = 1.0
 		sfx_volume = 1.0
+
+	AudioServer.set_bus_volume_db(
+		AudioServer.get_bus_index("Music"),
+		linear_to_db(music_volume)
+	)
+	AudioServer.set_bus_volume_db(
+		AudioServer.get_bus_index("SFX"),
+		linear_to_db(sfx_volume)
+	)
+
+func _ready() -> void:
+	cargar_audio_settings()
