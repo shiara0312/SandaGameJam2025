@@ -1,0 +1,45 @@
+
+{
+	"es": {
+		"instruction_001": "Bienvenido a mi cafetería",
+		"instruction_002": "Te preguntarás qué hace Isaac Newton con un mandil y preparando pasteles.",
+		"instruction_003": "Pues, descubrí mi pasión por la pastelería cuando me cayó una manzana en la cabeza mientras descansaba bajo un manzanero.",
+		"instruction_004": "Durante los siguientes minutos, llegarán mis mejores clientes para degustar de mis deliciosas preparaciones a base de mi fruta favorita, la manzana.",
+		"instruction_005": "¡Es hora de abrir!, aquí viene nuestro primer comensal.",
+		"instruction_006": "Aquí la clave es la empatía, comprende la gravedad de sus emociones para descifrar qué postre o bebida servirá para calmar sus frustraciones.",
+		"instruction_007": "Lee detalladamente cada recetario, y decide qué alimento encaja con las necesidades de tu cliente.",
+		"instruction_008": "Recuerda memorizar bien los ingredientes de la receta para que el resultado sea perfecto.",
+		"instruction_009": "La cocción es simple: sigue la receta, elige bien los ingredientes e incorpóralos a mi bowl.",
+		"instruction_0010": "Pero con cuidado, algunas cosas suelen colarse en mi cocina....",
+		"instruction_0011": "¡Eso se ve delicioso!",
+		"instruction_0012": "Ya estás listo para empezar a cocinar, ¡te deseo mucha suerte!"
+	},
+	"en": {
+		"instruction_001": "Welcome to my cafe",
+		"instruction_002": "You might be wondering what Isaac Newton is doing wearing an apron and baking pastries.",
+		"instruction_003": "Well, I discovered my passion for baking when an apple fell on my head while I was resting under an apple tree.",
+		"instruction_004": "Over the next few minutes, my best customers will arrive to enjoy my delicious creations made with my favorite fruit: the apple.",
+		"instruction_005": "It's time to open! Here comes our first guest.",
+		"instruction_006": "The key here is empathy, you have to understand the gravity of their emotions to figure out which dessert or drink will help soothe their frustrations.",
+		"instruction_007": "Read each recipe carefully and decide which food matches your customer's needs.",
+		"instruction_008": "Remember to memorize the ingredients well so the result is perfect.",
+		"instruction_009": "Cooking is simple: follow the recipe, choose the right ingredients, and add them to my bowl.",
+		"instruction_0010": "But be careful, some things tend to sneak into my kitchen...",
+		"instruction_0011": "That looks delicious!",
+		"instruction_0012": "You're ready to start cookin, good luck!"
+	},
+	"fr": {
+		"instruction_001": "Bienvenue dans mon café",
+		"instruction_002": "Vous vous demandez peut-être ce que fait Isaac Newton avec un tablier, en train de préparer des pâtisseries.",
+		"instruction_003": "Eh bien, j’ai découvert ma passion pour la pâtisserie lorsqu’une pomme est tombée sur ma tête pendant que je me reposais sous un pommier.",
+		"instruction_004": "Dans les prochaines minutes, mes meilleurs clients arriveront pour savourer mes délicieuses créations à base de mon fruit préféré : la pomme.",
+		"instruction_005": "Il est temps d’ouvrir ! Voici notre premier invité.",
+		"instruction_006": "La clé ici, c’est l’empathie : comprenez la gravité de leurs émotions pour choisir le dessert ou la boisson qui apaisera leurs frustrations.",
+		"instruction_007": "Lisez chaque recette attentivement et choisissez le plat qui correspond aux besoins de votre client.",
+		"instruction_008": "N’oubliez pas de bien mémoriser les ingrédients pour que le résultat soit parfait.",
+		"instruction_009": "Cuisiner est simple : suivez la recette, choisissez les bons ingrédients et ajoutez-les dans mon bol.",
+		"instruction_0010": "Mais attention—certaines choses ont tendance à se faufiler dans ma cuisine...",
+		"instruction_0011": "Ça a l’air délicieux !",
+		"instruction_0012": "Vous êtes prêt à cuisiner—bonne chance !"
+	}
+}
