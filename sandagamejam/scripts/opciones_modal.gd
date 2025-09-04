@@ -78,12 +78,20 @@ func _ready():
 	_actualizar_labels()
 
 func _on_musica_changed(value: float) -> void:
-	var vol = clamp(value / 100.0, 0.0, 1.0)
-	GlobalManager.set_music_volume(vol)  # Actualiza bus y guarda persistencia
+	GlobalManager.music_volume = value / 100.0
+	AudioServer.set_bus_volume_db(
+		AudioServer.get_bus_index("Music"),
+		linear_to_db(GlobalManager.music_volume)
+	)
+	GlobalManager.guardar_audio_settings()
 
 func _on_sfx_changed(value: float) -> void:
-	var vol = clamp(value / 100.0, 0.0, 1.0)
-	GlobalManager.set_sfx_volume(vol)    # Actualiza bus y guarda persistencia
+	GlobalManager.sfx_volume = value / 100.0
+	AudioServer.set_bus_volume_db(
+		AudioServer.get_bus_index("SFX"),
+		linear_to_db(GlobalManager.sfx_volume)
+	)
+	GlobalManager.guardar_audio_settings()
 
 func _on_resolucion_selected(index: int) -> void:
 	if index < resoluciones.size():
