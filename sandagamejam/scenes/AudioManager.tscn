@@ -1,19 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://lqqdf6iy7fnl"]
 
 [ext_resource type="Script" uid="uid://bv5tuq3hbtquc" path="res://scripts/managers/audio_manager.gd" id="1_v6v0x"]
-<<<<<<< HEAD
-[ext_resource type="AudioStream" uid="uid://dhop1owl4ecir" path="res://assets/sfx/global/sfx_click_pop.wav" id="2_5jw7j"]
-[ext_resource type="AudioStream" uid="uid://bp72dis3qtl7y" path="res://assets/sfx/music/isaacs_pastry_game.mp3" id="3_4tesi"]
-[ext_resource type="AudioStream" uid="uid://c26ail7w2v0q6" path="res://assets/sfx/minigame/sfx_collect_item.wav" id="3_5jw7j"]
-[ext_resource type="AudioStream" uid="uid://dk8s6u2tjd7oh" path="res://assets/sfx/minigame/sfx_whisking.wav" id="4_v5v75"]
-[ext_resource type="AudioStream" uid="uid://bddfrlou8uomc" path="res://assets/sfx/minigame/sfx_recipe_good.wav" id="5_5jw7j"]
-[ext_resource type="AudioStream" uid="uid://cfleepp1gltky" path="res://assets/sfx/minigame/sfx_recipe_bad.wav" id="6_5jw7j"]
-[ext_resource type="AudioStream" uid="uid://cmtudwflea85x" path="res://assets/sfx/minigame/sfx_recipe_ready.wav" id="7_qtie0"]
-[ext_resource type="AudioStream" uid="uid://dd26nkrbbamcy" path="res://assets/sfx/global/sfx_time_up.wav" id="8_hmi33"]
-[ext_resource type="AudioStream" uid="uid://cnw128el4qcw8" path="res://assets/sfx/music/isaacs_pastry_end.mp3" id="9_3uvv3"]
-[ext_resource type="AudioStream" uid="uid://bqps6aqptoogf" path="res://assets/sfx/global/sfx_game_over.wav" id="9_5jw7j"]
-[ext_resource type="AudioStream" uid="uid://dpdyjtmqx60se" path="res://assets/sfx/global/sfx_win.wav" id="10_5jw7j"]
-=======
 [ext_resource type="AudioStream" uid="uid://ca1ra5yu04e48" path="res://assets/sfx/global/sfx_click_pop.wav" id="2_5jw7j"]
 [ext_resource type="AudioStream" uid="uid://112dyx2ykght" path="res://assets/sfx/music/isaacs_pastry_game.mp3" id="3_4tesi"]
 [ext_resource type="AudioStream" uid="uid://ckq332fi7plra" path="res://assets/sfx/minigame/sfx_collect_item.wav" id="3_5jw7j"]
@@ -25,7 +12,6 @@
 [ext_resource type="AudioStream" uid="uid://b583ahxstbohc" path="res://assets/sfx/music/isaacs_pastry_end.mp3" id="9_3uvv3"]
 [ext_resource type="AudioStream" uid="uid://dwk87ojiwenrl" path="res://assets/sfx/global/sfx_game_over.wav" id="9_5jw7j"]
 [ext_resource type="AudioStream" uid="uid://bshjesh7cv1fu" path="res://assets/sfx/global/sfx_win.wav" id="10_5jw7j"]
->>>>>>> main
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_v6v0x")

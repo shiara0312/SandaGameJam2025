@@ -1,17 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://ebvprw6pexo2"]
 
 [ext_resource type="Script" uid="uid://cd2svseh483m6" path="res://scenes/menus/intro.gd" id="1_1a7bk"]
-<<<<<<< HEAD
 [ext_resource type="Texture2D" uid="uid://3to8a0h6lrew" path="res://assets/UI/intro_background.png" id="2_56pe6"]
 [ext_resource type="Texture2D" uid="uid://dsenofsp1vxvc" path="res://assets/UI/intro_text.png" id="3_klb7a"]
 [ext_resource type="LabelSettings" uid="uid://b2h5bls5s7rsg" path="res://custom_resources/MainMenuButtonLabels.tres" id="5_56pe6"]
 [ext_resource type="Texture2D" uid="uid://kmijifif5ra1" path="res://assets/UI/playbtn.png" id="5_uh46f"]
-=======
-[ext_resource type="Texture2D" uid="uid://qmsd438lm0q3" path="res://assets/UI/intro_background.png" id="2_56pe6"]
-[ext_resource type="Texture2D" uid="uid://dt7kphcetq4tb" path="res://assets/UI/intro_text.png" id="3_klb7a"]
-[ext_resource type="LabelSettings" uid="uid://b2h5bls5s7rsg" path="res://custom_resources/MainMenuButtonLabels.tres" id="5_56pe6"]
-[ext_resource type="Texture2D" uid="uid://bl87v8o7wik2h" path="res://assets/UI/playbtn.png" id="5_uh46f"]
->>>>>>> main
 
 [node name="Intro" type="Node2D"]
 script = ExtResource("1_1a7bk")
