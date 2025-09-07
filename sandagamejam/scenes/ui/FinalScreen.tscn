@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dday64lgpu1ot" path="res://scripts/ui/final_screen.gd" id="1_gh2yv"]
 [ext_resource type="Texture2D" uid="uid://y3oji4h74je" path="res://assets/backgrounds/bad_score_bg.png" id="2_7raak"]
-[ext_resource type="Texture2D" uid="uid://bc01500fwn7t0" path="res://assets/UI/btn1.png" id="3_7raak"]
+[ext_resource type="Texture2D" uid="uid://bc01500fwn7t0" path="res://assets/ui/btn1.png" id="3_7raak"]
 [ext_resource type="Texture2D" uid="uid://j5x08ntmqrit" path="res://assets/pastry/recipes/recipe_003.png" id="4_gh2yv"]
 [ext_resource type="Texture2D" uid="uid://l81w5kaye73g" path="res://assets/sprites/newtown/newton_sad.png" id="6_nsh0p"]
 [ext_resource type="LabelSettings" uid="uid://i5q50xw1j3v2" path="res://custom_resources/Ranking.tres" id="7_u5ho7"]

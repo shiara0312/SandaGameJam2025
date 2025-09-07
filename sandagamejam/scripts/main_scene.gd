@@ -9,7 +9,7 @@ var intro_game = preload("res://scenes/menus/intro.tscn")
 
 func _ready():
 	set_button_labels()
-	var cursor_texture = preload("res://assets/UI/hand_point.png")
+	var cursor_texture = preload("res://assets/ui/hand_point.png")
 	Input.set_custom_mouse_cursor(cursor_texture, Input.CURSOR_ARROW, Vector2(16, 16))
 	
 	# Conectar al cambio de idioma
@@ -71,5 +71,5 @@ func _on_salir_pressed() :
 	get_tree().quit()
 
 func _on_button_mouse_entered():
-	var hand_cursor = preload("res://assets/UI/hand_point.png")
+	var hand_cursor = preload("res://assets/ui/hand_point.png")
 	Input.set_custom_mouse_cursor(hand_cursor, Input.CURSOR_ARROW, Vector2(8, 8))
