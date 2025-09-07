@@ -20,3 +20,12 @@ static func read_data_from_file(json_path: String) -> Variant:
 		push_error("Error al parsear el JSON: " + json_path)
 
 	return data
+
+# Cargar cualquier texture, esto funciona para Web, Windows y Mac
+func safe_load_texture(path: String) -> Texture2D:
+	if ResourceLoader.exists(path, "Texture2D"):
+		return load(path)
+	else:
+		push_warning("⚠️ Texture not found: " + path)
+		# Retorna un placeholder o null según prefieras
+		return preload("res://assets/ui/missing_texture.png")
