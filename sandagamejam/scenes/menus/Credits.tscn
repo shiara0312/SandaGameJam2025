@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ecskbidj06cr"]
 
 [ext_resource type="Script" uid="uid://c2yno5nwb6hlr" path="res://credits.gd" id="1_g4wvt"]
-[ext_resource type="Texture2D" uid="uid://tvujyj6fwdns" path="res://assets/UI/back.png" id="2_c1t8d"]
-[ext_resource type="Texture2D" uid="uid://4jaer7avt0tj" path="res://assets/backgrounds/credits_bg.png" id="2_d2vv3"]
+[ext_resource type="Texture2D" uid="uid://ctcgekq2gtx1v" path="res://assets/UI/back.png" id="2_c1t8d"]
+[ext_resource type="Texture2D" uid="uid://bp4takne0jvo1" path="res://assets/backgrounds/credits_bg.png" id="2_d2vv3"]
 [ext_resource type="Theme" uid="uid://b43q23bmf727" path="res://custom_resources/Credits.tres" id="3_5jxb4"]
 
 [node name="Credits" type="Control"]
@@ -44,12 +44,28 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="GridContainer" type="GridContainer" parent="ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+offset_left = 288.0
+offset_top = 180.0
+offset_right = 877.0
+offset_bottom = 488.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.299
+anchor_top = 0.291
+anchor_right = 0.696
+anchor_bottom = 0.748
+offset_left = -0.448029
+offset_top = -8.56801
+offset_right = 2.20795
+offset_bottom = 3.29599
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="pressed" from="close_button" to="." method="_on_close_button_pressed"]

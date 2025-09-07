@@ -1,40 +1,48 @@
-[gd_scene load_steps=6 format=3 uid="uid://ebvprw6pexo2"]
+[gd_scene load_steps=7 format=3 uid="uid://ebvprw6pexo2"]
 
 [ext_resource type="Script" uid="uid://cd2svseh483m6" path="res://scenes/menus/intro.gd" id="1_1a7bk"]
-[ext_resource type="Texture2D" uid="uid://qmsd438lm0q3" path="res://assets/UI/intro_background.png" id="2_56pe6"]
-[ext_resource type="Texture2D" uid="uid://dt7kphcetq4tb" path="res://assets/UI/intro_text.png" id="3_klb7a"]
-[ext_resource type="LabelSettings" uid="uid://b2h5bls5s7rsg" path="res://custom_resources/MainMenuButtonLabels.tres" id="5_56pe6"]
-[ext_resource type="Texture2D" uid="uid://bl87v8o7wik2h" path="res://assets/UI/playbtn.png" id="5_uh46f"]
+[ext_resource type="Texture2D" uid="uid://2n1ol4pwkj0p" path="res://assets/backgrounds/level1.png" id="2_56pe6"]
+[ext_resource type="Texture2D" uid="uid://dsenofsp1vxvc" path="res://assets/ui/intro_text.png" id="3_klb7a"]
+[ext_resource type="Texture2D" uid="uid://4o3c3306e13x" path="res://assets/sprites/newtown/newton_ready.png" id="3_uh46f"]
+[ext_resource type="LabelSettings" uid="uid://d2d5fqqackxp5" path="res://custom_resources/TutorialLabels.tres" id="5_56pe6"]
+[ext_resource type="Texture2D" uid="uid://kmijifif5ra1" path="res://assets/ui/playbtn.png" id="5_uh46f"]
 
 [node name="Intro" type="Node2D"]
 script = ExtResource("1_1a7bk")
 
-[node name="IntroGame" type="Sprite2D" parent="."]
-position = Vector2(580, 325)
-scale = Vector2(0.374196, 0.370895)
+[node name="IntroGame2" type="TextureRect" parent="."]
+modulate = Color(0.228044, 0.161269, 0.0978538, 0.635294)
+offset_right = 40.0
+offset_bottom = 40.0
 texture = ExtResource("2_56pe6")
+
+[node name="IntroGame" type="Sprite2D" parent="."]
+position = Vector2(906, 480)
+scale = Vector2(0.374196, 0.370895)
+texture = ExtResource("3_uh46f")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = 29.0
-offset_top = 390.0
+offset_top = 351.0
 offset_right = 1295.0
-offset_bottom = 818.0
-scale = Vector2(0.5, 0.5)
+offset_bottom = 779.0
+scale = Vector2(0.575, 0.575)
 texture = ExtResource("3_klb7a")
 
 [node name="text_intro" type="Label" parent="TextureRect"]
 layout_mode = 0
-offset_left = 104.0
-offset_top = 98.0
-offset_right = 1076.0
-offset_bottom = 320.0
+offset_left = 89.0
+offset_top = 59.0
+offset_right = 1169.0
+offset_bottom = 362.0
+theme_override_font_sizes/font_size = 90
 label_settings = ExtResource("5_56pe6")
 autowrap_mode = 3
 
 [node name="Comenzar_Game" type="TextureButton" parent="."]
-offset_left = 560.0
-offset_top = 524.0
-offset_right = 599.0
-offset_bottom = 563.0
+offset_left = 680.0
+offset_top = 521.0
+offset_right = 719.0
+offset_bottom = 560.0
 scale = Vector2(1.2, 1.2)
 texture_normal = ExtResource("5_uh46f")

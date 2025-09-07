@@ -46,6 +46,7 @@ func _ready() -> void:
 	
 	# Characters
 	characters_data = FileHelper.read_data_from_file("res://i18n/characters_moods.json")["characters"]
+
 	populate_list(
 		characters_box,
 		characters_data,
@@ -131,6 +132,7 @@ func invest_label_colors():
 func _on_btn_help_pressed() -> void:
 	AudioManager.play_click_sfx()
 	AudioManager.stop_customer_sfx()
+	AudioManager.play_newton_humming_sfx()
 	message_texture.visible = false
 	invest_label_colors()
 	
@@ -186,25 +188,23 @@ func populate_list(
 		img_container.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		img_container.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 
-		var sprite_path = sprite_path_format % entry["id"]
-		#print("sprite_path ", sprite_path)
-		if not FileAccess.file_exists(sprite_path):
-			push_warning("Sprite not found: %s" % sprite_path)
-		else: 
-			var tex = load(sprite_path)
-			#print("tex ", tex)
-			if tex == null:
-				push_warning("Loaded resource is null: %s" % sprite_path)
-			else:
-				var tex_rect = TextureRect.new()
-				tex_rect.texture = tex
-				tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-				tex_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-				tex_rect.custom_minimum_size = sprite_min_size
-				tex_rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-				tex_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-				img_container.add_child(tex_rect)
-
+		var sprite_path = sprite_path_format % entry["id"]		
+		var tex = load(sprite_path)
+		
+		# Usado en mac
+		#if not FileAccess.file_exists(sprite_path):
+		#	push_warning("Sprite not found: %s" % sprite_path)
+		if tex == null:
+			push_warning("Could not load: %s" % sprite_path)
+		else:
+			var tex_rect = TextureRect.new()
+			tex_rect.texture = tex
+			tex_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			tex_rect.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+			tex_rect.custom_minimum_size = sprite_min_size
+			tex_rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			tex_rect.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+			img_container.add_child(tex_rect)
 		hbox.add_child(img_container)
 
 		# Textos

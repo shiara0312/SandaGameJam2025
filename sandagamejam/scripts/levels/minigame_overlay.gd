@@ -254,6 +254,7 @@ func _on_btn_continue_pressed() -> void:
 	
 func _on_btn_prepare_recipe_pressed() -> void:
 	AudioManager.play_click_sfx()
+	AudioManager.stop_newton_humming_sfx()
 	GlobalManager.recipe_started = true
 	
 	if minigame_started:

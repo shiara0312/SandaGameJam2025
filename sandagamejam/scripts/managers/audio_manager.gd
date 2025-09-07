@@ -13,6 +13,8 @@ extends Node
 @onready var game_music: AudioStreamPlayer = $GameMusic
 @onready var final_music: AudioStreamPlayer = $FinalMusic
 @onready var sfx_customer_complaint := AudioStreamPlayer.new()
+@onready var sfx_crowd_talking : AudioStreamPlayer = $SFXCrowdTalking
+@onready var sfx_newton_humming : AudioStreamPlayer = $SFXNewtonHumming
 
 var sfx_complaint_dict := {
 	"female_sad": preload("res://assets/sfx/characters/sfx_female_sad.ogg"),
@@ -113,6 +115,18 @@ func play_end_music():
 	else:
 		push_warning("FinalMusic no está asignado o no existe en AudioManager")
 
+func play_crowd_talking_sfx():	
+	if sfx_crowd_talking:
+		sfx_crowd_talking.play()
+	else:
+		push_warning("SFXCrowdTalking no está asignado o no existe en AudioManager")
+
+func play_newton_humming_sfx():	
+	if sfx_newton_humming:
+		sfx_newton_humming.play()
+	else:
+		push_warning("SFXNewtonHumming no está asignado o no existe en AudioManager")
+
 
 func stop_whisking_sfx():	
 	if sfx_whisking and sfx_whisking.playing:
@@ -121,6 +135,7 @@ func stop_whisking_sfx():
 		push_warning("SFXWhisking no está asignado o no existe en AudioManager")
 
 func stop_game_music():
+	stop_crowd_talking_sfx()
 	if game_music and game_music.playing:
 		game_music.stop()
 	else:
@@ -129,6 +144,18 @@ func stop_game_music():
 func stop_customer_sfx() -> void:
 	if sfx_customer_complaint.playing:
 		sfx_customer_complaint.stop()
+
+func stop_crowd_talking_sfx():	
+	if sfx_crowd_talking and sfx_crowd_talking.playing:
+		sfx_crowd_talking.stop()
+	else:
+		push_warning("SFXCrowdTalking no está asignado o no existe en AudioManager")
+
+func stop_newton_humming_sfx():	
+	if sfx_newton_humming and sfx_newton_humming.playing:
+		sfx_newton_humming.stop()
+	else:
+		push_warning("SFXNewtonHumming no está asignado o no existe en AudioManager")
 
 ### ============================
 ### NUEVO: Audio con sliders y persistencia

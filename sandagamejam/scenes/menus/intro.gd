@@ -4,11 +4,30 @@ extends Node2D
 @onready var text_intro: Label = $TextureRect/text_intro
 @onready var btn_back: Button = $BtnBack if has_node("BtnBack") else null 
 
-var texts = [
-	"¡Bienvenido a mi cafeteria! Te preguntarás qué hace Isaac Newton con un mandil y preparando pasteles.",
-	"Pues, descubrí mi pasión por la pastelería cuando me cayó una manzana en la cabeza mientras descansaba bajo un manzanero.",
-	"Durante los siguientes minutos, llegaran mis mejores clientes para degustar de mis deliciosas preparaciones a base de mi fruta favorita, la manzana. ¡Es hora de abrir!, aquí viene nuestro primer comensal "
-]
+var json_texts = {
+	"es":
+		[
+			"¡Bienvenido a mi cafeteria! Te preguntarás qué hace Isaac Newton con un mandil y preparando pasteles.",
+			"Pues, descubrí mi pasión por la pastelería cuando me cayó una manzana en la cabeza mientras descansaba bajo un manzanero.",
+			"Durante los siguientes minutos, llegaran mis mejores clientes para degustar de mis deliciosas preparaciones a base de mi fruta favorita, la manzana. ¡Es hora de abrir!, aquí viene nuestro primer comensal "
+		],
+	"en":
+		[
+			"Welcome to my pastry! You might be wondering what Isaac Newton is doing wearing an apron and baking pastries.",
+			"Well, I discovered my passion for baking when an apple fell on my head while I was resting under an apple tree.",
+			"Over the next few minutes, my best customers will arrive to enjoy my delicious creations made with my favorite fruit: the apple.",
+			"It's time to open! Here comes our first guest."
+		],
+	"fr":
+		[
+			"Bienvenue dans mon café!. Tu te demandes peut-être ce que fait Isaac Newton avec un tablier, en train de préparer des pâtisseries.",
+			"Eh bien, j'ai découvert ma passion pour la pâtisserie quand une pomme m'est tombée sur la tête pendant que je me reposais sous un pommier.",
+			"Dans les prochaines minutes, mes meilleurs clients arriveront pour savourer mes délicieuses créations à base de mon fruit préféré : la pomme.",
+			"Il est temps d’ouvrir ! Voici notre premier invité.",
+		]
+}
+
+var texts = []
 var typing_speed := 0.05
 var typing_timer: Timer
 var full_text := ""
@@ -17,6 +36,7 @@ var current_index = 0
 var is_typing := false
 
 func _ready():
+	texts = json_texts[GlobalManager.game_language]
 	# animación de tipeo
 	typing_timer = Timer.new()
 	typing_timer.wait_time = typing_speed

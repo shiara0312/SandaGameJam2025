@@ -9,7 +9,7 @@ var intro_game = preload("res://scenes/menus/intro.tscn")
 
 func _ready():
 	set_button_labels()
-	var cursor_texture = preload("res://assets/UI/hand_point.png")
+	var cursor_texture = preload("res://assets/ui/hand_point.png")
 	Input.set_custom_mouse_cursor(cursor_texture, Input.CURSOR_ARROW, Vector2(16, 16))
 	
 	# Conectar al cambio de idioma
@@ -55,8 +55,11 @@ func _on_jugar_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) 
 func _on_creditos_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
 		AudioManager.play_click_sfx()
-		var credits_scene = load("res://scenes/menus/Credits.tscn")
-		get_tree().change_scene_to_packed(credits_scene)
+		var credits_modal = preload("res://scenes/menus/Credits.tscn").instantiate()
+		add_child(credits_modal)
+		
+		#var credits_scene = load("res://scenes/menus/Credits.tscn")
+		#get_tree().change_scene_to_packed(credits_scene)
 
 func _on_opciones_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
@@ -68,5 +71,5 @@ func _on_salir_pressed() :
 	get_tree().quit()
 
 func _on_button_mouse_entered():
-	var hand_cursor = preload("res://assets/UI/hand_point.png")
+	var hand_cursor = preload("res://assets/ui/hand_point.png")
 	Input.set_custom_mouse_cursor(hand_cursor, Input.CURSOR_ARROW, Vector2(8, 8))
