@@ -50,7 +50,7 @@ bus = &"SFX"
 
 [node name="SFXCrowdTalking" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_buqc2")
-volume_db = -10.0
+volume_db = -12.0
 bus = &"SFX"
 parameters/looping = true
 
@@ -61,7 +61,7 @@ parameters/looping = true
 
 [node name="GameMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_4tesi")
-volume_db = -9.0
+volume_db = -12.0
 bus = &"Music"
 parameters/looping = true
 
