@@ -187,11 +187,8 @@ func populate_list(
 		img_container.custom_minimum_size = sprite_size
 		img_container.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		img_container.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		print("entry ", entry["id"])
-		var sprite_path = sprite_path_format % entry["id"]
-		print("sprite_path ", sprite_path)
-		#print("sprite_path ", sprite_path)
-		
+
+		var sprite_path = sprite_path_format % entry["id"]		
 		var tex = load(sprite_path)
 		
 		# Usado en mac
