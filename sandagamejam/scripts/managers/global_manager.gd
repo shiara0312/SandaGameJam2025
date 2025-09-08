@@ -8,12 +8,12 @@ signal game_over
 signal win
 signal idioma_cambiado(nuevo_idioma) # Señal para actualizar UI en tiempo real
 
-var lives = 3
-var max_lives = 4
-var time_left : float = 180.0
+var lives
+var max_lives
+var time_left
 var is_game_running : bool = false
 var is_minigame_overlay_visible : bool = false
-var ingredientes_array_size = 20 #Debe disminuir si el nivel aumenta
+var ingredientes_array_size
 
 var game_language : String = "es" 
 var customers_to_serve: Array = []
@@ -63,6 +63,13 @@ var response_keys := {
 var interaction_texts := {}     
 var menu_labels := {}        
 var characters_moods := {}  
+
+func _ready():
+	lives = GameController.LIVES
+	max_lives = GameController.MAX_LIVES
+	time_left = GameController.TIME_LEFT
+	ingredientes_array_size = GameController.ING_ARR_SIZE 
+	cargar_audio_settings()
 
 func start_game():
 	is_game_running = true
@@ -147,6 +154,23 @@ func pause_game():
 func resume_game():
 	is_game_running = true
 
+func reset():
+	lives = GameController.LIVES
+	max_lives = GameController.MAX_LIVES
+	time_left = GameController.TIME_LEFT
+	is_game_running = true
+	customers_to_serve.clear()
+	satisfied_customers.clear()
+	current_customer.clear()
+	current_level_recipes.clear()
+	collected_ingredients.clear()
+	selected_recipe_idx = -1
+	selected_recipe_data.clear()
+	recipe_started = false
+
+	is_minigame_overlay_visible = false
+	ingredientes_array_size = GameController.ING_ARR_SIZE
+	
 ### Botones de interaccion con el cliente ###
 func load_texts():
 	if interaction_texts.is_empty():
@@ -229,6 +253,3 @@ func cargar_audio_settings() -> void:
 		AudioServer.get_bus_index("SFX"),
 		linear_to_db(sfx_volume)
 	)
-
-func _ready() -> void:
-	cargar_audio_settings()

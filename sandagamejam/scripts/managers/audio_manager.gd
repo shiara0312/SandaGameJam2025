@@ -103,11 +103,16 @@ func play_win_sfx():
 	else:
 		push_warning("SFXWin no está asignado o no existe en AudioManager")
 
-func play_game_music():	
-	if game_music:
-		game_music.play()
+func play_game_music():
+	if is_instance_valid(game_music):
+		if game_music and not game_music.playing:
+			game_music.play()
 	else:
-		push_warning("GameMusic no está asignado o no existe en AudioManager")
+		await get_tree().process_frame
+		if is_instance_valid(game_music) and not game_music.playing:
+			game_music.play()
+		else:
+			push_warning("GameMusic no está asignado o no existe en AudioManager")
 
 func play_end_music():
 	if final_music:
@@ -140,6 +145,17 @@ func stop_game_music():
 		game_music.stop()
 	else:
 		push_warning("GameMusic no está asignado o no existe en AudioManager")
+
+func stop_end_music():
+	if is_instance_valid(final_music):
+		if final_music.playing:
+			final_music.stop()
+	else:
+		await get_tree().process_frame
+		if is_instance_valid(final_music) and final_music.playing:
+			final_music.stop()
+		else:
+			push_warning("FinalMusic no está asignado o no existe en AudioManager")
 
 func stop_customer_sfx() -> void:
 	if sfx_customer_complaint.playing:

@@ -73,6 +73,7 @@ func _ready() -> void:
 
 
 func show_hud():
+	visible = true
 	if not game_hud:
 		return
 
