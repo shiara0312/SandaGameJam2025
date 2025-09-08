@@ -71,7 +71,6 @@ func populate_credits():
 		roles_box.add_child(roles_title)
 		
 		for i in range(roles_arr.size()):
-			var c = roles_box.get_child(i)			
 			var role = roles_arr[i]
 			var role_key = role.get("key", "")
 			var role_title = credits_data["roles_titles"].get(role_key, "Role")
