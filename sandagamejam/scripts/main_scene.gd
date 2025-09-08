@@ -57,9 +57,6 @@ func _on_creditos_input_event(_viewport: Node, event: InputEvent, _shape_idx: in
 		AudioManager.play_click_sfx()
 		var credits_modal = preload("res://scenes/menus/Credits.tscn").instantiate()
 		add_child(credits_modal)
-		
-		#var credits_scene = load("res://scenes/menus/Credits.tscn")
-		#get_tree().change_scene_to_packed(credits_scene)
 
 func _on_opciones_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed:
