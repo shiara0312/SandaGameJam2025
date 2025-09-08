@@ -44,7 +44,8 @@ func populate_credits():
 			var member = members_arr[i]
 			var member_vbox = VBoxContainer.new()
 			member_vbox.alignment = BoxContainer.ALIGNMENT_CENTER
-			member_vbox.add_theme_constant_override("separation", 4)
+			if i < members_arr.size() - 1:
+				member_vbox.add_theme_constant_override("separation", 4)
 			var name_text = member.get("name", "")
 			var name_label = set_centered_text_with_size(name_text, MEMBER_NAME_SIZE)
 			member_vbox.add_child(name_label)
@@ -52,30 +53,26 @@ func populate_credits():
 			# Redes sociales
 			var socials_arr = member.get("socials", [])
 			if socials_arr.size() > 0:
-				var hbox = HBoxContainer.new()
-				hbox.alignment = BoxContainer.ALIGNMENT_CENTER
-				
 				for social in socials_arr:
 					var social_box = set_social_link_box(social)
-					hbox.add_child(social_box)
-				member_vbox.add_child(hbox)
+					member_vbox.add_child(social_box)
 			
 			members_box.add_child(member_vbox)
 			create_spacers(i, members_arr, members_box)
 	
 	# Separador Members → Roles
-	if general_data.get("roles", []).size() > 0:
-		members_box.add_child(create_section_separator())
-
+	members_box.add_child(create_section_separator())
+	
 	 # --- Roles --- #
-	var roles = general_data.get("roles", [])
-	if roles.size() > 0:
+	var roles_arr = general_data.get("roles", [])
+	if roles_arr.size() > 0:
 		var text = credits_data.get("roles_section_title", "Roles")
 		var roles_title = set_section_label_title(text)
 		roles_box.add_child(roles_title)
 		
-		for i in range(roles.size()):
-			var role = roles[i]
+		for i in range(roles_arr.size()):
+			var c = roles_box.get_child(i)			
+			var role = roles_arr[i]
 			var role_key = role.get("key", "")
 			var role_title = credits_data["roles_titles"].get(role_key, "Role")
 			var role_label = set_centered_text_with_size(role_title, SUBTITLE_SIZE)
@@ -95,12 +92,11 @@ func populate_credits():
 				roles_box.add_child(people_label)
 			
 			# Spacer entre roles
-			create_spacers(i, roles, roles_box)
+			create_spacers(i, roles_arr, roles_box)
 
 	# Separador Roles →  Special Thanks
-	if credits_data.get("special_thanks", []).size() > 0:
-		roles_box.add_child(create_section_separator())
-		
+	roles_box.add_child(create_section_separator())
+	
 	# --- Special Thanks --- #
 	var special_thanks = credits_data.get("special_thanks", {})
 	if special_thanks.size() > 0:
@@ -111,12 +107,25 @@ func populate_credits():
 		for key in special_thanks.keys():
 			var section = special_thanks[key]
 			var thanks_text = section.get("text", key)
-			var thanks_label = set_centered_text_with_size(thanks_text, MEMBER_NAME_SIZE)
-			thanks_box.add_child(thanks_label)
-		
+			var vbox = VBoxContainer.new()
+			vbox.alignment = BoxContainer.ALIGNMENT_CENTER
+			
+			# Texto descriptivo
+			var text_label = set_centered_text_with_size(thanks_text, MEMBER_NAME_SIZE)
+			vbox.add_child(text_label)
+			
+			# Revisar si tiene authors con URLs
+			var authors_arr = section.get("authors", [])
+			for author in authors_arr:
+				var url = author.get("url", "")
+				var type_icon = "soundcloud"
+				var social_box = set_social_link_box({"type": type_icon, "url": url})
+				vbox.add_child(social_box)
+			
+			thanks_box.add_child(vbox)
+	
 	# Special Thanks →   External Resources
-	if credits_data.get("resources", []).size() > 0:
-		thanks_box.add_child(create_section_separator())
+	thanks_box.add_child(create_section_separator())
 		
 	# --- External Resources --- #
 	var resources = credits_data.get("resources", [])
@@ -150,21 +159,28 @@ func set_social_link_box(social: Dictionary):
 	var parts = url.rsplit("/", false, 1)
 	var username = parts[1] if parts.size() > 1 else url
 	
+	# Contenedor horizontal para icono + label
+	var social_box = HBoxContainer.new()
+	social_box.alignment = BoxContainer.ALIGNMENT_CENTER
+	
 	# Botón con icono
 	var btn = TextureButton.new()
 	btn.texture_normal = load(icon_path)
-	btn.custom_minimum_size = Vector2(20, 20)
+	btn.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_CENTERED
+	btn.custom_minimum_size = Vector2(24, 24)
 	btn.connect("pressed", func():
 		OS.shell_open(url)
 	)
+	social_box.add_child(btn)
 	
 	# Texto clickeable estilo Label
 	var user_label = Label.new()
 	user_label.text = username
 	user_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	user_label.mouse_filter = Control.MOUSE_FILTER_STOP
 	user_label.theme = credits_theme
-
+	user_label.mouse_filter = Control.MOUSE_FILTER_STOP
+	user_label.size_flags_vertical = Control.SIZE_FILL
+	
 	# Guardar color original
 	var base_color = user_label.get_theme_color("font_color", "Label")
 	# Setear el color base explícitamente
@@ -186,9 +202,6 @@ func set_social_link_box(social: Dictionary):
 	)
 
 	# Contenedor del ícono + texto
-	var social_box = HBoxContainer.new()
-	social_box.alignment = BoxContainer.ALIGNMENT_CENTER
-	social_box.add_child(btn)
 	social_box.add_child(user_label)
 	
 	return social_box
@@ -230,6 +243,15 @@ func create_section_separator() -> Control:
 	vbox.add_child(bottom_spacer)
 	
 	return vbox
+
+func debug_last_child_box(box: VBoxContainer):
+	if box.get_child_count() == 0:
+		return
+	var marker = ColorRect.new()
+	marker.color = Color.RED
+	marker.custom_minimum_size = Vector2(0, 4)
+	# Añadir justo debajo del último hijo
+	box.add_child(marker)
 
 func _on_close_button_pressed() -> void:
 	AudioManager.play_click_sfx()

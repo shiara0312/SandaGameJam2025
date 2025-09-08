@@ -21,25 +21,26 @@ grow_vertical = 2
 texture = ExtResource("2_d2vv3")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-custom_minimum_size = Vector2(565, 444)
+custom_minimum_size = Vector2(562, 444)
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.265
+anchor_left = 0.259
 anchor_top = 0.15
-anchor_right = 0.265
+anchor_right = 0.259
 anchor_bottom = 0.15
-offset_left = -0.280029
+offset_left = -0.368011
 offset_top = -0.200005
-offset_right = 564.72
+offset_right = 571.632
 offset_bottom = 443.8
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-custom_minimum_size = Vector2(565, 444)
+custom_minimum_size = Vector2(560, 444)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 2
 alignment = 1
 
 [node name="TeamName" type="Label" parent="ScrollContainer/VBoxContainer"]
@@ -48,19 +49,10 @@ horizontal_alignment = 1
 
 [node name="MemberBox" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
-alignment = 1
-
-[node name="RolesTitle" type="Label" parent="ScrollContainer/VBoxContainer"]
-layout_mode = 2
-horizontal_alignment = 1
 
 [node name="RolesBox" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
 alignment = 1
-
-[node name="ThanksTitle" type="Label" parent="ScrollContainer/VBoxContainer"]
-layout_mode = 2
-horizontal_alignment = 1
 
 [node name="ThanksBox" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 layout_mode = 2
