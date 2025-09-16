@@ -57,12 +57,14 @@ sandagamejam/
 ---
 ## 👩‍💻 Team – The Glitch Girls
 
-- Selene Negrón - Concept Artist & 2D Artist
-- Ariadna Mestanza - 2D Artist
-- Melissa Huerta – Game Developer, Technical Designer
-- Shiara Arauzo - Game Developer
-- Maria Munayco - Game Developer
-- Fabrizio Murguia - Game Designer
+Concept Artist & 2D Artist
+- Selene Negrón
+- Ariadna Mestanza
+
+Game Developer
+- Melissa Huerta
+- Shiara Arauzo
+- Maria Munayco
 
 ---
 ## 📜 License
